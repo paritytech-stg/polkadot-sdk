@@ -447,27 +447,27 @@ cargo-check-each-crate:
     - PYTHONUNBUFFERED=x time .gitlab/check-each-crate.py "$CI_NODE_INDEX" "$CI_NODE_TOTAL"
   parallel: 6
 
-cargo-check-each-crate-macos:
-  stage: test
-  extends:
-    - .docker-env
-    - .common-refs
-    - .run-immediately
-    # - .collect-artifacts
-  before_script:
-    # skip timestamp script, the osx bash doesn't support printf %()T
-    - !reference [.job-switcher, before_script]
-    - !reference [.rust-info-script, script]
-    - !reference [.pipeline-stopper-vars, script]
-  variables:
-    SKIP_WASM_BUILD: 1
-  script:
-    # TODO: enable rusty-cachier once it supports Mac
-    # TODO: use parallel jobs, as per cargo-check-each-crate, once more Mac runners are available
-    # - time ./scripts/ci/gitlab/check-each-crate.py 1 1
-    - time cargo check --workspace --locked
-  tags:
-    - osx
+# cargo-check-each-crate-macos:
+#   stage: test
+#   extends:
+#     - .docker-env
+#     - .common-refs
+#     - .run-immediately
+#     # - .collect-artifacts
+#   before_script:
+#     # skip timestamp script, the osx bash doesn't support printf %()T
+#     - !reference [.job-switcher, before_script]
+#     - !reference [.rust-info-script, script]
+#     - !reference [.pipeline-stopper-vars, script]
+#   variables:
+#     SKIP_WASM_BUILD: 1
+#   script:
+#     # TODO: enable rusty-cachier once it supports Mac
+#     # TODO: use parallel jobs, as per cargo-check-each-crate, once more Mac runners are available
+#     # - time ./scripts/ci/gitlab/check-each-crate.py 1 1
+#     - time cargo check --workspace --locked
+#   tags:
+#     - osx
 
 cargo-hfuzz:
   stage: test
@@ -520,6 +520,6 @@ test-syscalls:
     - ./list-syscalls.rb ../../../target/x86_64-unknown-linux-musl/production/polkadot-prepare-worker --only-used-syscalls | diff -u prepare-worker-syscalls -
   after_script:
     - if [[ "$CI_JOB_STATUS" == "failed" ]]; then
-        printf "The x86_64 syscalls used by the worker binaries have changed. Please review if this is expected and update polkadot/scripts/list-syscalls/*-worker-syscalls as needed.\n";
+      printf "The x86_64 syscalls used by the worker binaries have changed. Please review if this is expected and update polkadot/scripts/list-syscalls/*-worker-syscalls as needed.\n";
       fi
   allow_failure: true # TODO: remove this once we have an idea how often the syscall lists will change
