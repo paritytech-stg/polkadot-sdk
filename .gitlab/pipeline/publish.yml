@@ -71,8 +71,6 @@ publish-rustdoc:
     DOCKERFILE: "" # docker/path-to.Dockerfile
     IMAGE_NAME: "" # docker.io/paritypr/image_name
   script:
-    # - test "$PARITYPR_USER" -a "$PARITYPR_PASS" ||
-    #   ( echo "no docker credentials provided"; exit 1 )
     - $BUILDAH_COMMAND build
       --format=docker
       --build-arg VCS_REF="${CI_COMMIT_SHA}"
