@@ -89,7 +89,7 @@ build-push-image-polkadot-parachain-debug:
   stage: publish
   extends:
     - .kubernetes-env
-    - .common-refs
+    - .zombienet-refs
     - .build-push-image
   needs:
     - job: build-linux-stable-cumulus
@@ -102,7 +102,7 @@ build-push-image-test-parachain:
   stage: publish
   extends:
     - .kubernetes-env
-    - .common-refs
+    - .zombienet-refs
     - .build-push-image
   needs:
     - job: build-test-parachain
@@ -168,7 +168,7 @@ build-push-image-polkadot-debug:
   stage: publish
   extends:
     - .kubernetes-env
-    - .common-refs
+    - .zombienet-refs
     - .build-push-image
   needs:
     - job: build-linux-stable
@@ -181,7 +181,7 @@ build-push-image-colander:
   stage: publish
   extends:
     - .kubernetes-env
-    - .common-refs
+    - .zombienet-refs
     - .build-push-image
   needs:
     - job: build-test-collators
@@ -194,7 +194,7 @@ build-push-image-malus:
   stage: publish
   extends:
     - .kubernetes-env
-    - .common-refs
+    - .zombienet-refs
     - .build-push-image
   needs:
     - job: build-malus
@@ -207,7 +207,7 @@ build-push-image-substrate-pr:
   stage: publish
   extends:
     - .kubernetes-env
-    - .common-refs
+    - .zombienet-refs
     - .build-push-image
   needs:
     - job: build-linux-substrate
