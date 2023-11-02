@@ -12,6 +12,8 @@
     - export DEBUG=zombie
     - export RELAY_IMAGE=${POLKADOT_IMAGE}
     - export COL_IMAGE=${COL_IMAGE}
+    # Exit if the job is not merge queue
+    - if [[ $CI_COMMIT_REF_NAME == *"gh-readonly-queue"* ]]; then echo "I will run only in a merge queue"; exit 0; fi
 
 .zombienet-after-script:
   after_script:

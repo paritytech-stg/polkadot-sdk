@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: master
     steps:
+      - name: Skip merge queue
+        if: ${{ contains(github.ref, 'gh-readonly-queue') }}
+        run: exit 0
       - name: Extract content of artifact
         id: number
         uses: Bullrich/extract-text-from-artifact@v1.0.0
