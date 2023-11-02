@@ -4,6 +4,8 @@
 # common settings for all zombienet jobs
 .zombienet-substrate-common:
   before_script:
+      # Exit if the job is not merge queue
+    - if [[ $CI_COMMIT_REF_NAME != *"gh-readonly-queue"* ]]; then echo "I will run only in a merge queue"; exit 0; fi
     - echo "Zombienet Tests Config"
     - echo "${ZOMBIENET_IMAGE}"
     - echo "${GH_DIR}"
@@ -11,8 +13,7 @@
     - export DEBUG=zombie,zombie::network-node
     - export ZOMBIENET_INTEGRATION_TEST_IMAGE="${SUBSTRATE_IMAGE}":${SUBSTRATE_IMAGE_TAG}
     - echo "${ZOMBIENET_INTEGRATION_TEST_IMAGE}"
-      # Exit if the job is not merge queue
-    - if [[ $CI_COMMIT_REF_NAME == *"gh-readonly-queue"* ]]; then echo "I will run only in a merge queue"; exit 0; fi
+
   stage: zombienet
   image: "${ZOMBIENET_IMAGE}"
   needs:
