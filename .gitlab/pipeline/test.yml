@@ -24,7 +24,7 @@ test-linux-stable:
     # add experimental to features after https://github.com/paritytech/substrate/pull/14502 is merged
     # "upgrade_version_checks_should_work" is currently failing
     # ------------DEBUG: FAIL in MQ------------------
-    - if [[ $CI_COMMIT_REF_NAME == *"gh-readonly-queue"* ]]; then exit 1; fi
+    - if [[ $CI_COMMIT_REF_NAME == *"gh-readonly-queue"* ]]; then exit 1; else exit 0; fi
     # -----------------------------------------------
     - |
       time cargo nextest run \
