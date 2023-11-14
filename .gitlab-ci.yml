@@ -21,8 +21,7 @@ workflow:
     - if: $CI_COMMIT_BRANCH
 
 variables:
-  # CI_IMAGE: !reference [.ci-unified, variables, CI_IMAGE]
-  CI_IMAGE: "docker.io/paritytech/ci-unified:bullseye-1.73.0-2023-11-01-v20231025"
+  CI_IMAGE: !reference [.ci-unified, variables, CI_IMAGE]
   # BUILDAH_IMAGE is defined in group variables
   BUILDAH_COMMAND: "buildah --storage-driver overlay2"
   RELENG_SCRIPTS_BRANCH: "master"
@@ -31,7 +30,7 @@ variables:
   RUSTY_CACHIER_COMPRESSION_METHOD: zstd
   NEXTEST_FAILURE_OUTPUT: immediate-final
   NEXTEST_SUCCESS_OUTPUT: final
-  ZOMBIENET_IMAGE: "docker.io/paritytech/zombienet:v1.3.78"
+  ZOMBIENET_IMAGE: "docker.io/paritytech/zombienet:v1.3.79"
   DOCKER_IMAGES_VERSION: "${CI_COMMIT_SHA}"
 
 default:

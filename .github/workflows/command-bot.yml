@@ -1,0 +1,68 @@
+name: Command Bot
+
+on:
+  workflow_dispatch:
+    inputs:
+      use_self_hosted:
+        description: 'Use self-hosted runner'
+        required: true
+        default: 'false'
+      image_name:
+        description: 'Docker image to use'
+        required: true
+      script_path:
+        description: 'Path to the command bot script to run'
+        required: true
+      scripts_branch:
+        description: 'Branch to checkout scripts from'
+        default: 'main'
+      variablesJson:
+        description: 'Variables to pass to the script'
+        required: true
+        default: '{}'
+
+env:
+  PIPELINE_SCRIPTS_DIR: ${{ github.workspace }}/command-bot-scripts
+  PIPELINE_SCRIPTS_REF: ${{ github.event.inputs.scripts_branch }}
+  ARTIFACTS_DIR: ${{ github.workspace }}/.git/.artifacts
+
+jobs:
+  command_bot_job:
+    runs-on: ${{ (github.event.inputs.use_self_hosted == 'true' && 'parity-gha-runner') || 'ubuntu-latest' }}
+    container:
+      image: ${{ github.event.inputs.image_name }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout scripts
+        uses: actions/checkout@v3
+        with:
+          repository: paritytech/command-bot-scripts
+          ref: ${{ env.PIPELINE_SCRIPTS_REF }}
+          path: ${{ env.PIPELINE_SCRIPTS_DIR }}
+
+        # Rest of your steps
+      - name: Run Script
+        env:
+          RUNNER_LABELS: ${{ runner.labels }}
+          IMAGE_NAME: ${{ github.event.inputs.image_name }}
+          SCRIPTS_PATH: ${{ github.event.inputs.script_path }}
+        shell: bash
+        run: |
+          VARIABLES_JSON="${{ github.event.inputs.variablesJson }}"
+          echo "$VARIABLES_JSON" > .git/variables.json
+          
+          echo "${{ github.event.inputs.variablesJson }}" | base64 -d > .git/variables.json
+          while IFS="=" read -r key value; do
+            echo "$key=$value" >> $GITHUB_ENV
+          done < <(jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" .git/variables.json)
+          
+          echo "Running on ${RUNNER_LABELS}"
+          echo "Using image ${IMAGE_NAME}"
+          echo "Scripts path: ${{ env.SCRIPTS_PATH }}"
+          bash ${{ github.event.inputs.script_path }}
+          
