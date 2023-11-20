@@ -1,0 +1,37 @@
+name: Merge-Queue-Status
+
+on:
+    workflow_run:
+      workflows:
+        - Merge-Queue-Trigger
+      types:
+        - completed
+
+jobs:
+  trigger-review-bot:
+    runs-on: ubuntu-latest
+    name: trigger review bot
+    steps:
+      - name: Extract content of artifact
+        id: sha
+        uses: Bullrich/extract-text-from-artifact@v1.0.0
+        with:
+          artifact-name: sha
+      - name: Generate token
+        id: app_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.REVIEW_APP_ID }}
+          private_key: ${{ secrets.REVIEW_APP_KEY }}
+      - run: echo "Running with commit $ID"
+        env:
+          ID: ${{ steps.sha.outputs.content }}
+      - name: Add Merge Queue status check
+        if: ${{ github.event_name == 'merge_group' }}
+        uses: billyjbryant/create-status-check@v2
+        with:
+          authToken: ${{ steps.app_token.outputs.token }}
+          context: 'Approved Merge Queue'
+          description: 'PRs for merge queue gets approved'
+          state: 'success'
+          sha: ${{ steps.sha.outputs.content }}
