@@ -30,7 +30,7 @@ jobs:
         uses: billyjbryant/create-status-check@v2
         with:
           authToken: ${{ steps.app_token.outputs.token }}
-          context: 'Approved Merge Queue'
+          context: 'review-bot'
           description: 'PRs for merge queue gets approved'
           state: 'success'
           sha: ${{ steps.sha.outputs.content }}
