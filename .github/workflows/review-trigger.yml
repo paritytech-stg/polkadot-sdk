@@ -45,10 +45,11 @@ jobs:
         env:
           ID: ${{ github.event.merge_group.head_commit.id }}
       - name: Add Merge Queue status check
+        if: ${{ github.event_name == 'merge_group' }}
         uses: billyjbryant/create-status-check@v2
         with:
-          authToken: ${{secrets.GITHUB_TOKEN}}
-          context: 'Test run'
-          description: 'Passed'
+          authToken: ${{ steps.app_token.outputs.token }}
+          context: 'Approved Merge Queue'
+          description: 'PRs for merge queue gets approved'
           state: 'success'
           sha: ${{ github.event.merge_group.head_commit.id || github.sha}}
