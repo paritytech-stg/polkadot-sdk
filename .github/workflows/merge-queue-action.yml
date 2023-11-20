@@ -1,4 +1,4 @@
-name: Merge-Queue-Trigger
+name: Merge-Queue
 
 on:
   merge_group:
@@ -6,7 +6,7 @@ on:
 jobs:
   trigger-review-bot:
     runs-on: ubuntu-latest
-    env: master
+    environment: master
     name: trigger review bot
     steps:
       - name: Generate token
