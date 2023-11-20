@@ -27,7 +27,6 @@ jobs:
         env:
           ID: ${{ steps.sha.outputs.content }}
       - name: Add Merge Queue status check
-        if: ${{ github.event_name == 'merge_group' }}
         uses: billyjbryant/create-status-check@v2
         with:
           authToken: ${{ steps.app_token.outputs.token }}
