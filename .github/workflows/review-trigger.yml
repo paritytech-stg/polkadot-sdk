@@ -44,12 +44,12 @@ jobs:
       - run: echo "Running with commit $ID"
         env:
           ID: ${{ github.event.merge_group.head_commit.id }}
-      - uses: LouisBrunner/checks-action@v1.6.1
+      - name: Add Merge Queue status check
         if: ${{ github.event_name == 'merge_group' }}
+        uses: billyjbryant/create-status-check@v2
         with:
-          token: ${{ steps.app_token.outputs.token }}
-          name: Test XYZ
-          sha: ${{ github.event.merge_group.head_commit.id }}
-          conclusion: "success"
-          output: |
-            {"summary":"completed"}
+          authToken: ${{ steps.app_token.outputs.token }}
+          context: 'Approved Merge Queue'
+          description: 'PRs for merge queue gets approved'
+          state: 'success'
+          sha: ${{ github.event.merge_group.head_commit.id || github.sha}}
