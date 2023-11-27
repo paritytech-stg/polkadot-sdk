@@ -10,7 +10,6 @@ on:
       - review_request_removed
       - ready_for_review
   pull_request_review:
-  merge_group:
 
 jobs:
   trigger-review-bot:
@@ -34,22 +33,3 @@ jobs:
           name: pr_number
           path: pr/
           retention-days: 5
-      - name: Generate token
-        if: ${{ github.event_name == 'merge_group' }}
-        id: app_token
-        uses: tibdex/github-app-token@v1
-        with:
-          app_id: ${{ secrets.REVIEW_APP_ID }}
-          private_key: ${{ secrets.REVIEW_APP_KEY }} 
-      - run: echo "Running with commit $ID"
-        env:
-          ID: ${{ github.event.merge_group.head_commit.id }}
-      - name: Add Merge Queue status check
-        if: ${{ github.event_name == 'merge_group' }}
-        uses: billyjbryant/create-status-check@v2
-        with:
-          authToken: ${{ steps.app_token.outputs.token }}
-          context: 'Approved Merge Queue'
-          description: 'PRs for merge queue gets approved'
-          state: 'success'
-          sha: ${{ github.event.merge_group.head_commit.id || github.sha}}
