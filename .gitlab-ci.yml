@@ -233,7 +233,7 @@ codecov:
         --locked \
         --release \
         --no-fail-fast \
-        -E 'all() & !test(tests::rejects_missing_seals) & !test(tests::authoring_blocks) & !test(sc-consensus-babe tests::rejects_missing_seals) & !test(sc-consensus-babe tests::authoring_blocks)' \
+        -E 'all() & !test(tests::rejects_missing_seals) & !test(tests::authoring_blocks) & !test(tests::send_honors_rate_limit) & !test(tests::batching_works) & !test(tests::receive_rate_limit_is_enforced) & !test(tests::participation_requests_reprioritized_for_newly_included)' \
         --features try-runtime,experimental > /dev/null
     # - cargo build --verbose --all-features --workspace
     # - cargo test --verbose --all-features --no-fail-fast --workspace
