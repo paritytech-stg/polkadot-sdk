@@ -264,6 +264,7 @@ codecov:
     PR_NUM: "${PR_NUM}"
   trigger:
     project: "parity/infrastructure/ci_cd/pipeline-stopper"
+
 # remove-cancel-pipeline-message:
 #   stage: .post
 #   rules:
@@ -418,3 +419,4 @@ codecov:
 #   extends: .cancel-pipeline-template
 #   needs:
 #     - job: check-runtime-migration-westend
+
