@@ -234,7 +234,7 @@ codecov:
         --release \
         --no-fail-fast \
         -E 'all() & !test(tests::rejects_missing_seals) & !test(tests::authoring_blocks) & !test(sc-consensus-babe tests::rejects_missing_seals) & !test(sc-consensus-babe tests::authoring_blocks)' \
-        --features try-runtime,experimental
+        --features try-runtime,experimental > /dev/null
     # - cargo build --verbose --all-features --workspace
     # - cargo test --verbose --all-features --no-fail-fast --workspace
     # coverage with branches
