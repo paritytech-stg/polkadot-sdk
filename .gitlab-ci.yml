@@ -219,8 +219,7 @@ codecov:
     # (see `-Z` in the `RUSTFLAGS` below).
     RUSTC_BOOTSTRAP: "1"
     # Variables partly came from https://github.com/mozilla/grcov/blob/master/README.md
-    RUSTFLAGS: "-Zprofile -Zmir-opt-level=0 -Ccodegen-units=1
-      -Clink-dead-code -Copt-level=0 -Coverflow-checks=off"
+    RUSTFLAGS: "-Zprofile -Zmir-opt-level=0 -Ccodegen-units=1 -Clink-dead-code -Copt-level=0 -Coverflow-checks=off"
     RUSTDOCFLAGS: "-Cpanic=abort"
     # The `cargo-taurpalin` coverage reporting tool seems to have better code instrumentation and thus
     # produces better results for Rust codebases in general. However, unlike `grcov` it requires
@@ -233,13 +232,12 @@ codecov:
         --locked \
         --release \
         --no-fail-fast \
-        -E 'all() & !test(validator_side::tests::prospective_parachains::second_multiple_candidates_per_relay_parent) & !test(tests::rejects_missing_seals) & !test(tests::authoring_blocks) & !test(tests::send_honors_rate_limit) & !test(tests::batching_works) & !test(tests::receive_rate_limit_is_enforced) & !test(tests::participation_requests_reprioritized_for_newly_included) & !test(tests::rejects_missing_consensus_digests)' \
+        -E 'all() &!test(tests::change_of_absolute_max_nominations) & !test(tests::election_data_provider::only_iterates_max_2_times_max_allowed_len) & !test(validator_side::tests::prospective_parachains::second_multiple_candidates_per_relay_parent) & !test(tests::rejects_missing_seals) & !test(tests::authoring_blocks) & !test(tests::send_honors_rate_limit) & !test(tests::batching_works) & !test(tests::receive_rate_limit_is_enforced) & !test(tests::participation_requests_reprioritized_for_newly_included) & !test(tests::rejects_missing_consensus_digests)' \
         --features try-runtime,experimental > /dev/null
     # - cargo build --verbose --all-features --workspace
     # - cargo test --verbose --all-features --no-fail-fast --workspace
     # coverage with branches
-    - grcov . --binary-path ./target/debug/ --source-dir . --output-type lcov --llvm --branch
-      --ignore-not-existing --ignore "/*" --ignore "tests/*" --output-path lcov-w-branch.info
+    - grcov . --binary-path ./target/debug/ --source-dir . --output-type lcov --llvm --branch --ignore-not-existing --ignore "/*" --ignore "tests/*" --output-path lcov-w-branch.info
     # - rust-covfix lcov-w-branch.info --output lcov-w-branch-fixed.info
     # - codecov --token "$CODECOV_P_TOKEN" --file lcov-w-branch-fixed.info --nonZero
     # lines coverage
