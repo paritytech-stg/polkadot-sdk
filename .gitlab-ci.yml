@@ -226,6 +226,7 @@ codecov:
     # running docker with `--security-opt seccomp=unconfined` which is why we use `grcov` instead.
   script:
     # RUSTFLAGS are the cause target cache can't be used here
+    - rustup component add llvm-tools-preview
     - |
       CARGO_INCREMENTAL=0 RUSTFLAGS='-Cinstrument-coverage' LLVM_PROFILE_FILE='cargo-test-%p-%m.profraw' time cargo nextest run \
         --workspace \
