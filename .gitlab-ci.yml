@@ -69,7 +69,6 @@ default:
 .common-before-script:
   before_script:
     - !reference [.job-switcher, before_script]
-    - !reference [.timestamp, before_script]
     - !reference [.pipeline-stopper-vars, script]
 
 .job-switcher:
@@ -80,7 +79,6 @@ default:
   image: "${CI_IMAGE}"
   before_script:
     - !reference [.common-before-script, before_script]
-    - !reference [.prepare-env, before_script]
   tags:
     - kubernetes-parity-build
 
