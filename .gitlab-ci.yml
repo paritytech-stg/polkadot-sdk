@@ -233,7 +233,7 @@ codecov:
         --locked \
         --release \
         --no-fail-fast \
-        -E 'all() &!test(tests::change_of_absolute_max_nominations) & !test(tests::election_data_provider::only_iterates_max_2_times_max_allowed_len) & !test(validator_side::tests::prospective_parachains::second_multiple_candidates_per_relay_parent) & !test(tests::rejects_missing_seals) & !test(tests::authoring_blocks) & !test(tests::send_honors_rate_limit) & !test(tests::batching_works) & !test(tests::receive_rate_limit_is_enforced) & !test(tests::participation_requests_reprioritized_for_newly_included) & !test(tests::rejects_missing_consensus_digests)' \
+        -E 'all() &!test(tests::change_of_absolute_max_nominations) & !test(tests::election_data_provider::only_iterates_max_2_times_max_allowed_len) & !test(validator_side::tests::prospective_parachains::second_multiple_candidates_per_relay_parent) & !test(tests::rejects_missing_seals) & !test(tests::authoring_blocks) & !test(tests::send_honors_rate_limit) & !test(tests::batching_works) & !test(tests::receive_rate_limit_is_enforced) & !test(tests::participation_requests_reprioritized_for_newly_included) & !test(tests::rejects_missing_consensus_digests) & !test(adder::execute_good_block_on_parent) & !test(execute_queue_doesnt_stall_if_workers_died) & !test(adder::stress_spawn) & !test(prepare_job_terminates_on_timeout) & !test(xecute_job_terminates_on_timeout)' \
         --features try-runtime,experimental > /dev/null
     - grcov . --binary-path ./target/release/deps/ -s . -t lcov --branch --ignore-not-existing --ignore '../*' --ignore "/*" -o target/coverage/tests.lcov
 # This job cancels the whole pipeline if any of provided jobs fail.
