@@ -105,15 +105,14 @@ default:
 
 .docker-env:
   image: "${CI_IMAGE}"
-  variables:
-    FL_FORKLIFT_VERSION: !reference [.forklift, variables, FL_FORKLIFT_VERSION]
+  # variables:
+  #   FL_FORKLIFT_VERSION: !reference [.forklift, variables, FL_FORKLIFT_VERSION]
   before_script:
     - !reference [.common-before-script, before_script]
     - !reference [.prepare-env, before_script]
     - !reference [.rust-info-script, script]
   tags:
     - linux-docker
-
 
 .common-refs:
   rules:
