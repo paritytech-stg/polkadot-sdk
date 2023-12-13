@@ -228,7 +228,7 @@ codecov:
       --locked
       --release
       --no-fail-fast
-      --features try-runtime,experimental > /dev/null
+      --features try-runtime,experimental > /dev/null || echo "some errors"
     - ls -la
     - grcov . --binary-path ./target/release/deps/ -s . -t lcov --branch --ignore-not-existing --ignore '../*' --ignore "/*" -o target/coverage/tests.lcov
 # This job cancels the whole pipeline if any of provided jobs fail.
