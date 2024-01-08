@@ -240,6 +240,7 @@ include:
 
 test-linux-stable:
   stage: test
+  timeout: 8h
   extends:
     - .docker-env
     - .common-refs
