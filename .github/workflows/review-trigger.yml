@@ -30,10 +30,11 @@ jobs:
         run: |
           echo "SENDER: $SENDER ; AUTHOR:$AUTHOR ; ACTION:$ACTION"
           echo "::error::Project needs to be reviewed again"
-          gh api repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews \
-          --jq '.[] | select(.state == "APPROVED") | .user.login' \
-          | xargs -I '{}' gh api --method=POST \
-          repos/${{ github.repository }}/pulls/${{ github.event.number }}/requested_reviewers/'{}'/
+          REVIEWERS=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews \
+          --jq '.[] | select(.state == "APPROVED") | .user.login')
+          echo "Requesting reviewers: $REVIEWERS to repos/${{ github.repository }}/pulls/${{ github.event.number }}/requested_reviewers"
+          gh api repos/${{ github.repository }}/pulls/${{ github.event.number }}/requested_reviewers \
+          -f "reviewers=$REVIEWERS"
           exit 1
         env:
           SENDER: ${{ github.event.sender.login }}
