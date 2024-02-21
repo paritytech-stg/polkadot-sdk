@@ -22,16 +22,24 @@ jobs:
         if: ${{ contains(github.ref, 'gh-readonly-queue') }}
         run: exit 0
       - name: Fail on non author pushing
-        # Require a new review on push
-        if: ${{ github.event.sender.login == github.event.pull_request.user.login && github.event.pull_request.author_association != 'MEMBER' }}
+        # Require new reviews when the author is pushing and he is not a member
+        if: | 
+          github.event.action == 'synchronize' && 
+          github.event.sender.login == github.event.pull_request.user.login && 
+          github.event.pull_request.author_association != 'MEMBER'
         run: |
           echo "SENDER: $SENDER ; AUTHOR:$AUTHOR ; ACTION:$ACTION"
           echo "::error::Project needs to be reviewed again"
+          gh api repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews \
+          --jq '.[] | select(.state == "APPROVED") | .user.login' \
+          | xargs -I '{}' gh api --method=POST \
+          repos/${{ github.repository }}/pulls/${{ github.event.number }}/requested_reviewers/'{}'/
           exit 1
         env:
           SENDER: ${{ github.event.sender.login }}
           AUTHOR: ${{ github.event.pull_request.author_association }}
           ACTION: ${{ github.event.action }}
+          GH_TOKEN: ${{ github.token }}
       - name: Get PR number
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
