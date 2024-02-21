@@ -31,16 +31,10 @@ jobs:
           echo "SENDER: $SENDER ; AUTHOR:$AUTHOR ; ACTION:$ACTION"
           echo "::error::Project needs to be reviewed again"
           REVIEWERS=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.number }}/reviews \
-          --jq '.[] | select(.state == "APPROVED") | .user.login')
-
-          # We store the approvals
-          while read -r i; do
-              R="$R -f \"reviewers[]=${i}\""
-              echo "R is $R"
-          done <<< "$(echo -e "$REVIEWERS")"
+          --jq '{reviewers: [.[] | select(.state == "APPROVED") | .user.login]}')
           
           echo "Requesting reviewers: $REVIEWERS to repos/${{ github.repository }}/pulls/${{ github.event.number }}/requested_reviewers $R"
-          gh api repos/${{ github.repository }}/pulls/${{ github.event.number }}/requested_reviewers $R
+          echo $REVIEWERS | gh api --method POST repos/${{ github.repository }}/pulls/${{ github.event.number }}/requested_reviewers --input
           exit 1
         env:
           SENDER: ${{ github.event.sender.login }}
