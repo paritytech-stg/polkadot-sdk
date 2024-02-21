@@ -34,7 +34,7 @@ jobs:
           --jq '{reviewers: [.[] | select(.state == "APPROVED") | .user.login]}')
           
           echo "Requesting reviewers: $REVIEWERS to repos/${{ github.repository }}/pulls/${{ github.event.number }}/requested_reviewers $R"
-          echo $REVIEWERS | gh api --method POST repos/${{ github.repository }}/pulls/${{ github.event.number }}/requested_reviewers --input
+          echo $REVIEWERS | gh api --method POST repos/${{ github.repository }}/pulls/${{ github.event.number }}/requested_reviewers --input REVIEWERS
           exit 1
         env:
           SENDER: ${{ github.event.sender.login }}
