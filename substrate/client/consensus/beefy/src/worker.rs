@@ -26,7 +26,7 @@ use crate::{
 	error::Error,
 	expect_validator_set,
 	justification::BeefyVersionedFinalityProof,
-	keystore::{BeefyKeystore, BeefySignatureHasher},
+	keystore::BeefyKeystore,
 	metric_inc, metric_set,
 	metrics::VoterMetrics,
 	round::{Rounds, VoteImportResult},
@@ -45,8 +45,8 @@ use sp_consensus::SyncOracle;
 use sp_consensus_beefy::{
 	check_equivocation_proof,
 	ecdsa_crypto::{AuthorityId, Signature},
-	BeefyApi, Commitment, ConsensusLog, EquivocationProof, PayloadProvider, ValidatorSet,
-	VersionedFinalityProof, VoteMessage, BEEFY_ENGINE_ID,
+	BeefyApi, BeefySignatureHasher, Commitment, ConsensusLog, EquivocationProof, PayloadProvider,
+	ValidatorSet, VersionedFinalityProof, VoteMessage, BEEFY_ENGINE_ID,
 };
 use sp_runtime::{
 	generic::{BlockId, OpaqueDigestItemId},
@@ -340,7 +340,7 @@ pub(crate) struct BeefyWorkerBase<B: Block, BE, RuntimeApi> {
 	// utilities
 	pub backend: Arc<BE>,
 	pub runtime: Arc<RuntimeApi>,
-	pub key_store: BeefyKeystore,
+	pub key_store: BeefyKeystore<AuthorityId>,
 
 	/// BEEFY client metrics.
 	pub metrics: Option<VoterMetrics>,
@@ -387,7 +387,7 @@ where
 				.flatten()
 				.map(|justifs| justifs.get(BEEFY_ENGINE_ID).is_some())
 			{
-				info!(
+				debug!(
 					target: LOG_TARGET,
 					"🥩 Initialize BEEFY voter at last BEEFY finalized block: {:?}.",
 					*header.number()
@@ -439,7 +439,7 @@ where
 			}
 
 			if let Some(active) = find_authorities_change::<B>(&header) {
-				info!(
+				debug!(
 					target: LOG_TARGET,
 					"🥩 Marking block {:?} as BEEFY Mandatory.",
 					*header.number()
@@ -471,7 +471,7 @@ where
 			state.set_best_grandpa(best_grandpa.clone());
 			// Overwrite persisted data with newly provided `min_block_delta`.
 			state.set_min_block_delta(min_block_delta);
-			info!(target: LOG_TARGET, "🥩 Loading BEEFY voter state from db: {:?}.", state);
+			debug!(target: LOG_TARGET, "🥩 Loading BEEFY voter state from db: {:?}.", state);
 
 			// Make sure that all the headers that we need have been synced.
 			let mut new_sessions = vec![];
@@ -489,7 +489,7 @@ where
 
 			// Make sure we didn't miss any sessions during node restart.
 			for (validator_set, new_session_start) in new_sessions.drain(..).rev() {
-				info!(
+				debug!(
 					target: LOG_TARGET,
 					"🥩 Handling missed BEEFY session after node restart: {:?}.",
 					new_session_start
@@ -630,13 +630,14 @@ where
 		&mut self,
 		notification: &FinalityNotification<B>,
 	) -> Result<(), Error> {
+		let header = &notification.header;
 		debug!(
 			target: LOG_TARGET,
-			"🥩 Finality notification: header {:?} tree_route {:?}",
-			notification.header,
+			"🥩 Finality notification: header(number {:?}, hash {:?}) tree_route {:?}",
+			header.number(),
+			header.hash(),
 			notification.tree_route,
 		);
-		let header = &notification.header;
 
 		self.base
 			.runtime
@@ -757,7 +758,7 @@ where
 		match rounds.add_vote(vote) {
 			VoteImportResult::RoundConcluded(signed_commitment) => {
 				let finality_proof = VersionedFinalityProof::V1(signed_commitment);
-				info!(
+				debug!(
 					target: LOG_TARGET,
 					"🥩 Round #{} concluded, finality_proof: {:?}.", block_number, finality_proof
 				);
@@ -1165,7 +1166,7 @@ where
 			return Ok(())
 		} else if let Some(local_id) = self.base.key_store.authority_id(validators) {
 			if offender_id == local_id {
-				debug!(target: LOG_TARGET, "🥩 Skip equivocation report for own equivocation");
+				warn!(target: LOG_TARGET, "🥩 Skip equivocation report for own equivocation");
 				return Ok(())
 			}
 		}
@@ -1234,7 +1235,7 @@ where
 	// if the mandatory block (session_start) does not have a beefy justification yet,
 	// we vote on it
 	let target = if best_beefy < session_start {
-		debug!(target: LOG_TARGET, "🥩 vote target - mandatory block: #{:?}", session_start,);
+		debug!(target: LOG_TARGET, "🥩 vote target - mandatory block: #{:?}", session_start);
 		session_start
 	} else {
 		let diff = best_grandpa.saturating_sub(best_beefy) + 1u32.into();
@@ -1278,8 +1279,11 @@ pub(crate) mod tests {
 	use sc_network_test::TestNetFactory;
 	use sp_blockchain::Backend as BlockchainBackendT;
 	use sp_consensus_beefy::{
-		generate_equivocation_proof, known_payloads, known_payloads::MMR_ROOT_ID,
-		mmr::MmrRootProvider, Keyring, Payload, SignedCommitment,
+		known_payloads,
+		known_payloads::MMR_ROOT_ID,
+		mmr::MmrRootProvider,
+		test_utils::{generate_equivocation_proof, Keyring},
+		Payload, SignedCommitment,
 	};
 	use sp_runtime::traits::{Header as HeaderT, One};
 	use substrate_test_runtime_client::{
@@ -1309,7 +1313,7 @@ pub(crate) mod tests {
 
 	fn create_beefy_worker(
 		peer: &mut BeefyPeer,
-		key: &Keyring,
+		key: &Keyring<AuthorityId>,
 		min_block_delta: u32,
 		genesis_validator_set: ValidatorSet<AuthorityId>,
 	) -> BeefyWorker<
@@ -1319,7 +1323,7 @@ pub(crate) mod tests {
 		TestApi,
 		Arc<SyncingService<Block>>,
 	> {
-		let keystore = create_beefy_keystore(*key);
+		let keystore = create_beefy_keystore(key);
 
 		let (to_rpc_justif_sender, from_voter_justif_stream) =
 			BeefyVersionedFinalityProofStream::<Block>::channel();
