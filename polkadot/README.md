@@ -1,5 +1,8 @@
 # Polkadot
 
+# FOO
+# BAR
+
 Implementation of a <https://polkadot.network> node in Rust based on the Substrate framework.
 
 The README provides information about installing the `polkadot` binary and developing on the codebase. For more specific
