@@ -75,6 +75,8 @@ Ensure you follow our [contribution guidelines](./docs/contributor/CONTRIBUTING.
 contribution, this project adheres to the [Contributor Covenant Code of Conduct](./docs/contributor/CODE_OF_CONDUCT.md).
 
 
+
+
 ## Additional Resources
 
 - For monitoring upcoming changes and current proposals related to the technical implementation of the Polkadot network,
