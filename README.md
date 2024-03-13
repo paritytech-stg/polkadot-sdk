@@ -77,6 +77,8 @@ contribution, this project adheres to the [Contributor Covenant Code of Conduct]
 
 
 
+
+
 ## Additional Resources
 
 - For monitoring upcoming changes and current proposals related to the technical implementation of the Polkadot network,
