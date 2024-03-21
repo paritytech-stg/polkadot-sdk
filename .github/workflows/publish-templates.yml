@@ -96,6 +96,7 @@ jobs:
               "runtime",
           ]
           EOF
+        working-directory: "${{ env.template-path }}"
       - name: Check if it compiles
         id: check-compilation
         run: |
@@ -103,6 +104,7 @@ jobs:
           # Commented out for now.
           # cargo build
           cargo tree --depth 1
+          cargo fmt
         working-directory: "${{ env.template-path }}"
       - name: Push changes
         run: |
