@@ -21,7 +21,7 @@
 #[cfg(feature = "std")]
 include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
 
-use frame::{
+use polkadot_sdk_frame::{
 	deps::frame_support::{
 		genesis_builder_helper::{build_config, create_default_config},
 		weights::{FixedFee, NoFee},
@@ -111,7 +111,7 @@ impl pallet_transaction_payment::Config for Runtime {
 
 impl pallet_minimal_template::Config for Runtime {}
 
-type Block = frame::runtime::types_common::BlockOf<Runtime, SignedExtra>;
+type Block = polkadot_sdk_frame::runtime::types_common::BlockOf<Runtime, SignedExtra>;
 type Header = HeaderFor<Runtime>;
 
 type RuntimeExecutive =
