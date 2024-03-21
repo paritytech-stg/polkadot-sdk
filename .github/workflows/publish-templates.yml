@@ -105,7 +105,7 @@ jobs:
       #     # cargo build
       #     cargo tree --depth 1
       #     cargo fmt
-        working-directory: "${{ env.template-path }}"
+        # working-directory: "${{ env.template-path }}"
       - name: Push changes
         run: |
           git add -A .
