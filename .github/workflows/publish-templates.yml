@@ -15,7 +15,7 @@ jobs:
         template: ["minimal"]
     env:
       template-path: "polkadot-sdk-${{ matrix.template }}-template"
-      polkadot-release-version: "1.8.0"
+      polkadot-release-version: "1.9.0"
     steps:
       - name: Configure git identity
         run: |
@@ -36,7 +36,7 @@ jobs:
           path: "${{ env.template-path }}"
           token: ${{ steps.app_token.outputs.token }}
       - name: Install Polkadot SDK Version Manager
-        run: cargo install --git https://github.com/paritytech/psvm --rev 3ed634e47c595ce9912e4645d71ae2c527dc72a7 psvm
+        run: cargo install --git https://github.com/paritytech/psvm --branch rzadp/190 psvm
       - name: Replace the workspace references in the template
         run: |
           set -euo pipefail
