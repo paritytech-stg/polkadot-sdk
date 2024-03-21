@@ -95,6 +95,7 @@ jobs:
               "pallets/template",
               "runtime",
           ]
+          resolver = "2"
           EOF
         working-directory: "${{ env.template-path }}"
       - name: Check if it compiles
