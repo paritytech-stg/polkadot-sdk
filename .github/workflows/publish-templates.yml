@@ -44,7 +44,7 @@ jobs:
           find . -type f -name 'Cargo.toml' -exec psvm -o -v ${{ env.polkadot-release-version }} -p {} \;
 
           # frame/polkadot-sdk-frame is not a part of release yet, treat it manually.
-          find . -type f -name 'Cargo.toml' -exec sed -i -E "s/path = \".*\/substrate\/frame\"\, //g" {} \;
+          find . -type f -name 'Cargo.toml' -exec sed -i -E "s/package = \"frame\", path = .*\/substrate\/frame\", //g" {} \;
           
           # Set the Rust edition.
           rust_edition=$(cat ../../Cargo.toml | grep "edition =")
