@@ -76,6 +76,9 @@ jobs:
           }
           export -f replace_workspace_deps
           find . -type f -name 'Cargo.toml' -exec bash -c 'replace_workspace_deps {}' \;
+
+          echo "Result Cargo.toml debug"
+          find . -type f -name 'Cargo.toml' -exec cat {} \;
         shell: bash
         working-directory: polkadot-sdk/templates/${{ matrix.template }}/
       - name: Clean the destination repository
