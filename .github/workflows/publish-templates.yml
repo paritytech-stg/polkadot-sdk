@@ -86,6 +86,16 @@ jobs:
       - name: Copy over the new changes
         run: |
           cp -r polkadot-sdk/templates/${{ matrix.template }}/* "${{ env.template-path }}/"
+      - name: Create a new workspace
+        run: |
+          cat << EOF > Cargo.toml
+          [workspace]
+          members = [
+              "node",
+              "pallets/template",
+              "runtime",
+          ]
+          EOF
       - name: Check if it compiles
         id: check-compilation
         run: |
