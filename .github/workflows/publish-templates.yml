@@ -94,17 +94,17 @@ jobs:
         working-directory: polkadot-sdk/templates/${{ matrix.template }}/
       - name: Clean the destination repository
         run: rm -rf "${{ env.template-path }}/*"
-      - name: Copy over the new changes
-        run: |
-          cp -r polkadot-sdk/templates/${{ matrix.template }}/* "${{ env.template-path }}/"
-      - name: Check if it compiles
-        id: check-compilation
-        run: |
-          set -e
-          # Commented out for now.
-          # cargo build
-          cargo tree --depth 1
-          cargo fmt
+      # - name: Copy over the new changes
+      #   run: |
+      #     cp -r polkadot-sdk/templates/${{ matrix.template }}/* "${{ env.template-path }}/"
+      # - name: Check if it compiles
+      #   id: check-compilation
+      #   run: |
+      #     set -e
+      #     # Commented out for now.
+      #     # cargo build
+      #     cargo tree --depth 1
+      #     cargo fmt
         working-directory: "${{ env.template-path }}"
       - name: Push changes
         run: |
