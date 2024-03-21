@@ -52,7 +52,6 @@ jobs:
 
           # Get rid of "authors.workspace = true" and similar entries.
           find . -type f -name 'Cargo.toml' -exec sed -i -E "/^.*\.workspace = true\$/d" {} \;
-          find . -type f -name 'Cargo.toml' -exec sed -i -E "/^workspace = true\$/d" {} \;
 
           # Replace workspace dependencies with actual versions.
           # e.g. serde_json = { workspace = true, default-features = true }
@@ -77,17 +76,8 @@ jobs:
           export -f replace_workspace_deps
           find . -type f -name 'Cargo.toml' -exec bash -c 'replace_workspace_deps {}' \;
 
-          echo "Result Cargo.toml debug"
-          find . -type f -name 'Cargo.toml' -exec cat {} \;
-        shell: bash
-        working-directory: polkadot-sdk/templates/${{ matrix.template }}/
-      - name: Clean the destination repository
-        run: rm -rf "${{ env.template-path }}/*"
-      - name: Copy over the new changes
-        run: |
-          cp -r polkadot-sdk/templates/${{ matrix.template }}/* "${{ env.template-path }}/"
-      - name: Create a new workspace
-        run: |
+          # Get rid of "workspace = true" and create a new workspace.
+          find . -type f -name 'Cargo.toml' -exec sed -i -E "/^workspace = true\$/d" {} \;
           cat << EOF > Cargo.toml
           [workspace]
           members = [
@@ -97,7 +87,16 @@ jobs:
           ]
           resolver = "2"
           EOF
-        working-directory: "${{ env.template-path }}"
+
+          echo "Result Cargo.toml debug"
+          find . -type f -name 'Cargo.toml' -exec cat {} \;
+        shell: bash
+        working-directory: polkadot-sdk/templates/${{ matrix.template }}/
+      - name: Clean the destination repository
+        run: rm -rf "${{ env.template-path }}/*"
+      - name: Copy over the new changes
+        run: |
+          cp -r polkadot-sdk/templates/${{ matrix.template }}/* "${{ env.template-path }}/"
       - name: Check if it compiles
         id: check-compilation
         run: |
