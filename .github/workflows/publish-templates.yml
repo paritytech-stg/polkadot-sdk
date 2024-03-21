@@ -93,7 +93,9 @@ jobs:
         shell: bash
         working-directory: polkadot-sdk/templates/${{ matrix.template }}/
       - name: Clean the destination repository
-        run: rm -rf "${{ env.template-path }}/*"
+        run: rm -rf ./*
+        working-directory: "${{ env.template-path }}"
+        
       # - name: Copy over the new changes
       #   run: |
       #     cp -r polkadot-sdk/templates/${{ matrix.template }}/* "${{ env.template-path }}/"
@@ -108,7 +110,9 @@ jobs:
         # working-directory: "${{ env.template-path }}"
       - name: Push changes
         run: |
+          git status
           git add -A .
+          git status
           git commit --allow-empty -m "Pushed event"
           git push
         working-directory: "${{ env.template-path }}"
