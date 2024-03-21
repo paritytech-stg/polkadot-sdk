@@ -52,18 +52,7 @@ jobs:
 
           # Get rid of "authors.workspace = true" and similar entries.
           find . -type f -name 'Cargo.toml' -exec sed -i -E "/^.*\.workspace = true\$/d" {} \;
-
-          # Get rid of "workspace = true" and replace with a new workspace
           find . -type f -name 'Cargo.toml' -exec sed -i -E "/^workspace = true\$/d" {} \;
-          cat << EOF > Cargo.toml
-          [workspace]
-          members = [
-              "node",
-              "pallets/template",
-              "runtime",
-          ]
-          resolver = "2"
-          EOF
 
           # Replace workspace dependencies with actual versions.
           # e.g. serde_json = { workspace = true, default-features = true }
@@ -97,6 +86,18 @@ jobs:
       - name: Copy over the new changes
         run: |
           cp -r polkadot-sdk/templates/${{ matrix.template }}/* "${{ env.template-path }}/"
+      - name: Create a new workspace
+        run: |
+          cat << EOF > Cargo.toml
+          [workspace]
+          members = [
+              "node",
+              "pallets/template",
+              "runtime",
+          ]
+          resolver = "2"
+          EOF
+        working-directory: "${{ env.template-path }}"
       - name: Check if it compiles
         id: check-compilation
         run: |
