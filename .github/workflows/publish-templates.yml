@@ -90,8 +90,7 @@ jobs:
         id: check-compilation
         run: |
           set -e
-          cd node
-          # Commented out for now because it's very long.
+          # Commented out for now.
           # cargo build
           cargo tree --depth 1
         working-directory: "${{ env.template-path }}"
