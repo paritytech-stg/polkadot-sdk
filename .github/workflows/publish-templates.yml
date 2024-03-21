@@ -51,8 +51,8 @@ jobs:
           find . -type f -name 'Cargo.toml' -exec sed -i -E "s/edition\.workspace = true\$/$rust_edition/g" {} \;
 
           # Get rid of "authors.workspace = true" and similar entries.
-          find . -type f -name 'Cargo.toml' -exec sed -i -E "s/^.*\.workspace = true\$//g" {} \;
-          find . -type f -name 'Cargo.toml' -exec sed -i -E "s/^workspace = true\$//g" {} \;
+          find . -type f -name 'Cargo.toml' -exec sed -i -E "/^.*\.workspace = true\$/d" {} \;
+          find . -type f -name 'Cargo.toml' -exec sed -i -E "/^workspace = true\$/d" {} \;
 
           # Replace workspace dependencies with actual versions.
           # e.g. serde_json = { workspace = true, default-features = true }
