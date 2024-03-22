@@ -50,7 +50,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v5
       - name: Push changes
         run: |
-          git config --global --add safe.directory /__w/cmd-action/cmd-action
+          git config --global --add safe.directory /__w/$REPO/$REPO
           git config --system user.name command-bot
           git config --system user.email "github@users.noreply.github.com"
           git add .
@@ -58,3 +58,4 @@ jobs:
           git push origin $BRANCH
         env:
           BRANCH: ${{ github.head_ref || github.ref_name }}
+          REPO: ${{ github.event.repository.name }}
