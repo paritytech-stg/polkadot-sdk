@@ -18,7 +18,7 @@
 
 use crate::{RuntimeT, LOG_TARGET};
 use frame_support::traits::PalletInfoAccess;
-use pallet_staking::Nominators  ;
+use pallet_staking::Nominators;
 use remote_externalities::{Builder, Mode, OnlineConfig};
 use sp_runtime::{traits::Block as BlockT, DeserializeOwned};
 
