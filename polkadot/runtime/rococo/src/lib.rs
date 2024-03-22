@@ -21,7 +21,7 @@
 #![recursion_limit = "512"]
 
 use pallet_nis::WithMaximumOf;
-use parity_scale_codec::{Decode, Encode, MaxEncodedLen}  ;
+use parity_scale_codec::{Decode, Encode, MaxEncodedLen};
 use primitives::{
 	slashing,
 	vstaging::{ApprovalVotingParams, NodeFeatures},
