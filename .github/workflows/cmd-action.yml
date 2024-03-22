@@ -1,4 +1,4 @@
-name: Continuous testing
+name: Command
 
 on: 
   pull_request:
@@ -20,15 +20,15 @@ jobs:
     continue-on-error: true
     # We set the current machine here (to differ between ours and generic ones)
     runs-on: ubuntu-latest
-    # container:
-    #   image: paritytech/ci-unified:bullseye-1.75.0-2024-01-22-v20240109
-    #   env:
-    #     NODE_ENV: development
-    #   ports:
-    #     - 80
-    #   volumes:
-    #     - my_docker_volume:/volume_mount
-    #   options: --cpus 1
+    container:
+      image: paritytech/ci-unified:bullseye-1.75.0-2024-01-22-v20240109
+      env:
+        NODE_ENV: development
+      ports:
+        - 80
+      volumes:
+        - my_docker_volume:/volume_mount
+      options: --cpus 1
     steps:
       - name: Download repo
         uses: actions/checkout@v4.1.1
