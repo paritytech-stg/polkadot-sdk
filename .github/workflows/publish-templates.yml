@@ -54,6 +54,7 @@ jobs:
           private_key: ${{ secrets.TEMPLATE_APP_KEY }}
       - uses: actions/checkout@v3
         with:
+          # TODO: CHANGE BEFORE MOVING FROM STAGING
           repository: "paritytech-stg/polkadot-sdk-${{ matrix.template }}-template"
           path: "${{ env.template-path }}"
           token: ${{ steps.app_token.outputs.token }}
