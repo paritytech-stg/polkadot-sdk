@@ -58,8 +58,10 @@ jobs:
           repository: "paritytech-stg/polkadot-sdk-${{ matrix.template }}-template"
           path: "${{ env.template-path }}"
           token: ${{ steps.app_token.outputs.token }}
+      - name: Install toml-cli
+        run: cargo install --git https://github.com/gnprice/toml-cli --rev ea69e9d2ca4f0f858110dc7a5ae28bcb918c07fb # v0.2.3
       - name: Install Polkadot SDK Version Manager
-        run: cargo install --git https://github.com/paritytech/psvm --rev c41261ffb52ab0c115adbbdb17e2cb7900d2bdfd psvm
+        run: cargo install --git https://github.com/paritytech/psvm --rev c41261ffb52ab0c115adbbdb17e2cb7900d2bdfd psvm # master
       - name: Rust compilation prerequisites
         run: |
           sudo apt update
@@ -73,43 +75,14 @@ jobs:
       - name: Use psvm to replace git references with released creates.
         run: find . -type f -name 'Cargo.toml' -exec psvm -o -v ${{ env.polkadot-release-version }} -p {} \;
         working-directory: polkadot-sdk/templates/${{ matrix.template }}/
-      - name: Yank the template out of the workspace
+      - name: Create a new workspace Cargo.toml
         run: |
-          set -euo pipefail
-
-          # Set the Rust edition.
-          rust_edition=$(cat ../../Cargo.toml | grep "edition =")
-          find . -type f -name 'Cargo.toml' -exec sed -i -E "s/edition\.workspace = true\$/$rust_edition/g" {} \;
-
-          # Get rid of "authors.workspace = true" and similar entries.
-          find . -type f -name 'Cargo.toml' -exec sed -i -E "/^.*\.workspace = true\$/d" {} \;
-
-          # Replace workspace dependencies with actual versions - it is not handled by psvm.
-          # e.g. serde_json = { workspace = true, default-features = true }
-          replace_workspace_deps () {
-            # To preserve TAB identation.
-            IFS=''
-            echo "Replacing workspace deps in $1"
-            while read line; do
-              if echo "$line" | grep -q -E ".* = .* workspace = true"
-              then
-                pkg=$(echo $line | sed -E 's/(.*) = \{(.*)/\1/')
-                echo "Replacing workspace dependency ${pkg}."
-                cargo tree --depth 1 --prefix none | grep "${pkg} v"
-                version=$(cargo tree --depth 1 --prefix none | grep "${pkg} v" | head -1 | sed -E "s/${pkg} v//" | tr -d '\n')
-                echo "Version: $version"
-                line=$(echo "$line" | sed -E "s/workspace = true/version = \"${version}\"/")
-              fi
-              echo "$line" >> "${1}.temp"
-            done < "$1"
-            mv "${1}.temp" "$1"
-          }
-          export -f replace_workspace_deps
-          find . -type f -name 'Cargo.toml' -exec bash -c 'replace_workspace_deps {}' \;
-
-          # Get rid of "workspace = true" and create a new workspace.
-          find . -type f -name 'Cargo.toml' -exec sed -i -E "/^workspace = true\$/d" {} \;
           cat << EOF > Cargo.toml
+          [workspace.package]
+          license = "MIT-0"
+          authors = ["Parity Technologies <admin@parity.io>"]
+          homepage = "https://substrate.io"
+
           [workspace]
           members = [
               "node",
@@ -120,6 +93,22 @@ jobs:
           EOF
         shell: bash
         working-directory: polkadot-sdk/templates/${{ matrix.template }}/
+      - name: Update workspace configuration
+        run: |
+          set -euo pipefail
+          # toml-cli has no overwrite functionality yet, so we use temporary files.
+          # We cannot pipe the output straight to the same file while the CLI still reads and processes it.
+
+          toml set templates/${{ matrix.template }}/Cargo.toml 'workspace.package.repository' "https://github.com/paritytech/polkadot-sdk-${{ matrix.template }}-template.git" > Cargo.temp
+          mv Cargo.temp ./templates/${{ matrix.template }}/Cargo.toml
+
+          toml set templates/${{ matrix.template }}/Cargo.toml 'workspace.package.edition' "$(toml get --raw Cargo.toml 'workspace.package.edition')" > Cargo.temp
+          mv Cargo.temp ./templates/${{ matrix.template }}/Cargo.toml
+
+          toml get Cargo.toml 'workspace.lints' --output-toml >> ./templates/${{ matrix.template }}/Cargo.toml
+
+          toml get Cargo.toml 'workspace.dependencies' --output-toml >> ./templates/${{ matrix.template }}/Cargo.toml
+        working-directory: polkadot-sdk
       - name: Print the result Cargo.tomls for debugging
         if: runner.debug == '1'
         run: find . -type f -name 'Cargo.toml' -exec cat {} \;
@@ -131,12 +120,6 @@ jobs:
       - name: Copy over the new changes
         run: |
           cp -r polkadot-sdk/templates/${{ matrix.template }}/* "${{ env.template-path }}/"
-
-        # The new repository does not have lint settings specific to polkadot-sdk.
-        # We reformat it without those settings.
-      - name: Reformat the repository
-        run: cargo fmt
-        working-directory: "${{ env.template-path }}"
 
       # 3. Verify the build. Push the changes or create a PR.
 
@@ -151,8 +134,6 @@ jobs:
           haskell: false
           large-packages: false
           swap-storage: false
-
-
 
       - name: Check if it compiles
         id: check-compilation
