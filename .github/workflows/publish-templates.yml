@@ -17,6 +17,7 @@ jobs:
       template-path: "polkadot-sdk-${{ matrix.template }}-template"
       polkadot-release-version: "1.9.0"
     steps:
+      - run: exit -1
       - name: Configure git identity
         run: |
           git config --global user.name "Template Bot"
@@ -105,6 +106,10 @@ jobs:
           cargo tree --depth 1
           cargo fmt
         working-directory: "${{ env.template-path }}"
+      - name: Create PR on failure
+        if: failure() && steps.check-compilation.outcome == 'failure'
+        run: |
+          echo "creating PR"
       - name: Push changes
         run: |
           git add -A .
