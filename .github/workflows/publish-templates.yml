@@ -3,6 +3,11 @@ name: Publish templates
 
 on:
   push:
+  workflow_dispatch:
+    inputs:
+      release_branch:
+        description: 'A branch to use, e.g. release-crates-io-v1.x.x'
+        required: true
 
 
 jobs:
@@ -25,6 +30,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           path: polkadot-sdk
+          ref: "${{ github.event.inputs.release_branch }}"
       - name: Generate token
         id: app_token
         uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
@@ -107,7 +113,6 @@ jobs:
           # Commented out for now.
           # cargo build
           # cargo test
-          exit -1
           cargo tree --depth 1
         working-directory: "${{ env.template-path }}"
       - name: Create PR on failure
