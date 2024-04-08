@@ -80,7 +80,7 @@ jobs:
           cat << EOF > Cargo.toml
           [workspace.package]
           license = "MIT-0"
-          authors = "Parity Technologies"
+          authors = ["Parity Technologies <admin@parity.io>"]
           homepage = "https://substrate.io"
 
           [workspace]
