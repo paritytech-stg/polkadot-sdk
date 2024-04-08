@@ -61,7 +61,7 @@ jobs:
           # Get rid of "authors.workspace = true" and similar entries.
           find . -type f -name 'Cargo.toml' -exec sed -i -E "/^.*\.workspace = true\$/d" {} \;
 
-          # Replace workspace dependencies with actual versions.
+          # Replace workspace dependencies with actual versions - it is not handled by psvm.
           # e.g. serde_json = { workspace = true, default-features = true }
           replace_workspace_deps () {
             # To preserve TAB identation.
