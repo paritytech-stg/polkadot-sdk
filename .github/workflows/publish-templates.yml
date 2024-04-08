@@ -93,25 +93,15 @@ jobs:
         working-directory: polkadot-sdk/templates/${{ matrix.template }}/
       - name: Update workspace configuration
         run: |
-          set -e
+          set -euo pipefail
 
-          cat ./templates/${{ matrix.template }}/Cargo.toml
+          toml set templates/${{ matrix.template }}/Cargo.toml 'workspace.package.repository' "https://github.com/paritytech/polkadot-sdk-${{ matrix.template }}-template.git" | tee ./templates/${{ matrix.template }}/Cargo.toml
 
-          toml set templates/${{ matrix.template }}/Cargo.toml 'workspace.package.repository' "https://github.com/paritytech/polkadot-sdk-${{ matrix.template }}-template.git" > ./templates/${{ matrix.template }}/Cargo.toml
-
-          cat ./templates/${{ matrix.template }}/Cargo.toml
-
-          toml set templates/${{ matrix.template }}/Cargo.toml 'workspace.package.edition' "$(toml get --raw Cargo.toml 'workspace.package.edition')" > ./templates/${{ matrix.template }}/Cargo.toml
-
-          cat ./templates/${{ matrix.template }}/Cargo.toml
+          toml set templates/${{ matrix.template }}/Cargo.toml 'workspace.package.edition' "$(toml get --raw Cargo.toml 'workspace.package.edition')" | tee ./templates/${{ matrix.template }}/Cargo.toml
 
           toml get Cargo.toml 'workspace.lints' --output-toml >> ./templates/${{ matrix.template }}/Cargo.toml
 
-          cat ./templates/${{ matrix.template }}/Cargo.toml
-
           toml get Cargo.toml 'workspace.dependencies' --output-toml >> ./templates/${{ matrix.template }}/Cargo.toml
-
-          cat ./templates/${{ matrix.template }}/Cargo.toml
         working-directory: polkadot-sdk
       - name: Print the result Cargo.tomls for debugging
         #if: runner.debug == '1'
