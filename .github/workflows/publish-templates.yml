@@ -47,12 +47,13 @@ jobs:
         # run: cargo install --git https://github.com/paritytech/psvm --rev ad7eb4333c124b0b7169359f1463ba40cd5d55dd psvm
         # https://github.com/paritytech/psvm/pull/7
         run: cargo install --git https://github.com/paritytech/psvm --rev a3ecef700e4c1429c2d01e265a145654ceb3cc49 psvm
-      - name: Replace the workspace references in the template
+      - name: Use psvm to replace git references with released creates.
+        run: find . -type f -name 'Cargo.toml' -exec psvm -o -v ${{ env.polkadot-release-version }} -p {} \;
+        working-directory: polkadot-sdk/templates/${{ matrix.template }}/
+      - name: Yank the template out of the workspace
         run: |
           set -euo pipefail
-          # Use psvm to replace git references with released creates.
-          find . -type f -name 'Cargo.toml' -exec psvm -o -v ${{ env.polkadot-release-version }} -p {} \;
-          
+
           # Set the Rust edition.
           rust_edition=$(cat ../../Cargo.toml | grep "edition =")
           find . -type f -name 'Cargo.toml' -exec sed -i -E "s/edition\.workspace = true\$/$rust_edition/g" {} \;
@@ -94,10 +95,11 @@ jobs:
           ]
           resolver = "2"
           EOF
-
-          echo "Result Cargo.toml debug"
-          find . -type f -name 'Cargo.toml' -exec cat {} \;
         shell: bash
+        working-directory: polkadot-sdk/templates/${{ matrix.template }}/
+      - name: Print the result Cargo.tomls for debugging
+        if: runner.debug == '1'
+        run: find . -type f -name 'Cargo.toml' -exec cat {} \;
         working-directory: polkadot-sdk/templates/${{ matrix.template }}/
       - name: Clean the destination repository
         run: rm -rf ./*
