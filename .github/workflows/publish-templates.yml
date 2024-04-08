@@ -60,9 +60,7 @@ jobs:
           path: "${{ env.template-path }}"
           token: ${{ steps.app_token.outputs.token }}
       - name: Install Polkadot SDK Version Manager
-        # run: cargo install --git https://github.com/paritytech/psvm --rev ad7eb4333c124b0b7169359f1463ba40cd5d55dd psvm
-        # https://github.com/paritytech/psvm/pull/7
-        run: cargo install --git https://github.com/paritytech/psvm --rev a3ecef700e4c1429c2d01e265a145654ceb3cc49 psvm
+        run: cargo install --git https://github.com/paritytech/psvm --rev c41261ffb52ab0c115adbbdb17e2cb7900d2bdfd psvm
       
       # 2. Yanking the template out of the monorepo workspace.
 
