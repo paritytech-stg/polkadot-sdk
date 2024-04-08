@@ -8,7 +8,7 @@ name: Publish templates
 # - https://github.com/paritytech/polkadot-sdk-solochain-template
 #
 # The job moves the template code out of the monorepo,
-# replaces any references to the monorepo workspace using psvm and sed,
+# replaces any references to the monorepo workspace using psvm and toml-cli,
 # checks that it builds successfully,
 # and commits and pushes the result to each respective repository.
 # If the build fails, a PR is created instead for manual inspection.
