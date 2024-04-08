@@ -160,6 +160,6 @@ jobs:
       - name: Push changes
         run: |
           git add -A .
-          git commit --allow-empty -m "Pushed event"
+          git commit --allow-empty -m "Update template triggered by ${{ github.event_name }}"
           git push
         working-directory: "${{ env.template-path }}"
