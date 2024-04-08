@@ -15,7 +15,7 @@ name: Publish templates
 
 
 on:
-  push: # For testing locally, to be removed.
+#  push: # For testing locally, to be removed.
   # A manual dispatch for now - automatic on releases later.
   workflow_dispatch:
     inputs:
