@@ -97,6 +97,7 @@ jobs:
 
           [workspace.dependencies]
           serde = { version = "1.0.197", default-features = false }
+          serde_json = { version = "1.0.114", default-features = false }
           EOF
         shell: bash
         working-directory: polkadot-sdk/templates/${{ matrix.template }}/
