@@ -79,39 +79,15 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Set the Rust edition.
-          rust_edition=$(cat ../../Cargo.toml | grep "edition =")
-          find . -type f -name 'Cargo.toml' -exec sed -i -E "s/edition\.workspace = true\$/$rust_edition/g" {} \;
-
-          # Get rid of "authors.workspace = true" and similar entries.
-          find . -type f -name 'Cargo.toml' -exec sed -i -E "/^.*\.workspace = true\$/d" {} \;
-
-          # Replace workspace dependencies with actual versions - it is not handled by psvm.
-          # e.g. serde_json = { workspace = true, default-features = true }
-          replace_workspace_deps () {
-            # To preserve TAB identation.
-            IFS=''
-            echo "Replacing workspace deps in $1"
-            while read line; do
-              if echo "$line" | grep -q -E ".* = .* workspace = true"
-              then
-                pkg=$(echo $line | sed -E 's/(.*) = \{(.*)/\1/')
-                echo "Replacing workspace dependency ${pkg}."
-                cargo tree --depth 1 --prefix none | grep "${pkg} v"
-                version=$(cargo tree --depth 1 --prefix none | grep "${pkg} v" | head -1 | sed -E "s/${pkg} v//" | tr -d '\n')
-                echo "Version: $version"
-                line=$(echo "$line" | sed -E "s/workspace = true/version = \"${version}\"/")
-              fi
-              echo "$line" >> "${1}.temp"
-            done < "$1"
-            mv "${1}.temp" "$1"
-          }
-          export -f replace_workspace_deps
-          find . -type f -name 'Cargo.toml' -exec bash -c 'replace_workspace_deps {}' \;
-
-          # Get rid of "workspace = true" and create a new workspace.
+          # Create a new workspace.
           find . -type f -name 'Cargo.toml' -exec sed -i -E "/^workspace = true\$/d" {} \;
           cat << EOF > Cargo.toml
+          authors = ["Parity Technologies <admin@parity.io>"]
+          edition = "2021"
+          repository = "https://github.com/paritytech/polkadot-sdk.git"
+          license = "MIT-0"
+          homepage = "https://paritytech.github.io/polkadot-sdk/master/polkadot_sdk_docs/index.html"
+
           [workspace]
           members = [
               "node",
@@ -119,6 +95,9 @@ jobs:
               "runtime",
           ]
           resolver = "2"
+
+          [workspace.dependencies]
+          serde = { version = "1.0.197", default-features = false }
           EOF
         shell: bash
         working-directory: polkadot-sdk/templates/${{ matrix.template }}/
