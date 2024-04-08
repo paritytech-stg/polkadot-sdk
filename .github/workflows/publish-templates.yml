@@ -120,7 +120,7 @@ jobs:
             ./*
           title: "[Don't merge] Update the ${{ matrix.template }} template"
           body: "The template has NOT been successfully built and needs to be inspected."
-          branch: "update-template/${{ github/event_name }}"
+          branch: "update-template/${{ github.event_name }}"
       - name: Push changes
         run: |
           git add -A .
