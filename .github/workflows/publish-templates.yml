@@ -18,7 +18,6 @@ jobs:
       template-path: "polkadot-sdk-${{ matrix.template }}-template"
       polkadot-release-version: "1.9.0"
     steps:
-      - run: exit -1
       - name: Configure git identity
         run: |
           git config --global user.name "Template Bot"
@@ -104,13 +103,21 @@ jobs:
           set -e
           # Commented out for now.
           # cargo build
+          # cargo test
+          exit -1
           cargo tree --depth 1
           cargo fmt
         working-directory: "${{ env.template-path }}"
       - name: Create PR on failure
         if: failure() && steps.check-compilation.outcome == 'failure'
-        run: |
-          echo "creating PR"
+        uses: peter-evans/create-pull-request@5b4a9f6a9e2af26e5f02351490b90d01eb8ec1e5 # v5
+        with:
+          path: "${{ env.template-path }}"
+          token: ${{ steps.app_token.outputs.token }}
+          add-paths: |
+            ./*
+          title: "[Don't merge] Update the ${{ matrix.template }} template"
+          body: "The template has NOT been successfully built and needs to be inspected."
       - name: Push changes
         run: |
           git add -A .
