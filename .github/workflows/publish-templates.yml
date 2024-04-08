@@ -79,8 +79,8 @@ jobs:
           set -euo pipefail
 
           # Create a new workspace.
-          find . -type f -name 'Cargo.toml' -exec sed -i -E "/^workspace = true\$/d" {} \;
           cat << EOF > Cargo.toml
+          [workspace.package]
           authors = ["Parity Technologies <admin@parity.io>"]
           edition = "2021"
           repository = "https://github.com/paritytech/polkadot-sdk.git"
