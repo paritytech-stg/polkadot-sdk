@@ -134,6 +134,18 @@ jobs:
 
       # 3. Verify the build. Push the changes or create a PR.
 
+      # We've run into out-of-disk error when compiling Polkadot in the next step, so we free up some space this way.
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@ab7a4bef6b34bec5dc471eec8f22bd328ba94675 # 1.1.0
+        with:
+          android: true # This alone is a 12 GB save.
+          # We disable the rest because it caused some problems. (they're enabled by default)
+          # The Android removal is enough.
+          dotnet: false
+          haskell: false
+          large-packages: false
+          swap-storage: false
+
       - name: Check if it compiles
         id: check-compilation
         run: |
