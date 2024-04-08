@@ -27,8 +27,6 @@ on:
 jobs:
   publish-templates:
     runs-on: ubuntu-latest
-    container:
-      image: docker.io/paritytech/ci-unified:bullseye-1.75.0-2024-01-22-v20240109
     strategy:
       fail-fast: false
       matrix:
