@@ -36,9 +36,6 @@ jobs:
       polkadot-release-version: "1.9.0"
     steps:
 
-      - run: which yq
-      - run: which tomlq
-
       # 1. Prerequisites.
 
       - name: Configure git identity
@@ -60,8 +57,10 @@ jobs:
           repository: "paritytech-stg/polkadot-sdk-${{ matrix.template }}-template"
           path: "${{ env.template-path }}"
           token: ${{ steps.app_token.outputs.token }}
+      - name: Install toml-cli
+        run: cargo install --git https://github.com/gnprice/toml-cli --rev ea69e9d2ca4f0f858110dc7a5ae28bcb918c07fb # v0.2.3
       - name: Install Polkadot SDK Version Manager
-        run: cargo install --git https://github.com/paritytech/psvm --rev c41261ffb52ab0c115adbbdb17e2cb7900d2bdfd psvm
+        run: cargo install --git https://github.com/paritytech/psvm --rev c41261ffb52ab0c115adbbdb17e2cb7900d2bdfd psvm # master
       - name: Rust compilation prerequisites
         run: |
           sudo apt update
