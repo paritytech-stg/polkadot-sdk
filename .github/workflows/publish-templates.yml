@@ -2,7 +2,8 @@ name: Publish templates
 
 
 on:
-  push:
+  push: # For testing locally, to be removed.
+  # A manual dispatch for now - automatic on releases later.
   workflow_dispatch:
     inputs:
       release_branch:
@@ -49,7 +50,7 @@ jobs:
       - name: Replace the workspace references in the template
         run: |
           set -euo pipefail
-          # Use released creates, instead of git references.
+          # Use psvm to replace git references with released creates.
           find . -type f -name 'Cargo.toml' -exec psvm -o -v ${{ env.polkadot-release-version }} -p {} \;
           
           # Set the Rust edition.
@@ -104,6 +105,8 @@ jobs:
       - name: Copy over the new changes
         run: |
           cp -r polkadot-sdk/templates/${{ matrix.template }}/* "${{ env.template-path }}/"
+        # The new repository does not have lint settings specific to polkadot-sdk.
+        # We reformat it without those settings.
       - name: Reformat the repository
         run: cargo fmt
         working-directory: "${{ env.template-path }}"
@@ -111,11 +114,14 @@ jobs:
         id: check-compilation
         run: |
           set -e
-          # Commented out for now.
+          # Uncomment later.
           # cargo build
           # cargo test
+
+          # Run anything instead, to generate Cargo.lock
           cargo tree --depth 1
         working-directory: "${{ env.template-path }}"
+        timeout-minutes: 90
       - name: Create PR on failure
         if: failure() && steps.check-compilation.outcome == 'failure'
         uses: peter-evans/create-pull-request@5b4a9f6a9e2af26e5f02351490b90d01eb8ec1e5 # v5
