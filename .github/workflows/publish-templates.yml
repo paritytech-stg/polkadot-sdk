@@ -94,10 +94,14 @@ jobs:
       - name: Update workspace configuration
         run: |
           set -euo pipefail
+          # toml-cli has no overwrite functionality yet, so we use temporary files.
+          # We cannot pipe the output straight to the same file while the CLI still reads and processes it.
 
-          toml set templates/${{ matrix.template }}/Cargo.toml 'workspace.package.repository' "https://github.com/paritytech/polkadot-sdk-${{ matrix.template }}-template.git" | tee ./templates/${{ matrix.template }}/Cargo.toml
+          toml set templates/${{ matrix.template }}/Cargo.toml 'workspace.package.repository' "https://github.com/paritytech/polkadot-sdk-${{ matrix.template }}-template.git" > Cargo.temp
+          mv Cargo.temp ./templates/${{ matrix.template }}/Cargo.toml
 
-          toml set templates/${{ matrix.template }}/Cargo.toml 'workspace.package.edition' "$(toml get --raw Cargo.toml 'workspace.package.edition')" | tee ./templates/${{ matrix.template }}/Cargo.toml
+          toml set templates/${{ matrix.template }}/Cargo.toml 'workspace.package.edition' "$(toml get --raw Cargo.toml 'workspace.package.edition')" > Cargo.temp
+          mv Cargo.temp ./templates/${{ matrix.template }}/Cargo.toml
 
           toml get Cargo.toml 'workspace.lints' --output-toml >> ./templates/${{ matrix.template }}/Cargo.toml
 
