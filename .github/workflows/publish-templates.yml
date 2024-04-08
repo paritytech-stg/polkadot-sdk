@@ -102,7 +102,7 @@ jobs:
         shell: bash
         working-directory: polkadot-sdk/templates/${{ matrix.template }}/
       - name: Print the result Cargo.tomls for debugging
-        if: runner.debug == '1'
+        #if: runner.debug == '1'
         run: find . -type f -name 'Cargo.toml' -exec cat {} \;
         working-directory: polkadot-sdk/templates/${{ matrix.template }}/
 
