@@ -59,6 +59,10 @@ jobs:
           token: ${{ steps.app_token.outputs.token }}
       - name: Install Polkadot SDK Version Manager
         run: cargo install --git https://github.com/paritytech/psvm --rev c41261ffb52ab0c115adbbdb17e2cb7900d2bdfd psvm
+      - name: Install compilation prerequisites
+        run: |
+          apt-get install -y \
+            protobuf-compiler
       
       # 2. Yanking the template out of the monorepo workspace.
 
