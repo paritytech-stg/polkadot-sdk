@@ -80,6 +80,8 @@ jobs:
           cat << EOF > Cargo.toml
           [workspace.package]
           license = "MIT-0"
+          authors = ""
+          homepage = ""
 
           [workspace]
           members = [
