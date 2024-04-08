@@ -30,11 +30,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        template: ["minimal", "solochain", "parachain"]
+        template: ["minimal"]
     env:
       template-path: "polkadot-sdk-${{ matrix.template }}-template"
       polkadot-release-version: "1.9.0"
     steps:
+
+      - run: which yq
+      - run: which tomlq
 
       # 1. Prerequisites.
 
