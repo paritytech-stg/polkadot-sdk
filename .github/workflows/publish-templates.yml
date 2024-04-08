@@ -136,7 +136,6 @@ jobs:
         id: check-compilation
         run: |
           set -e
-          Uncomment later.
           cargo build
           cargo test
         working-directory: "${{ env.template-path }}"
