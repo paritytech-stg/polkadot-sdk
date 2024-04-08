@@ -59,11 +59,13 @@ jobs:
           token: ${{ steps.app_token.outputs.token }}
       - name: Install Polkadot SDK Version Manager
         run: cargo install --git https://github.com/paritytech/psvm --rev c41261ffb52ab0c115adbbdb17e2cb7900d2bdfd psvm
-      - name: Install compilation prerequisites
+      - name: Rust compilation prerequisites
         run: |
           sudo apt update
           sudo apt install -y \
             protobuf-compiler
+          rustup target add wasm32-unknown-unknown
+          rustup component add rustfmt clippy rust-src
       
       # 2. Yanking the template out of the monorepo workspace.
 
