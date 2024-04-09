@@ -1,4 +1,4 @@
-name: Publish templates
+name: Synchronize templates
 
 
 # This job is used to keep the repository templates up-to-date.
@@ -15,7 +15,6 @@ name: Publish templates
 
 
 on:
-  push: # For testing locally, to be removed.
   # A manual dispatch for now - automatic on releases later.
   workflow_dispatch:
     inputs:
@@ -25,7 +24,7 @@ on:
 
 
 jobs:
-  publish-templates:
+  sync-templates:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -54,8 +53,7 @@ jobs:
           private_key: ${{ secrets.TEMPLATE_APP_KEY }}
       - uses: actions/checkout@v3
         with:
-          # TODO: CHANGE BEFORE MOVING FROM STAGING
-          repository: "paritytech-stg/polkadot-sdk-${{ matrix.template }}-template"
+          repository: "paritytech/polkadot-sdk-${{ matrix.template }}-template"
           path: "${{ env.template-path }}"
           token: ${{ steps.app_token.outputs.token }}
       - name: Install toml-cli
@@ -137,10 +135,7 @@ jobs:
 
       - name: Check if it compiles
         id: check-compilation
-        run: |
-          set -e
-          cargo check
-          cargo test
+        run: cargo check && cargo test
         working-directory: "${{ env.template-path }}"
         timeout-minutes: 90
       - name: Create PR on failure
