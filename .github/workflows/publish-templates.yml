@@ -15,6 +15,7 @@ name: Synchronize templates
 
 
 on:
+  push:
   # A manual dispatch for now - automatic on releases later.
   workflow_dispatch:
     inputs:
@@ -53,7 +54,7 @@ jobs:
           private_key: ${{ secrets.TEMPLATE_APP_KEY }}
       - uses: actions/checkout@v3
         with:
-          repository: "paritytech/polkadot-sdk-${{ matrix.template }}-template"
+          repository: "paritytech-stg/polkadot-sdk-${{ matrix.template }}-template"
           path: "${{ env.template-path }}"
           token: ${{ steps.app_token.outputs.token }}
       - name: Install toml-cli
