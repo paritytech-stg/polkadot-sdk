@@ -48,10 +48,10 @@ jobs:
           ref: "${{ github.event.inputs.release_branch }}"
       - name: Generate token
         id: app_token
-        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
+        uses: actions/create-github-app-token@v1.9.3
         with:
-          app_id: ${{ secrets.TEMPLATE_APP_ID }}
-          private_key: ${{ secrets.TEMPLATE_APP_KEY }}
+          app-id: ${{ secrets.TEMPLATE_APP_ID }}
+          private-key: ${{ secrets.TEMPLATE_APP_KEY }}
       - uses: actions/checkout@v3
         with:
           repository: "paritytech-stg/polkadot-sdk-${{ matrix.template }}-template"
