@@ -48,6 +48,8 @@ jobs:
       - name: Download repo
         uses: actions/checkout@v4.1.1
       - run: gh pr checkout ${{ github.event.issue.number }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Generate script
         # Here it would get the script from previous step
         run: $COMMAND
