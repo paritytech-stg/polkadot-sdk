@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        command: ${{ needs.cmd-check.outputs.commands }}
+        command: ${{ fromJson(needs.cmd-check.outputs.commands) }}
     container:
       image: node:20
       env:
