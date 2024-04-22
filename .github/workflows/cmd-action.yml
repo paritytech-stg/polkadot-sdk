@@ -55,9 +55,9 @@ jobs:
           ref: ${{ needs.cmd-check.outputs.branch }}
       - name: Generate script
         # Here it would get the script from previous step
-        run: $COMMAND
+        run: bash -c $COMMAND
         env:
-          SCRIPT: ${{ matrix.command }}
+          COMMAND: ${{ matrix.command }}
       - name: Report failure
         if: ${{ failure() }}
         run: echo "Command failed!"
