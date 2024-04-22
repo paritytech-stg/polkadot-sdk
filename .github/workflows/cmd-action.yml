@@ -20,6 +20,6 @@ jobs:
           commands-directory: ".github/commands"
           GITHUB_TOKEN: ${{ github.token }}
       - name: Print commands
-        run: "Commands are $CMD"
+        run: echo "Commands are $CMD"
         env:
           CMD: ${{ steps.cmd.outputs.commands }}
