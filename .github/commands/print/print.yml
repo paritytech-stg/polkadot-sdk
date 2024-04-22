@@ -1,0 +1,3 @@
+name: print
+description: This command is used to create a file
+commandStart: "touch file.txt"
