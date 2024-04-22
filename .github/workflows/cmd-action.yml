@@ -8,6 +8,8 @@ on:
 jobs:
   cmd-check:
     runs-on: ubuntu-latest
+    outputs:
+      commands: ${{ steps.cmd.outputs.commands }}
     name: Bot
     steps:
       - uses: actions/checkout@v4
@@ -20,6 +22,7 @@ jobs:
           commands-directory: ".github/commands"
           GITHUB_TOKEN: ${{ github.token }}
       - name: Print commands
+        if: ${{ github.event.issue.pull_request }}
         run: echo "Commands are $CMD"
         env:
           CMD: ${{ steps.cmd.outputs.commands }}
