@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       commands: ${{ steps.cmd.outputs.commands }}
+      branch: ${{ steps.branch.outputs.branch }}
     name: Bot
     steps:
       - uses: actions/checkout@v4
@@ -21,6 +22,9 @@ jobs:
         with:
           commands-directory: ".github/commands"
           GITHUB_TOKEN: ${{ github.token }}
+      - name: Export branch name
+        run: echo "branch=$(git rev-parse --abbrev-ref HEAD)" >> "$GITHUB_OUTPUT"
+        id: branch
       - name: Print commands
         if: ${{ github.event.issue.pull_request }}
         run: echo "Commands are $CMD"
@@ -47,9 +51,8 @@ jobs:
     steps:
       - name: Download repo
         uses: actions/checkout@v4.1.1
-      - run: gh pr checkout ${{ github.event.issue.number }}
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          ref: ${{ needs.cmd-check.outputs.branch }}
       - name: Generate script
         # Here it would get the script from previous step
         run: $COMMAND
