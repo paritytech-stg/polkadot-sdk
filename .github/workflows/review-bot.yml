@@ -28,6 +28,12 @@ jobs:
         with:
           app-id: ${{ secrets.REVIEW_APP_ID }}
           private-key: ${{ secrets.REVIEW_APP_KEY }}
+      - name: Get PR ID
+        id: pr-id
+        run: |
+          PR_ID=$(gh run view -R ${{ github.repository }} ${{ github.event.workflow_run.id }} | grep -oP '#[0-9]+ . ${{ github.event.workflow_run.id }}' | grep -oP '#[0-9]+' | cut -c 2-)
+          echo "PR was $PR_ID"
+          echo "pr-id=${PR_ID}" >> $GITHUB_OUTPUT
       - name: "Evaluates PR reviews and assigns reviewers"
         uses: paritytech/review-bot@v2.4.0
         with:
