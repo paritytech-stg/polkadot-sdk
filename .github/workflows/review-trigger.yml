@@ -21,6 +21,11 @@ jobs:
       - name: Skip merge queue
         if: ${{ contains(github.ref, 'gh-readonly-queue') }}
         run: exit 0
+      - name: Log
+        if: ${{ runner.debug }}
+        run: echo "::debug::$payload"
+        env:
+          payload: ${{ toJson(github.event) }}
       - name: Get PR data
         id: comments
         run: |
