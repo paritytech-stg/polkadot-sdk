@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: master
     steps:
+      - name: Log
+        if: ${{ runner.debug }}
+        run: echo "::debug::$payload"
+        env:
+          payload: ${{ toJson(github.event.workflow_run) }}
       - name: Generate token
         id: app_token
         uses: actions/create-github-app-token@v1.9.3
