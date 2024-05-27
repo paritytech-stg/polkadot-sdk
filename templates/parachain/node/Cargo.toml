@@ -15,12 +15,12 @@ build = "build.rs"
 
 [dependencies]
 clap = { version = "4.5.3", features = ["derive"] }
-log = { workspace = true, default-features = true }
+log = { version = "0.4.21", default-features = true }
 codec = { package = "parity-scale-codec", version = "3.0.0" }
-serde = { features = ["derive"], workspace = true, default-features = true }
+serde = { features = ["derive"], version = "1.0.197", default-features = true }
 jsonrpsee = { version = "0.22", features = ["server"] }
 futures = "0.3.28"
-serde_json = { workspace = true, default-features = true }
+serde_json = { version = "1.0.114", default-features = true }
 docify = "0.2.8"
 parachain-template-runtime = { version = "0.1.0", path = "../runtime" }
 frame-benchmarking = { version = "34.0.0", path = "../../../substrate/frame/benchmarking" }
