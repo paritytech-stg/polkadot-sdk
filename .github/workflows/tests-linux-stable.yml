@@ -58,7 +58,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: script
-        run: WASM_BUILD_NO_COLOR=1 time forklift cargo test -p staging-node-cli --release --locked -- --ignored
+        run: WASM_BUILD_NO_COLOR=1 time  cargo test -p staging-node-cli --release --locked -- --ignored
 
   # https://github.com/paritytech/ci_cd/issues/864
   test-linux-stable-runtime-benchmarks:
@@ -77,4 +77,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: script
-        run: time forklift cargo nextest run --workspace --features runtime-benchmarks benchmark --locked --cargo-profile testnet
+        run: time  cargo nextest run --workspace --features runtime-benchmarks benchmark --locked --cargo-profile testnet
