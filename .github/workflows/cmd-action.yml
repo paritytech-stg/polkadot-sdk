@@ -1,0 +1,68 @@
+name: Command-Action
+
+on:
+  pull_request:
+  issue_comment:
+    types: [created]
+
+jobs:
+  cmd-check:
+    runs-on: ubuntu-latest
+    outputs:
+      commands: ${{ steps.cmd.outputs.commands }}
+      branch: ${{ steps.branch.outputs.branch }}
+    name: Bot
+    steps:
+      - uses: actions/checkout@v4
+      - run: gh pr checkout ${{ github.event.issue.number || github.event.pull_request.number }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - uses: paritytech/cmd-action@parse-comment
+        id: cmd
+        with:
+          commands-directory: ".github/commands"
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Export branch name
+        run: echo "branch=$(git rev-parse --abbrev-ref HEAD)" >> "$GITHUB_OUTPUT"
+        id: branch
+      - name: Print commands
+        if: ${{ github.event.issue.pull_request }}
+        run: echo "Commands are $CMD"
+        env:
+          CMD: ${{ steps.cmd.outputs.commands }}
+
+  cmd:
+    needs: [cmd-check]
+    continue-on-error: true
+    # We set the current machine here (to differ between ours and generic ones)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        command: ${{ fromJson(needs.cmd-check.outputs.commands) }}
+    container:
+      image: node:20
+    steps:
+      - name: Download repo
+        uses: actions/checkout@v4.1.1
+        with:
+          ref: ${{ needs.cmd-check.outputs.branch }}
+      - name: Generate script
+        # Here it would get the script from previous step
+        run: bash -c $COMMAND
+        env:
+          COMMAND: ${{ matrix.command }}
+      - name: Report failure
+        if: ${{ failure() }}
+        run: echo "Command failed!"
+      - run: git status
+      # - uses: stefanzweifel/git-auto-commit-action@v5
+      # - name: Push changes
+      #   run: |
+      #     git config --global --add safe.directory /__w/cmd-action/cmd-action
+      #     git config --system user.name command-bot
+      #     git config --system user.email "github@users.noreply.github.com"
+      #     git add .
+      #     git commit -m "changes"
+      #     git push origin $BRANCH
+      #   env:
+      #     BRANCH: ${{ github.head_ref || github.ref_name }}
