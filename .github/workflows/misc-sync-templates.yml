@@ -128,7 +128,6 @@ jobs:
         working-directory: polkadot-sdk/
       - name: Copy over required workspace dependencies
         run: |
-          echo -e "\n[workspace.dependencies]" >> Cargo.toml
           set +e
           # If a workspace dependency is required..
           while cargo tree --depth 1 --prefix none --no-dedupe 2>&1 | grep 'was not found in `workspace.dependencies`'; do
