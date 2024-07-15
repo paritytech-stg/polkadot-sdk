@@ -116,6 +116,10 @@ jobs:
       - name: Copy over the new changes
         run: |
           cp -r polkadot-sdk/templates/${{ matrix.template }}/* "${{ env.template-path }}/"
+
+      - name: Run psvm on monorepo workspace dependencies
+        run: psvm -o -v ${{ github.event.inputs.crate_release_version }} -p ./Cargo.toml
+        working-directory: polkadot-sdk/
       - name: Copy over required workspace dependencies
         run: |
           echo -e "\n[workspace.dependencies]" >> Cargo.toml
@@ -127,9 +131,6 @@ jobs:
             # And copy the dependency from the monorepo.
             toml get ../polkadot-sdk/Cargo.toml 'workspace.dependencies' --output-toml | grep "^${missing_dep} = " >> Cargo.toml
           done;
-        working-directory: "${{ env.template-path }}"
-      - name: Run psvm one more time on workspace dependencies
-        run: psvm -o -v ${{ github.event.inputs.crate_release_version }} -p ./Cargo.toml
         working-directory: "${{ env.template-path }}"
 
       # 3. Verify the build. Push the changes or create a PR.
