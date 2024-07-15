@@ -30,7 +30,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        template: ["minimal", "solochain", "parachain"]
+        template: ["minimal"]
     env:
       template-path: "polkadot-sdk-${{ matrix.template }}-template"
     steps:
