@@ -5,9 +5,7 @@ on:
     branches:
       - master
   pull_request:
-    types: [ opened, synchronize, reopened, ready_for_review ]
-  label:
-    types: [ created, edited, deleted ]
+    types: [ opened, synchronize, reopened, ready_for_review, labeled ]
   merge_group:
 
 concurrency:
@@ -68,7 +66,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-  
+
       - name: script
         run: |
           RUNTIME_BLOB_NAME=$(echo $PACKAGE_NAME | sed 's/-/_/g').compact.compressed.wasm
