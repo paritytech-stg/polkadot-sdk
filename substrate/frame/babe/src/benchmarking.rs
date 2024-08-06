@@ -15,7 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Benchmarks for the BABE Pallet.
+//! Benchmarks for the BABE Pallet. 123
 
 #![cfg(feature = "runtime-benchmarks")]
 
