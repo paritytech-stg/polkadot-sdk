@@ -40,6 +40,9 @@ jobs:
         run: echo "current-workflow-file=$(echo ${{ github.workflow_ref }} | sed -nE "s/.*(\.github\/workflows\/[a-zA-Z0-9_-]*\.y[a]?ml)@refs.*/\1/p")" >> $GITHUB_OUTPUT
       - run: echo "${{ steps.current-file.outputs.current-workflow-file }}"
         # For pull requests it's not necessary to checkout the code
+      - name: Checkout
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@v4
       - id: filter
         uses: dorny/paths-filter@v3
         with:
