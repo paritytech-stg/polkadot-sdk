@@ -39,7 +39,7 @@ jobs:
       - name: Configure git identity
         run: |
           git config --global user.name "Template Bot"
-          git config --global user.email "163342540+paritytech-polkadotsdk-templatebot[bot]@users.noreply.github.com"
+          git config --global user.email "163130811+polkadot-sdk-template-bot-stg[bot]@users.noreply.github.com"
       - uses: actions/checkout@v4
         with:
           path: polkadot-sdk
@@ -48,7 +48,7 @@ jobs:
         id: app_token
         uses: actions/create-github-app-token@v1.9.3
         with:
-          owner: "paritytech"
+          owner: "paritytech-stg"
           repositories: "polkadot-sdk-${{ matrix.template }}-template"
           app-id: ${{ secrets.TEMPLATE_APP_ID }}
           private-key: ${{ secrets.TEMPLATE_APP_KEY }}
