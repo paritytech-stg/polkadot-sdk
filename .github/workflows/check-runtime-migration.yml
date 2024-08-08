@@ -28,7 +28,7 @@ jobs:
         run: cat .github/env >> $GITHUB_OUTPUT
   # rococo and westend are disabled for now (no access to parity-chains.parity.io)
   check-runtime-migration:
-    runs-on: arc-runners-polkadot-sdk-beefy
+    runs-on: arc-runners-beefy-stg
     # We need to set this to rather long to allow the snapshot to be created, but the average time
     # should be much lower.
     timeout-minutes: 60
