@@ -44,7 +44,7 @@ jobs:
         continue-on-error: true
         id: run-benchmarks
         run: |
-          cargo bench -p ${{ matrix.features.name }} --bench ${{ matrix.features.bench }} --features subsystem-benchmarks || echo "Benchmarks failed"
+          forklift cargo bench -p ${{ matrix.features.name }} --bench ${{ matrix.features.bench }} --features subsystem-benchmarks || echo "Benchmarks failed"
           mkdir -p $BENCH_DIR || echo "Directory exists"
           cp charts/$BENCH_FILE $BENCH_DIR
           ls -lsa ./charts
