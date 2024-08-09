@@ -25,7 +25,7 @@ jobs:
       image: paritytech/ci-unified:latest
     env:
       BENCH_DIR: ./charts/bench/${{ matrix.features.bench }}
-      BENCH_FILE: ${{ matrix.features.bench }}.json
+      BENCH_FILE_NAME: ${{ matrix.features.bench }}
     strategy:
       fail-fast: false
       matrix:
@@ -51,18 +51,16 @@ jobs:
           cargo bench -p ${{ matrix.features.name }} --bench ${{ matrix.features.bench }} --features subsystem-benchmarks || echo "Benchmarks failed"
           ls -lsa ./charts
           mkdir -p $BENCH_DIR || echo "Directory exists"
-          cp charts/$BENCH_FILE $BENCH_DIR
-          ls -lsa ./charts/bench
-          ls -lsa ./charts/bench/${{ matrix.features.bench }}
-          ls -lsa $BECH_DIR
+          cp charts/${BENCH_FILE_NAME}.json $BENCH_DIR
+          ls -lsa $BENCH_DIR
 
       - name: Publish result to GH Pages
         if: ${{ steps.run-benchmarks.outcome == 'success' }}
         uses: benchmark-action/github-action-benchmark@v1
         with:
           tool: "customSmallerIsBetter"
-          name: ${{ env.BENCH_DIR }}
-          output-file-path: ${{ env.BENCH_FILE }}
+          name: ${{ env.BENCH_FILE_NAME }}
+          output-file-path: ${{ env.BENCH_FILE_NAME }}.json
           benchmark-data-dir-path: ${{ env.BENCH_DIR }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           comment-on-alert: ${{ github.event_name == 'pull_request' }} # will comment on PRs if regression is detected
