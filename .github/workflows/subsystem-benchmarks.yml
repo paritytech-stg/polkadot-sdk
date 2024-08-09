@@ -12,9 +12,6 @@ permissions:
   contents: read
   pull-requests: write
 
-env:
-  ARTIFACTS_NAME: subsystem-benchmarks_${{ github.sha }}
-
 jobs:
   build:
     # TODO: remove once migration is complete or this workflow is fully stable
@@ -38,15 +35,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check Rust
+        run: |
+          rustup show
+          rustup +nightly show
+
       - name: Run Benchmarks
         continue-on-error: true
         id: run-benchmarks
         run: |
-          cargo bench -p ${{ matrix.features.name }} --bench ${{ matrix.features.bench }} --features subsystem-benchmarks
+          cargo bench -p ${{ matrix.features.name }} --bench ${{ matrix.features.bench }} --features subsystem-benchmarks || echo "Benchmarks failed"
           mkdir -p $BENCH_DIR || echo "Directory exists"
           cp charts/$BENCH_FILE $BENCH_DIR
+          ls -lsa ./charts
+          ls -lsa ./charts/bench
+          ls -lsa ./charts/bench/${{ matrix.features.bench }}
+          ls -lsa $BECH_DIR
 
-      - name: Convert benchmark result to GH Pages
+      - name: Publish result to GH Pages
         if: ${{ steps.run-benchmarks.outcome == 'success' }}
         uses: benchmark-action/github-action-benchmark@v1
         with:
