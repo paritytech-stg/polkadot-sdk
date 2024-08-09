@@ -60,7 +60,7 @@ jobs:
         with:
           tool: "customSmallerIsBetter"
           name: ${{ env.BENCH_FILE_NAME }}
-          output-file-path: ${{ env.BENCH_FILE_NAME }}.json
+          output-file-path: ${{ env.BENCH_DIR }}/${{ env.BENCH_FILE_NAME }}.json
           benchmark-data-dir-path: ${{ env.BENCH_DIR }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           comment-on-alert: ${{ github.event_name == 'pull_request' }} # will comment on PRs if regression is detected
