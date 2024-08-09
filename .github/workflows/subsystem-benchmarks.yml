@@ -26,6 +26,7 @@ jobs:
       BENCH_DIR: ./charts/bench/${{ matrix.features.bench }}
       BENCH_FILE: ${{ matrix.features.bench }}.json
     strategy:
+      fail-fast: false
       matrix:
         features: [
           { name: "polkadot-availability-recovery", bench: "availability-recovery-regression-bench" },
@@ -39,58 +40,21 @@ jobs:
 
       - name: Run Benchmarks
         continue-on-error: true
+        id: run-benchmarks
         run: |
           cargo bench -p ${{ matrix.features.name }} --bench ${{ matrix.features.bench }} --features subsystem-benchmarks
           mkdir -p $BENCH_DIR || echo "Directory exists"
           cp charts/$BENCH_FILE $BENCH_DIR
 
       - name: Convert benchmark result to GH Pages
+        if: ${{ steps.run-benchmarks.outcome == 'success' }}
         uses: benchmark-action/github-action-benchmark@v1
         with:
           tool: "customSmallerIsBetter"
           name: ${{ env.BENCH_DIR }}
           output-file-path: ${{ env.BENCH_FILE }}
           benchmark-data-dir-path: ${{ env.BENCH_DIR }}
-          github-token: ${{ github.token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           comment-on-alert: ${{ github.event_name == 'pull_request' }} # will comment on PRs if regression is detected
-          auto-push: false # will be pushed to artifacts and then pushed on publish step
+          auto-push: false # TODO: enable when gitlab is removed  ${{ github.ref == 'refs/heads/master' }}
 
-      - name: Upload artifacts
-        if: ${{ github.ref == 'refs/heads/master' }}
-        uses: actions/upload-artifact@v4.3.6
-        with:
-          name: ${{ env.ARTIFACTS_NAME }}
-          path: ./charts
-
-  publish:
-    # TODO: unblock once the gitlab publish is removed
-    # TODO: when enabled: cleanup publish-subsystem-benchmarks.yml workflow
-    if: false
-    runs-on: ubuntu-latest
-    needs: build
-    environment: subsystem-benchmarks
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v4.1.8
-        with:
-          ${{ env.ARTIFACTS_NAME }}
-
-      - uses: actions/create-github-app-token@v1
-        id: app-token
-        with:
-          app-id: ${{ secrets.POLKADOTSDK_GHPAGES_APP_ID }}
-          private-key: ${{ secrets.POLKADOTSDK_GHPAGES_APP_KEY }}
-
-      - name: Push to gh-pages
-        run: |
-          git checkout gh-pages --force
-          mkdir -p bench || echo "Directory exists"
-          cp -r charts/bench/* bench/
-          git status
-          git add bench/
-          # git commit -m "Add json files with benchmark results for ${{ github.sha }}"
-          # git push origin gh-pages
-          sleep 300
