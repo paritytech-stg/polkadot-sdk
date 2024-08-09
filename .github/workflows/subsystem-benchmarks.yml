@@ -1,0 +1,60 @@
+# The actions takes json file as input and runs github-action-benchmark for it.
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [ opened, synchronize, reopened, closed, labeled ]
+  merge_group:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  ARTIFACTS_NAME: subsystem-benchmarks_${{ github.sha }}
+
+jobs:
+  build:
+    # TODO: remove once migration is complete or this workflow is fully stable
+    # if: contains(github.event.label.name, 'GHA-migration')
+    runs-on: ubuntu-latest
+    container:
+      image: paritytech/ci-unified:latest
+    env:
+      BENCH_DIR: ./charts/bench/${{ matrix.features.bench }}
+      BENCH_FILE: ${{ matrix.features.bench }}.json
+    strategy:
+      fail-fast: false
+      matrix:
+        features: [
+          { name: "polkadot-availability-recovery", bench: "availability-recovery-regression-bench" },
+          { name: "polkadot-availability-distribution", bench: "availability-distribution-regression-bench" },
+          { name: "polkadot-node-core-approval-voting", bench: "approval-voting-regression-bench" },
+          { name: "polkadot-statement-distribution", bench: "statement-distribution-regression-bench" }
+        ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Benchmarks
+        continue-on-error: true
+        id: run-benchmarks
+        run: |
+          cargo bench -p ${{ matrix.features.name }} --bench ${{ matrix.features.bench }} --features subsystem-benchmarks
+          mkdir -p $BENCH_DIR || echo "Directory exists"
+          cp charts/$BENCH_FILE $BENCH_DIR
+
+      - name: Convert benchmark result to GH Pages
+        if: ${{ steps.run-benchmarks.outcome == 'success' }}
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          tool: "customSmallerIsBetter"
+          name: ${{ env.BENCH_DIR }}
+          output-file-path: ${{ env.BENCH_FILE }}
+          benchmark-data-dir-path: ${{ env.BENCH_DIR }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          comment-on-alert: ${{ github.event_name == 'pull_request' }} # will comment on PRs if regression is detected
+          auto-push: false # TODO: enable when gitlab is removed  ${{ github.ref == 'refs/heads/master' }}
+
