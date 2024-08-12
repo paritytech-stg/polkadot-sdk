@@ -13,16 +13,16 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
 
 jobs:
   build:
     # TODO: remove once migration is complete or this workflow is fully stable
     # if: contains(github.event.label.name, 'GHA-migration')
-    runs-on: arc-runners-beefy-stg # ubuntu-latest
-#    container:
-#      image: paritytech/ci-unified:latest
+    runs-on:  ubuntu-latest
+    container:
+      image: paritytech/ci-unified:latest
     env:
       BENCH_DIR: ./charts/bench/${{ matrix.features.bench }}
       BENCH_FILE_NAME: ${{ matrix.features.bench }}
