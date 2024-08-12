@@ -62,7 +62,7 @@ jobs:
         continue-on-error: true
         id: run-benchmarks
         run: |
-          folklift cargo bench -p ${{ matrix.features.name }} --bench ${{ matrix.features.bench }} --features subsystem-benchmarks || echo "Benchmarks failed"
+          cargo bench -p ${{ matrix.features.name }} --bench ${{ matrix.features.bench }} --features subsystem-benchmarks || echo "Benchmarks failed"
           ls -lsa ./charts
           mkdir -p $BENCH_DIR || echo "Directory exists"
           cp charts/${BENCH_FILE_NAME}.json $BENCH_DIR
