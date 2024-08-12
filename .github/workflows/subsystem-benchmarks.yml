@@ -37,7 +37,6 @@ jobs:
     runs-on: arc-runners-beefy-stg # arc-runners-polkadot-sdk-benchmark
     container:
       image:  ${{ needs.set-image.outputs.IMAGE }}
-      options: --user 1001
     env:
       BENCH_DIR: ./charts/bench/${{ matrix.features.bench }}
       BENCH_FILE_NAME: ${{ matrix.features.bench }}
@@ -69,7 +68,7 @@ jobs:
           cp charts/${BENCH_FILE_NAME}.json $BENCH_DIR
           ls -lsa $BENCH_DIR
           # Fixes "detected dubious ownership" error in the ci
-          # git config --global --add safe.directory '*'
+          git config --global --add safe.directory '*'
 
       - name: Publish result to GH Pages
         if: ${{ steps.run-benchmarks.outcome == 'success' }}
