@@ -65,4 +65,5 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           comment-on-alert: ${{ github.event_name == 'pull_request' }} # will comment on PRs if regression is detected
           auto-push: false # TODO: enable when gitlab is removed  ${{ github.ref == 'refs/heads/master' }}
+          skip-fetch-gh-pages: true # TODO: remove when gitlab is removed  ${{ github.ref == 'refs/heads/master' }}
 
