@@ -19,6 +19,7 @@ jobs:
           cat << EOF | expect -f -
             spawn bash scripts/getting-started.sh
             expect "Detected Ubuntu"
+            expect eof
           EOF
         timeout-minutes: 3
       - name: Check the script
@@ -26,5 +27,6 @@ jobs:
           expect << EOF
             spawn bash scripts/getting-started.sh
             expect "Detected Ubuntu"
+            expect eof
           EOF
         timeout-minutes: 3
