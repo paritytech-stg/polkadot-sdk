@@ -31,4 +31,4 @@ jobs:
       - run: brew install protobuf
       # - run: rustup target add wasm32-unknown-unknown --toolchain stable-aarch64-apple-darwin
       - run: rustup component add rust-src --toolchain stable-aarch64-apple-darwin
-      - run: cargo check --workspace --locked
+      - run: SKIP_WASM_BUILD=1 cargo check --workspace --locked
