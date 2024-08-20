@@ -10,24 +10,33 @@ jobs:
   check-getting-started:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Install prerequisites
         run: |
           sudo apt update
           sudo apt install -y expect
       - name: Check the script
         run: |
-          expect << EOF
-            spawn bash scripts/getting-started.sh
-            expect "Detected Ubuntu"
-            expect eof
-          EOF
-        timeout-minutes: 3
+          [[ "${{ runner.debug }}" == "1" ]] && FLAGS="-d" || FLAGS=""
 
-      - name: Check the script
-        run: |
-          cat << EOF | expect -f -
+          expect $FLAGS << EOF
             spawn bash scripts/getting-started.sh
-            expect "Detected Ubuntu"
-            expect eof
+
+            expect {
+              timeout {exit 1}
+              -exact "Detected Debian"
+            }
+
+            expect {
+              timeout {exit 1}
+              -exact "Detected Ubuntu"
+            }
+
+            expect {
+              timeout {exit 1}
+              eof
+            }
+
           EOF
-        timeout-minutes: 3
+        timeout-minutes: 1
