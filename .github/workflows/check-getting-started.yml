@@ -1,0 +1,23 @@
+name: Check the getting-started.sh script
+
+on:
+  push:
+    branches:
+      - rzadp/getting-started
+  merge_group:
+
+jobs:
+  check-getting-started:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install prerequisites
+        run: |
+          sudo apt update
+          sudo apt install -y expect
+      - name: Check the script
+        run: |
+          cat << EOF | expect -f -
+            spawn bash scripts/getting-started.sh
+            expect "Detected Ubuntu"
+          EOF
+        timeout-minutes: 3
