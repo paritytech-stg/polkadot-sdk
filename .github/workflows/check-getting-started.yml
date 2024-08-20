@@ -21,3 +21,10 @@ jobs:
             expect "Detected Ubuntu"
           EOF
         timeout-minutes: 3
+      - name: Check the script
+        run: |
+          expect << EOF
+            spawn bash scripts/getting-started.sh
+            expect "Detected Ubuntu"
+          EOF
+        timeout-minutes: 3
