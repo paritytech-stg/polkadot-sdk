@@ -19,6 +19,9 @@ jobs:
     runs-on: macOS
     steps:
       - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: rustfmt
       - name: Install rust
         run: rustup toolchain install nightly
       - run: brew install protobuf
