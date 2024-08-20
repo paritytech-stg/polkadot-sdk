@@ -129,6 +129,7 @@ else
     if prompt_default_yes "\n🦀 Rust is not installed. Install it?"; then
         echo "🦀 Installing via rustup."
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        . "$HOME/.cargo/env"
     else
         echo "Aborting."
         exit 1
