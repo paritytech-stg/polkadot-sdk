@@ -9,6 +9,7 @@ on:
 jobs:
   check-getting-started:
     strategy:
+      fail-fast: false
       matrix:
         container: [ubuntu, debian]
     runs-on: ubuntu-latest
@@ -17,24 +18,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install prerequisites
-        run: |
-          sudo apt update
-          sudo apt install -y expect
+        run: apt update && apt install -y expect
       - name: Check the script
         run: |
           [[ "${{ runner.debug }}" == "1" ]] && FLAGS="-d" || FLAGS=""
 
-          expect $FLAGS -c "
-            spawn bash scripts/getting-started.sh
+          expect $FLAGS -c '
+          expect_before {
+            timeout { puts stderr "Timed out on an expect"; exit 1 }
+            eof { puts stderr "EOF received on an expect"; exit 1 }
+          }
 
-            expect {
-              timeout {exit 1}
-              "Detected ${{ matrix.container }}"
-            }
+          spawn bash scripts/getting-started.sh
 
-            expect {
-              timeout {exit 1}
-              eof
-            }
-          "
+          expect "Detected ${{ matrix.container }}"
+
+          expect {
+            timeout {exit 1}
+            eof
+          }
+          '
+        shell: bash
         timeout-minutes: 1
