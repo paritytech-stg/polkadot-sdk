@@ -18,9 +18,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install prerequisites
-        run: apt update && apt install -y expect
+        run: apt update && apt install -y expect sudo
       - name: Check the script
         run: |
+          # Add a debug flag to expect, if github is re-run with debug logging enabled.
           [[ "${{ runner.debug }}" == "1" ]] && FLAGS="-d" || FLAGS=""
 
           expect $FLAGS -c '
@@ -33,10 +34,13 @@ jobs:
 
           expect "Detected ${{ matrix.container }}"
 
-          expect {
-            timeout {exit 1}
-            eof
-          }
+          expect -exact "Setup the Rust environment"
+          send "y\r"
+
+          expect -exact "start with one of the templates"
+          send "n\r"
+
+          expect eof
           '
         shell: bash
         timeout-minutes: 1
