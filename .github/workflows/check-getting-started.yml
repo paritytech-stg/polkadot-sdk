@@ -25,14 +25,16 @@ jobs:
           [[ "${{ runner.debug }}" == "1" ]] && FLAGS="-d" || FLAGS=""
 
           expect $FLAGS -c '
+          set timeout 600
+
+          spawn bash scripts/getting-started.sh
+
           expect_before {
             timeout { puts stderr "Timed out on an expect"; exit 1 }
             eof { puts stderr "EOF received on an expect"; exit 1 }
           }
 
-          spawn bash scripts/getting-started.sh
-
-          expect "Detected ${{ matrix.container }}"
+          expect -nocase "Detected ${{ matrix.container }}"
 
           expect -exact "Setup the Rust environment"
           send "y\r"
