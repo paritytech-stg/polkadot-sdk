@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Install prerequisites
         run: apt update && apt install -y expect sudo
+      - run: bash scripts/getting-started.sh
       - name: Check the script
         run: |
           # Add a debug flag to expect, if github is re-run with debug logging enabled.
