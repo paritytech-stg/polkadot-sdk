@@ -45,14 +45,10 @@ jobs:
 
           expect -nocase "Detected ${{ matrix.container }}"
 
-          # wait for dependencies installation
-          sleep 60
-
           expect "Rust is not installed. Install it?" {
             send "y\r"
             expect "Proceed with standard installation (default - just press enter)" {
               send "\r"
-              sleep 60
               expect "Rust is installed now"
             }
           }
@@ -65,8 +61,8 @@ jobs:
             send "y\r"
           }
           
-          expect "1) ${{ matrix.template }} template" {
-            send "1\r"
+          expect -re "(.*)\\) ${{ matrix.template }} template" {
+            send "$expect_out(1,string)\r"
           }
 
           expect "compile the node?" {
@@ -100,8 +96,8 @@ jobs:
             send "y\r"
           }
           
-          expect "1) ${{ matrix.template }} template" {
-            send "1\r"
+          expect -re "(.*)\\) ${{ matrix.template }} template" {
+            send "$expect_out(1,string)\r"
             expect "directory already exists" {}
           }
 
