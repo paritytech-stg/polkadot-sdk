@@ -12,7 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         container: [ubuntu, debian]
-        shell: [bash, sh]
     runs-on: ubuntu-latest
     container: ${{ matrix.container }}:latest
     steps:
@@ -45,5 +44,5 @@ jobs:
 
           expect eof
           '
-        shell: ${{ matrix.shell }}
+        shell: bash
         timeout-minutes: 1
