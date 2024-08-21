@@ -61,7 +61,7 @@ jobs:
             send "y\r"
           }
           
-          expect -re "(.*)\\) ${{ matrix.template }} template" {
+          expect -re "\n(.*)\\) ${{ matrix.template }} template" {
             send "$expect_out(1,string)\r"
           }
 
@@ -96,7 +96,7 @@ jobs:
             send "y\r"
           }
           
-          expect -re "(.*)\\) ${{ matrix.template }} template" {
+          expect -re "\n(.*)\\) ${{ matrix.template }} template" {
             send "$expect_out(1,string)\r"
             expect "directory already exists" {}
           }
