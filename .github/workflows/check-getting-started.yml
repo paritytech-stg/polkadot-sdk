@@ -113,6 +113,7 @@ jobs:
 
       - name: Compile the node outside of the script
         run: |
+          . "$HOME/.cargo/env"
           cd minimal-template
           cargo build --release
         timeout-minutes: 120
@@ -120,6 +121,7 @@ jobs:
 
       - name: Check that the binary is executable
         run: |
+          . "$HOME/.cargo/env"
           cd minimal-template
           cargo run --release -- --help
         shell: bash
