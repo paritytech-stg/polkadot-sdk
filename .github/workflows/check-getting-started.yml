@@ -72,10 +72,6 @@ jobs:
             send "1\r"
           }
 
-          expect "1) minimal template" {
-            send "1\r"
-          }
-
           expect "compile the node?" {
             send "n\r"
           }

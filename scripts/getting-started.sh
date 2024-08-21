@@ -34,7 +34,7 @@ clone_and_enter_template() {
         printf "\n✅︎ ${template}-template directory already exists. -> Entering.\n"
     else
         printf "\n↓ Let's grab the ${template} template from github.\n"
-        git clone https://github.com/paritytech/polkadot-sdk-${template}-template.git ${template}-template
+        git clone --quiet https://github.com/paritytech/polkadot-sdk-${template}-template.git ${template}-template
     fi
     cd ${template}-template
 }
