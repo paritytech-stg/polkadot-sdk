@@ -13,9 +13,10 @@ concurrency:
 jobs:
   check-getting-started:
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
-        container: [debian]
+        container: [ubuntu, debian]
+        template: [minimal, solochain, parachain]
     runs-on: ubuntu-latest
     container: ${{ matrix.container }}:latest
     steps:
@@ -64,7 +65,7 @@ jobs:
             send "y\r"
           }
           
-          expect "1) minimal template" {
+          expect "1) ${{ matrix.template }} template" {
             send "1\r"
           }
 
@@ -99,8 +100,9 @@ jobs:
             send "y\r"
           }
           
-          expect "1) minimal template" {
+          expect "1) ${{ matrix.template }} template" {
             send "1\r"
+            expect "directory already exists" {}
           }
 
           expect "compile the node?" {
@@ -114,7 +116,7 @@ jobs:
       - name: Compile the node outside of the script
         run: |
           . "$HOME/.cargo/env"
-          cd minimal-template
+          cd ${{ matrix.template }}-template
           cargo build --release
         timeout-minutes: 120
         shell: bash
@@ -122,6 +124,7 @@ jobs:
       - name: Check that the binary is executable
         run: |
           . "$HOME/.cargo/env"
-          cd minimal-template
+          cd ${{ matrix.template }}-template
           cargo run --release -- --help
         shell: bash
+        timeout-minutes: 5
