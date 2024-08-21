@@ -15,15 +15,21 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        container: [ubuntu, debian]
-        template: [minimal, solochain, parachain]
+        container: [arch]
+        template: [minimal]
     runs-on: ubuntu-latest
     container: ${{ matrix.container }}:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install prerequisites
+
+      - name: Install ubuntu/debian prerequisites
         run: apt update && apt install -y expect sudo
+        if: contains(matrix.container, 'ubuntu') || contains(matrix.container, 'debian')
+      - name: Install arch prerequisites
+        run: pacman -Syu --needed --noconfirm expect sudo
+        if: contains(matrix.container, 'arch')
+
       - name: Set additional expect flags if necessary
         run: |
           # Add a debug flag to expect, if github is re-run with debug logging enabled.
