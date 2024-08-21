@@ -123,6 +123,7 @@ else
 fi
 
 # Check if rust is installed
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 if command -v rustc >/dev/null 2>&1; then
     printf "\n✅︎🦀 Rust already installed.\n"
 else
