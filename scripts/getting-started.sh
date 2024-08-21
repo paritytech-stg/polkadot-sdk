@@ -95,7 +95,7 @@ elif [ "$os_name" = "Linux" ]; then
     if [ "$distro" = "ubuntu" ]; then
         printf "\n🐧 Detected Ubuntu. Using apt to install dependencies.\n"
         sudo apt -qq update
-        sudo apt -qq install --assume-yes git clang curl libssl-dev protobuf-compiler
+        sudo apt -qq install --assume-yes git clang curl libssl-dev protobuf-compiler make
     elif [ "$distro" = "debian" ]; then
         printf "\n🐧 Detected Debian. Using apt to install dependencies.\n"
         sudo apt -qq update
