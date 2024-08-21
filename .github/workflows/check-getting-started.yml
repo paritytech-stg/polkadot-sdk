@@ -116,8 +116,10 @@ jobs:
           cd minimal-template
           cargo build --release
         timeout-minutes: 120
+        shell: bash
 
       - name: Check that the binary is executable
         run: |
           cd minimal-template
           cargo run --release -- --help
+        shell: bash
