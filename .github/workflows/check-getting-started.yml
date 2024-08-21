@@ -6,6 +6,10 @@ on:
       - rzadp/getting-started
   merge_group:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check-getting-started:
     strategy:
@@ -19,28 +23,57 @@ jobs:
         uses: actions/checkout@v4
       - name: Install prerequisites
         run: apt update && apt install -y expect sudo
-      - name: Check the script
+      - name: Set additional expect flags if necessary
         run: |
           # Add a debug flag to expect, if github is re-run with debug logging enabled.
-          [[ "${{ runner.debug }}" == "1" ]] && FLAGS="-d" || FLAGS=""
+          [[ "${{ runner.debug }}" == "1" ]] && EXPECT_FLAGS="-d" || EXPECT_FLAGS=""
+          echo "EXPECT_FLAGS=${EXPECT_FLAGS}" >> $GITHUB_ENV
 
-          expect $FLAGS -c '
+      - name: Check the script
+        run: |
+          expect $EXPECT_FLAGS -c '
           set timeout 600
 
           spawn bash scripts/getting-started.sh
 
-          expect_before {
+          expect_after {
             timeout { puts stderr "Timed out on an expect"; exit 1 }
             eof { puts stderr "EOF received on an expect"; exit 1 }
           }
 
           expect -nocase "Detected ${{ matrix.container }}"
 
-          expect -exact "Setup the Rust environment"
-          send "y\r"
+          expect {
+            "Rust already installed"
+            "Rust is not installed. Install it?" {
+              send "y\r"
+              expect "Proceed with standard installation (default - just press enter)" {
+                send "\r"
+                expect "Rust is installed now"
+              }
+            }
+          }
 
-          expect -exact "start with one of the templates"
-          send "n\r"
+          expect "Setup the Rust environment" {
+            send "y\r"
+          }
+          
+
+          expect "start with one of the templates" {
+            send "y\r"
+          }
+          
+          expect "1) minimal template" {
+            send "1\r"
+          }
+
+          expect "1) minimal template" {
+            send "1\r"
+          }
+
+          expect "compile the node?" {
+            send "n\r"
+          }
 
           expect eof
           '
