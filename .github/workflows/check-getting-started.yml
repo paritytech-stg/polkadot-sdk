@@ -33,7 +33,7 @@ jobs:
         run: |
           # expect $EXPECT_FLAGS -c '
           expect -d -c '
-          set timeout 300
+          set timeout 120
 
           spawn bash scripts/getting-started.sh
 
@@ -44,12 +44,16 @@ jobs:
 
           expect -nocase "Detected ${{ matrix.container }}"
 
+          # wait for dependencies installation
+          sleep 60
+
           expect {
-            "Rust already installed"
+            "Rust already installed" {}
             "Rust is not installed. Install it?" {
               send "y\r"
               expect "Proceed with standard installation (default - just press enter)" {
                 send "\r"
+                sleep 60
                 expect "Rust is installed now"
               }
             }
