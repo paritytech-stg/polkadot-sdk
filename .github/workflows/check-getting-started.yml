@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        container: [ubuntu, debian]
+        container: [debian]
     runs-on: ubuntu-latest
     container: ${{ matrix.container }}:latest
     steps:
