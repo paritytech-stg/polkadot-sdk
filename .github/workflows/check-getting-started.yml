@@ -31,8 +31,9 @@ jobs:
 
       - name: Check the script
         run: |
-          expect $EXPECT_FLAGS -c '
-          set timeout 300
+          # expect $EXPECT_FLAGS -c '
+          expect -d -c '
+          set timeout 120
 
           spawn bash scripts/getting-started.sh
 
