@@ -10,7 +10,7 @@ prompt() {
             [Yy]* ) return 0;;  # Yes, return 0 (true)
             [Nn]* ) return 1;;  # No, return 1 (false)
             "" ) return 1;;     # Default to no if user just presses Enter
-            * ) echo "Please answer yes or no.";;
+            * ) printf "Please answer yes or no.\n";;
         esac
     done
 }
@@ -23,7 +23,7 @@ prompt_default_yes() {
             [Yy]* ) return 0;;  # Yes, return 0 (true)
             [Nn]* ) return 1;;  # No, return 1 (false)
             "" ) return 0;;     # Default to yes if user just presses Enter
-            * ) echo "Please answer yes or no.";;
+            * ) printf "Please answer yes or no.\n";;
         esac
     done
 }
@@ -56,17 +56,17 @@ EOF
 # Determine OS
 os_name=$(uname -s)
 if [ "$os_name" = "Darwin" ]; then
-    echo "🍎 Detected macOS. Installing dependencies via Homebrew."
+    printf "🍎 Detected macOS. Installing dependencies via Homebrew.\n"
 
     # Check if brew is installed
     if command -v brew >/dev/null 2>&1; then
         printf "\n✅︎🍺 Homebrew already installed.\n"
     else
         if prompt_default_yes "\n🍺 Homebrew is not installed. Install it?\n"; then
-            echo "🍺 Installing Homebrew."
+            printf "🍺 Installing Homebrew.\n"
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
         else
-            echo "❌ Cannot continue without homebrew. Aborting."
+            printf "❌ Cannot continue without homebrew. Aborting.\n"
             exit 1
         fi
     fi
@@ -78,7 +78,7 @@ if [ "$os_name" = "Darwin" ]; then
         if prompt_default_yes "\n🍺 git seems to be missing but we will need it; install git?\n"; then
             brew install git
         else
-            echo "❌ Cannot continue without git. Aborting."
+            printf "❌ Cannot continue without git. Aborting.\n"
             exit 1
         fi
     fi
@@ -86,7 +86,7 @@ if [ "$os_name" = "Darwin" ]; then
     if prompt "\n🍺 Install cmake, openssl and protobuf?"; then
         brew install cmake openssl protobuf
     else
-        echo "🍺 Assuming cmake, openssl and protobuf are present."
+        printf "🍺 Assuming cmake, openssl and protobuf are present.\n"
     fi
 elif [ "$os_name" = "Linux" ]; then
     # find the distro name in the release files
@@ -118,7 +118,7 @@ elif [ "$os_name" = "Linux" ]; then
         fi
     fi
 else
-    echo "❌ Unknown operating system. Aborting."
+    printf "❌ Unknown operating system. Aborting.\n"
     exit 1
 fi
 
@@ -128,18 +128,18 @@ if command -v rustc >/dev/null 2>&1; then
     printf "\n✅︎🦀 Rust already installed.\n"
 else
     if prompt_default_yes "\n🦀 Rust is not installed. Install it?"; then
-        echo "🦀 Installing via rustup."
+        printf "🦀 Installing via rustup.\n"
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
         . "$HOME/.cargo/env"
     else
-        echo "Aborting."
+        printf "Aborting.\n"
         exit 1
     fi
 fi
 
 # Ensure that we have wasm support
 if prompt_default_yes "\n🦀 Setup the Rust environment (e.g. WASM support)?"; then
-    echo "🦀 Setting up Rust environment."
+    printf "🦀 Setting up Rust environment.\n"
     rustup default stable
     rustup update
     rustup target add wasm32-unknown-unknown
@@ -147,28 +147,28 @@ if prompt_default_yes "\n🦀 Setup the Rust environment (e.g. WASM support)?"; 
 fi
 
 if ! prompt "\nWould you like to start with one of the templates?"; then
-    echo "⚡ All done, the environment is ready for hacking."
+    printf "⚡ All done, the environment is ready for hacking.\n"
     exit 0
 fi
 
 while true; do
     printf "\nWhich template would you like to start with?\n"
-    echo "1) minimal template"
-    echo "2) parachain template"
-    echo "3) solochain template"
-    echo "q) cancel"
+    printf "1) minimal template\n"
+    printf "2) parachain template\n"
+    printf "3) solochain template\n"
+    printf "q) cancel"
     read -p "#? " template
     case $template in
         [1]* ) clone_and_enter_template minimal; break;;
         [2]* ) clone_and_enter_template parachain; break;;
         [3]* ) clone_and_enter_template solochain; break;;
-        [qQ]* ) echo "Canceling, not using a template."; exit 0;;
-        * ) echo "Selection not recognized.";;
+        [qQ]* ) printf "Canceling, not using a template.\n"; exit 0;;
+        * ) printf "Selection not recognized.\n";;
     esac
 done
 
 if ! prompt_default_yes "\n⚙️ Let's compile the node? It might take a while."; then
-    echo "⚡ Script finished, you can continue in the ${template}-template directory."
+    printf "⚡ Script finished, you can continue in the ${template}-template directory.\n"
     exit 0
 fi
 
