@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [{name: fedora, container: fedora}]
+        os: [{name: opensuse, container: opensuse/leap}]
         template: [minimal]
     runs-on: ubuntu-latest
     container: ${{ matrix.os.container }}:latest
@@ -32,6 +32,9 @@ jobs:
       - name: Install fedora prerequisites
         run: dnf --assumeyes install expect sudo
         if: contains(matrix.os.name, 'fedora')
+      - name: Install opensuse prerequisites
+        run: zypper install --no-confirm expect sudo
+        if: contains(matrix.os.name, 'opensuse')
 
       - name: Set additional expect flags if necessary
         run: |
