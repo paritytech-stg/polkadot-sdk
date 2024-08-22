@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [{name: opensuse, container: opensuse/leap}]
+        os: [{name: opensuse, container: opensuse/tumbleweed}]
         template: [minimal]
     runs-on: ubuntu-latest
     container: ${{ matrix.os.container }}:latest
