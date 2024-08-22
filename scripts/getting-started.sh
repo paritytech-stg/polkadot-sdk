@@ -105,8 +105,8 @@ elif [ "$os_name" = "Linux" ]; then
         pacman -Syu --needed --noconfirm curl git clang make protobuf
     elif [ "$distro" = "fedora" ]; then
         printf "\n🐧 Detected Fedora. Using dnf to install dependencies.\n"
-        sudo dnf update
-        sudo dnf install clang curl git openssl-devel make protobuf-compiler
+        sudo dnf update --assumeyes
+        sudo dnf install --assumeyes clang curl git openssl-devel make protobuf-compiler perl
     elif [ "$distro" = "opensuse" ]; then
         printf "\n🐧 Detected openSUSE. Using zypper to install dependencies.\n"
         sudo zypper install clang curl git openssl-devel llvm-devel libudev-devel make protobuf

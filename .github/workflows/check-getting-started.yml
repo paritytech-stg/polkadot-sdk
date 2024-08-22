@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [{name: arch, container: archlinux}]
+        os: [{name: fedora, container: fedora}]
         template: [minimal]
     runs-on: ubuntu-latest
     container: ${{ matrix.os.container }}:latest
@@ -29,6 +29,9 @@ jobs:
       - name: Install arch prerequisites
         run: pacman -Syu --needed --noconfirm expect sudo
         if: contains(matrix.os.name, 'arch')
+      - name: Install fedora prerequisites
+        run: dnf --assumeyes install expect sudo
+        if: contains(matrix.os.name, 'fedora')
 
       - name: Set additional expect flags if necessary
         run: |
