@@ -15,8 +15,13 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [{name: opensuse, container: opensuse/tumbleweed}]
-        template: [minimal]
+        os: 
+          - {name: ubuntu, container: ubuntu}
+          - {name: debian, container: debian}
+          - {name: arch, container: archlinux}
+          - {name: fedora, container: fedora}
+          - {name: opensuse, container: opensuse/tumbleweed}
+        template: [minimal, parachain, solochain]
     runs-on: ubuntu-latest
     container: ${{ matrix.os.container }}:latest
     steps:
