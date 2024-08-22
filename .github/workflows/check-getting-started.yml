@@ -21,7 +21,7 @@ name: Check the getting-started.sh script
 on:
   push:
     branches:
-      - rzadp/getting-started-tests
+      - rzadp/getting-started-runner
   merge_group:
 
 concurrency:
@@ -41,7 +41,7 @@ jobs:
           - {name: opensuse, container: opensuse/tumbleweed}
         template: [minimal, parachain, solochain]
         shell: [sh, bash]
-    runs-on: ubuntu-latest
+    runs-on: arc-runners-polkadot-sdk-beefy
     container: ${{ matrix.os.container }}:latest
     steps:
       # A minimal amount of prerequisites required before we can run the actual getting-started script,
