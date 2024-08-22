@@ -156,7 +156,7 @@ while true; do
     printf "1) minimal template\n"
     printf "2) parachain template\n"
     printf "3) solochain template\n"
-    printf "q) cancel"
+    printf "q) cancel\n"
     read -p "#? " template
     case $template in
         [1]* ) clone_and_enter_template minimal; break;;
