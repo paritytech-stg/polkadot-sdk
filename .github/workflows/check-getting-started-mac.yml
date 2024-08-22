@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        template: [minimal]
+        template: [minimal, parachain, solochain]
     runs-on: macos-latest
     steps:
       # A minimal amount of prerequisites required before we can run the actual getting-started script,
