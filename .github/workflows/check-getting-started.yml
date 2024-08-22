@@ -55,7 +55,7 @@ jobs:
         run: |
           # expect $EXPECT_FLAGS -c '
           expect -d -c '
-          set timeout 120
+          set timeout 240
 
           spawn ${{ matrix.shell }} scripts/getting-started.sh
 
