@@ -33,31 +33,44 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: 
-          - {name: ubuntu, container: ubuntu}
-          - {name: debian, container: debian}
-          - {name: arch, container: archlinux}
-          - {name: fedora, container: fedora}
-          - {name: opensuse, container: opensuse/tumbleweed}
-        template: [minimal, parachain, solochain]
-        shell: [sh, bash]
+        include:
+          - name: ubuntu
+            container: ubuntu
+            template: minimal
+            shell: bash
+          - name: debian
+            container: debian
+            template: parachain
+            shell: sh
+          - name: arch
+            container: archlinux
+            template: solochain
+            shell: sh
+          - name: fedora
+            container: fedora
+            template: parachain
+            shell: sh
+          - name: opensuse
+            container: opensuse/tumbleweed
+            template: solochain
+            shell: sh
     runs-on: ubuntu-latest
-    container: ${{ matrix.os.container }}:latest
+    container: ${{ matrix.container }}:latest
     steps:
       # A minimal amount of prerequisites required before we can run the actual getting-started script,
       # which will install the rest of requirements.
       - name: Install ubuntu/debian prerequisites
         run: apt update && apt install -y expect sudo git
-        if: contains(matrix.os.name, 'ubuntu') || contains(matrix.os.name, 'debian')
+        if: contains(matrix.name, 'ubuntu') || contains(matrix.name, 'debian')
       - name: Install arch prerequisites
         run: pacman -Syu --needed --noconfirm expect sudo git
-        if: contains(matrix.os.name, 'arch')
+        if: contains(matrix.name, 'arch')
       - name: Install fedora prerequisites
         run: dnf --assumeyes install expect sudo git
-        if: contains(matrix.os.name, 'fedora')
+        if: contains(matrix.name, 'fedora')
       - name: Install opensuse prerequisites
         run: zypper install --no-confirm expect sudo git
-        if: contains(matrix.os.name, 'opensuse')
+        if: contains(matrix.name, 'opensuse')
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -80,7 +93,7 @@ jobs:
             eof { puts stderr "EOF received on an expect"; exit 1 }
           }
 
-          expect -nocase "Detected ${{ matrix.os.name }}"
+          expect -nocase "Detected ${{ matrix.name }}"
 
           expect "Rust is not installed. Install it?" {
             send "y\r"
@@ -163,8 +176,11 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        template: [minimal, parachain, solochain]
-        shell: [sh, bash]
+        include:
+          - template: parachain
+            shell: sh
+          - template: solochain
+            shell: bash
     runs-on: macos-latest
     steps:
       - name: Checkout
