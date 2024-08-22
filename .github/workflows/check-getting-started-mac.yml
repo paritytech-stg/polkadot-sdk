@@ -1,0 +1,140 @@
+name: Check the getting-started.sh script on macOS
+
+on:
+  push:
+    branches:
+      - rzadp/getting-started-mac
+  merge_group:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-getting-started-mac:
+    strategy:
+      fail-fast: true
+      matrix:
+        template: [minimal]
+    runs-on: macos-latest
+    steps:
+      # A minimal amount of prerequisites required before we can run the actual getting-started script,
+      # which will install the rest of requirements.
+      - name: Install macOS prerequisites
+        run: command -v expect
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set additional expect flags if necessary
+        run: |
+          # Add a debug flag to expect, if github is re-run with debug logging enabled.
+          [ "${{ runner.debug }}" = "1" ] && EXPECT_FLAGS="-d" || EXPECT_FLAGS=""
+          echo "EXPECT_FLAGS=${EXPECT_FLAGS}" >> $GITHUB_ENV
+
+      - name: Check the first run if the script
+        run: |
+          # expect $EXPECT_FLAGS -c '
+          expect -d -c '
+          set timeout 120
+
+          spawn bash scripts/getting-started.sh
+
+          expect_after {
+            timeout { puts stderr "Timed out on an expect"; exit 1 }
+            eof { puts stderr "EOF received on an expect"; exit 1 }
+          }
+
+          expect -nocase "Detected macOS"
+
+          expect "Homebrew already installed"
+
+          expect "Install cmake" {
+            send "y\r"
+          }
+
+          expect "Rust is not installed. Install it?" {
+            send "y\r"
+            expect "Proceed with standard installation (default - just press enter)" {
+              send "\r"
+              expect "Rust is installed now"
+            }
+          }
+
+          expect "Setup the Rust environment" {
+            send "y\r"
+          }
+
+          expect "start with one of the templates" {
+            send "y\r"
+          }
+          
+          expect -re "(.)\\) ${{ matrix.template }} template" {
+            send "$expect_out(1,string)\r"
+          }
+
+          expect "compile the node?" {
+            send "n\r"
+          }
+
+          expect eof
+          '
+        timeout-minutes: 15
+
+      - name: Check the second run if the script
+        run: |
+          # expect $EXPECT_FLAGS -c '
+          expect -d -c '
+          set timeout 120
+
+          spawn bash scripts/getting-started.sh
+
+          expect_after {
+            timeout { puts stderr "Timed out on an expect"; exit 1 }
+            eof { puts stderr "EOF received on an expect"; exit 1 }
+          }
+
+          expect "Homebrew already installed"
+
+          expect "Install cmake" {
+            send "y\r"
+          }
+
+          expect "Rust already installed" {}
+
+          expect "Setup the Rust environment" {
+            send "n\r"
+          }
+
+          expect "start with one of the templates" {
+            send "y\r"
+          }
+          
+          expect -re "(.)\\) ${{ matrix.template }} template" {
+            send "$expect_out(1,string)\r"
+            expect "directory already exists" {}
+          }
+
+          expect "compile the node?" {
+            send "n\r"
+          }
+
+          expect eof
+          '
+        timeout-minutes: 15
+
+      - name: Compile the node outside of the script
+        run: |
+          . "$HOME/.cargo/env"
+          cd ${{ matrix.template }}-template
+          cargo build --release
+        timeout-minutes: 120
+        shell: bash
+
+      - name: Check that the binary is executable
+        run: |
+          . "$HOME/.cargo/env"
+          cd ${{ matrix.template }}-template
+          cargo run --release -- --help
+        shell: bash
+        timeout-minutes: 5
