@@ -20,21 +20,23 @@ jobs:
     runs-on: ubuntu-latest
     container: ${{ matrix.os.container }}:latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
+      # A minimal amount of prerequisites required before we can run the actual getting-started script,
+      # which will install the rest of requirements.
       - name: Install ubuntu/debian prerequisites
-        run: apt update && apt install -y expect sudo
+        run: apt update && apt install -y expect sudo git
         if: contains(matrix.os.name, 'ubuntu') || contains(matrix.os.name, 'debian')
       - name: Install arch prerequisites
-        run: pacman -Syu --needed --noconfirm expect sudo
+        run: pacman -Syu --needed --noconfirm expect sudo git
         if: contains(matrix.os.name, 'arch')
       - name: Install fedora prerequisites
-        run: dnf --assumeyes install expect sudo
+        run: dnf --assumeyes install expect sudo git
         if: contains(matrix.os.name, 'fedora')
       - name: Install opensuse prerequisites
-        run: zypper install --no-confirm expect sudo
+        run: zypper install --no-confirm expect sudo git
         if: contains(matrix.os.name, 'opensuse')
+
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Set additional expect flags if necessary
         run: |
