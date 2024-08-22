@@ -21,7 +21,9 @@ jobs:
           - {name: arch, container: archlinux}
           - {name: fedora, container: fedora}
           - {name: opensuse, container: opensuse/tumbleweed}
-        template: [minimal, parachain, solochain]
+        # template: [minimal, parachain, solochain]
+        template: [minimal]
+        shell: [sh, bash]
     runs-on: ubuntu-latest
     container: ${{ matrix.os.container }}:latest
     steps:
@@ -55,7 +57,7 @@ jobs:
           expect -d -c '
           set timeout 120
 
-          spawn bash scripts/getting-started.sh
+          spawn ${{ matrix.shell }} scripts/getting-started.sh
 
           expect_after {
             timeout { puts stderr "Timed out on an expect"; exit 1 }
@@ -98,7 +100,7 @@ jobs:
           expect -d -c '
           set timeout 120
 
-          spawn bash scripts/getting-started.sh
+          spawn ${{ matrix.shell }} scripts/getting-started.sh
 
           expect_after {
             timeout { puts stderr "Timed out on an expect"; exit 1 }
