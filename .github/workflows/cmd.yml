@@ -268,9 +268,8 @@ jobs:
             });
             const prBranch = pr.data.head.ref;
             const repo = pr.data.head.repo.full_name;
-            console.log(prBranch, repo, pr, pr.data, pr.data.head)
+            console.log(prBranch, repo)
             return { pr_branch: prBranch, repo: repo };
-          result-encoding: string
 
       - name: Use PR Branch Name and Repo
         run: |
