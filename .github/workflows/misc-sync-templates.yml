@@ -42,6 +42,7 @@ jobs:
           git config --global user.email "163130811+polkadot-sdk-template-bot-stg[bot]@users.noreply.github.com"
       - uses: actions/checkout@v4
         with:
+          repository: "paritytech/polkadot-sdk"
           path: polkadot-sdk
           ref: "${{ github.event.inputs.stable_release_branch }}"
       - name: Generate a token for the template repository
