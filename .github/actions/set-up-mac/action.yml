@@ -7,6 +7,9 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Set up Homebrew
+      id: set-up-homebrew
+      uses: Homebrew/actions/setup-homebrew@master
     - name: Install with Hombrew
       shell: bash
       run: brew install protobuf rustup openssl pkg-config zlib xz zstd llvm jq curl gcc make cmake
