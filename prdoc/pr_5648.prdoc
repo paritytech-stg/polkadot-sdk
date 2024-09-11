@@ -1,0 +1,9 @@
+title: '[Bot] Revive prdoc bot'
+doc:
+- audience: '123'
+  description: |-
+    Prdoc bot was deleted in https://github.com/paritytech/polkadot-sdk/pull/5457 just after being added in https://github.com/paritytech/polkadot-sdk/pull/5331 without replacement.
+    Now bringing it back until it is integrated into the new command structure.
+
+    Formatting is now also fixed, such that the title is always first and the description renders correctly.
+crates: []
