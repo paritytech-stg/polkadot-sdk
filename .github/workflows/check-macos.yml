@@ -36,7 +36,15 @@ jobs:
       - run: rustup component add rust-src --toolchain stable-aarch64-apple-darwin
       - run: |
           df -h
+          rustup show
+          cargo --version
+          rustup +nightly show
           SKIP_WASM_BUILD=1 cargo check --workspace --locked
+      - if: failure()
+        run: |
+          rustup show
+          cargo --version
+          rustup +nightly show
 
   # cargo-check-all-crate-macos:
   #   runs-on: macOS
