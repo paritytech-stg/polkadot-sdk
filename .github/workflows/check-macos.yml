@@ -1,0 +1,54 @@
+name: checks MacOS
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, labeled]
+  merge_group:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  cargo-check-each-crate-macos:
+    runs-on: macOS
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: 1.77.0
+          components: rustfmt
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable-aarch64-apple-darwin
+      # - name: Install rust
+      #   run: rustup toolchain install nightly
+      - run: brew install protobuf
+      # - run: rustup target add wasm32-unknown-unknown --toolchain stable-aarch64-apple-darwin
+      - run: rustup component add rust-src --toolchain stable-aarch64-apple-darwin
+      - run: |
+          df -h
+          SKIP_WASM_BUILD=1 cargo check --workspace --locked
+
+  # cargo-check-all-crate-macos:
+  #   runs-on: macOS
+  #   # strategy:
+  #   #   fail-fast: false
+  #   #   matrix:
+  #   #     index: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install dependencies
+  #       uses: ./.github/actions/set-up-mac
+  #       with:
+  #         IMAGE: ${{ needs.set-image.outputs.IMAGE }}
+  #     - name: Run cargo check
+  #       run: |
+  #         source $HOME/.cargo/env
+  #         # PYTHONUNBUFFERED=x .github/scripts/check-each-crate.py ${{ matrix.index }} ${{ strategy.job-total }} --disable_forklift
+  #         cargo check --workspace --locked
