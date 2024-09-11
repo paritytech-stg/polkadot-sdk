@@ -62,9 +62,7 @@ jobs:
           SKIP_WASM_BUILD=1 cargo check --workspace --locked
       - if: failure()
         run: |
-          rustup show
-          cargo --version
-          rustup +nightly show
+          sleep 600
 
   # cargo-check-all-crate-macos:
   #   runs-on: macOS
