@@ -55,6 +55,7 @@ jobs:
       # # - run: rustup target add wasm32-unknown-unknown --toolchain stable-aarch64-apple-darwin
       # - run: rustup component add rust-src --toolchain stable-aarch64-apple-darwin
       - run: |
+          export PATH=$PATH:/Users/admin/.rustup/toolchains/1.77.0-aarch64-apple-darwin/bin
           df -h
           rustup show
           cargo --version
