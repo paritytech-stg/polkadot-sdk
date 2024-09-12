@@ -40,8 +40,6 @@ jobs:
         run: |
           echo "######## rustup show ########"
           rustup show
-          echo "######## rustup +nightly show ########"
-          rustup +nightly show
           echo "######## cargo --version ########"
           cargo --version
       - name: Run cargo check
