@@ -58,18 +58,18 @@ jobs:
           cache: false
           toolchain: 1.77.0
           target: wasm32-unknown-unknown
-          components: rust-src, rustfmt, clippy
+          components: cargo, clippy, rust-docs, rust-src, rustfmt, rustc, rust-std
       - run: brew install protobuf
-      - run: |
-          df -h
-          echo "############# rustup show #############"
-          rustup show
-          echo "############# cargo --version #############"
-          which cargo
-          cargo -V
-          cargo -V | grep 1.77
-          echo "############# rustup +nightly show #############"
-          rustup +nightly show
+      # - run: |
+      #     df -h
+      #     echo "############# rustup show #############"
+      #     rustup show
+      #     echo "############# cargo --version #############"
+      #     which cargo
+      #     cargo -V
+      #     cargo -V | grep 1.77
+      #     echo "############# rustup +nightly show #############"
+      #     rustup +nightly show
       - run: cargo check --workspace --locked
       - if: failure()
         run: |
