@@ -44,4 +44,3 @@ runs:
       run: |
         rustup show
         rustup +nightly show
-        export PATH=$PATH:/Users/admin/.cargo/bin
