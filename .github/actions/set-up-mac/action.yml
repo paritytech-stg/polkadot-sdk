@@ -44,3 +44,4 @@ runs:
       run: |
         rustup show
         rustup +nightly show
+        export PATH=$PATH:/Users/admin/.rustup/toolchains/${VERSION}-aarch64-apple-darwin/bin

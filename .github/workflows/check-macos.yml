@@ -31,6 +31,8 @@ jobs:
   cargo-check-each-crate-macos:
     runs-on: macOS
     needs: [set-image]
+    env:
+      SKIP_WASM_BUILD: 1
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
@@ -55,12 +57,12 @@ jobs:
       # # - run: rustup target add wasm32-unknown-unknown --toolchain stable-aarch64-apple-darwin
       # - run: rustup component add rust-src --toolchain stable-aarch64-apple-darwin
       - run: |
-          export PATH=$PATH:/Users/admin/.rustup/toolchains/1.77.0-aarch64-apple-darwin/bin
+          echo $PATH
           df -h
           rustup show
           cargo --version
           rustup +nightly show
-          SKIP_WASM_BUILD=1 cargo check --workspace --locked
+      - run: cargo check --workspace --locked
       - if: failure()
         run: |
           sleep 600
