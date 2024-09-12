@@ -59,8 +59,11 @@ jobs:
       - run: |
           echo $PATH
           df -h
+          echo "############# rustup show #############"
           rustup show
+          echo "############# cargo --version #############"
           cargo --version
+          echo "############# rustup +nightly show #############"
           rustup +nightly show
       - run: cargo check --workspace --locked
       - if: failure()
