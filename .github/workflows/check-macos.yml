@@ -46,5 +46,5 @@ jobs:
         run: brew install protobuf openssl pkg-config zlib xz zstd llvm jq curl gcc make cmake
       - name: Run cargo check
         run: |
-          rustup toolchain install "nightly-2024-04-10"
+          rustup toolchain install nightly # "nightly-2024-04-10"
           cargo check --workspace --locked
