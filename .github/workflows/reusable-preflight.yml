@@ -107,3 +107,6 @@ jobs:
           echo "action dir: ${{ steps.current_file.outputs.currentActionDir }}"
           echo "wf file: ${{ steps.current_file.outputs.currentWorkflowFile }}"
           echo "Modified: ${{ steps.set_changes.outputs.modified_keys }}"
+          echo "github.ref: ${{ github.ref }}"
+          echo "github.ref_name: ${{ github.ref_name }}"
+          echo "github.sha: ${{ github.sha }}"
