@@ -32,19 +32,56 @@ jobs:
     env:
       SKIP_WASM_BUILD: 1
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      #   - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      #   - name: Set up Homebrew
+      #     id: set-up-homebrew
+      #     uses: Homebrew/actions/setup-homebrew@1ccc07ccd54b6048295516a3eb89b192c35057dc # master from 12.09.2024
+      #   - uses: actions-rust-lang/setup-rust-toolchain@1fbea72663f6d4c03efaab13560c8a24cfd2a7cc # v1.9.0
+      #     with:
+      #       cache: false
+      #       toolchain: ${{ steps.set_image.outputs.RUST_VERSION }}
+      #       target: wasm32-unknown-unknown
+      #       components: rust-src, rustfmt, clippy
+      #   - name: Install protobuf
+      #     run: brew install protobuf openssl pkg-config zlib xz zstd llvm jq curl gcc make cmake
+      #   - name: Run cargo check
+      #     run: |
+      #       rustup toolchain install nightly # "nightly-2024-04-10"
+      #       cargo check --workspace --locked
+
+      - uses: actions/checkout@v4
+      # - name: Install dependencies
+      #   uses: ./.github/actions/set-up-mac
+      #   with:
+      #     IMAGE: ${{ needs.set-image.outputs.IMAGE }}
       - name: Set up Homebrew
         id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@1ccc07ccd54b6048295516a3eb89b192c35057dc # master from 12.09.2024
-      - uses: actions-rust-lang/setup-rust-toolchain@1fbea72663f6d4c03efaab13560c8a24cfd2a7cc # v1.9.0
+        uses: Homebrew/actions/setup-homebrew@master
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           cache: false
-          toolchain: ${{ steps.set_image.outputs.RUST_VERSION }}
+          toolchain: 1.77.0
           target: wasm32-unknown-unknown
           components: rust-src, rustfmt, clippy
-      - name: Install protobuf
-        run: brew install protobuf openssl pkg-config zlib xz zstd llvm jq curl gcc make cmake
-      - name: Run cargo check
+      # - uses: actions-rust-lang/setup-rust-toolchain@v1
+      #   with:
+      #     cache: false
+      #     toolchain: stable-aarch64-apple-darwin
+      # - name: Install rust
+      #   run: rustup toolchain install nightly
+      - run: brew install protobuf
+      # - run: rustup target add wasm32-unknown-unknown --toolchain 1.77.0-aarch64-apple-darwin
+      - run: |
+          df -h
+          echo "############# rustup show #############"
+          rustup show
+          echo "############# cargo --version #############"
+          which cargo
+          cargo -V
+          cargo -V | grep 1.77
+          echo "############# rustup +nightly show #############"
+          rustup +nightly show
+      - run: cargo check --workspace --locked
+      - if: failure()
         run: |
-          rustup toolchain install nightly # "nightly-2024-04-10"
-          cargo check --workspace --locked
+          sleep 600
