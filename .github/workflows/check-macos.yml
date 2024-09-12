@@ -35,35 +35,34 @@ jobs:
       SKIP_WASM_BUILD: 1
     steps:
       - uses: actions/checkout@v4
-      - name: Install dependencies
-        uses: ./.github/actions/set-up-mac
+      # - name: Install dependencies
+      #   uses: ./.github/actions/set-up-mac
+      #   with:
+      #     IMAGE: ${{ needs.set-image.outputs.IMAGE }}
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          IMAGE: ${{ needs.set-image.outputs.IMAGE }}
-      # - name: Set up Homebrew
-      #   id: set-up-homebrew
-      #   uses: Homebrew/actions/setup-homebrew@master
-      # - uses: actions-rust-lang/setup-rust-toolchain@v1
-      #   with:
-      #     cache: false
-      #     toolchain: 1.77.0
-      #     components: rustfmt
-      # - uses: actions-rust-lang/setup-rust-toolchain@v1
-      #   with:
-      #     cache: false
-      #     toolchain: stable-aarch64-apple-darwin
-      # # - name: Install rust
-      # #   run: rustup toolchain install nightly
-      # - run: brew install protobuf
-      # # - run: rustup target add wasm32-unknown-unknown --toolchain stable-aarch64-apple-darwin
-      # - run: rustup component add rust-src --toolchain stable-aarch64-apple-darwin
-      - run: export PATH=$PATH:/Users/admin/.cargo/bin
+          cache: false
+          toolchain: 1.77.0
+          components: rustfmt
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          cache: false
+          toolchain: stable-aarch64-apple-darwin
+      # - name: Install rust
+      #   run: rustup toolchain install nightly
+      - run: brew install protobuf
+      - run: rustup target add wasm32-unknown-unknown --toolchain stable-aarch64-apple-darwin
+      - run: rustup component add rust-src --toolchain stable-aarch64-apple-darwin
+      - run: rustup component add rust-src rustfmt clippy --toolchain $VERSION
       - run: |
-          echo $PATH
           df -h
           echo "############# rustup show #############"
           rustup show
           echo "############# cargo --version #############"
-          cargo --version
+          cargo -V | grep 1.77
           echo "############# rustup +nightly show #############"
           rustup +nightly show
       - run: cargo check --workspace --locked
