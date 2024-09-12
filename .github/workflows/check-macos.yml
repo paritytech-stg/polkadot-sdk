@@ -36,6 +36,7 @@ jobs:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@1ccc07ccd54b6048295516a3eb89b192c35057dc # master from 12.09.2024
+      - run: echo ${{ steps.set_image.outputs.RUST_VERSION }}
       - uses: actions-rust-lang/setup-rust-toolchain@1fbea72663f6d4c03efaab13560c8a24cfd2a7cc # v1.9.0
         with:
           cache: false
@@ -46,6 +47,8 @@ jobs:
         run: brew install protobuf
       - name: Run cargo check
         run: |
+          cargo -V
+          cargo -V | grep 1.77
           cargo check --workspace --locked
 
       # - uses: actions/checkout@v4
