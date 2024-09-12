@@ -50,10 +50,6 @@ jobs:
       #       cargo check --workspace --locked
 
       - uses: actions/checkout@v4
-      # - name: Install dependencies
-      #   uses: ./.github/actions/set-up-mac
-      #   with:
-      #     IMAGE: ${{ needs.set-image.outputs.IMAGE }}
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
@@ -63,14 +59,7 @@ jobs:
           toolchain: 1.77.0
           target: wasm32-unknown-unknown
           components: rust-src, rustfmt, clippy
-      # - uses: actions-rust-lang/setup-rust-toolchain@v1
-      #   with:
-      #     cache: false
-      #     toolchain: stable-aarch64-apple-darwin
-      # - name: Install rust
-      #   run: rustup toolchain install nightly
       - run: brew install protobuf
-      # - run: rustup target add wasm32-unknown-unknown --toolchain 1.77.0-aarch64-apple-darwin
       - run: |
           df -h
           echo "############# rustup show #############"
