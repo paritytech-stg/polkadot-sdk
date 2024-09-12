@@ -34,16 +34,17 @@ jobs:
     needs: [set_image]
     env:
       SKIP_WASM_BUILD: 1
+      RUST_VERSION: ${{ needs.set_image.outputs.RUST_VERSION }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@1ccc07ccd54b6048295516a3eb89b192c35057dc # master from 12.09.2024
-      - run: echo ${{ needs.set_image.outputs.RUST_VERSION }}
+      - run: echo ${{ env.RUST_VERSION }}
       - uses: actions-rust-lang/setup-rust-toolchain@1fbea72663f6d4c03efaab13560c8a24cfd2a7cc # v1.9.0
         with:
           cache: false
-          toolchain: ${{ needs.set_image.outputs.RUST_VERSION }}
+          toolchain: ${{ env.RUST_VERSION }}
           target: wasm32-unknown-unknown
           components: cargo, clippy, rust-docs, rust-src, rustfmt, rustc, rust-std
       - name: Install protobuf
