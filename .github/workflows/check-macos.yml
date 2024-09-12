@@ -15,18 +15,16 @@ concurrency:
 permissions: {}
 
 jobs:
-  set-image:
-    # GitHub Actions allows using 'env' in a container context.
-    # However, env variables don't work for forks: https://github.com/orgs/community/discussions/44322
-    # This workaround sets the container image for each job using 'set-image' job output.
+  set-version:
     runs-on: ubuntu-latest
     outputs:
-      IMAGE: ${{ steps.set_image.outputs.IMAGE }}
+      RUST_VERSION: ${{ steps.set_image.outputs.IMAGE }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - id: set_image
-        run: cat .github/env >> $GITHUB_OUTPUT
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - name: Get rust version from image name
+        id: set_image
+        run: echo "RUST_VERSION=$(cat .github/env | sed -E 's/.*ci-unified:([^-]+)-([^-]+).*/\2/')" >> $GITHUB_OUTPUT
 
   cargo-check-each-crate-macos:
     runs-on: macOS
@@ -34,58 +32,17 @@ jobs:
     env:
       SKIP_WASM_BUILD: 1
     steps:
-      - uses: actions/checkout@v4
-      # - name: Install dependencies
-      #   uses: ./.github/actions/set-up-mac
-      #   with:
-      #     IMAGE: ${{ needs.set-image.outputs.IMAGE }}
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Set up Homebrew
         id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        uses: Homebrew/actions/setup-homebrew@1ccc07ccd54b6048295516a3eb89b192c35057dc # master from 12.09.2024
+      - uses: actions-rust-lang/setup-rust-toolchain@1fbea72663f6d4c03efaab13560c8a24cfd2a7cc # v1.9.0
         with:
           cache: false
-          toolchain: 1.77.0
+          toolchain: ${{ steps.set_image.outputs.RUST_VERSION }}
           target: wasm32-unknown-unknown
           components: rust-src, rustfmt, clippy
-      # - uses: actions-rust-lang/setup-rust-toolchain@v1
-      #   with:
-      #     cache: false
-      #     toolchain: stable-aarch64-apple-darwin
-      # - name: Install rust
-      #   run: rustup toolchain install nightly
-      - run: brew install protobuf
-      # - run: rustup target add wasm32-unknown-unknown --toolchain 1.77.0-aarch64-apple-darwin
-      - run: |
-          df -h
-          echo "############# rustup show #############"
-          rustup show
-          echo "############# cargo --version #############"
-          which cargo
-          cargo -V
-          cargo -V | grep 1.77
-          echo "############# rustup +nightly show #############"
-          rustup +nightly show
-      - run: cargo check --workspace --locked
-      - if: failure()
-        run: |
-          sleep 600
-
-  # cargo-check-all-crate-macos:
-  #   runs-on: macOS
-  #   needs: [set-image]
-  #   # strategy:
-  #   #   fail-fast: false
-  #   #   matrix:
-  #   #     index: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Install dependencies
-  #       uses: ./.github/actions/set-up-mac
-  #       with:
-  #         IMAGE: ${{ needs.set-image.outputs.IMAGE }}
-  #     - name: Run cargo check
-  #       run: |
-  #         source $HOME/.cargo/env
-  #         # PYTHONUNBUFFERED=x .github/scripts/check-each-crate.py ${{ matrix.index }} ${{ strategy.job-total }} --disable_forklift
-  #         cargo check --workspace --locked
+      - name: Install protobuf
+        run: brew install protobuf
+      - name: Run cargo check
+        run: cargo check --workspace --locked
