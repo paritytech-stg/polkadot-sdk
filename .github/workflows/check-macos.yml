@@ -43,7 +43,7 @@ jobs:
           target: wasm32-unknown-unknown
           components: rust-src, rustfmt, clippy
       - name: Install protobuf
-        run: brew install protobuf
+        run: brew install protobuf openssl pkg-config zlib xz zstd llvm jq curl gcc make cmake
       - name: Run cargo check
         run: |
           rustup toolchain install "nightly-2024-04-10"
