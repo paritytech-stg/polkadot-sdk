@@ -15,7 +15,7 @@ concurrency:
 permissions: {}
 
 jobs:
-  set-version:
+  set_image:
     runs-on: ubuntu-latest
     outputs:
       RUST_VERSION: ${{ steps.set_image.outputs.IMAGE }}
@@ -28,7 +28,7 @@ jobs:
 
   cargo-check-each-crate-macos:
     runs-on: macOS
-    needs: [set-image]
+    needs: [set_image]
     env:
       SKIP_WASM_BUILD: 1
     steps:
