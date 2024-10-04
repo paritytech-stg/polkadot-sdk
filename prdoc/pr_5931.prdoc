@@ -1,0 +1,13 @@
+title: fix regex, improve prdoc generation inputs
+doc:
+- audience:
+  - Node Dev
+  - Runtime User
+  description: |-
+    Closes https://github.com/paritytech/polkadot-sdk/issues/5927
+    Related to https://github.com/paritytech/polkadot-sdk/pull/5924#issuecomment-2393558697
+
+    1. Allow quotes + better sanitize the inputs
+    2. improve prdoc arguments validation & help
+    3. support more than one audiences
+crates: []
