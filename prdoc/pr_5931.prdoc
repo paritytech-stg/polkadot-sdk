@@ -1,13 +1,17 @@
 title: fix regex, improve prdoc generation inputs
 doc:
 - audience:
-  - Node Dev
   - Runtime User
+  - Runtime Dev
   description: |-
     Closes https://github.com/paritytech/polkadot-sdk/issues/5927
     Related to https://github.com/paritytech/polkadot-sdk/pull/5924#issuecomment-2393558697
 
-    1. Allow quotes + better sanitize the inputs
-    2. improve prdoc arguments validation & help
-    3. support more than one audiences
+    improve prdoc arguments validation & help:
+      - convert audiences options to snake_case + allow defining multiple options
+      - support more than one audiences
+      - define allowed bump options
+      - infer --pr from the actual PR (now it's optional, can still be overwritten)
+
+    ![image](https://github.com/user-attachments/assets/24e18fe2-2f67-4ce0-90e4-34f6c2f860c9)
 crates: []
