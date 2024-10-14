@@ -123,8 +123,10 @@ jobs:
           echo "Git config"
           cat .git/config
           echo "Git push"
-          git config --global user.email "${APP_ID}+${APP_NAME}[bot]@users.noreply.github.com"
-          git config --global user.name "${APP_NAME}"
+          # git config --global user.email "${APP_ID}+${APP_NAME}[bot]@users.noreply.github.com"
+          # git config --global user.name "${APP_NAME}"
+          git config user.email "ci@parity.io"
+          git config user.name "polkadotsdk-ghpages"
           git add ${{ github.sha }}.txt
           git commit -m "___Updated docs for ${{ github.head_ref || github.ref_name }}___"
           git push origin gh-pages
