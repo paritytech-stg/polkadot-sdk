@@ -165,6 +165,6 @@ jobs:
           echo "${Green}Git push${NC}"
           git config user.email "ci@parity.io"
           git config user.name "polkadotsdk-ghpages"
-          git commit -m --amend "___Updated docs" || echo "___Nothing to commit___"
+          git commit --amend -m "___Updated docs" || echo "___Nothing to commit___"
           git push origin gh-pages --force
           # sleep 1800
