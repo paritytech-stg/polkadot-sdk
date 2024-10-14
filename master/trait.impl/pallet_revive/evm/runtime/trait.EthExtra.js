@@ -1,0 +1,3 @@
+(function() {var implementors = {
+"kitchensink_runtime":[["impl <a class=\"trait\" href=\"pallet_revive/evm/runtime/trait.EthExtra.html\" title=\"trait pallet_revive::evm::runtime::EthExtra\">EthExtra</a> for <a class=\"struct\" href=\"kitchensink_runtime/struct.EthExtraImpl.html\" title=\"struct kitchensink_runtime::EthExtraImpl\">EthExtraImpl</a>"]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
