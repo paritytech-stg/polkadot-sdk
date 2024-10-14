@@ -91,7 +91,7 @@ jobs:
   publish-rustdoc:
     # if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    environment: subsystem-benchmarks
+    # environment: subsystem-benchmarks
     # needs: [preflight]
     steps:
       - uses: actions/checkout@v4
@@ -132,8 +132,8 @@ jobs:
           github-token: ${{ steps.app-token.outputs.token }}
           push-branch: "gh-pages"
           commit-message: "___Updated docs for ${{ github.head_ref || github.ref_name }}___"
-          force-add: "true"
+          # force-add: "true"
           # files: ${{ github.head_ref || github.ref_name }}/ book/
           files: ${{ github.sha }}.txt
-          name: devops-parity
+          name: polkadotsdk-ghpages
           email: devops-team@parity.io
