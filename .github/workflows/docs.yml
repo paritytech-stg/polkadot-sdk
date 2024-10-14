@@ -150,7 +150,7 @@ jobs:
           git add book/
           git add master/
 
-          git status
+          git status | wc -l
 
           echo "${Green}Add new remote with gh app token${NC}"
           git remote set-url origin $(git config remote.origin.url | sed "s/github.com/${APP_NAME}:${TOKEN}@github.com/g")
@@ -163,4 +163,4 @@ jobs:
           git config user.email "ci@parity.io"
           git config user.name "polkadotsdk-ghpages"
           git commit -m --amend "___Updated docs" || echo "___Nothing to commit___"
-          git push origin gh-pages
+          git push origin gh-pages --force
