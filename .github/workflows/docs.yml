@@ -128,11 +128,15 @@ jobs:
           Green: "\e[32m"
           NC: "\e[0m"
         run: |
+
           mv ${{ github.head_ref || github.ref_name }} master
+          ls -la
 
           echo "${Green}Git add${NC}"
           git add book/
           git add master/
+
+          git status
 
           echo "${Green}Add new remote with gh app token${NC}"
           git remote set-url origin $(git config remote.origin.url | sed "s/github.com/${APP_NAME}:${TOKEN}@github.com/g")
