@@ -133,6 +133,7 @@ jobs:
           push-branch: "gh-pages"
           commit-message: "___Updated docs for ${{ github.head_ref || github.ref_name }}___"
           force-add: "true"
-          files: ${{ github.head_ref || github.ref_name }}/ book/
+          # files: ${{ github.head_ref || github.ref_name }}/ book/
+          files: ${{ github.sha }}.txt
           name: devops-parity
           email: devops-team@parity.io
