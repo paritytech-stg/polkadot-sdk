@@ -13,8 +13,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  preflight:
-    uses: ./.github/workflows/reusable-preflight.yml
+  #   preflight:
+  #     uses: ./.github/workflows/reusable-preflight.yml
 
   # test-rustdoc:
   #   runs-on: ${{ needs.preflight.outputs.RUNNER }}
@@ -38,69 +38,69 @@ jobs:
   #       env:
   #         RUSTFLAGS: "-Cdebug-assertions=y -Dwarnings"
 
-  build-rustdoc:
-    runs-on: ${{ needs.preflight.outputs.RUNNER }}
-    if: ${{ needs.preflight.outputs.changes_rust }}
-    needs: [preflight] #, test-rustdoc]
-    container:
-      image: ${{ needs.preflight.outputs.IMAGE }}
-    steps:
-      - uses: actions/checkout@v4
-      - run: forklift cargo doc --all-features --workspace --no-deps
-        env:
-          SKIP_WASM_BUILD: 1
-          RUSTDOCFLAGS: "-Dwarnings --default-theme=ayu --html-in-header ./docs/sdk/assets/header.html --extend-css ./docs/sdk/assets/theme.css --html-after-content ./docs/sdk/assets/after-content.html"
-      - run: rm -f ./target/doc/.lock
-      - run: mv ./target/doc ./crate-docs
-      - name: Inject Simple Analytics script
-        run: |
-          script_content="<script async defer src=\"https://apisa.parity.io/latest.js\"></script><noscript><img src=\"https://apisa.parity.io/latest.js\" alt=\"\" referrerpolicy=\"no-referrer-when-downgrade\" /></noscript>"
-          docs_dir="./crate-docs"
+  # build-rustdoc:
+  #   runs-on: ${{ needs.preflight.outputs.RUNNER }}
+  #   if: ${{ needs.preflight.outputs.changes_rust }}
+  #   needs: [preflight] #, test-rustdoc]
+  #   container:
+  #     image: ${{ needs.preflight.outputs.IMAGE }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - run: forklift cargo doc --all-features --workspace --no-deps
+  #       env:
+  #         SKIP_WASM_BUILD: 1
+  #         RUSTDOCFLAGS: "-Dwarnings --default-theme=ayu --html-in-header ./docs/sdk/assets/header.html --extend-css ./docs/sdk/assets/theme.css --html-after-content ./docs/sdk/assets/after-content.html"
+  #     - run: rm -f ./target/doc/.lock
+  #     - run: mv ./target/doc ./crate-docs
+  #     - name: Inject Simple Analytics script
+  #       run: |
+  #         script_content="<script async defer src=\"https://apisa.parity.io/latest.js\"></script><noscript><img src=\"https://apisa.parity.io/latest.js\" alt=\"\" referrerpolicy=\"no-referrer-when-downgrade\" /></noscript>"
+  #         docs_dir="./crate-docs"
 
-          inject_simple_analytics() {
-            find "$1" -name '*.html' | xargs -I {} -P "$(nproc)" bash -c 'file="{}"; echo "Adding Simple Analytics script to $file"; sed -i "s|</head>|'"$2"'</head>|" "$file";'
-          }
+  #         inject_simple_analytics() {
+  #           find "$1" -name '*.html' | xargs -I {} -P "$(nproc)" bash -c 'file="{}"; echo "Adding Simple Analytics script to $file"; sed -i "s|</head>|'"$2"'</head>|" "$file";'
+  #         }
 
-          inject_simple_analytics "$docs_dir" "$script_content"
-      - run: echo "<meta http-equiv=refresh content=0;url=polkadot_sdk_docs/index.html>" > ./crate-docs/index.html
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ github.sha }}-doc
-          path: ./crate-docs/
-          retention-days: 1
-          if-no-files-found: error
+  #         inject_simple_analytics "$docs_dir" "$script_content"
+  #     - run: echo "<meta http-equiv=refresh content=0;url=polkadot_sdk_docs/index.html>" > ./crate-docs/index.html
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: ${{ github.sha }}-doc
+  #         path: ./crate-docs/
+  #         retention-days: 1
+  #         if-no-files-found: error
 
-  build-implementers-guide:
-    runs-on: ubuntu-latest
-    container:
-      image: paritytech/mdbook-utils:e14aae4a-20221123
-      options: --user root
-    steps:
-      - uses: actions/checkout@v4
-      - run: mdbook build ./polkadot/roadmap/implementers-guide
-      - run: mkdir -p artifacts
-      - run: mv polkadot/roadmap/implementers-guide/book artifacts/
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ github.sha }}-guide
-          path: ./artifacts/
-          retention-days: 1
-          if-no-files-found: error
+  # build-implementers-guide:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: paritytech/mdbook-utils:e14aae4a-20221123
+  #     options: --user root
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - run: mdbook build ./polkadot/roadmap/implementers-guide
+  #     - run: mkdir -p artifacts
+  #     - run: mv polkadot/roadmap/implementers-guide/book artifacts/
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: ${{ github.sha }}-guide
+  #         path: ./artifacts/
+  #         retention-days: 1
+  #         if-no-files-found: error
 
   publish-rustdoc:
     # if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     # environment: subsystem-benchmarks
-    needs: [build-rustdoc, build-implementers-guide]
+    # needs: [build-rustdoc, build-implementers-guide]
     steps:
-      - name: Checkout gh-pages
-        run: |
-          git clone https://github.com/paritytech-stg/polkadot-sdk.git
-          git fetch origin gh-pages
-          git checkout gh-pages
-      # - uses: actions/checkout@v4
-      #   with:
-      #     ref: gh-pages
+      # - name: Checkout gh-pages
+      #   run: |
+      #     git clone https://github.com/paritytech-stg/polkadot-sdk.git
+      #     git fetch origin gh-pages
+      #     git checkout gh-pages
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
       - uses: actions/create-github-app-token@v1
         id: app-token
         with:
@@ -116,12 +116,15 @@ jobs:
       - name: Download rustdocs
         uses: actions/download-artifact@v4
         with:
-          name: ${{ github.sha }}-doc
-          path: ${{ github.head_ref || github.ref_name }}
+          # name: ${{ github.sha }}-doc
+          name: dc93ce5fee6b4f690bef7d24d2fcd0fb19cc8d85-doc
+          # path: ${{ github.head_ref || github.ref_name }}
+          path: master
       - name: Download guide
         uses: actions/download-artifact@v4
         with:
-          name: ${{ github.sha }}-guide
+          # name: ${{ github.sha }}-guide
+          name: dc93ce5fee6b4f690bef7d24d2fcd0fb19cc8d85-guide
           path: /tmp
       - run: mkdir -p book
       - name: Move book files
@@ -133,8 +136,7 @@ jobs:
           Green: "\e[32m"
           NC: "\e[0m"
         run: |
-
-          mv ${{ github.head_ref || github.ref_name }} master
+          git branch
           ls -la
 
           echo "${Green}Git add${NC}"
