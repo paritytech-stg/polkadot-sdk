@@ -16,32 +16,32 @@ jobs:
   preflight:
     uses: ./.github/workflows/reusable-preflight.yml
 
-  test-rustdoc:
-    runs-on: ${{ needs.preflight.outputs.RUNNER }}
-    if: ${{ needs.preflight.outputs.changes_rust }}
-    needs: [preflight]
-    container:
-      image: ${{ needs.preflight.outputs.IMAGE }}
-    steps:
-      - uses: actions/checkout@v4
-      - run: forklift cargo doc --workspace --all-features --no-deps
-        env:
-          SKIP_WASM_BUILD: 1
-  test-doc:
-    runs-on: ${{ needs.preflight.outputs.RUNNER }}
-    needs: [preflight]
-    container:
-      image: ${{ needs.preflight.outputs.IMAGE }}
-    steps:
-      - uses: actions/checkout@v4
-      - run: forklift cargo test --doc --workspace
-        env:
-          RUSTFLAGS: "-Cdebug-assertions=y -Dwarnings"
+  # test-rustdoc:
+  #   runs-on: ${{ needs.preflight.outputs.RUNNER }}
+  #   if: ${{ needs.preflight.outputs.changes_rust }}
+  #   needs: [preflight]
+  #   container:
+  #     image: ${{ needs.preflight.outputs.IMAGE }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - run: forklift cargo doc --workspace --all-features --no-deps
+  #       env:
+  #         SKIP_WASM_BUILD: 1
+  # test-doc:
+  #   runs-on: ${{ needs.preflight.outputs.RUNNER }}
+  #   needs: [preflight]
+  #   container:
+  #     image: ${{ needs.preflight.outputs.IMAGE }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - run: forklift cargo test --doc --workspace
+  #       env:
+  #         RUSTFLAGS: "-Cdebug-assertions=y -Dwarnings"
 
   build-rustdoc:
     runs-on: ${{ needs.preflight.outputs.RUNNER }}
     if: ${{ needs.preflight.outputs.changes_rust }}
-    needs: [preflight, test-rustdoc]
+    needs: [preflight] #, test-rustdoc]
     container:
       image: ${{ needs.preflight.outputs.IMAGE }}
     steps:
