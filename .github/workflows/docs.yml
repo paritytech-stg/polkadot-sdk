@@ -103,10 +103,19 @@ jobs:
           app-id: ${{ secrets.POLKADOTSDK_GHPAGES_APP_ID }}
           private-key: ${{ secrets.POLKADOTSDK_GHPAGES_APP_KEY }}
       - name: Create test file
+        env:
+          TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           ls -la
           echo ${{ github.sha }} > ${{ github.sha }}.txt
           git status
+          echo "Git config"
+          cat .git/config
+          echo "Add new remote"
+          git remote remove origin
+          git remote add origin https://${TOKEN}@github.com/paritytech-stg/polkadot-sdk
+          echo "Git config"
+          cat .git/config
       # - name: Ensure destination dir does not exist
       #   run: |
       #     rm -rf book/
@@ -126,14 +135,14 @@ jobs:
       # - run: mkdir -p book
       # - name: Move book files
       #   run: mv /tmp/book/html/* book/
-      - name: Push to GH-Pages branch
-        uses: github-actions-x/commit@v2.9
-        with:
-          github-token: ${{ steps.app-token.outputs.token }}
-          push-branch: "gh-pages"
-          commit-message: "___Updated docs for ${{ github.head_ref || github.ref_name }}___"
-          # force-add: "true"
-          # files: ${{ github.head_ref || github.ref_name }}/ book/
-          files: ${{ github.sha }}.txt
-          name: polkadotsdk-ghpages
-          email: devops-team@parity.io
+      # - name: Push to GH-Pages branch
+      #   uses: github-actions-x/commit@v2.9
+      #   with:
+      #     github-token: ${{ steps.app-token.outputs.token }}
+      #     push-branch: "gh-pages"
+      #     commit-message: "___Updated docs for ${{ github.head_ref || github.ref_name }}___"
+      #     # force-add: "true"
+      #     # files: ${{ github.head_ref || github.ref_name }}/ book/
+      #     files: ${{ github.sha }}.txt
+      #     name: polkadotsdk-ghpages
+      #     email: devops-team@parity.io
