@@ -114,7 +114,8 @@ jobs:
           echo "Git config"
           cat .git/config
           echo "Add new remote"
-          git remote set-url origin $(git config remote.origin.url | sed "s/github.com/${APP_NAME}:${TOKEN}@github.com/g")
+          # git remote set-url origin $(git config remote.origin.url | sed "s/github.com/${APP_NAME}:${TOKEN}@github.com/g")
+          git remote set-url origin $(git config remote.origin.url | sed "s/github.com/${TOKEN}@github.com/g")
           echo "Remove http section"
           sed -i.bak '/\[http/d' ./.git/config
           sed -i.bak '/extraheader/d' ./.git/config
