@@ -92,8 +92,8 @@ jobs:
 
   publish-rustdoc:
     # if: github.ref == 'refs/heads/master'
-    runs-on: parity-default
-    # runs-on: ubuntu-latest
+    # runs-on: parity-default
+    runs-on: ubuntu-latest
     # environment: subsystem-benchmarks
     # needs: [build-rustdoc, build-implementers-guide]
     steps:
@@ -144,8 +144,8 @@ jobs:
           Green: "\e[32m"
           NC: "\e[0m"
         run: |
-          sudo apt-get update && sudo apt-get install -y git
-          sleep 1800
+          # sudo apt-get update && sudo apt-get install -y git
+          # sleep 1800
           git branch
           ls -la
 
