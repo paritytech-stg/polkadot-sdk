@@ -93,9 +93,14 @@ jobs:
     # environment: subsystem-benchmarks
     needs: [build-rustdoc, build-implementers-guide]
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: gh-pages
+      - name: Checkout gh-pages
+        run: |
+          git clone https://github.com/paritytech-stg/polkadot-sdk.git
+          git fetch origin gh-pages
+          git checkout gh-pages
+      # - uses: actions/checkout@v4
+      #   with:
+      #     ref: gh-pages
       - uses: actions/create-github-app-token@v1
         id: app-token
         with:
