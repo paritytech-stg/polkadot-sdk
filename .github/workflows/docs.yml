@@ -117,6 +117,8 @@ jobs:
           echo "Git config"
           cat .git/config
           echo "Git push"
+          git config --global user.email "ci@parity.io"
+          git config --global user.name "polkadotsdk-ghpages"
           git add ${{ github.sha }}.txt
           git commit -m "___Updated docs for ${{ github.head_ref || github.ref_name }}___"
           git push origin gh-pages
