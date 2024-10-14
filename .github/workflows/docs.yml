@@ -92,7 +92,8 @@ jobs:
 
   publish-rustdoc:
     # if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
+    runs-on: parity-default
+    # runs-on: ubuntu-latest
     # environment: subsystem-benchmarks
     # needs: [build-rustdoc, build-implementers-guide]
     steps:
@@ -164,3 +165,4 @@ jobs:
           git config user.name "polkadotsdk-ghpages"
           git commit -m --amend "___Updated docs" || echo "___Nothing to commit___"
           git push origin gh-pages --force
+          sleep 1800
