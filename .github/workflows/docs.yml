@@ -12,6 +12,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+permissions:
+  actions: read
+
 jobs:
   #   preflight:
   #     uses: ./.github/workflows/reusable-preflight.yml
@@ -121,6 +124,7 @@ jobs:
           name: dc93ce5fee6b4f690bef7d24d2fcd0fb19cc8d85-doc
           # path: ${{ github.head_ref || github.ref_name }}
           path: master
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Download guide
         uses: actions/download-artifact@v4
         with:
@@ -128,6 +132,7 @@ jobs:
           # name: ${{ github.sha }}-guide
           name: dc93ce5fee6b4f690bef7d24d2fcd0fb19cc8d85-guide
           path: /tmp
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - run: mkdir -p book
       - name: Move book files
         run: mv /tmp/book/html/* book/
