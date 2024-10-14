@@ -116,6 +116,10 @@ jobs:
           git remote add origin https://${TOKEN}@github.com/paritytech-stg/polkadot-sdk
           echo "Git config"
           cat .git/config
+          echo "Git push"
+          git add ${{ github.sha }}.txt
+          git commit -m "___Updated docs for ${{ github.head_ref || github.ref_name }}___"
+          git push origin gh-pages
       # - name: Ensure destination dir does not exist
       #   run: |
       #     rm -rf book/
