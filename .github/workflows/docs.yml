@@ -114,8 +114,9 @@ jobs:
           echo "Git config"
           cat .git/config
           echo "Add new remote"
-          git remote remove origin
-          git remote add origin https://${APP_NAME}:${TOKEN}@github.com/paritytech-stg/polkadot-sdk
+          git remote set-url origin $(git config remote.origin.url | sed "s/github.com/${APP_NAME}:${TOKEN}@github.com/g")
+          # git remote remove origin
+          # git remote add origin https://${APP_NAME}:${TOKEN}@github.com/paritytech-stg/polkadot-sdk
           echo "Git config"
           cat .git/config
           echo "Git push"
