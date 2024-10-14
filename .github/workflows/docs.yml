@@ -106,6 +106,7 @@ jobs:
         env:
           TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
+          curl -H "Authorization: token ${TOKEN}" https://api.github.com/user
           ls -la
           echo ${{ github.sha }} > ${{ github.sha }}.txt
           git status
