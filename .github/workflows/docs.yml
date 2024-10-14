@@ -144,6 +144,7 @@ jobs:
           Green: "\e[32m"
           NC: "\e[0m"
         run: |
+          apt-get update && apt-get install -y git
           git branch
           ls -la
 
