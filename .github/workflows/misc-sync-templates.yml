@@ -25,7 +25,7 @@ on:
 jobs:
   sync-templates:
     runs-on: ubuntu-latest
-    environment: master
+    environment: ib-make-node-compilation-optional  
     strategy:
       fail-fast: false
       matrix:
