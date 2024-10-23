@@ -48,13 +48,13 @@ jobs:
         id: app_token
         uses: actions/create-github-app-token@v1.9.3
         with:
-          owner: "paritytech"
+          owner: "paritytech-stg"
           repositories: "polkadot-sdk-${{ matrix.template }}-template"
           app-id: ${{ secrets.TEMPLATE_APP_ID }}
           private-key: ${{ secrets.TEMPLATE_APP_KEY }}
       - uses: actions/checkout@v4
         with:
-          repository: "paritytech/polkadot-sdk-${{ matrix.template }}-template"
+          repository: "paritytech-stg/polkadot-sdk-${{ matrix.template }}-template"
           path: "${{ env.template-path }}"
           token: ${{ steps.app_token.outputs.token }}
       - name: Install toml-cli
