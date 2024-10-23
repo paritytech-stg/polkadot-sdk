@@ -127,9 +127,9 @@ jobs:
         run: |
           cp -r polkadot-sdk/templates/${{ matrix.template }}/* "${{ env.template-path }}/"
 
-      - name: Run psvm on monorepo workspace dependencies
-        run: psvm -o -v ${{ github.event.inputs.stable_release_branch }} -p ./Cargo.toml
-        working-directory: polkadot-sdk/
+      #      - name: Run psvm on monorepo workspace dependencies
+        #  run: psvm -o -v ${{ github.event.inputs.stable_release_branch }} -p ./Cargo.toml
+        # working-directory: polkadot-sdk/
       - name: Copy over required workspace dependencies
         run: |
           set +e
