@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
       - name: script
         run: |
-          cargo run --quiet --profile=production --bin=polkadot --features=runtime-benchmarks -- benchmark pallet --steps=50 \
+          cargo run --profile=production --bin=polkadot --features=runtime-benchmarks -- benchmark pallet --steps=50 \
             --repeat=20 --extrinsic=* --wasm-execution=compiled --heap-pages=4096 \
             --json-file=bench.json \
             --pallet=pallet_balances --chain=westend-dev --header=./polkadot/file_header.txt \
