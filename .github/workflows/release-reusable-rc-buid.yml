@@ -91,7 +91,10 @@ jobs:
       - name: Install protobuf
         run: brew install protobuf
       - name: Install gpg
-        run: brew install gnupg
+        run: |
+          brew install gnupg
+          whereis gpg || true
+          ls /opt/homebew/bin
       - name: cargo info
         run: |
           echo "######## rustup show ########"
