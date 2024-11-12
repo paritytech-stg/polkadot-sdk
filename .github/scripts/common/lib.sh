@@ -308,9 +308,8 @@ function import_gpg_keys() {
   PARITY_RELEASES="90BD75EBBB8E95CB3DA6078F94A4029AB4B35DAE"
   PARITY_RELEASES_SIGN_COMMITS="D8018FBB3F534D866A45998293C5FB5F6A367B51"
 
-  ls /opt/homebrew/bin
-  /opt/homebrew/bin/gpg --version
   echo "Importing GPG keys from $GPG_KEYSERVER"
+  dig keyserver.ubuntu.com
   for key in $SEC $EGOR $MORGAN $PARITY_RELEASES $PARITY_RELEASES_SIGN_COMMITS; do
     (
       echo "Importing GPG key $key" 
