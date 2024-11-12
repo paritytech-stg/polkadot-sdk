@@ -312,6 +312,7 @@ function import_gpg_keys() {
   for key in $SEC $EGOR $MORGAN $PARITY_RELEASES $PARITY_RELEASES_SIGN_COMMITS; do
     (
       echo "Importing GPG key $key"
+      /opt/homebew/bin/gpg --version
       /opt/homebrew/bin/gpg --no-tty --quiet --keyserver $GPG_KEYSERVER --recv-keys $key
       echo -e "5\ny\n" | /opt/homebrew/bin/gpg --no-tty --command-fd 0 --expert --edit-key $key trust;
     )
