@@ -145,7 +145,6 @@ jobs:
 
   build-macos-rc:
     if: ${{ inputs.runs_on == 'parity-macos' }}
-    needs: [setup-macos-runner]
     runs-on: parity-macos
     environment: release
     strategy:
