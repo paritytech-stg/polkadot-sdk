@@ -313,7 +313,7 @@ function import_gpg_keys() {
     (
       echo "Importing GPG key $key"
       /opt/homebrew/bin/gpg --no-tty --quiet --keyserver $GPG_KEYSERVER --recv-keys $key
-      echo -e "5\ny\n" | gpg --no-tty --command-fd 0 --expert --edit-key $key trust;
+      echo -e "5\ny\n" | /opt/homebrew/bin/gpg --no-tty --command-fd 0 --expert --edit-key $key trust;
     )
   done
   wait
