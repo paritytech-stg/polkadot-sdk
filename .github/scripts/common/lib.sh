@@ -309,7 +309,7 @@ function import_gpg_keys() {
   PARITY_RELEASES_SIGN_COMMITS="D8018FBB3F534D866A45998293C5FB5F6A367B51"
 
   ls /opt/homebrew/bin
-  /opt/homebew/bin/gpg --version
+  /opt/homebrew/bin/gpg --version
   echo "Importing GPG keys from $GPG_KEYSERVER"
   for key in $SEC $EGOR $MORGAN $PARITY_RELEASES $PARITY_RELEASES_SIGN_COMMITS; do
     (
