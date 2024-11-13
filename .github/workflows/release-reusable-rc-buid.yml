@@ -158,6 +158,11 @@ jobs:
       AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
       SKIP_WASM_BUILD: 1
     steps:
+      - name: Checkout sources
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+        with:
+          ref: stabletest 
+          fetch-depth: 0
       - name: Set rust version from env file
         run: |
           RUST_VERSION=$(cat .github/env | sed -E 's/.*ci-unified:([^-]+)-([^-]+).*/\2/')
@@ -195,21 +200,15 @@ jobs:
       - name: Install bind 
         run: |
           brew install bind 
-          /opt/homebrew/bin/dig keyserver.ubuntu.com
-
-      - name: Checkout sources
-        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
-        with:
-          ref: stabletest 
-          fetch-depth: 0
-
+          /opt/homebrew/bin/dig keyser nicInfmkdir -p ~/.gnupg/
+          touch ~/.gnupg/dirmngr.conf
+          echo "standard-resolver" >  ~/.gnupg/dirmngr.confver.ubuntu.com 
       - name: Import gpg keys
         shell: bash
         run: |
           . ./.github/scripts/common/lib.sh
 
           import_gpg_keys
-
       - name: Build binary
         run: |
           git config --global --add safe.directory "${GITHUB_WORKSPACE}" #avoid "detected dubious ownership" error
