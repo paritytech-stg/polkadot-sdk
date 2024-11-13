@@ -19,12 +19,6 @@ on:
         required: true
         type: string
 
-      runs_on:
-        description: Operating system used for the workflow call
-        required: true
-        type: string
-        default: ubuntu-latest
-      
     secrets:
       PGP_KMS_KEY:
         required: true
