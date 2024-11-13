@@ -9,7 +9,7 @@ BIN=$1
 PACKAGE=${2:-$BIN}
 
 PROFILE=${PROFILE:-production}
-ARTIFACTS=/artifacts/$BIN
+ARTIFACTS=${GITHUB_WORKSPACE}/artifacts/$BIN
 VERSION=$(git tag -l --contains HEAD | grep -E "^v.*")
 
 echo "Artifacts will be copied into $ARTIFACTS"

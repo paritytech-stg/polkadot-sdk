@@ -212,15 +212,15 @@ jobs:
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@1c608d11d69870c2092266b3f9a6f3abbf17002c # v1.4.3
         with:
-          subject-path: /artifacts/${{ matrix.binaries }}/${{ matrix.binaries }}
+          subject-path: ${{ env.GITHUB_WORKSPACE }}/artifacts/${{ matrix.binaries }}/${{ matrix.binaries }}
 
       - name: Sign artifacts
-        working-directory: /artifacts/${{ matrix.binaries }}
+        working-directory: ${{ env.GITHUB_WORKSPACE }}/artifacts/${{ matrix.binaries }}
         run: |
           python3 -m pgpkms sign --input ${{matrix.binaries }} -o ${{ matrix.binaries }}.asc
 
       - name: Check sha256 ${{ matrix.binaries }}
-        working-directory: /artifacts/${{ matrix.binaries }}
+        working-directory: ${{ env.GITHUB_WORKSPACE }}/artifacts/${{ matrix.binaries }}
         shell: bash
         run: |
           .  "${GITHUB_WORKSPACE}"/.github/scripts/common/lib.sh
@@ -229,7 +229,7 @@ jobs:
           check_sha256  ${{ matrix.binaries }}
 
       - name: Check GPG ${{ matrix.binaries }}
-        working-directory: /artifacts/${{ matrix.binaries }}
+        working-directory: ${{ env.GITHUB_WORKSPACE }}/artifacts/${{ matrix.binaries }}
         shell: bash
         run: |
           . "${GITHUB_WORKSPACE}"/.github/scripts/common/lib.sh
@@ -240,7 +240,7 @@ jobs:
         uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
         with:
           name: ${{ matrix.binaries }}
-          path: /artifacts/${{ matrix.binaries }}
+          path: ${{ env.GITHUB_WORKSPACE }}/artifacts/${{ matrix.binaries }}
 
 
   # build-polkadot-deb-package:
