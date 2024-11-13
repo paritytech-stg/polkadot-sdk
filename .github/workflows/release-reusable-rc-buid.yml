@@ -185,6 +185,9 @@ jobs:
           mkdir -p ~/.gnupg/
           touch ~/.gnupg/dirmngr.conf
           echo "standard-resolver" >  ~/.gnupg/dirmngr.conf
+      - name: Install sha256sum
+        run: |
+          brew install coreutils
       - name: cargo info
         run: |
           echo "######## rustup show ########"
@@ -193,8 +196,6 @@ jobs:
           cargo --version
       - name: Install pgpkkms
         run: |
-          # Upgrade pip first
-          /Applications/Xcode_15.4.app/Contents/Developer/usr/bin/python3 -m pip install --upgrade pip
           # Install pgpkms that is used to sign built artifacts
           python3 -m pip install "pgpkms @ git+https://github.com/paritytech-release/pgpkms.git@5a8f82fbb607ea102d8c178e761659de54c7af69" || true
       - name: Import gpg keys
