@@ -309,12 +309,11 @@ function import_gpg_keys() {
   PARITY_RELEASES_SIGN_COMMITS="D8018FBB3F534D866A45998293C5FB5F6A367B51"
 
   echo "Importing GPG keys from $GPG_KEYSERVER"
-  dig keyserver.ubuntu.com
   for key in $SEC $EGOR $MORGAN $PARITY_RELEASES $PARITY_RELEASES_SIGN_COMMITS; do
     (
       echo "Importing GPG key $key" 
-      /opt/homebrew/bin/gpg --no-tty --quiet --keyserver $GPG_KEYSERVER --recv-keys $key
-      echo -e "5\ny\n" | /opt/homebrew/bin/gpg --no-tty --command-fd 0 --expert --edit-key $key trust;
+      gpg --no-tty --quiet --keyserver $GPG_KEYSERVER --recv-keys $key
+      echo -e "5\ny\n" | gpg --no-tty --command-fd 0 --expert --edit-key $key trust;
     )
   done
   wait
