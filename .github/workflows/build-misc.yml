@@ -27,10 +27,10 @@ jobs:
     # container:
     #   image: ${{ needs.preflight.outputs.IMAGE }}
     steps:
-      - run: exit 1
-        id: required
       - name: Checkout
         uses: actions/checkout@v4
+      - run: exit 1
+        id: required
 
       - name: Check Rust
         run: |
