@@ -22,11 +22,13 @@ jobs:
   build-runtimes-polkavm:
     timeout-minutes: 20
     needs: [preflight]
-    runs-on: ${{ needs.preflight.outputs.RUNNER }}
-    container:
-      image: ${{ needs.preflight.outputs.IMAGE }}
+    # runs-on: ${{ needs.preflight.outputs.RUNNER }}
+    runs-on: ubuntu-latest
+    # container:
+    #   image: ${{ needs.preflight.outputs.IMAGE }}
     steps:
       - run: exit 1
+        id: required
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -38,7 +40,7 @@ jobs:
       - name: Build
         env:
           SUBSTRATE_RUNTIME_TARGET: riscv
-        id: required
+        # id: required
         run: |
           forklift cargo check -p minimal-template-runtime
           forklift cargo check -p westend-runtime
