@@ -10,6 +10,9 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: test
+      run: env
+      shell: bash
     - name: Worfklow stopper - Generate token
       uses: actions/create-github-app-token@v1
       id: app-token

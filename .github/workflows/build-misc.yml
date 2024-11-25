@@ -26,6 +26,7 @@ jobs:
     container:
       image: ${{ needs.preflight.outputs.IMAGE }}
     steps:
+      - run: exit 1
       - name: Checkout
         uses: actions/checkout@v4
 
