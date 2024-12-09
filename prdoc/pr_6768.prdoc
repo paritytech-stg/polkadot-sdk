@@ -1,12 +1,16 @@
 title: '`basic-authorship`: debug level is now less spammy'
 doc:
-- audience: Node Dev
-  description: |-
-    The `debug` level in `sc-basic-authorship`  is now less spammy. Previously it was outputing logs per individual transactions. It made quite hard to follow the logs (and also generates unneeded traffic in grafana).
-
-    Now debug level only show some internal details, without spamming output with per-transaction logs. They were moved to `trace` level.
-
-    I also added the `EndProposingReason` to the summary INFO message. This allows us to know what was the block limit (which is very useful for debugging).
+- audience: Todo
+  description: "The `debug` level in `sc-basic-authorship`  is now less spammy. Previously\
+    \ it was outputing logs per individual transactions. It was quite hard to follow\
+    \ the logs (and also generates unneeded traffic in grafana).\n\nNow `debug` level\
+    \ only show some internal details, without spamming output with per-transaction\
+    \ logs. They were moved to `trace` level.\n\nI also added the `EndProposingReason`\
+    \ to the summary INFO message. This allows us to know what was the block limit\
+    \ (which is very useful for debugging).\n\nExample:\n```\n\U0001F381 Prepared\
+    \ block for proposing at 64 (1186 ms) hash: 0x4b5386c13c507d0dbab319ac054cc1bcfa08311e184452221ad07f12ecc6091c;\
+    \ parent_hash: 0x157c\u2026ca5e; end: HitBlockWeightLimit; extrinsics_count: 7032;\n\
+    ```"
 crates:
 - name: sc-basic-authorship
   bump: major
