@@ -1,0 +1,9 @@
+title: Mak cmd swap omnibench
+doc:
+- audience: Todo
+  description: |-
+    - change bench to default to old CLI
+    - fix profile to production
+crates:
+- name: westend-runtime
+  bump: major
