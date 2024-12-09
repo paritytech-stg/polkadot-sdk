@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1733766626007,
+  "lastUpdate": 1733770348794,
   "repoUrl": "https://github.com/paritytech-stg/polkadot-sdk",
   "entries": {
     "availability-recovery-regression-bench": [
@@ -747,6 +747,50 @@ window.BENCHMARK_DATA = {
           {
             "name": "availability-recovery",
             "value": 11.769580293133334,
+            "unit": "seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "alex.theissen@me.com",
+            "name": "Alexander Theißen",
+            "username": "athei"
+          },
+          "committer": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "distinct": true,
+          "id": "6549e5f480c77c1ae5f0d01b4e52316cd4012183",
+          "message": "pallet-revive: Remove unused dependencies (#6796)\n\nThe dependency on `pallet_balances` doesn't seem to be necessary. At\nleast everything compiles for me without it. Removed this dependency and\na few others that seem to be left overs.\n\n---------\n\nCo-authored-by: GitHub Action <action@github.com>",
+          "timestamp": "2024-12-09T18:18:57Z",
+          "tree_id": "bd6af6927182ebcc986512287fd5a3dc7cd33f9e",
+          "url": "https://github.com/paritytech-stg/polkadot-sdk/commit/6549e5f480c77c1ae5f0d01b4e52316cd4012183"
+        },
+        "date": 1733770340467,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "Received from peers",
+            "value": 307203,
+            "unit": "KiB"
+          },
+          {
+            "name": "Sent to peers",
+            "value": 1.6666666666666665,
+            "unit": "KiB"
+          },
+          {
+            "name": "availability-recovery",
+            "value": 11.7084870017,
+            "unit": "seconds"
+          },
+          {
+            "name": "test-environment",
+            "value": 0.23461357406666675,
             "unit": "seconds"
           }
         ]
