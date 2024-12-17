@@ -13,3 +13,10 @@ CARGO_WORKSPACE_ROOT_DIR = { value = "", relative = true }
 [net]
 retry = 5
 # git-fetch-with-cli = true # commented because there is a risk that a runner can be banned by github
+
+[source.crates-io]
+replace-with = "crates-io-mirror"
+
+[registries.crates-io-mirror]
+index = "sparse+http://crates-proxy-service.arc-runners-stg.svc.cluster.local:3080/index/"
+
