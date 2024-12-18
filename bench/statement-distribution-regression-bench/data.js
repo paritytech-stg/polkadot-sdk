@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1734519939008,
+  "lastUpdate": 1734536891416,
   "repoUrl": "https://github.com/paritytech-stg/polkadot-sdk",
   "entries": {
     "statement-distribution-regression-bench": [
@@ -835,6 +835,50 @@ window.BENCHMARK_DATA = {
           {
             "name": "test-environment",
             "value": 0.04515028591799993,
+            "unit": "seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "37865735+clangenb@users.noreply.github.com",
+            "name": "clangenb",
+            "username": "clangenb"
+          },
+          "committer": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "distinct": true,
+          "id": "f3f66ebc9649acbefc8201452689bc8948ef2a5a",
+          "message": "Migrate pallet-xcm benchmarks to benchmark v2 syntax (#6501)\n\nMigrates pallet-xcm benchmarks to benchmark v2 syntax\n\n* Part of #6202",
+          "timestamp": "2024-12-18T14:55:50Z",
+          "tree_id": "a37330398d10a7e5f5da33949735dff051064ae1",
+          "url": "https://github.com/paritytech-stg/polkadot-sdk/commit/f3f66ebc9649acbefc8201452689bc8948ef2a5a"
+        },
+        "date": 1734536883539,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "Sent to peers",
+            "value": 127.95799999999997,
+            "unit": "KiB"
+          },
+          {
+            "name": "Received from peers",
+            "value": 106.39999999999996,
+            "unit": "KiB"
+          },
+          {
+            "name": "statement-distribution",
+            "value": 0.03546184215199999,
+            "unit": "seconds"
+          },
+          {
+            "name": "test-environment",
+            "value": 0.04907688667799995,
             "unit": "seconds"
           }
         ]
