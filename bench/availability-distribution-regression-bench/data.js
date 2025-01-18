@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1737133029520,
+  "lastUpdate": 1737162220350,
   "repoUrl": "https://github.com/paritytech-stg/polkadot-sdk",
   "entries": {
     "availability-distribution-regression-bench": [
@@ -1241,6 +1241,60 @@ window.BENCHMARK_DATA = {
           {
             "name": "availability-store",
             "value": 0.17878628844666664,
+            "unit": "seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "committer": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "distinct": true,
+          "id": "950a595621ab9c61d1a2ab4fa894a10003e06369",
+          "message": "Refactor command bot and drop membership check",
+          "timestamp": "2025-01-18T00:32:38Z",
+          "tree_id": "3dba5303bfde4ddeaf0e2ba235356714abcee46f",
+          "url": "https://github.com/paritytech-stg/polkadot-sdk/commit/950a595621ab9c61d1a2ab4fa894a10003e06369"
+        },
+        "date": 1737162213110,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "Received from peers",
+            "value": 433.3333333333332,
+            "unit": "KiB"
+          },
+          {
+            "name": "Sent to peers",
+            "value": 18481.666666666653,
+            "unit": "KiB"
+          },
+          {
+            "name": "bitfield-distribution",
+            "value": 0.02347995593333333,
+            "unit": "seconds"
+          },
+          {
+            "name": "availability-store",
+            "value": 0.17944276428000003,
+            "unit": "seconds"
+          },
+          {
+            "name": "availability-distribution",
+            "value": 0.0163641467,
+            "unit": "seconds"
+          },
+          {
+            "name": "test-environment",
+            "value": 0.008878030933333421,
             "unit": "seconds"
           }
         ]
