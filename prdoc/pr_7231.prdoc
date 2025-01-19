@@ -1,0 +1,10 @@
+title: Refactor command bot and drop membership check
+doc:
+- audience: Todo
+  description: |-
+    Aims to close #7049
+
+    - removed is paritytech member check
+    - the point above drops a need in GH app
+    - separate commit and subweight into separate job with artifacts - allows then to download and apply manually (sometimes useful)
+crates: []
