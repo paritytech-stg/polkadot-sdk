@@ -361,6 +361,7 @@ jobs:
           rm -rf patches
           
           if [ -n "$(git status --porcelain)" ]; then
+            git config --global --add safe.directory '*'
             git config user.name "cmd[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git config --global pull.rebase false
