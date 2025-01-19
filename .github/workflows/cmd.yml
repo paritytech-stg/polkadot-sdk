@@ -69,7 +69,7 @@ jobs:
     if: ${{ startsWith(github.event.comment.body, '/cmd') }}
     runs-on: ubuntu-latest
     outputs:
-      CMD: ${{ steps.get-comment.outputs.CMD }}
+      CMD: ${{ steps.get-comment.outputs.group2 }}
       pr-branch: ${{ steps.get-pr.outputs.pr_branch }}
       repo: ${{ steps.get-pr.outputs.repo }}
     steps:
@@ -112,6 +112,7 @@ jobs:
         run: |
           echo "The PR branch is ${{ steps.get-pr.outputs.pr_branch }}"
           echo "The repository is ${{ steps.get-pr.outputs.repo }}"
+          echo "The CMD is ${{ steps.get-comment.outputs.group2 }}"
 
   help:
     needs: [clean, get-pr-info]
@@ -279,7 +280,7 @@ jobs:
             })
       
       - name: Install dependencies for bench
-        if: startsWith(${{ needs.get-pr-info.outputs.CMD }}, 'bench')
+        if: startsWith(needs.get-pr-info.outputs.CMD, 'bench')
         run: |
           cargo install --path substrate/utils/frame/omni-bencher --locked
 
