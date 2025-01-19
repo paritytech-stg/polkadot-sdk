@@ -1,0 +1,7 @@
+title: Auto-update weights for 2025-01-19-1737285546
+doc:
+- audience: Todo
+  description: $SUBWEIGHT_OUTPUT
+crates:
+- name: pallet-balances
+  bump: major
