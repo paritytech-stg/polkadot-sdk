@@ -310,8 +310,11 @@ jobs:
             echo 'EOF' >> $GITHUB_OUTPUT
           fi
       
-          git diff HEAD > diff-command.patch
-      
+          # Stage all changes including new files
+          git add -A
+          git diff --staged > diff-command.patch
+          git reset
+
       - name: Upload diff
         uses: actions/upload-artifact@v4
         with:
