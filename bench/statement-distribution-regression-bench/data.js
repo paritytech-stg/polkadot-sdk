@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1737285784655,
+  "lastUpdate": 1737315210154,
   "repoUrl": "https://github.com/paritytech-stg/polkadot-sdk",
   "entries": {
     "statement-distribution-regression-bench": [
@@ -1187,6 +1187,50 @@ window.BENCHMARK_DATA = {
           {
             "name": "test-environment",
             "value": 0.04504791104199992,
+            "unit": "seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "committer": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "distinct": true,
+          "id": "ec3f52a3230eda7969b8a6cdcfc7649b1bd95681",
+          "message": "Update cmd.yml",
+          "timestamp": "2025-01-19T19:07:12Z",
+          "tree_id": "84b2af9cc1caa836e915aa57a84c7fb1c45cb9bc",
+          "url": "https://github.com/paritytech-stg/polkadot-sdk/commit/ec3f52a3230eda7969b8a6cdcfc7649b1bd95681"
+        },
+        "date": 1737315202747,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "Received from peers",
+            "value": 106.39999999999996,
+            "unit": "KiB"
+          },
+          {
+            "name": "Sent to peers",
+            "value": 127.95199999999997,
+            "unit": "KiB"
+          },
+          {
+            "name": "statement-distribution",
+            "value": 0.035105361931999986,
+            "unit": "seconds"
+          },
+          {
+            "name": "test-environment",
+            "value": 0.04479384817399995,
             "unit": "seconds"
           }
         ]
