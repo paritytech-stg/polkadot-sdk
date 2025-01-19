@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1737277670816,
+  "lastUpdate": 1737285760750,
   "repoUrl": "https://github.com/paritytech-stg/polkadot-sdk",
   "entries": {
     "availability-distribution-regression-bench": [
@@ -1403,6 +1403,60 @@ window.BENCHMARK_DATA = {
           {
             "name": "test-environment",
             "value": 0.008664225853333409,
+            "unit": "seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "committer": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "distinct": true,
+          "id": "aef992f30947ac4f647ce51ae1db1203a44f9067",
+          "message": "Update cmd.yml",
+          "timestamp": "2025-01-19T10:55:46Z",
+          "tree_id": "97677fd5ee7284720f6b4ea9fe816b384b65fb77",
+          "url": "https://github.com/paritytech-stg/polkadot-sdk/commit/aef992f30947ac4f647ce51ae1db1203a44f9067"
+        },
+        "date": 1737285753319,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "Received from peers",
+            "value": 433.3333333333332,
+            "unit": "KiB"
+          },
+          {
+            "name": "Sent to peers",
+            "value": 18481.666666666653,
+            "unit": "KiB"
+          },
+          {
+            "name": "bitfield-distribution",
+            "value": 0.02341108866666667,
+            "unit": "seconds"
+          },
+          {
+            "name": "availability-distribution",
+            "value": 0.015792145419999994,
+            "unit": "seconds"
+          },
+          {
+            "name": "test-environment",
+            "value": 0.008687330080000093,
+            "unit": "seconds"
+          },
+          {
+            "name": "availability-store",
+            "value": 0.17784874122666663,
             "unit": "seconds"
           }
         ]
