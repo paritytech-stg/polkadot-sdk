@@ -310,8 +310,11 @@ jobs:
             echo 'EOF' >> $GITHUB_OUTPUT
           fi
       
-          git diff HEAD > diff-command.patch
-      
+          # Stage all changes including new files
+          git add -A
+          git diff --staged > diff-command.patch
+          git reset
+
       - name: Upload diff
         uses: actions/upload-artifact@v4
         with:
@@ -347,9 +350,11 @@ jobs:
           ls -lsaR patches
           
           for file in patches/diff-*/diff-*.patch; do
-            if [ -f "$file" ]; then
+            if [ -f "$file" ] && [ -s "$file" ]; then
               echo "Applying $file"
               git apply "$file"
+            else
+              echo "Skipping empty patch file: $file"
             fi
           done
 
