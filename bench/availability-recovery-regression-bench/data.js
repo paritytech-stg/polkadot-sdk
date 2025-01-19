@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1737315173611,
+  "lastUpdate": 1737326831972,
   "repoUrl": "https://github.com/paritytech-stg/polkadot-sdk",
   "entries": {
     "availability-recovery-regression-bench": [
@@ -1231,6 +1231,50 @@ window.BENCHMARK_DATA = {
           {
             "name": "availability-recovery",
             "value": 12.047259234333334,
+            "unit": "seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "committer": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "distinct": true,
+          "id": "f3f344c41e5eb2b734d5c66b6771355c47cbbcf1",
+          "message": "combine jobs",
+          "timestamp": "2025-01-19T22:20:42Z",
+          "tree_id": "9135b21f9f2438536b6365530fc216593eb95d95",
+          "url": "https://github.com/paritytech-stg/polkadot-sdk/commit/f3f344c41e5eb2b734d5c66b6771355c47cbbcf1"
+        },
+        "date": 1737326824415,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "Sent to peers",
+            "value": 1.6666666666666665,
+            "unit": "KiB"
+          },
+          {
+            "name": "Received from peers",
+            "value": 307203,
+            "unit": "KiB"
+          },
+          {
+            "name": "test-environment",
+            "value": 0.23644439826666663,
+            "unit": "seconds"
+          },
+          {
+            "name": "availability-recovery",
+            "value": 11.783358364033335,
             "unit": "seconds"
           }
         ]
