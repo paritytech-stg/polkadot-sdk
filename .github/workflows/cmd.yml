@@ -348,6 +348,8 @@ jobs:
       - name: Commit changes
         run: |
           ls -lsaR patches
+
+          git config --global --add safe.directory '*'
           
           for file in patches/diff-*/diff-*.patch; do
             if [ -f "$file" ] && [ -s "$file" ]; then
@@ -358,10 +360,11 @@ jobs:
             fi
           done
 
+          git status
+
           rm -rf patches
           
           if [ -n "$(git status --porcelain)" ]; then
-            git config --global --add safe.directory '*'
             git config user.name "cmd[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git config --global pull.rebase false
