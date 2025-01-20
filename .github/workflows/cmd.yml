@@ -314,7 +314,16 @@ jobs:
             echo "$CMD_OUTPUT" >> $GITHUB_OUTPUT
             echo 'EOF' >> $GITHUB_OUTPUT
           fi
-      
+
+      - name: Generate token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.CMD_BOT_APP_ID }}
+          private-key: ${{ secrets.CMD_BOT_APP_KEY }}
+
+      - name: Commit changes
+        run: |
           git status
           
           if [ -n "$(git status --porcelain)" ]; then
@@ -325,7 +334,7 @@ jobs:
             # Push the results to the target branch
             git remote add \
               github \
-              "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ needs.get-pr-info.outputs.repo }}.git" || :
+              "https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/${{ needs.get-pr-info.outputs.repo }}.git" || :
 
             push_changes() {
               git push github "HEAD:$PR_BRANCH"
@@ -342,6 +351,8 @@ jobs:
               # After successful rebase, try pushing again
               push_changes
             fi
+
+            git remote remove github || :
           else
             echo "Nothing to commit";
           fi
