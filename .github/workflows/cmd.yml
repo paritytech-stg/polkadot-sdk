@@ -8,7 +8,7 @@ permissions: # allow the action to comment on the PR
   contents: write
   issues: write
   pull-requests: write
-  actions: read
+  actions: write
 
 jobs:
   acknowledge:
