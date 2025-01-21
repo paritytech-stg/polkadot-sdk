@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1737483826587,
+  "lastUpdate": 1737486113467,
   "repoUrl": "https://github.com/paritytech-stg/polkadot-sdk",
   "entries": {
     "statement-distribution-regression-bench": [
@@ -1363,6 +1363,50 @@ window.BENCHMARK_DATA = {
           {
             "name": "statement-distribution",
             "value": 0.03543886293,
+            "unit": "seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "ludovic.domingues96@gmail.com",
+            "name": "Ludovic_Domingues",
+            "username": "Krayt78"
+          },
+          "committer": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "distinct": true,
+          "id": "7d7c9b69db4393025c9910d1ffbbc6f8f721415d",
+          "message": "Migrate pallet-paged-list-fuzzer to umbrella crate (#6930)\n\nPart of  #6504\n\n---------\n\nCo-authored-by: Bastian Köcher <git@kchr.de>\nCo-authored-by: Giuseppe Re <giuseppe.re@parity.io>",
+          "timestamp": "2025-01-21T18:34:02Z",
+          "tree_id": "239311ac638bd4216fa5861fb360ee7e020d9976",
+          "url": "https://github.com/paritytech-stg/polkadot-sdk/commit/7d7c9b69db4393025c9910d1ffbbc6f8f721415d"
+        },
+        "date": 1737486106045,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "Sent to peers",
+            "value": 127.94399999999996,
+            "unit": "KiB"
+          },
+          {
+            "name": "Received from peers",
+            "value": 106.39999999999996,
+            "unit": "KiB"
+          },
+          {
+            "name": "statement-distribution",
+            "value": 0.03558801777000001,
+            "unit": "seconds"
+          },
+          {
+            "name": "test-environment",
+            "value": 0.04540256774999994,
             "unit": "seconds"
           }
         ]
