@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1737476108602,
+  "lastUpdate": 1737479386463,
   "repoUrl": "https://github.com/paritytech-stg/polkadot-sdk",
   "entries": {
     "request_response_protocol": [
@@ -1079,6 +1079,114 @@ window.BENCHMARK_DATA = {
             "name": "request_response_protocol/litep2p/serially/16MB",
             "value": 2562075383,
             "range": "± 21293482",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "committer": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "distinct": true,
+          "id": "450a5d0bc896d0014b6d1ac7e061888318369024",
+          "message": "Update cmd.yml",
+          "timestamp": "2025-01-21T16:53:34Z",
+          "tree_id": "104b37d475a54bb5d7199b895b5ca6319a11cff2",
+          "url": "https://github.com/paritytech-stg/polkadot-sdk/commit/450a5d0bc896d0014b6d1ac7e061888318369024"
+        },
+        "date": 1737479379341,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "request_response_protocol/libp2p/serially/64B",
+            "value": 17525696,
+            "range": "± 121135",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/libp2p/serially/512B",
+            "value": 17768951,
+            "range": "± 141080",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/libp2p/serially/4KB",
+            "value": 19282798,
+            "range": "± 479463",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/libp2p/serially/64KB",
+            "value": 22806533,
+            "range": "± 234567",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/libp2p/serially/256KB",
+            "value": 52978490,
+            "range": "± 710381",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/libp2p/serially/2MB",
+            "value": 312823811,
+            "range": "± 3168038",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/libp2p/serially/16MB",
+            "value": 2275551465,
+            "range": "± 124463003",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/litep2p/serially/64B",
+            "value": 14446135,
+            "range": "± 74225",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/litep2p/serially/512B",
+            "value": 14615724,
+            "range": "± 163125",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/litep2p/serially/4KB",
+            "value": 15026026,
+            "range": "± 103054",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/litep2p/serially/64KB",
+            "value": 19186252,
+            "range": "± 175218",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/litep2p/serially/256KB",
+            "value": 49835108,
+            "range": "± 675220",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/litep2p/serially/2MB",
+            "value": 295470439,
+            "range": "± 2928596",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "request_response_protocol/litep2p/serially/16MB",
+            "value": 2398046491,
+            "range": "± 18908928",
             "unit": "ns/iter"
           }
         ]
