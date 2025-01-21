@@ -468,7 +468,7 @@ jobs:
           git config --global pull.rebase false
           
           echo "Applying $file"
-          git apply "command-diff/command_diff.patch" --unidiff-zero
+          git apply "command-diff/command_diff.patch" --unidiff-zero --allow-empty
 
           rm -rf command-diff
 
