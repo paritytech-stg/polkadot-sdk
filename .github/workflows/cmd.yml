@@ -439,6 +439,12 @@ jobs:
     needs: [cmd, get-pr-info, before-cmd]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ needs.get-pr-info.outputs.repo }}
+          ref: ${{ needs.get-pr-info.outputs.pr-branch }}
+
       - name: Download all artifacts
         uses: actions/download-artifact@v4
         with: 
@@ -455,7 +461,6 @@ jobs:
       - name: Apply & Commit changes
         run: |
           ls -lsa .
-          ls -lsaR command-diff
 
           git config --global --add safe.directory $GITHUB_WORKSPACE
           git config user.name "cmd[bot]"
