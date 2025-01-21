@@ -319,9 +319,9 @@ jobs:
     # lowerdown permissions to separate permissions context for executable parts by contributors
     permissions:
       contents: read
-      pull-requests: read
-      actions: read
-      issues: read
+      pull-requests: none
+      actions: none
+      issues: none
     outputs:
       cmd_output: ${{ steps.cmd.outputs.cmd_output }}
       subweight: ${{ steps.subweight.outputs.result }}
@@ -414,7 +414,8 @@ jobs:
         if: startsWith(needs.get-pr-info.outputs.CMD, 'bench')
         shell: bash
         run: |
-          git fetch
+          echo $(git log -n 2 --oneline)
+
           result=$(subweight compare commits \
             --path-pattern "./**/weights/**/*.rs,./**/weights.rs" \
             --method asymptotic \
@@ -422,7 +423,7 @@ jobs:
             --no-color \
             --change added changed \
             --ignore-errors \
-            refs/remotes/origin/master HEAD)
+            refs/remotes/origin/master $PR_BRANCH)
 
           # Save the multiline result to the output
           {
@@ -521,12 +522,12 @@ jobs:
             })
 
   finish:
-    needs: [before-cmd, after-cmd]
+    needs: [before-cmd, after-cmd, cmd]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
       - name: Comment PR (Failure)
-        if: ${{ failure() && !contains(github.event.comment.body, '--quiet') }}
+        if: ${{ needs.cmd.result == 'failure' || needs.after-cmd.result == 'failure' }}
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -547,8 +548,8 @@ jobs:
             })
 
       - name: Add 😕 reaction on failure
+        if: ${{ needs.cmd.result == 'failure' || needs.after-cmd.result == 'failure' }}
         uses: actions/github-script@v7
-        if: ${{ failure() }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -560,8 +561,8 @@ jobs:
             })
 
       - name: Add 👍 reaction on success
+        if: ${{ needs.cmd.result == 'success' && needs.after-cmd.result == 'success' }}
         uses: actions/github-script@v7
-        if: ${{ !failure() }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
