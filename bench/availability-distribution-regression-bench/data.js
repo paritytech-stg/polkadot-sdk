@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1737416869387,
+  "lastUpdate": 1737483803496,
   "repoUrl": "https://github.com/paritytech-stg/polkadot-sdk",
   "entries": {
     "availability-distribution-regression-bench": [
@@ -1619,6 +1619,60 @@ window.BENCHMARK_DATA = {
           {
             "name": "availability-distribution",
             "value": 0.015591312953333334,
+            "unit": "seconds"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "committer": {
+            "email": "mordamax@gmail.com",
+            "name": "Maksym H",
+            "username": "mordamax"
+          },
+          "distinct": true,
+          "id": "081bc00c28b74e360e79283a1b59bb1dfd1abcc9",
+          "message": "Update cmd.py",
+          "timestamp": "2025-01-21T17:51:28Z",
+          "tree_id": "32f5a5496d660ef557fa2f994e72a6fffdf6e1ee",
+          "url": "https://github.com/paritytech-stg/polkadot-sdk/commit/081bc00c28b74e360e79283a1b59bb1dfd1abcc9"
+        },
+        "date": 1737483796257,
+        "tool": "customSmallerIsBetter",
+        "benches": [
+          {
+            "name": "Received from peers",
+            "value": 433.3333333333332,
+            "unit": "KiB"
+          },
+          {
+            "name": "Sent to peers",
+            "value": 18481.666666666653,
+            "unit": "KiB"
+          },
+          {
+            "name": "bitfield-distribution",
+            "value": 0.023488137873333325,
+            "unit": "seconds"
+          },
+          {
+            "name": "availability-distribution",
+            "value": 0.016044549166666672,
+            "unit": "seconds"
+          },
+          {
+            "name": "test-environment",
+            "value": 0.008506777353333423,
+            "unit": "seconds"
+          },
+          {
+            "name": "availability-store",
+            "value": 0.17862483643999993,
             "unit": "seconds"
           }
         ]
