@@ -1,0 +1,19 @@
+title: 'transfer function Preservation is changed to Expendable '
+doc:
+- audience: Todo
+  description: |-
+    # Description
+
+    Fixes #7039
+
+    The Preservation of transfer method of fungible and fungibles adapters is changed from Preserve to Expendable. So the behavior of the TransferAsset will be consistent with the WithdrawAsset function, as in [fungible](https://github.com/paritytech/polkadot-sdk/blob/f3ab3854e1df9e0498599f01ba4f9f152426432a/polkadot/xcm/xcm-builder/src/fungible_adapter.rs#L217) and [fungibles](https://github.com/paritytech/polkadot-sdk/issues/url) adapter.
+
+    This pull request includes changes to the `fungible_adapter.rs` and `fungibles_adapter.rs` files in the `polkadot/xcm/xcm-builder` directory. The main change involves modifying the transfer method to use the `Expendable` strategy instead of the `Preserve` strategy.
+
+    Changes to transfer strategy:
+
+    * [`polkadot/xcm/xcm-builder/src/fungible_adapter.rs`](diffhunk://#diff-6ebd77385441f2c8b023c480e818a01c4b43ae892c73ca30144cd64ee960bd66L67-R67): Changed the transfer method to use `Expendable` instead of `Preserve`.
+    * [`polkadot/xcm/xcm-builder/src/fungibles_adapter.rs`](diffhunk://#diff-82221429de4c4c88be3d2976ece6475ef4fa56a32abc70290911bd47191f8e17L61-R61): Changed the transfer method to use `Expendable` instead of `Preserve`.
+crates:
+- name: staging-xcm-builder
+  bump: major
