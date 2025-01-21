@@ -442,9 +442,17 @@ jobs:
       PR_BRANCH: ${{ needs.get-pr-info.outputs.pr-branch }}
     runs-on: ubuntu-latest
     steps:
+      # needs to be able to trigger CI, as default token does not retrigger
+      - uses: actions/create-github-app-token@v1
+        id: generate_token
+        with:
+          app-id: ${{ secrets.CMD_BOT_APP_ID }}
+          private-key: ${{ secrets.CMD_BOT_APP_KEY }}
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          token: ${{ steps.generate_token.outputs.token }}
           repository: ${{ needs.get-pr-info.outputs.repo }}
           ref: ${{ needs.get-pr-info.outputs.pr-branch }}
 
@@ -453,13 +461,6 @@ jobs:
         with: 
           name: command-diff
           path: command-diff
-
-      # needs to be able to trigger CI, as default token does not retrigger
-      - uses: actions/create-github-app-token@v1
-        id: generate_token
-        with:
-          app-id: ${{ secrets.CMD_BOT_APP_ID }}
-          private-key: ${{ secrets.CMD_BOT_APP_KEY }}
 
       - name: Apply & Commit changes
         run: |
@@ -479,13 +480,10 @@ jobs:
           
           if [ -n "$(git status --porcelain)" ]; then
 
-            # Push the results to the target branch
-            git remote add \
-              github \
-              "https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/${{ needs.get-pr-info.outputs.repo }}.git" || :
+            git remote -v
 
             push_changes() {
-              git push github "HEAD:$PR_BRANCH"
+              git push origin "HEAD:$PR_BRANCH"
             }
 
             git add .
@@ -495,7 +493,7 @@ jobs:
             # Attempt to push changes
             if ! push_changes; then
               echo "Push failed, trying to rebase..."
-              git pull --rebase github $PR_BRANCH
+              git pull --rebase origin $PR_BRANCH
               # After successful rebase, try pushing again
               push_changes
             fi
