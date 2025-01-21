@@ -392,7 +392,7 @@ jobs:
 
           git add -A
           git diff > /tmp/cmd/command_diff.patch -U0
-          git commit -m "tmp cmd: $CMD"
+          git commit -m "tmp cmd: $CMD" || true
           # without push, as we're saving the diff to an artifact and subweight will compare the local branch with the remote branch
 
       - name: Upload command output
