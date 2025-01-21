@@ -319,9 +319,9 @@ jobs:
     # lowerdown permissions to separate permissions context for executable parts by contributors
     permissions:
       contents: read
-      pull-requests: read
-      actions: read
-      issues: read
+      pull-requests: none
+      actions: none
+      issues: none
     outputs:
       cmd_output: ${{ steps.cmd.outputs.cmd_output }}
       subweight: ${{ steps.subweight.outputs.result }}
@@ -357,6 +357,11 @@ jobs:
           echo "Running command: '$CMD $PR_ARG' on '${{ needs.set-image.outputs.RUNNER }}' runner, container: '${{ needs.set-image.outputs.IMAGE }}'"
           echo "RUST_NIGHTLY_VERSION: $RUST_NIGHTLY_VERSION"
           echo "IS_ORG_MEMBER: $IS_ORG_MEMBER"
+
+          git config --global --add safe.directory $GITHUB_WORKSPACE
+          git config user.name "cmd[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            
           
           # if the user is not an org member, we need to use the bot's path from master to avoid unwanted modifications
           if [ "$IS_ORG_MEMBER" = "true" ]; then
@@ -386,8 +391,8 @@ jobs:
           fi
 
           git add -A
-          git diff > /tmp/cmd/command_diff.patch -U0
-          git commit -m "tmp cmd: $CMD"
+          git diff HEAD > /tmp/cmd/command_diff.patch -U0
+          git commit -m "tmp cmd: $CMD" || true
           # without push, as we're saving the diff to an artifact and subweight will compare the local branch with the remote branch
 
       - name: Upload command output
@@ -412,7 +417,8 @@ jobs:
         if: startsWith(needs.get-pr-info.outputs.CMD, 'bench')
         shell: bash
         run: |
-          git fetch
+          echo $(git log -n 2 --oneline)
+
           result=$(subweight compare commits \
             --path-pattern "./**/weights/**/*.rs,./**/weights.rs" \
             --method asymptotic \
@@ -420,7 +426,7 @@ jobs:
             --no-color \
             --change added changed \
             --ignore-errors \
-            refs/remotes/origin/master HEAD)
+            refs/remotes/origin/master $PR_BRANCH)
 
           # Save the multiline result to the output
           {
@@ -431,13 +437,11 @@ jobs:
 
   after-cmd:
     needs: [cmd, get-pr-info, before-cmd]
+    env:
+      CMD: ${{ needs.get-pr-info.outputs.CMD }}
+      PR_BRANCH: ${{ needs.get-pr-info.outputs.pr-branch }}
     runs-on: ubuntu-latest
     steps:
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with: 
-          name: command-diff
-      
       # needs to be able to trigger CI, as default token does not retrigger
       - uses: actions/create-github-app-token@v1
         id: generate_token
@@ -445,31 +449,41 @@ jobs:
           app-id: ${{ secrets.CMD_BOT_APP_ID }}
           private-key: ${{ secrets.CMD_BOT_APP_KEY }}
 
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+          repository: ${{ needs.get-pr-info.outputs.repo }}
+          ref: ${{ needs.get-pr-info.outputs.pr-branch }}
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with: 
+          name: command-diff
+          path: command-diff
+
       - name: Apply & Commit changes
         run: |
-          ls -lsaR command-diff
+          ls -lsa .
 
-          git config --global --add safe.directory '*'
+          git config --global --add safe.directory $GITHUB_WORKSPACE
+          git config user.name "cmd[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global pull.rebase false
           
           echo "Applying $file"
-          git apply "command-diff/command_diff.patch" --unidiff-zero
+          git apply "command-diff/command_diff.patch" --unidiff-zero --allow-empty
 
           rm -rf command-diff
 
           git status
           
           if [ -n "$(git status --porcelain)" ]; then
-            git config user.name "cmd[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git config --global pull.rebase false
 
-            # Push the results to the target branch
-            git remote add \
-              github \
-              "https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/${{ needs.get-pr-info.outputs.repo }}.git" || :
+            git remote -v
 
             push_changes() {
-              git push github "HEAD:$PR_BRANCH"
+              git push origin "HEAD:$PR_BRANCH"
             }
 
             git add .
@@ -479,7 +493,7 @@ jobs:
             # Attempt to push changes
             if ! push_changes; then
               echo "Push failed, trying to rebase..."
-              git pull --rebase github $PR_BRANCH
+              git pull --rebase origin $PR_BRANCH
               # After successful rebase, try pushing again
               push_changes
             fi
@@ -489,7 +503,7 @@ jobs:
 
       - name: Comment PR (End)
         # No need to comment on prdoc success or --quiet
-        if: ${{ !failure() && !contains(github.event.comment.body, '--quiet') && !startsWith(needs.get-pr-info.outputs.CMD, 'prdoc') && !startsWith(needs.get-pr-info.outputs.CMD, 'fmt') }}
+        if: ${{ needs.cmd.result == 'success' && !contains(github.event.comment.body, '--quiet') && !startsWith(needs.get-pr-info.outputs.CMD, 'prdoc') && !startsWith(needs.get-pr-info.outputs.CMD, 'fmt') }}
         uses: actions/github-script@v7
         env:
           SUBWEIGHT: "${{ needs.cmd.outputs.subweight }}"
@@ -498,8 +512,8 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             let runUrl = ${{ needs.before-cmd.outputs.run_url }}
-            let subweight = process.env.SUBWEIGHT;
-            let cmdOutput = process.env.CMD_OUTPUT;
+            let subweight = process.env.SUBWEIGHT || '';
+            let cmdOutput = process.env.CMD_OUTPUT || '';
             let cmd = process.env.CMD;
             console.log(cmdOutput);
 
@@ -519,12 +533,15 @@ jobs:
             })
 
   finish:
-    needs: [before-cmd, after-cmd]
+    needs: [get-pr-info, before-cmd, after-cmd, cmd]
     if: ${{ always() }}
     runs-on: ubuntu-latest
+    env:
+      CMD_OUTPUT: "${{ needs.cmd.outputs.cmd_output }}"
+      CMD: ${{ needs.get-pr-info.outputs.CMD }}
     steps:
       - name: Comment PR (Failure)
-        if: ${{ failure() && !contains(github.event.comment.body, '--quiet') }}
+        if: ${{ needs.cmd.result == 'failure' || needs.after-cmd.result == 'failure' }}
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -532,10 +549,10 @@ jobs:
             let jobUrl = ${{ needs.before-cmd.outputs.job_url }}
             let cmdOutput = process.env.CMD_OUTPUT;
             let cmd = process.env.CMD;
-
-            let cmdOutputCollapsed = cmdOutput.trim() !== ''
-              ? `<details>\n\n<summary>Command output:</summary>\n\n${cmdOutput}\n\n</details>` 
-              : '';
+            let cmdOutputCollapsed = '';
+            if (cmdOutput && cmdOutput.trim() !== '') {
+              cmdOutputCollapsed = `<details>\n\n<summary>Command output:</summary>\n\n${cmdOutput}\n\n</details>` 
+            }
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -545,8 +562,8 @@ jobs:
             })
 
       - name: Add 😕 reaction on failure
+        if: ${{ needs.cmd.result == 'failure' || needs.after-cmd.result == 'failure' }}
         uses: actions/github-script@v7
-        if: ${{ failure() }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -558,8 +575,8 @@ jobs:
             })
 
       - name: Add 👍 reaction on success
+        if: ${{ needs.cmd.result == 'success' && needs.after-cmd.result == 'success' }}
         uses: actions/github-script@v7
-        if: ${{ !failure() }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
