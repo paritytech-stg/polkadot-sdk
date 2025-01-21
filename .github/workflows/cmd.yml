@@ -357,6 +357,8 @@ jobs:
           echo "Running command: '$CMD $PR_ARG' on '${{ needs.set-image.outputs.RUNNER }}' runner, container: '${{ needs.set-image.outputs.IMAGE }}'"
           echo "RUST_NIGHTLY_VERSION: $RUST_NIGHTLY_VERSION"
           echo "IS_ORG_MEMBER: $IS_ORG_MEMBER"
+
+          git config --global --add safe.directory $GITHUB_WORKSPACE
           
           # if the user is not an org member, we need to use the bot's path from master to avoid unwanted modifications
           if [ "$IS_ORG_MEMBER" = "true" ]; then
