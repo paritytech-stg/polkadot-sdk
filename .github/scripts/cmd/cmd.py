@@ -127,6 +127,8 @@ def main():
 
     print(f'args: {args}')
 
+    print(f'------------------------- SOMMETHING IS HERE -------------------------')
+
     if args.command == 'bench-omni':
         runtime_pallets_map = {}
         failed_benchmarks = {}
