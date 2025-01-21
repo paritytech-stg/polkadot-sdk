@@ -437,6 +437,9 @@ jobs:
 
   after-cmd:
     needs: [cmd, get-pr-info, before-cmd]
+    env:
+      CMD: ${{ needs.get-pr-info.outputs.CMD }}
+      PR_BRANCH: ${{ needs.get-pr-info.outputs.pr-branch }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -548,11 +551,9 @@ jobs:
             let jobUrl = ${{ needs.before-cmd.outputs.job_url }}
             let cmdOutput = process.env.CMD_OUTPUT;
             let cmd = process.env.CMD;
-
-            if (cmdOutput) {
-              let cmdOutputCollapsed = cmdOutput.trim() !== ''
-                ? `<details>\n\n<summary>Command output:</summary>\n\n${cmdOutput}\n\n</details>` 
-                : '';
+            let cmdOutputCollapsed = '';
+            if (cmdOutput && cmdOutput.trim() !== '') {
+              cmdOutputCollapsed = `<details>\n\n<summary>Command output:</summary>\n\n${cmdOutput}\n\n</details>` 
             }
 
             github.rest.issues.createComment({
