@@ -124,10 +124,7 @@ generate_prdoc.setup_parser(parser_prdoc, pr_required=False)
 def main():
     global args, unknown, runtimesMatrix
     args, unknown = parser.parse_known_args()
-    print(f'OLOLO i have modified this'
     print(f'args: {args}')
-
-    print(f'------------------------- SOMMETHING IS HERE -------------------------')
 
     if args.command == 'bench-omni':
         runtime_pallets_map = {}
