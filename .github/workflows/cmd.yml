@@ -407,7 +407,7 @@ jobs:
         with:
           name: command-diff
           path: /tmp/cmd/command_diff.patch
-
+      #
       - name: Install subweight for bench
         if: startsWith(needs.get-pr-info.outputs.CMD, 'bench')
         run: cargo install subweight
