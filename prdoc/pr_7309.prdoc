@@ -1,0 +1,13 @@
+title: '[stable2409] Backport #7271'
+doc:
+- audience: Todo
+  description: |-
+    Backport #7271 into `stable2409` from EgorPopelyaev.
+
+    See the [documentation](https://github.com/paritytech/polkadot-sdk/blob/master/docs/BACKPORT.md) on how to use this bot.
+
+    <!--
+      # To be used by other automation, do not modify:
+      original-pr-number: #${pull_number}
+    -->
+crates: []
