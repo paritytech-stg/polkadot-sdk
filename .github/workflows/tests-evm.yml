@@ -33,11 +33,22 @@ jobs:
 
       - name: script
         run: |
-          # cd polkadot
           forklift cargo build --locked --profile production -p pallet-revive-eth-rpc --bin eth-rpc
           forklift cargo build --locked --profile testnet --features pyroscope,fast-runtime --bin polkadot
-          find . -name eth-rpc
-          find . -name polkadot
+
+      - name: Checkout evm-tests
+        uses: actions/checkout@v4
+        with:
+          repository: paritytech/evm-test-suite
+          ref: 14b2b9af243b70a938404e6366df0ce364d74232
+          path: evm-test-suite
+
+      - name: script
+        run: |
+          сd evm-test-suite
+          wget https://github.com/paritytech/revive/releases/download/v0.1.0-dev.9/resolc
+          chmod +x resolc
+          init.sh --kitchensink -- --matter-labs -- ../target/testnet/polkadot ../target/production/eth-rpc ./resolc
 
   confirm-required-test-evm-jobs-passed:
     runs-on: ubuntu-latest
