@@ -33,8 +33,10 @@ jobs:
 
       - name: script
         run: |
-          cd polkadot
+          # cd polkadot
           forklift cargo build --locked --profile production -p pallet-revive-eth-rpc --bin eth-rpc
+          forklift cargo build --locked --profile testnet --features pyroscope,fast-runtime --bin polkadot
+          ls -la target/release
 
   confirm-required-test-evm-jobs-passed:
     runs-on: ubuntu-latest
