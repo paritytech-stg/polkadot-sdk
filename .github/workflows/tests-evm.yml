@@ -45,9 +45,12 @@ jobs:
 
       - name: script
         run: |
-          сd evm-test-suite
+          echo "Change to the evm-test-suite directory"
+          cd evm-test-suite
+          echo "Download the resolc binary"
           wget https://github.com/paritytech/revive/releases/download/v0.1.0-dev.9/resolc
           chmod +x resolc
+          echo "Run the tests"
           init.sh --kitchensink -- --matter-labs -- ../target/testnet/polkadot ../target/production/eth-rpc ./resolc
 
   confirm-required-test-evm-jobs-passed:
