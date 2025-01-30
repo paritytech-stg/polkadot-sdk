@@ -51,7 +51,7 @@ jobs:
           wget https://github.com/paritytech/revive/releases/download/v0.1.0-dev.9/resolc
           chmod +x resolc
           echo "Run the tests"
-          init.sh --kitchensink -- --matter-labs -- ../target/testnet/polkadot ../target/production/eth-rpc ./resolc
+          bash init.sh --kitchensink -- --matter-labs -- ../target/testnet/polkadot ../target/production/eth-rpc ./resolc
 
   confirm-required-test-evm-jobs-passed:
     runs-on: ubuntu-latest
