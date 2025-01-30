@@ -36,9 +36,8 @@ jobs:
           # cd polkadot
           forklift cargo build --locked --profile production -p pallet-revive-eth-rpc --bin eth-rpc
           forklift cargo build --locked --profile testnet --features pyroscope,fast-runtime --bin polkadot
-          cd target
-          apt-get update && apt-get install -y tree
-          tree
+          find . -name eth-rpc
+          find . -name polkadot
 
   confirm-required-test-evm-jobs-passed:
     runs-on: ubuntu-latest
