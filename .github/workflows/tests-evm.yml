@@ -43,6 +43,10 @@ jobs:
           ref: 14b2b9af243b70a938404e6366df0ce364d74232
           path: evm-test-suite
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: script
         run: |
           echo "Change to the evm-test-suite directory"
