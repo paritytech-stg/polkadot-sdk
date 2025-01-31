@@ -57,11 +57,12 @@ jobs:
           echo "Install npm dependencies"
           npm install
           echo "Check that binaries are in place"
-          ls -la ../target/testnet/polkadot
-          ls -la ../target/production/eth-rpc
-          ls -la ./resolc
+          NODE_BIN_PATH=$(readlink -f ../target/testnet/polkadot)
+          ETH_RPC_PATH=$(readlink -f ../target/production/eth-rpc)
+          RESOLC_PATH=$(readlink -f ./resolc)
+          echo $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH
           echo "Run the tests"
-          bash init.sh --kitchensink -- --matter-labs -- ../target/testnet/polkadot ../target/production/eth-rpc ./resolc
+          bash init.sh --kitchensink -- --matter-labs -- $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH
 
       - name: Collect tests results
         if: always()
