@@ -54,6 +54,8 @@ jobs:
           echo "Download the resolc binary"
           wget https://github.com/paritytech/revive/releases/download/v0.1.0-dev.9/resolc
           chmod +x resolc
+          echo "Install npm dependencies"
+          npm install
           echo "Run the tests"
           bash init.sh --kitchensink -- --matter-labs -- ../target/testnet/polkadot ../target/production/eth-rpc ./resolc
 
