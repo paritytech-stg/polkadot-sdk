@@ -59,6 +59,13 @@ jobs:
           echo "Run the tests"
           bash init.sh --kitchensink -- --matter-labs -- ../target/testnet/polkadot ../target/production/eth-rpc ./resolc
 
+      - name: Collect tests results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evm-test-suite-${{ github.sha }}
+          path: evm-test-suite/test-logs/matter-labs-tests.log
+
   confirm-required-test-evm-jobs-passed:
     runs-on: ubuntu-latest
     name: All test misc tests passed
