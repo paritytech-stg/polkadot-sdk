@@ -63,9 +63,9 @@ jobs:
           ETH_RPC_PATH=$(readlink -f ../target/production/eth-rpc)
           RESOLC_PATH=$(readlink -f ./resolc)
 
-          NODE_PATH=$(readlink -f ../target/testnet/polkadot)
-          ADAPTER_PATH=$(readlink -f ../target/production/eth-rpc)
-          COMPILER_PATH=$(readlink -f ./resolc)
+          export NODE_PATH=$(readlink -f ../target/testnet/polkadot)
+          export ADAPTER_PATH=$(readlink -f ../target/production/eth-rpc)
+          export COMPILER_PATH=$(readlink -f ./resolc)
 
           echo $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH
           echo "Run the tests"
