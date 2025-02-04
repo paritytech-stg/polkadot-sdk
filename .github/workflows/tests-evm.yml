@@ -35,6 +35,8 @@ jobs:
         run: |
           forklift cargo build --locked --profile production -p pallet-revive-eth-rpc --bin eth-rpc
           forklift cargo build --locked --profile testnet --features pyroscope,fast-runtime --bin polkadot
+          forklift cargo build --locked --profile testnet --features pyroscope,fast-runtime --bin polkadot-execute-worker
+          forklift cargo build --locked --profile testnet --features pyroscope,fast-runtime --bin polkadot-prepare-worker
 
       - name: Checkout evm-tests
         uses: actions/checkout@v4
