@@ -34,9 +34,9 @@ jobs:
       - name: script
         run: |
           forklift cargo build --locked --profile production -p pallet-revive-eth-rpc --bin eth-rpc
-          forklift cargo build --locked --profile testnet --features pyroscope,fast-runtime --bin polkadot
-          forklift cargo build --locked --profile testnet --features pyroscope,fast-runtime --bin polkadot-execute-worker
-          forklift cargo build --locked --profile testnet --features pyroscope,fast-runtime --bin polkadot-prepare-worker
+          forklift cargo build --bin substrate-node
+          # forklift cargo build --locked --profile testnet --features pyroscope,fast-runtime --bin polkadot-execute-worker
+          # forklift cargo build --locked --profile testnet --features pyroscope,fast-runtime --bin polkadot-prepare-worker
 
       - name: Checkout evm-tests
         uses: actions/checkout@v4
@@ -59,7 +59,7 @@ jobs:
           echo "Install npm dependencies"
           npm install
           echo "Check that binaries are in place"
-          NODE_BIN_PATH=$(readlink -f ../target/testnet/polkadot)
+          NODE_BIN_PATH=$(readlink -f ../target/release/substrate-node)
           ETH_RPC_PATH=$(readlink -f ../target/production/eth-rpc)
           RESOLC_PATH=$(readlink -f ./resolc)
 
