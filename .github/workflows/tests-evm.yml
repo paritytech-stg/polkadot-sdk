@@ -51,23 +51,26 @@ jobs:
 
       - name: script
         run: |
+          find . -name substrate-node
+          export NODE_BIN_PATH=$(pwd)$(find . -name substrate-node | tr -d ".")
           echo "Change to the evm-test-suite directory"
           cd evm-test-suite
           echo "Download the resolc binary"
-          wget https://github.com/paritytech/revive/releases/download/v0.1.0-dev.9/resolc
+          wget https://github.com/paritytech/revive/releases/download/v0.1.0-dev.9/resolc -q
           chmod +x resolc
+
+          echo "Check that binaries are in place"
+          # NODE_BIN_PATH=$(readlink -f ../target/production/substrate-node)
+          export ETH_RPC_PATH=$(readlink -f ../target/production/eth-rpc)
+          export RESOLC_PATH=$(readlink -f ./resolc)
+          echo $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH
+          echo "export variables for hardhat"
+          export NODE_PATH=$NODE_BIN_PATH
+          export ADAPTER_PATH=$ETH_RPC_PATH
+          export COMPILER_PATH=$RESOLC_PATH
+
           echo "Install npm dependencies"
           npm install
-          echo "Check that binaries are in place"
-          NODE_BIN_PATH=$(readlink -f ../target/release/substrate-node)
-          ETH_RPC_PATH=$(readlink -f ../target/production/eth-rpc)
-          RESOLC_PATH=$(readlink -f ./resolc)
-
-          export NODE_PATH=$(readlink -f ../target/testnet/polkadot)
-          export ADAPTER_PATH=$(readlink -f ../target/production/eth-rpc)
-          export COMPILER_PATH=$(readlink -f ./resolc)
-
-          echo $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH
           echo "Run the tests"
           # bash init.sh --kitchensink -- --matter-labs -- $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH
           cd matter-labs-tests
