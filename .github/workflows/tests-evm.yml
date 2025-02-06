@@ -70,11 +70,11 @@ jobs:
           echo "Install npm dependencies"
           npm install
           echo "Run the tests"
-          echo "bash init.sh --kitchensink -- --matter-labs -- $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH"
-          bash init.sh --kitchensink -- --matter-labs -- $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH
-          # cd matter-labs-tests
-          # npm install --force
-          # npx hardhat node
+          # echo "bash init.sh --kitchensink -- --matter-labs -- $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH"
+          # bash init.sh --kitchensink -- --matter-labs -- $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH
+          cd matter-labs-tests
+          npm install --force
+          npx hardhat node
 
       - name: Collect tests results
         if: always()
