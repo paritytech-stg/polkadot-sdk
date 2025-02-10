@@ -69,9 +69,14 @@ jobs:
           npm install
           # cat matter-labs-tests/hardhat.config.ts | grep batchSize
 
+          echo "Installing solc"
+          wget https://github.com/ethereum/solidity/releases/download/v0.8.28/solc-static-linux -q
+          chmod +x solc-static-linux
+          mv solc-static-linux /usr/local/bin/solc
           echo "Run the tests"
+          sed -i 's/batchSize: 300,/batchSize: 100,/' matter-labs-tests/hardhat.config.ts
           echo "bash init.sh --kitchensink -- --matter-labs -- $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH"
-          bash init.sh --kitchensink -- --matter-labs -- $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH || sleep 3600
+          bash init.sh --kitchensink -- --matter-labs -- $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH
 
       - name: Collect tests results
         if: always()
