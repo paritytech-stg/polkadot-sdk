@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: paritytech/evm-test-suite
-          ref: 14b2b9af243b70a938404e6366df0ce364d74232
+          ref: anp-docker-fix
           path: evm-test-suite
 
       - uses: actions/setup-node@v4
@@ -70,7 +70,7 @@ jobs:
           echo "Run the tests"
           echo "bash init.sh --kitchensink -- --matter-labs -- $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH"
           bash init.sh --kitchensink -- --matter-labs -- $NODE_BIN_PATH $ETH_RPC_PATH $RESOLC_PATH
-          sleep 3600
+          # sleep 3600
 
       - name: Collect tests results
         if: always()
