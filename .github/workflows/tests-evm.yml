@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: paritytech/evm-test-suite
-          ref: anp-docker-fix
+          ref: 6f95f703b1bc25d7eb2ca9377bd2c422e7a50ce9
           path: evm-test-suite
 
       - uses: actions/setup-node@v4
