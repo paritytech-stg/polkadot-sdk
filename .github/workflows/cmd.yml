@@ -316,22 +316,27 @@ jobs:
       PR_BRANCH: ${{ needs.get-pr-info.outputs.pr-branch }}
       RUNNER: ${{ needs.set-image.outputs.RUNNER }}
       IMAGE: ${{ needs.set-image.outputs.IMAGE }}
+      REPO: ${{ needs.get-pr-info.outputs.repo }}
+      IS_ORG_MEMBER: ${{ needs.is-org-member.outputs.member }}
+      RUN_URL: ${{ needs.before-cmd.outputs.run_url }}
+      COMMENT_ID: ${{ github.event.comment.id }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # In order to run prdoc without specifying the PR number, we need to add the PR number as an argument automatically
-      - name: Prepare PR Number argument
-        id: pr-arg
-        run: |
-          CMD="${{ needs.get-pr-info.outputs.CMD }}"
-          if echo "$CMD" | grep -q "prdoc" && ! echo "$CMD" | grep -qE "\-\-pr[[:space:]=][0-9]+"; then
-            echo "arg=--pr ${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
-          else
-            echo "arg=" >> $GITHUB_OUTPUT
-          fi
 
       - name: Start cmd with gh cli
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh workflow run cmd-run.yml --ref $PR_BRANCH -f cmd="${CMD}" -f pr_num="${PR_BRANCH}" -f runner="${RUNNER}" -f image="${IMAGE}"
+          PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+          gh workflow run cmd-run.yml \
+            --ref $PR_BRANCH \
+            -f cmd="${CMD}" \
+            -f repo="${REPO}" \
+            -f pr_branch="${PR_BRANCH}" \
+            -f pr_num="${PR_NUMBER}" \
+            -f runner="${RUNNER}" \
+            -f is_org_member="${IS_ORG_MEMBER}" \
+            -f run_url="${RUN_URL}" \
+            -f comment_id="${COMMENT_ID}" \
+            -f image="${IMAGE}"
