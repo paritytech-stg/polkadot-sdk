@@ -331,5 +331,7 @@ jobs:
           fi
 
       - name: Start cmd with gh cli
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh workflow run cmd-run.yml --ref $PR_BRANCH -f cmd="${CMD}" -f pr_num="${PR_BRANCH}" -f runner="${RUNNER}" -f image="${IMAGE}"
