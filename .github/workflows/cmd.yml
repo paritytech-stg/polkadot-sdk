@@ -4,11 +4,11 @@ on:
   issue_comment: # listen for comments on issues
     types: [created]
 
-permissions: # allow the action to comment on the PR
+permissions: # allow the action to run workflow and comment in PR
   contents: read
   issues: write
   pull-requests: write
-  actions: read
+  actions: write
 
 jobs:
   is-org-member:
@@ -331,5 +331,7 @@ jobs:
           fi
 
       - name: Start cmd with gh cli
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh workflow run cmd-run.yml --ref $PR_BRANCH -f cmd="${CMD}" -f pr_num="${PR_BRANCH}" -f runner="${RUNNER}" -f image="${IMAGE}"
