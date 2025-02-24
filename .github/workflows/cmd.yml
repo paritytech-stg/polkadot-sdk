@@ -4,11 +4,11 @@ on:
   issue_comment: # listen for comments on issues
     types: [created]
 
-permissions: # allow the action to comment on the PR
+permissions: # allow the action to run workflow and comment in PR
   contents: read
   issues: write
   pull-requests: write
-  actions: read
+  actions: write
 
 jobs:
   is-org-member:
