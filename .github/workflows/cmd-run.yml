@@ -24,7 +24,9 @@ permissions: # allow the action to comment on the PR
 
 jobs:
   test-job:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.inputs.runner }}
+    container:
+      image: ${{ github.event.inputs.image }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
