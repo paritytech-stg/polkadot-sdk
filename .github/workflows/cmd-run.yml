@@ -83,6 +83,7 @@ jobs:
           repository: ${{ github.event.inputs.repo }}
           ref: ${{ github.event.inputs.pr_branch }}
 
+      - run: exit 1
       # In order to run prdoc without specifying the PR number, we need to add the PR number as an argument automatically
       - name: Prepare PR Number argument
         id: pr-arg
