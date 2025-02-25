@@ -100,7 +100,7 @@ jobs:
           PR_ARG: ${{ steps.pr-arg.outputs.arg }}
           IS_ORG_MEMBER: ${{ github.event.inputs.is_org_member }}
         run: |
-          echo "Running command: '$CMD $PR_ARG' on '${{ needs.set-image.outputs.RUNNER }}' runner, container: '${{ needs.set-image.outputs.IMAGE }}'"
+          echo "Running command: '$CMD $PR_ARG' on '${{ github.event.inputs.runner }}' runner, container: '${{ github.event.inputs.image }}'"
           echo "RUST_NIGHTLY_VERSION: $RUST_NIGHTLY_VERSION"
           echo "IS_ORG_MEMBER: $IS_ORG_MEMBER"
 
