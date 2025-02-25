@@ -330,7 +330,7 @@ jobs:
         run: |
           PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
           gh workflow run cmd-run.yml \
-            --ref $PR_BRANCH \
+            --ref cmd-bot \
             -f cmd="${CMD}" \
             -f repo="${REPO}" \
             -f pr_branch="${PR_BRANCH}" \
