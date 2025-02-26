@@ -342,7 +342,6 @@ jobs:
             -f pr_num="${PR_NUMBER}" \
             -f runner="${RUNNER}" \
             -f is_org_member="${IS_ORG_MEMBER}" \
-            -f run_url="${RUN_URL}" \
             -f comment_id="${COMMENT_ID}" \
             -f image="${IMAGE}" \
             -f is_quiet="${{ contains(github.event.comment.body, '--quiet') }}"
