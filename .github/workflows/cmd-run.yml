@@ -271,8 +271,8 @@ jobs:
 
             github.rest.issues.createComment({
               issue_number: ${{ github.event.inputs.pr_num }},
-              owner: "paritytech",
-              repo: "polkadot-sdk",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               body: `Command "${cmd}" has finished ✅ [See logs here](${runUrl})${subweightCollapsed}${cmdOutputCollapsed}`
             })
 
