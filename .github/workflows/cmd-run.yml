@@ -198,6 +198,7 @@ jobs:
         if: startsWith(github.event.inputs.cmd, 'bench')
         run: cargo install subweight
 
+      # TODO: fix for forks, refs/remotes/origin/master should be replaced with master branch from paritytech/polkadot-sdk
       - name: Run Subweight for bench
         id: subweight
         if: startsWith(github.event.inputs.cmd, 'bench')
