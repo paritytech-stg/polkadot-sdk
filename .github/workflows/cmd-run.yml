@@ -79,7 +79,7 @@ jobs:
             let job_url = ${{ steps.build-link.outputs.job_url }}
             let cmd = process.env.CMD;
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: ${{ github.event.inputs.pr_num }},
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `Command "${cmd}" has started 🚀 [See logs here](${job_url})`
