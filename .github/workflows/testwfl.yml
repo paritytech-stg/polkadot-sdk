@@ -1,0 +1,41 @@
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited, closed]
+
+jobs:
+  run-cmd-workflow:
+    runs-on: ubuntu-latest
+    # don't run on help and clean commands
+    permissions: # run workflow
+      contents: read
+      issues: write
+      pull-requests: write
+      actions: write
+    env:
+      CMD: "echo ok"
+      PR_BRANCH: as-test-cmd
+      RUNNER: ubuntu-latest
+      IMAGE: "debian:latest"
+      REPO: "paritytech-stg/polkadot-sdk"
+      IS_ORG_MEMBER: "true"
+      COMMENT_ID: "111"
+      PR_NUMBER: "82"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Start cmd with gh cli
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run cmd-run.yml \
+            --ref cmd-bot \
+            -f cmd="${CMD}" \
+            -f repo="${REPO}" \
+            -f pr_branch="${PR_BRANCH}" \
+            -f pr_num="${PR_NUMBER}" \
+            -f runner="${RUNNER}" \
+            -f is_org_member="${IS_ORG_MEMBER}" \
+            -f comment_id="${COMMENT_ID}" \
+            -f image="${IMAGE}" \
+            -f is_quiet="false"
