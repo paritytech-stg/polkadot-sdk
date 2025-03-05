@@ -376,7 +376,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.rest.reactions.createForIssueComment({
-              comment_id: ${{ env.comment_id }},
+              comment_id: ${{ env.COMMENT_ID }},
               owner: context.repo.owner,
               repo: context.repo.repo,
               content: 'confused'
@@ -389,7 +389,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.rest.reactions.createForIssueComment({
-              comment_id: ${{ env.comment_id }},
+              comment_id: ${{ env.COMMENT_ID }},
               owner: context.repo.owner,
               repo: context.repo.repo,
               content: '+1'
