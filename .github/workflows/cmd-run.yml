@@ -135,6 +135,7 @@ jobs:
           repository: ${{ env.REPO }}
           ref: ${{ env.PR_BRANCH }}
 
+      - run: exit 1
       # In order to run prdoc without specifying the PR number, we need to add the PR number as an argument automatically
       - name: Prepare PR Number argument
         id: pr-arg
