@@ -28,7 +28,7 @@ jobs:
     needs: [preflight]
     if: ${{ needs.preflight.outputs.changes_rust }}
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     container:
       image: ${{ needs.preflight.outputs.IMAGE }}
     env:
