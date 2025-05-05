@@ -51,8 +51,6 @@ pub mod weights;
 pub mod weights_ext;
 
 pub use weights::WeightInfo;
-#[cfg(feature = "std")]
-pub use weights_ext::check_weight_info_ext_accuracy;
 pub use weights_ext::WeightInfoExt;
 
 extern crate alloc;
@@ -68,8 +66,8 @@ use cumulus_primitives_core::{
 use frame_support::{
 	defensive, defensive_assert,
 	traits::{
-		BatchFootprint, Defensive, EnqueueMessage, EnsureOrigin, Get, QueueFootprint,
-		QueueFootprintQuery, QueuePausedQuery,
+		Defensive, EnqueueMessage, EnsureOrigin, Get, QueueFootprint, QueueFootprintQuery,
+		QueuePausedQuery,
 	},
 	weights::{Weight, WeightMeter},
 	BoundedVec,
@@ -79,7 +77,7 @@ use polkadot_runtime_common::xcm_sender::PriceForMessageDelivery;
 use polkadot_runtime_parachains::FeeTracker;
 use scale_info::TypeInfo;
 use sp_core::MAX_POSSIBLE_ALLOCATION;
-use sp_runtime::{FixedU128, RuntimeDebug, Saturating, WeakBoundedVec};
+use sp_runtime::{FixedU128, RuntimeDebug, SaturatedConversion, Saturating, WeakBoundedVec};
 use xcm::{latest::prelude::*, VersionedLocation, VersionedXcm, WrapVersion, MAX_XCM_DECODE_DEPTH};
 use xcm_builder::InspectMessageQueues;
 use xcm_executor::traits::ConvertOrigin;
@@ -658,11 +656,10 @@ impl<T: Config> Pallet<T> {
 			drop_threshold,
 		);
 
-		// `batches_footprints[n]` contains the footprint of the batch `xcms[0..n]`,
-		// so as `n` increases `batches_footprints[n]` contains the footprint of a bigger batch.
-		let best_batch_idx = batches_footprints.binary_search_by(|batch_info| {
+		let best_batch_footprint = batches_footprints.search_best_by(|batch_info| {
 			let required_weight = T::WeightInfo::enqueue_xcmp_messages(
 				batch_info.new_pages_count,
+				batches_footprints.first_page_pos.saturated_into(),
 				batch_info.msgs_count,
 				batch_info.size_in_bytes,
 			);
@@ -672,23 +669,10 @@ impl<T: Config> Pallet<T> {
 				false => core::cmp::Ordering::Greater,
 			}
 		});
-		let best_batch_idx = match best_batch_idx {
-			Ok(last_ok_idx) => {
-				// We should never reach this branch since we never return `Ordering::Equal`.
-				defensive!("Unexpected best_batch_idx found: Ok({})", last_ok_idx);
-				Some(last_ok_idx)
-			},
-			Err(first_err_idx) => first_err_idx.checked_sub(1),
-		};
-		let best_batch_footprint = match best_batch_idx {
-			Some(best_batch_idx) => batches_footprints.get(best_batch_idx).ok_or_else(|| {
-				defensive!("Invalid best_batch_idx: {}", best_batch_idx);
-			})?,
-			None => &BatchFootprint { msgs_count: 0, size_in_bytes: 0, new_pages_count: 0 },
-		};
 
 		meter.consume(T::WeightInfo::enqueue_xcmp_messages(
 			best_batch_footprint.new_pages_count,
+			batches_footprints.first_page_pos.saturated_into(),
 			best_batch_footprint.msgs_count,
 			best_batch_footprint.size_in_bytes,
 		));
