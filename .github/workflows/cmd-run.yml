@@ -259,6 +259,13 @@ jobs:
             echo "EOF"
           } >> $GITHUB_OUTPUT
 
+      - name: Upload Subweight
+        uses: actions/upload-artifact@v4
+        if: startsWith(github.event.inputs.cmd, 'bench')
+        with:
+          name: subweight
+          path: /tmp/cmd/subweight.log
+
   after-cmd:
     needs: [cmd, before-cmd]
     env:
