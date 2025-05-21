@@ -45,16 +45,16 @@ BENCH
 """
 
 bench_example = '''**Examples**:
- Runs all benchmarks 
+ Runs all benchmarks
  %(prog)s
 
  Runs benchmarks for pallet_balances and pallet_multisig for all runtimes which have these pallets. **--quiet** makes it to output nothing to PR but reactions
  %(prog)s --pallet pallet_balances pallet_xcm_benchmarks::generic --quiet
- 
+
  Runs bench for all pallets for westend runtime and fails fast on first failed benchmark
  %(prog)s --runtime westend --fail-fast
- 
- Does not output anything and cleans up the previous bot's & author command triggering comments in PR 
+
+ Does not output anything and cleans up the previous bot's & author command triggering comments in PR
  %(prog)s --runtime westend rococo --pallet pallet_balances pallet_multisig --quiet --clean
 '''
 
@@ -263,8 +263,9 @@ def main():
         print(f'Formatting with `{command}`')
         nightly_status = os.system(f'{command}')
         taplo_status = os.system('taplo format --config .config/taplo.toml')
+        zepter_status = os.system('zepter format features --fix')
 
-        if (nightly_status != 0 or taplo_status != 0):
+        if (nightly_status != 0 or taplo_status != 0 or zepter_status != 0):
             print_and_log('❌ Failed to format code')
             sys.exit(1)
 
