@@ -42,8 +42,8 @@ sp-version = { workspace = true, default-features = true }
 
 [features]
 default = [
-	"std"
-	]
+	"std",
+]
 std = [
 	"codec/std",
 	"cumulus-pallet-parachain-system/std",
