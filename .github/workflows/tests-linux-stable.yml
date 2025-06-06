@@ -90,10 +90,6 @@ jobs:
           git config --global --add safe.directory '*'
           forklift cargo nextest run \
             --archive-file test-linux-stable-nextest-build.tar.zst \
-            --workspace \
-            --locked \
-            --release \
             --no-fail-fast \
             --cargo-quiet \
-            --features try-runtime,experimental,ci-only-tests \
             --partition count:${{ matrix.partition }}
