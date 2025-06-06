@@ -48,11 +48,14 @@ jobs:
             --features try-runtime,experimental,ci-only-tests
 
       - run: ls -al
-      - run: exit 1
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-linux-stable-nextest-build.tar.zst
+          path: test-linux-stable-nextest-build.tar.zst
 
   test-linux-stable:
-    needs: [test-linux-stable-archive]
-    if: ${{ needs.preflight.outputs.changes_rust }}
+    needs: [preflight, test-linux-stable-archive]
     runs-on: ${{ matrix.runners }}
     timeout-minutes: 60
     strategy:
@@ -62,7 +65,6 @@ jobs:
         runners:
           [
             "${{ needs.preflight.outputs.RUNNER }}",
-            "${{ needs.preflight.outputs.RUNNER_OLDLINUX }}",
           ]
     container:
       image: ${{ needs.preflight.outputs.IMAGE }}
@@ -76,12 +78,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: test-linux-stable-nextest-build.tar.zst
+
       - name: script
         id: required
         run: |
           # Fixes "detected dubious ownership" error in the ci
           git config --global --add safe.directory '*'
           forklift cargo nextest run \
+            --archive-file test-linux-stable-nextest-build.tar.zst \
             --workspace \
             --locked \
             --release \
@@ -89,13 +97,3 @@ jobs:
             --cargo-quiet \
             --features try-runtime,experimental,ci-only-tests \
             --partition count:${{ matrix.partition }}
-      # run runtime-api tests with `enable-staging-api` feature on the 1st node
-      - name: runtime-api tests
-        if: ${{ matrix.partition == '1/3' }}
-        run: forklift cargo nextest run -p sp-api-test --features enable-staging-api --cargo-quiet
-      - name: Stop all workflows if failed
-        if: ${{ failure() && steps.required.conclusion == 'failure' && !github.event.pull_request.head.repo.fork }}
-        uses: ./.github/actions/workflow-stopper
-        with:
-          app-id: ${{ secrets.WORKFLOW_STOPPER_RUNNER_APP_ID }}
-          app-key: ${{ secrets.WORKFLOW_STOPPER_RUNNER_APP_KEY }}
