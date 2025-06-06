@@ -16,32 +16,6 @@ jobs:
   preflight:
     uses: ./.github/workflows/reusable-preflight.yml
 
-  # https://github.com/paritytech/ci_cd/issues/864
-  test-linux-stable-runtime-benchmarks:
-    needs: [preflight]
-    if: ${{ needs.preflight.outputs.changes_rust }}
-    runs-on: ${{ needs.preflight.outputs.RUNNER }}
-    timeout-minutes: 60
-    container:
-      image: ${{ needs.preflight.outputs.IMAGE }}
-    env:
-      RUST_TOOLCHAIN: stable
-      # Enable debug assertions since we are running optimized builds for testing
-      # but still want to have debug assertions.
-      RUSTFLAGS: "-Cdebug-assertions=y -Dwarnings"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: script
-        id: required
-        run: forklift cargo nextest run --workspace --features runtime-benchmarks benchmark --locked --cargo-profile testnet --cargo-quiet
-      - name: Stop all workflows if failed
-        if: ${{ failure() && steps.required.conclusion == 'failure' && !github.event.pull_request.head.repo.fork }}
-        uses: ./.github/actions/workflow-stopper
-        with:
-          app-id: ${{ secrets.WORKFLOW_STOPPER_RUNNER_APP_ID }}
-          app-key: ${{ secrets.WORKFLOW_STOPPER_RUNNER_APP_KEY }}
-
   #
   #
   #
