@@ -81,6 +81,9 @@ jobs:
             --cargo-quiet \
             --features try-runtime,experimental,ci-only-tests
 
+      - run: ls -al
+      - run: exit 1
+
   test-linux-stable:
     needs: [test-linux-stable-archive]
     if: ${{ needs.preflight.outputs.changes_rust }}
