@@ -13,8 +13,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  isdraft:
-    uses: ./.github/workflows/reusable-isdraft.yml
   preflight:
     uses: ./.github/workflows/reusable-preflight.yml
 
