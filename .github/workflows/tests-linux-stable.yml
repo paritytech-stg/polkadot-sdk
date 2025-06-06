@@ -72,6 +72,45 @@ jobs:
           app-id: ${{ secrets.WORKFLOW_STOPPER_RUNNER_APP_ID }}
           app-key: ${{ secrets.WORKFLOW_STOPPER_RUNNER_APP_KEY }}
 
+  #
+  #
+  #
+  test-linux-stable-archive:
+    needs: [preflight]
+    runs-on: ${{ matrix.runners }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        partition: [1/3, 2/3, 3/3]
+        runners:
+          [
+            "${{ needs.preflight.outputs.RUNNER }}"
+          ]
+    container:
+      image: ${{ needs.preflight.outputs.IMAGE }}
+      # needed for tests that use unshare syscall
+      options: --security-opt seccomp=unconfined
+    env:
+      RUST_TOOLCHAIN: stable
+      # Enable debug assertions since we are running optimized builds for testing
+      # but still want to have debug assertions.
+      RUSTFLAGS: "-Cdebug-assertions=y -Dwarnings"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: script
+        id: required
+        run: |
+          # Fixes "detected dubious ownership" error in the ci
+          git config --global --add safe.directory '*'
+          forklift cargo nextest archive --archive-file test-linux-stable-nextest-build.tar.zst \
+            --workspace \
+            --locked \
+            --release \
+            --cargo-quiet \
+            --features try-runtime,experimental,ci-only-tests
+
   test-linux-stable:
     needs: [preflight]
     if: ${{ needs.preflight.outputs.changes_rust }}
