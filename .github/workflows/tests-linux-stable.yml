@@ -88,7 +88,7 @@ jobs:
         run: |
           # Fixes "detected dubious ownership" error in the ci
           git config --global --add safe.directory '*'
-          forklift cargo nextest run \
+          cargo nextest run \
             --archive-file test-linux-stable-nextest-build.tar.zst \
             --no-fail-fast \
             --partition count:${{ matrix.partition }}
