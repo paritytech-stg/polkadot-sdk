@@ -91,5 +91,4 @@ jobs:
           forklift cargo nextest run \
             --archive-file test-linux-stable-nextest-build.tar.zst \
             --no-fail-fast \
-            --cargo-quiet \
             --partition count:${{ matrix.partition }}
