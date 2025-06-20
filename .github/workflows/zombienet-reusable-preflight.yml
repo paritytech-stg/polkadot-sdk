@@ -48,7 +48,7 @@ on:
         description: "CI image"
 
       DOCKER_IMAGES_VERSION:
-        value: ${{ jobs.preflight.outputs.DOCKER_IMAGES_VERSION }}
+        value: docker.io/paritypr/polkadot-debug:8748
         description: |
           Version for temp docker images.
 
@@ -317,56 +317,56 @@ jobs:
   #
   #
   # Wait until the 'build and push' image workflow success
-  wait_build_images:
-    needs: [preflight, ci-env]
-    runs-on: ubuntu-latest
-    timeout-minutes: 90
-    outputs:
-      BUILD_RUN_ID: ${{ steps.wait_build.outputs.BUILD_RUN_ID }}
-      POLKADOT_PR_ARTIFACTS_URL: ${{ steps.get_artifacts_url.outputs.POLKADOT_PR_ARTIFACTS_URL }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Wait until "Build and push images" workflow is done
-        id: wait_build
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh --version
+  # wait_build_images:
+  #   needs: [preflight, ci-env]
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 90
+  #   outputs:
+  #     BUILD_RUN_ID: ${{ steps.wait_build.outputs.BUILD_RUN_ID }}
+  #     POLKADOT_PR_ARTIFACTS_URL: ${{ steps.get_artifacts_url.outputs.POLKADOT_PR_ARTIFACTS_URL }}
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Wait until "Build and push images" workflow is done
+  #       id: wait_build
+  #       env:
+  #         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       run: |
+  #         gh --version
 
-          export SHA=${{ github.event.pull_request.head.sha }}
-          if [[ ${{ github.event_name }} == "merge_group" || ${{ github.event_name }} == "workflow_dispatch" ]]; then
-            # Full SHA is needed to query GH run status
-            export SHA="${GITHUB_SHA}";
-          fi
-          DELAYER=10
-          while true; do
-            # In case of multiple runs take the most recent one (with greatest databaseId)
-            STATUS=$(gh run ls -c $SHA -w "Build and push images" --json status,databaseId --jq 'max_by(.databaseId) | .status')
-            echo "CI workflow status: $STATUS"
-            if [[ $STATUS == "completed" ]]; then
-              echo "CI workflow is done."
-              break
-            fi
-            if [[ -z "$STATUS" ]]; then
-              echo "::warning::No CI workflow runs found for this commit"
-              exit 1
-            fi
-            sleep $((60 * DELAYER))
-            DELAYER=1
-          done
+  #         export SHA=${{ github.event.pull_request.head.sha }}
+  #         if [[ ${{ github.event_name }} == "merge_group" || ${{ github.event_name }} == "workflow_dispatch" ]]; then
+  #           # Full SHA is needed to query GH run status
+  #           export SHA="${GITHUB_SHA}";
+  #         fi
+  #         DELAYER=10
+  #         while true; do
+  #           # In case of multiple runs take the most recent one (with greatest databaseId)
+  #           STATUS=$(gh run ls -c $SHA -w "Build and push images" --json status,databaseId --jq 'max_by(.databaseId) | .status')
+  #           echo "CI workflow status: $STATUS"
+  #           if [[ $STATUS == "completed" ]]; then
+  #             echo "CI workflow is done."
+  #             break
+  #           fi
+  #           if [[ -z "$STATUS" ]]; then
+  #             echo "::warning::No CI workflow runs found for this commit"
+  #             exit 1
+  #           fi
+  #           sleep $((60 * DELAYER))
+  #           DELAYER=1
+  #         done
 
-          # check if the build succeeded
-          RUN_INFO=($(gh run ls -c $SHA -w "Build and push images" --json conclusion,databaseId --jq 'max_by(.databaseId) | .conclusion, .databaseId'))
-          CONCLUSION=${RUN_INFO[@]:0:1}
-          BUILD_RUN_ID=${RUN_INFO[@]:1:1}
-          if [[ $CONCLUSION == "success" ]]; then
-            echo "CI workflow succeeded. (build run_id: ${BUILD_RUN_ID})"
-            echo "BUILD_RUN_ID=${BUILD_RUN_ID}" >> $GITHUB_OUTPUT
-          else
-            echo "::warning:: CI workflow ('Build and push images') fails with conclusion: $CONCLUSION"
-            exit 1
-          fi;
+  #         # check if the build succeeded
+  #         RUN_INFO=($(gh run ls -c $SHA -w "Build and push images" --json conclusion,databaseId --jq 'max_by(.databaseId) | .conclusion, .databaseId'))
+  #         CONCLUSION=${RUN_INFO[@]:0:1}
+  #         BUILD_RUN_ID=${RUN_INFO[@]:1:1}
+  #         if [[ $CONCLUSION == "success" ]]; then
+  #           echo "CI workflow succeeded. (build run_id: ${BUILD_RUN_ID})"
+  #           echo "BUILD_RUN_ID=${BUILD_RUN_ID}" >> $GITHUB_OUTPUT
+  #         else
+  #           echo "::warning:: CI workflow ('Build and push images') fails with conclusion: $CONCLUSION"
+  #           exit 1
+  #         fi;
 
       # - name: Get artifacts url for pr
       #   id: get_artifacts_url
