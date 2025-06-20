@@ -48,7 +48,7 @@ on:
         description: "CI image"
 
       DOCKER_IMAGES_VERSION:
-        value: docker.io/paritypr/polkadot-debug:8748
+        value: "8748"
         description: |
           Version for temp docker images.
 
