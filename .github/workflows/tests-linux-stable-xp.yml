@@ -78,6 +78,7 @@ jobs:
         uses: actions/checkout@v4
       - name: update forklift
         run: /builds/download-forklift.sh -v master -p ./forklift/
+      - run: forklift version
       - name: script
         id: required
         run: |
