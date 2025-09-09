@@ -18,41 +18,41 @@ jobs:
 
   # No filter for 'all_security_features_work' and 'nonexistent_cache_dir'
   # run all tests on cattery runners
-  test-linux-stable-no-try-runtime:
-    needs: [preflight]
-    if: ${{ needs.preflight.outputs.changes_rust }}
-    runs-on: parity-large-test
-    timeout-minutes: 60
-    container:
-      image: ${{ needs.preflight.outputs.IMAGE }}
-      options: --privileged
-    strategy:
-      fail-fast: false
-      matrix:
-        partition: [1/2, 2/2]
-    env:
-      RUST_TOOLCHAIN: stable
-      # Enable debug assertions since we are running optimized builds for testing
-      # but still want to have debug assertions.
-      RUSTFLAGS: "-Cdebug-assertions=y -Dwarnings"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: script
-        id: required
-        run: |
-          forklift cargo nextest run --workspace \
-                   --locked \
-                   --release \
-                   --no-fail-fast \
-                   --features experimental,ci-only-tests \
-                   --partition count:${{ matrix.partition }}
-      # - name: Stop all workflows if failed
-      #   if: ${{ failure() && steps.required.conclusion == 'failure' && !github.event.pull_request.head.repo.fork }}
-      #   uses: ./.github/actions/workflow-stopper
-      #   with:
-      #     app-id: ${{ secrets.WORKFLOW_STOPPER_RUNNER_APP_ID }}
-      #     app-key: ${{ secrets.WORKFLOW_STOPPER_RUNNER_APP_KEY }}
+  #test-linux-stable-no-try-runtime:
+  #  needs: [preflight]
+  #  if: ${{ needs.preflight.outputs.changes_rust }}
+  #  runs-on: parity-large-test
+  #  timeout-minutes: 60
+  #  container:
+  #    image: ${{ needs.preflight.outputs.IMAGE }}
+  #    options: --privileged
+  #  strategy:
+  #    fail-fast: false
+  #    matrix:
+  #      partition: [1/2, 2/2]
+  #  env:
+  #    RUST_TOOLCHAIN: stable
+  #    # Enable debug assertions since we are running optimized builds for testing
+  #    # but still want to have debug assertions.
+  #    RUSTFLAGS: "-Cdebug-assertions=y -Dwarnings"
+  #  steps:
+  #    - name: Checkout
+  #      uses: actions/checkout@v4
+  #    - name: script
+  #      id: required
+  #      run: |
+  #        forklift cargo nextest run --workspace \
+  #                 --locked \
+  #                 --release \
+  #                 --no-fail-fast \
+  #                 --features experimental,ci-only-tests \
+  #                 --partition count:${{ matrix.partition }}
+  #    # - name: Stop all workflows if failed
+  #    #   if: ${{ failure() && steps.required.conclusion == 'failure' && !github.event.pull_request.head.repo.fork }}
+  #    #   uses: ./.github/actions/workflow-stopper
+  #    #   with:
+  #    #     app-id: ${{ secrets.WORKFLOW_STOPPER_RUNNER_APP_ID }}
+  #    #     app-key: ${{ secrets.WORKFLOW_STOPPER_RUNNER_APP_KEY }}
 
   test-linux-stable:
     needs: [preflight]
@@ -63,6 +63,7 @@ jobs:
       matrix:
         partition: [1/3, 2/3, 3/3]
         runners: [parity-large-test, parity-oldlinux-test]
+        try: [1,2,3,4,5,6,7,8,9,10]
     container:
       image: ${{ needs.preflight.outputs.IMAGE }}
       # needed for tests that use unshare syscall
@@ -75,6 +76,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: update forklift
+        run: /builds/download-forklift.sh -v master -p ./forklift/
+      - run: forklift version
       - name: script
         id: required
         run: |
