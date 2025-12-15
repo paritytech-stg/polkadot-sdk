@@ -42,7 +42,6 @@ use sp_runtime::{
 		InvalidTransaction, TransactionSource, TransactionValidity, TransactionValidityError,
 		ValidTransaction,
 	},
-	RuntimeDebug,
 };
 
 type CurrencyOf<T> = <<T as Config>::VestingSchedule as VestingSchedule<
@@ -90,7 +89,7 @@ impl WeightInfo for TestWeightInfo {
 	Copy,
 	Eq,
 	PartialEq,
-	RuntimeDebug,
+	Debug,
 	TypeInfo,
 	Serialize,
 	Deserialize,
@@ -137,7 +136,7 @@ impl Default for StatementKind {
 	Decode,
 	DecodeWithMemTracking,
 	Default,
-	RuntimeDebug,
+	Debug,
 	TypeInfo,
 	MaxEncodedLen,
 )]
@@ -171,6 +170,12 @@ impl<'de> Deserialize<'de> for EthereumAddress {
 		let mut r = Self::default();
 		r.0.copy_from_slice(&raw);
 		Ok(r)
+	}
+}
+
+impl AsRef<[u8]> for EthereumAddress {
+	fn as_ref(&self) -> &[u8] {
+		&self.0[..]
 	}
 }
 

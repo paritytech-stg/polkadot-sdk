@@ -423,14 +423,7 @@ pub const POINTS_TO_BALANCE_INIT_RATIO: u32 = 1;
 
 /// Possible operations on the configuration values of this pallet.
 #[derive(
-	Encode,
-	Decode,
-	DecodeWithMemTracking,
-	MaxEncodedLen,
-	TypeInfo,
-	RuntimeDebugNoBound,
-	PartialEq,
-	Clone,
+	Encode, Decode, DecodeWithMemTracking, MaxEncodedLen, TypeInfo, DebugNoBound, PartialEq, Clone,
 )]
 pub enum ConfigOp<T: Codec + Debug> {
 	/// Don't change.
@@ -516,7 +509,7 @@ impl ClaimPermission {
 	DecodeWithMemTracking,
 	MaxEncodedLen,
 	TypeInfo,
-	RuntimeDebugNoBound,
+	DebugNoBound,
 	CloneNoBound,
 	PartialEqNoBound,
 	EqNoBound,
@@ -699,7 +692,7 @@ impl<T: Config> PoolMember<T> {
 	MaxEncodedLen,
 	TypeInfo,
 	PartialEq,
-	RuntimeDebugNoBound,
+	DebugNoBound,
 	Clone,
 	Copy,
 )]
@@ -745,7 +738,7 @@ pub struct PoolRoles<AccountId> {
 	Encode,
 	Decode,
 	DecodeWithMemTracking,
-	RuntimeDebug,
+	Debug,
 	TypeInfo,
 	MaxEncodedLen,
 )]
@@ -1004,7 +997,7 @@ pub struct BondedPoolInner<T: Config> {
 ///
 /// The main purpose of this is to wrap a [`BondedPoolInner`], with the account
 /// + id of the pool, for easier access.
-#[derive(RuntimeDebugNoBound)]
+#[derive(DebugNoBound)]
 #[cfg_attr(feature = "std", derive(Clone, PartialEq))]
 pub struct BondedPool<T: Config> {
 	/// The identifier of the pool.
@@ -1357,11 +1350,12 @@ impl<T: Config> BondedPool<T> {
 	Encode,
 	Decode,
 	MaxEncodedLen,
+	DecodeWithMemTracking,
 	TypeInfo,
 	CloneNoBound,
 	PartialEqNoBound,
 	EqNoBound,
-	RuntimeDebugNoBound,
+	DebugNoBound,
 )]
 #[cfg_attr(feature = "std", derive(DefaultNoBound))]
 #[codec(mel_bound(T: Config))]
@@ -1526,9 +1520,10 @@ impl<T: Config> RewardPool<T> {
 	Encode,
 	Decode,
 	MaxEncodedLen,
+	DecodeWithMemTracking,
 	TypeInfo,
 	DefaultNoBound,
-	RuntimeDebugNoBound,
+	DebugNoBound,
 	CloneNoBound,
 	PartialEqNoBound,
 	EqNoBound,
@@ -1578,9 +1573,10 @@ impl<T: Config> UnbondPool<T> {
 	Encode,
 	Decode,
 	MaxEncodedLen,
+	DecodeWithMemTracking,
 	TypeInfo,
 	DefaultNoBound,
-	RuntimeDebugNoBound,
+	DebugNoBound,
 	CloneNoBound,
 	PartialEqNoBound,
 	EqNoBound,
@@ -2072,9 +2068,7 @@ pub mod pallet {
 		Restricted,
 	}
 
-	#[derive(
-		Encode, Decode, DecodeWithMemTracking, PartialEq, TypeInfo, PalletError, RuntimeDebug,
-	)]
+	#[derive(Encode, Decode, DecodeWithMemTracking, PartialEq, TypeInfo, PalletError, Debug)]
 	pub enum DefensiveError {
 		/// There isn't enough space in the unbond pool.
 		NotEnoughSpaceInUnbondPool,
@@ -3716,8 +3710,16 @@ impl<T: Config> Pallet<T> {
 		Self::freeze_pool_deposit(reward_acc)?;
 
 		if pre_frozen_balance > min_balance {
+			// Ensure the caller is the depositor or the root.
+			ensure!(
+				who == bonded_pool.roles.depositor ||
+					bonded_pool.roles.root.as_ref().map_or(false, |root| &who == root),
+				Error::<T>::DoesNotHavePermission
+			);
+
 			// Transfer excess back to depositor.
 			let excess = pre_frozen_balance.saturating_sub(min_balance);
+
 			T::Currency::transfer(reward_acc, &who, excess, Preservation::Preserve)?;
 			Self::deposit_event(Event::<T>::MinBalanceExcessAdjusted {
 				pool_id: pool,
@@ -3927,7 +3929,8 @@ impl<T: Config> Pallet<T> {
 			// If this happens, this is most likely due to an old bug and not a recent code change.
 			// We warn about this in try-runtime checks but do not panic.
 			if !pending_rewards_lt_leftover_bal {
-				log::warn!(
+				log!(
+					warn,
 					"pool {:?}, sum pending rewards = {:?}, remaining balance = {:?}",
 					id,
 					pools_members_pending_rewards.get(&id),
@@ -3952,12 +3955,19 @@ impl<T: Config> Pallet<T> {
 			);
 
 			let depositor = PoolMembers::<T>::get(&bonded_pool.roles.depositor).unwrap();
-			ensure!(
-				bonded_pool.is_destroying_and_only_depositor(depositor.active_points()) ||
-					depositor.active_points() >= MinCreateBond::<T>::get(),
-				"depositor must always have MinCreateBond stake in the pool, except for when the \
-				pool is being destroyed and the depositor is the last member",
-			);
+			let depositor_has_enough_stake = bonded_pool
+				.is_destroying_and_only_depositor(depositor.active_points()) ||
+				depositor.active_points() >= MinCreateBond::<T>::get();
+			if !depositor_has_enough_stake {
+				log!(
+					warn,
+					"pool {:?} has depositor {:?} with insufficient stake {:?}, minimum required is {:?}",
+					id,
+					bonded_pool.roles.depositor,
+					depositor.active_points(),
+					MinCreateBond::<T>::get()
+				);
+			}
 
 			ensure!(
 				bonded_pool.points >= bonded_pool.points_to_balance(bonded_pool.points),
@@ -4015,7 +4025,7 @@ impl<T: Config> Pallet<T> {
 
 		// Warn if any pool has incorrect ED frozen. We don't want to fail hard as this could be a
 		// result of an intentional ED change.
-		Self::check_ed_imbalance()?;
+		let _needs_adjust = Self::check_ed_imbalance()?;
 
 		Ok(())
 	}
@@ -4030,8 +4040,8 @@ impl<T: Config> Pallet<T> {
 		test,
 		debug_assertions
 	))]
-	pub fn check_ed_imbalance() -> Result<(), DispatchError> {
-		let mut failed: u32 = 0;
+	pub fn check_ed_imbalance() -> Result<u32, DispatchError> {
+		let mut needs_adjust = 0;
 		BondedPools::<T>::iter_keys().for_each(|id| {
 			let reward_acc = Self::generate_reward_account(id);
 			let frozen_balance =
@@ -4039,9 +4049,10 @@ impl<T: Config> Pallet<T> {
 
 			let expected_frozen_balance = T::Currency::minimum_balance();
 			if frozen_balance != expected_frozen_balance {
-				failed += 1;
-				log::warn!(
-					"pool {:?} has incorrect ED frozen that can result from change in ED. Expected  = {:?},  Actual = {:?}",
+				needs_adjust += 1;
+				log!(
+					warn,
+					"pool {:?} has incorrect ED frozen that can result from change in ED. Expected  = {:?},  Actual = {:?}. Use `adjust_pool_deposit` to fix it",
 					id,
 					expected_frozen_balance,
 					frozen_balance,
@@ -4049,8 +4060,7 @@ impl<T: Config> Pallet<T> {
 			}
 		});
 
-		ensure!(failed == 0, "Some pools do not have correct ED frozen");
-		Ok(())
+		Ok(needs_adjust)
 	}
 	/// Fully unbond the shares of `member`, when executed from `origin`.
 	///

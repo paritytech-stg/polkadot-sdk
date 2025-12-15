@@ -100,7 +100,7 @@ use frame_support::traits::{
 
 use sp_runtime::{
 	traits::{AccountIdConversion, BadOrigin, BlockNumberProvider, Saturating, StaticLookup, Zero},
-	DispatchResult, Permill, RuntimeDebug,
+	Debug, DispatchResult, Permill,
 };
 
 use frame_support::{dispatch::DispatchResultWithPostInfo, traits::EnsureOrigin};
@@ -128,25 +128,17 @@ type BlockNumberFor<T, I = ()> =
 
 /// A bounty proposal.
 #[derive(
-	Encode,
-	Decode,
-	DecodeWithMemTracking,
-	Clone,
-	PartialEq,
-	Eq,
-	RuntimeDebug,
-	TypeInfo,
-	MaxEncodedLen,
+	Encode, Decode, DecodeWithMemTracking, Clone, PartialEq, Eq, Debug, TypeInfo, MaxEncodedLen,
 )]
 pub struct Bounty<AccountId, Balance, BlockNumber> {
 	/// The account proposing it.
-	proposer: AccountId,
+	pub proposer: AccountId,
 	/// The (total) amount that should be paid if the bounty is rewarded.
-	value: Balance,
+	pub value: Balance,
 	/// The curator fee. Included in value.
-	fee: Balance,
+	pub fee: Balance,
 	/// The deposit of curator.
-	curator_deposit: Balance,
+	pub curator_deposit: Balance,
 	/// The amount held on deposit (reserved) for making this proposal.
 	bond: Balance,
 	/// The status of this bounty.
@@ -164,15 +156,7 @@ impl<AccountId: PartialEq + Clone + Ord, Balance, BlockNumber: Clone>
 
 /// The status of a bounty proposal.
 #[derive(
-	Encode,
-	Decode,
-	DecodeWithMemTracking,
-	Clone,
-	PartialEq,
-	Eq,
-	RuntimeDebug,
-	TypeInfo,
-	MaxEncodedLen,
+	Encode, Decode, DecodeWithMemTracking, Clone, PartialEq, Eq, Debug, TypeInfo, MaxEncodedLen,
 )]
 pub enum BountyStatus<AccountId, BlockNumber> {
 	/// The bounty is proposed and waiting for approval.

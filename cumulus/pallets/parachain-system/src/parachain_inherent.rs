@@ -16,16 +16,11 @@
 
 //! Cumulus parachain inherent related structures.
 
-use alloc::{
-	collections::{btree_map::BTreeMap, btree_set::BTreeSet},
-	vec,
-	vec::Vec,
-};
+use alloc::{collections::btree_map::BTreeMap, vec, vec::Vec};
 use core::fmt::Debug;
 use cumulus_primitives_core::{
 	relay_chain::{
-		vstaging::ApprovedPeerId, BlockNumber as RelayChainBlockNumber, BlockNumber,
-		Header as RelayHeader,
+		ApprovedPeerId, BlockNumber as RelayChainBlockNumber, BlockNumber, Header as RelayHeader,
 	},
 	InboundDownwardMessage, InboundHrmpMessage, ParaId, PersistedValidationData,
 };
@@ -55,16 +50,7 @@ use sp_core::{bounded::BoundedSlice, Get};
 /// `InboundMessageId {sent_at: 1, reverse_idx: 0}` points to `msgs[4]`
 /// `InboundMessageId {sent_at: 1, reverse_idx: 3}` points to `msgs[1]`
 /// `InboundMessageId {sent_at: 1, reverse_idx: 4}` points to `msgs[0]`
-#[derive(
-	Encode,
-	Decode,
-	DecodeWithMemTracking,
-	Clone,
-	Default,
-	sp_runtime::RuntimeDebug,
-	PartialEq,
-	TypeInfo,
-)]
+#[derive(Encode, Decode, DecodeWithMemTracking, Clone, Default, Debug, PartialEq, TypeInfo)]
 pub struct InboundMessageId {
 	/// The block number at which this message was added to the message passing queue
 	/// on the relay chain.
@@ -93,13 +79,7 @@ pub trait InboundMessage {
 
 /// A collection of inbound messages.
 #[derive(
-	codec::Encode,
-	codec::Decode,
-	codec::DecodeWithMemTracking,
-	sp_core::RuntimeDebug,
-	Clone,
-	PartialEq,
-	TypeInfo,
+	codec::Encode, codec::Decode, codec::DecodeWithMemTracking, Debug, Clone, PartialEq, TypeInfo,
 )]
 pub struct InboundMessagesCollection<Message: InboundMessage> {
 	messages: Vec<Message>,
@@ -167,13 +147,7 @@ impl<Message: InboundMessage> InboundMessagesCollection<Message> {
 /// The first messages in the collection (up to a limit) contain the full message data.
 /// The messages that exceed that limit are hashed.
 #[derive(
-	codec::Encode,
-	codec::Decode,
-	codec::DecodeWithMemTracking,
-	sp_core::RuntimeDebug,
-	Clone,
-	PartialEq,
-	TypeInfo,
+	codec::Encode, codec::Decode, codec::DecodeWithMemTracking, Debug, Clone, PartialEq, TypeInfo,
 )]
 pub struct AbridgedInboundMessagesCollection<Message: InboundMessage> {
 	full_messages: Vec<Message>,
@@ -246,7 +220,7 @@ impl AbridgedInboundDownwardMessages {
 	/// Returns an iterator over the messages that maps them to `BoundedSlices`.
 	pub fn bounded_msgs_iter<MaxMessageLen: Get<u32>>(
 		&self,
-	) -> impl Iterator<Item = BoundedSlice<u8, MaxMessageLen>> {
+	) -> impl Iterator<Item = BoundedSlice<'_, u8, MaxMessageLen>> {
 		self.full_messages
 			.iter()
 			// Note: we are not using `.defensive()` here since that prints the whole value to
@@ -307,15 +281,6 @@ pub type AbridgedInboundHrmpMessages =
 	AbridgedInboundMessagesCollection<(ParaId, InboundHrmpMessage)>;
 
 impl AbridgedInboundHrmpMessages {
-	/// Returns a list of all the unique senders.
-	pub fn get_senders(&self) -> BTreeSet<ParaId> {
-		self.full_messages
-			.iter()
-			.map(|(sender, _msg)| *sender)
-			.chain(self.hashed_messages.iter().map(|(sender, _msg)| *sender))
-			.collect()
-	}
-
 	/// Returns an iterator over the deconstructed messages.
 	pub fn flat_msgs_iter(&self) -> impl Iterator<Item = (ParaId, RelayChainBlockNumber, &[u8])> {
 		self.full_messages
@@ -327,13 +292,7 @@ impl AbridgedInboundHrmpMessages {
 /// The basic inherent data that is passed by the collator to the parachain runtime.
 /// This data doesn't contain any messages.
 #[derive(
-	codec::Encode,
-	codec::Decode,
-	codec::DecodeWithMemTracking,
-	sp_core::RuntimeDebug,
-	Clone,
-	PartialEq,
-	TypeInfo,
+	codec::Encode, codec::Decode, codec::DecodeWithMemTracking, Debug, Clone, PartialEq, TypeInfo,
 )]
 pub struct BasicParachainInherentData {
 	pub validation_data: PersistedValidationData,
@@ -345,13 +304,7 @@ pub struct BasicParachainInherentData {
 /// The messages that are passed by the collator to the parachain runtime as part of the
 /// inherent data.
 #[derive(
-	codec::Encode,
-	codec::Decode,
-	codec::DecodeWithMemTracking,
-	sp_core::RuntimeDebug,
-	Clone,
-	PartialEq,
-	TypeInfo,
+	codec::Encode, codec::Decode, codec::DecodeWithMemTracking, Debug, Clone, PartialEq, TypeInfo,
 )]
 pub struct InboundMessagesData {
 	pub downward_messages: AbridgedInboundDownwardMessages,

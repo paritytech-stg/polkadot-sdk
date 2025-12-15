@@ -128,11 +128,11 @@ use polkadot_primitives::{
 	UpgradeRestriction, ValidationCode, ValidationCodeHash, ValidatorSignature, MIN_CODE_SIZE,
 };
 use scale_info::{Type, TypeInfo};
-use sp_core::RuntimeDebug;
 use sp_runtime::{
 	traits::{AppVerify, One, Saturating},
 	DispatchResult, SaturatedConversion,
 };
+use Debug;
 
 use serde::{Deserialize, Serialize};
 
@@ -183,7 +183,7 @@ pub struct ParaPastCodeMeta<N> {
 /// If the para is in a "transition state", it is expected that the parachain is
 /// queued in the `ActionsQueue` to transition it into a stable state. Its lifecycle
 /// state will be used to determine the state transition to apply to the para.
-#[derive(PartialEq, Eq, Clone, Encode, Decode, RuntimeDebug, TypeInfo)]
+#[derive(PartialEq, Eq, Clone, Encode, Decode, Debug, TypeInfo)]
 pub enum ParaLifecycle {
 	/// Para is new and is onboarding as an on-demand or lease holding Parachain.
 	Onboarding,
@@ -301,7 +301,7 @@ impl<N: Ord + Copy + PartialEq> ParaPastCodeMeta<N> {
 	Encode,
 	Decode,
 	DecodeWithMemTracking,
-	RuntimeDebug,
+	Debug,
 	TypeInfo,
 	Serialize,
 	Deserialize,
@@ -317,7 +317,7 @@ pub struct ParaGenesisArgs {
 }
 
 /// Distinguishes between lease holding Parachain and Parathread (on-demand parachain)
-#[derive(DecodeWithMemTracking, PartialEq, Eq, Clone, RuntimeDebug)]
+#[derive(DecodeWithMemTracking, PartialEq, Eq, Clone, Debug)]
 pub enum ParaKind {
 	Parathread,
 	Parachain,
@@ -439,7 +439,7 @@ impl<BlockNumber> PvfCheckCause<BlockNumber> {
 }
 
 /// Specifies what was the outcome of a PVF pre-checking vote.
-#[derive(Copy, Clone, Encode, Decode, RuntimeDebug, TypeInfo)]
+#[derive(Copy, Clone, Encode, Decode, Debug, TypeInfo)]
 enum PvfCheckOutcome {
 	Accepted,
 	Rejected,
@@ -1299,11 +1299,13 @@ pub mod pallet {
 			valid_period: BlockNumberFor<T>,
 		) -> DispatchResult {
 			T::AuthorizeCurrentCodeOrigin::ensure_origin(origin, &para)?;
+			// The requested para must be a valid para (neither onboarding nor offboarding).
+			ensure!(Self::is_valid_para(para), Error::<T>::NotRegistered);
 
 			let now = frame_system::Pallet::<T>::block_number();
 			let expire_at = now.saturating_add(valid_period);
 
-			// insert authorized code hash and make sure to overwrite existing one for a para.
+			// Insert the authorized code hash and ensure it overwrites the existing one for a para.
 			AuthorizedCodeHash::<T>::insert(
 				&para,
 				AuthorizedCodeHashAndExpiry::from((new_code_hash, expire_at)),
@@ -1326,7 +1328,7 @@ pub mod pallet {
 			para: ParaId,
 			new_code: ValidationCode,
 		) -> DispatchResultWithPostInfo {
-			// no need to ensure, anybody can do this
+			// no need to ensure anybody can do this
 
 			// Ensure `new_code` is authorized
 			let _ = Self::validate_code_is_authorized(&new_code, &para)?;
@@ -1588,6 +1590,7 @@ impl<T: Config> Pallet<T> {
 					UpgradeGoAheadSignal::<T>::remove(&para);
 					UpgradeRestrictionSignal::<T>::remove(&para);
 					ParaLifecycles::<T>::remove(&para);
+					AuthorizedCodeHash::<T>::remove(&para);
 					let removed_future_code_hash = FutureCodeHash::<T>::take(&para);
 					if let Some(removed_future_code_hash) = removed_future_code_hash {
 						Self::decrease_code_ref(&removed_future_code_hash);

@@ -44,13 +44,10 @@ use frame_support::{
 use frame_system::pallet_prelude::*;
 use pallet_message_queue::OnQueueChanged;
 use polkadot_primitives::{
-	effective_minimum_backing_votes, supermajority_threshold,
-	vstaging::{
-		skip_ump_signals, BackedCandidate, CandidateDescriptorV2 as CandidateDescriptor,
-		CandidateReceiptV2 as CandidateReceipt,
-		CommittedCandidateReceiptV2 as CommittedCandidateReceipt,
-	},
-	well_known_keys, CandidateCommitments, CandidateHash, CoreIndex, GroupIndex, HeadData,
+	effective_minimum_backing_votes, skip_ump_signals, supermajority_threshold, well_known_keys,
+	BackedCandidate, CandidateCommitments, CandidateDescriptorV2 as CandidateDescriptor,
+	CandidateHash, CandidateReceiptV2 as CandidateReceipt,
+	CommittedCandidateReceiptV2 as CommittedCandidateReceipt, CoreIndex, GroupIndex, HeadData,
 	Id as ParaId, SignedAvailabilityBitfields, SigningContext, UpwardMessage, ValidatorId,
 	ValidatorIndex, ValidityAttestation,
 };
@@ -197,6 +194,11 @@ pub trait RewardValidators {
 	fn reward_bitfields(validators: impl IntoIterator<Item = ValidatorIndex>);
 }
 
+impl RewardValidators for () {
+	fn reward_backing(_: impl IntoIterator<Item = ValidatorIndex>) {}
+	fn reward_bitfields(_: impl IntoIterator<Item = ValidatorIndex>) {}
+}
+
 /// Reads the footprint of queues for a specific origin type.
 pub trait QueueFootprinter {
 	type Origin;
@@ -217,15 +219,7 @@ impl QueueFootprinter for () {
 /// Can be extended to serve further use-cases besides just UMP. Is stored in storage, so any change
 /// to existing values will require a migration.
 #[derive(
-	Encode,
-	Decode,
-	DecodeWithMemTracking,
-	Clone,
-	MaxEncodedLen,
-	Eq,
-	PartialEq,
-	RuntimeDebug,
-	TypeInfo,
+	Encode, Decode, DecodeWithMemTracking, Clone, MaxEncodedLen, Eq, PartialEq, Debug, TypeInfo,
 )]
 pub enum AggregateMessageOrigin {
 	/// Inbound upward message.
@@ -238,15 +232,7 @@ pub enum AggregateMessageOrigin {
 /// It is written in verbose form since future variants like `Here` and `Bridged` are already
 /// foreseeable.
 #[derive(
-	Encode,
-	Decode,
-	DecodeWithMemTracking,
-	Clone,
-	MaxEncodedLen,
-	Eq,
-	PartialEq,
-	RuntimeDebug,
-	TypeInfo,
+	Encode, Decode, DecodeWithMemTracking, Clone, MaxEncodedLen, Eq, PartialEq, Debug, TypeInfo,
 )]
 pub enum UmpQueueId {
 	/// The message originated from this parachain.
