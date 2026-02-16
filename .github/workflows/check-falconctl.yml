@@ -1,0 +1,37 @@
+name: Check FalconCTL CID and AID
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check-falconctl:
+    runs-on: cattery-gce-kushtest-stg
+    timeout-minutes: 10
+    steps:
+      - name: Check falconctl is installed
+        run: |
+          if ! command -v falconctl &> /dev/null; then
+            echo "::error::falconctl is not installed on this runner"
+            exit 1
+          fi
+          echo "falconctl found at $(command -v falconctl)"
+
+      - name: Verify CID is assigned
+        run: |
+          CID=$(sudo falconctl -g --cid 2>&1)
+          echo "CID output: ${CID}"
+          if echo "${CID}" | grep -qiE 'not set|not found|error|unknown'; then
+            echo "::error::CID is not assigned"
+            exit 1
+          fi
+          echo "CID is assigned"
+
+      - name: Verify AID is assigned
+        run: |
+          AID=$(sudo falconctl -g --aid 2>&1)
+          echo "AID output: ${AID}"
+          if echo "${AID}" | grep -qiE 'not set|not found|error|unknown'; then
+            echo "::error::AID is not assigned"
+            exit 1
+          fi
+          echo "AID is assigned"
