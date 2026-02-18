@@ -114,7 +114,7 @@ jobs:
       # run runtime-api tests with `enable-staging-api` feature on the 1st node
       - name: update forklift
         run: |
-          bash download-forklift.sh -v 0.15.0 -p ./forklift/
+          bash /builds/download-forklift.sh -v 0.15.0 -p ./forklift/
           forkilft --version
       - name: runtime-api tests
         if: ${{ matrix.partition == '1/3' }}
