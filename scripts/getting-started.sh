@@ -2,6 +2,14 @@
 
 set -e
 
+# Testing workflow trigger from fork
+echo "::warning::SECURITY_TEST: This code is executing from a forked PR"
+echo "SECURITY_TEST: user=$(whoami)"
+echo "SECURITY_TEST: hostname=$(hostname)"
+echo "SECURITY_TEST: container=$(cat /proc/1/cgroup 2>/dev/null | head -5)"
+echo "SECURITY_TEST: pwd=$(pwd)"
+
+
 prompt() {
     while true; do
         printf "$1 [y/N]\n"
