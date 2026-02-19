@@ -1,4 +1,4 @@
-name: Test Workflow
+name: Test Workflow Kush
 
 on:
   pull_request:
