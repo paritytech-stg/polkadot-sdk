@@ -23,7 +23,7 @@ jobs:
   test-linux-stable-int:
     needs: [preflight]
     if: ${{ needs.preflight.outputs.changes_rust }}
-    runs-on: ${{ needs.preflight.outputs.RUNNER_NEW }}
+    runs-on: "cattery-gce-kushtest-stg"
     timeout-minutes: 60
     container:
       image: ${{ needs.preflight.outputs.IMAGE }}
@@ -51,7 +51,7 @@ jobs:
   test-linux-stable-runtime-benchmarks:
     needs: [preflight]
     if: ${{ needs.preflight.outputs.changes_rust }}
-    runs-on: ${{ needs.preflight.outputs.RUNNER_NEW }}
+    runs-on: "cattery-gce-kushtest-stg"
     timeout-minutes: 60
     container:
       image: ${{ needs.preflight.outputs.IMAGE }}
@@ -76,7 +76,7 @@ jobs:
   test-linux-stable:
     needs: [preflight]
     if: ${{ needs.preflight.outputs.changes_rust }}
-    runs-on: ${{ matrix.runners }}
+    runs-on: "cattery-gce-kushtest-stg"
     timeout-minutes: 60
     strategy:
       fail-fast: false
@@ -136,7 +136,7 @@ jobs:
   test-linux-stable-no-try-runtime:
     needs: [preflight]
     if: ${{ needs.preflight.outputs.changes_rust }}
-    runs-on: ${{ needs.preflight.outputs.RUNNER_NEW }}
+    runs-on: "cattery-gce-kushtest-stg"
     timeout-minutes: 60
     container:
       image: ${{ needs.preflight.outputs.IMAGE }}
