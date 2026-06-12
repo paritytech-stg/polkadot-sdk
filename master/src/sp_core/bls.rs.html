@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/primitives/core/src/bls.rs`."><title>bls.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/primitives/core/src/bls.rs`."><title>bls.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sp_core" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sp_core" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">sp_core/</div>bls.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">sp_core/</div>bls.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -335,7 +335,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#185 id=185 data-nosnippet>185</a>
 <a href=#186 id=186 data-nosnippet>186</a>	<span class="kw">fn </span>from_seed_slice(seed_slice: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, SecretStringError&gt; {
 <a href=#187 id=187 data-nosnippet>187</a>		<span class="kw">if </span>seed_slice.len() != SECRET_KEY_SERIALIZED_SIZE {
-<a href=#188 id=188 data-nosnippet>188</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(SecretStringError::InvalidSeedLength)
+<a href=#188 id=188 data-nosnippet>188</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(SecretStringError::InvalidSeedLength);
 <a href=#189 id=189 data-nosnippet>189</a>		}
 <a href=#190 id=190 data-nosnippet>190</a>		<span class="kw">let </span>secret = w3f_bls::SecretKey::from_seed(seed_slice);
 <a href=#191 id=191 data-nosnippet>191</a>		<span class="kw">let </span>public = secret.into_public();
@@ -450,13 +450,13 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#300 id=300 data-nosnippet>300</a>		<span class="kw">let </span><span class="prelude-val">Ok</span>(allegedly_possessed_pubkey_as_bls_pubkey) =
 <a href=#301 id=301 data-nosnippet>301</a>			DoublePublicKey::&lt;T&gt;::from_bytes(allegedly_possessed_pubkey.as_ref())
 <a href=#302 id=302 data-nosnippet>302</a>		<span class="kw">else </span>{
-<a href=#303 id=303 data-nosnippet>303</a>			<span class="kw">return </span><span class="bool-val">false
-<a href=#304 id=304 data-nosnippet>304</a>		</span>};
+<a href=#303 id=303 data-nosnippet>303</a>			<span class="kw">return </span><span class="bool-val">false</span>;
+<a href=#304 id=304 data-nosnippet>304</a>		};
 <a href=#305 id=305 data-nosnippet>305</a>
 <a href=#306 id=306 data-nosnippet>306</a>		<span class="kw">let </span><span class="prelude-val">Ok</span>(proof_of_ownership) = proof_of_possession.<span class="number">0</span>[<span class="number">0</span>..SIGNATURE_SERIALIZED_SIZE].try_into()
 <a href=#307 id=307 data-nosnippet>307</a>		<span class="kw">else </span>{
-<a href=#308 id=308 data-nosnippet>308</a>			<span class="kw">return </span><span class="bool-val">false
-<a href=#309 id=309 data-nosnippet>309</a>		</span>};
+<a href=#308 id=308 data-nosnippet>308</a>			<span class="kw">return </span><span class="bool-val">false</span>;
+<a href=#309 id=309 data-nosnippet>309</a>		};
 <a href=#310 id=310 data-nosnippet>310</a>
 <a href=#311 id=311 data-nosnippet>311</a>		<span class="kw">if </span>!<span class="self">Self</span>::verify(
 <a href=#312 id=312 data-nosnippet>312</a>			<span class="kw-2">&amp;</span>proof_of_ownership,
@@ -858,7 +858,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#708 id=708 data-nosnippet>708</a>	</span><span class="kw">fn </span>proof_of_possession_must_fail_if_prover_does_not_possess_secret_key_for_bls381() {
 <a href=#709 id=709 data-nosnippet>709</a>		proof_of_possession_must_fail_if_prover_does_not_possess_secret_key::&lt;bls381::BlsEngine&gt;();
 <a href=#710 id=710 data-nosnippet>710</a>	}
-<a href=#711 id=711 data-nosnippet>711</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#711 id=711 data-nosnippet>711</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

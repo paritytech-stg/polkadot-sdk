@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/runtime/common/slot_range_helper/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/runtime/common/slot_range_helper/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="slot_range_helper" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="slot_range_helper" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">slot_range_helper/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">slot_range_helper/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Polkadot.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Polkadot is free software: you can redistribute it and/or modify
@@ -199,9 +199,9 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#49 id=49 data-nosnippet>49</a></span><span class="macro">macro_rules!</span> generate_slot_range{
 <a href=#50 id=50 data-nosnippet>50</a>	<span class="comment">// Entry point
 <a href=#51 id=51 data-nosnippet>51</a>	</span>($( <span class="macro-nonterminal">$x</span>:ident ( <span class="macro-nonterminal">$e</span>:expr ) ),<span class="kw-2">*</span>) =&gt; {
-<a href=#52 id=52 data-nosnippet>52</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::generate_lease_period_per_slot!</span>( $( <span class="macro-nonterminal">$x </span>)* );
-<a href=#53 id=53 data-nosnippet>53</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::generate_slot_range!</span>(@<span class="macro-nonterminal">inner
-<a href=#54 id=54 data-nosnippet>54</a>			</span>{ }
+<a href=#52 id=52 data-nosnippet>52</a>		<span class="macro-nonterminal">$crate::generate_lease_period_per_slot</span>!( $( <span class="macro-nonterminal">$x </span>)* );
+<a href=#53 id=53 data-nosnippet>53</a>		<span class="macro-nonterminal">$crate::generate_slot_range</span>!(@inner
+<a href=#54 id=54 data-nosnippet>54</a>			{ }
 <a href=#55 id=55 data-nosnippet>55</a>			$( <span class="macro-nonterminal">$x </span>( <span class="macro-nonterminal">$e </span>) )*
 <a href=#56 id=56 data-nosnippet>56</a>		);
 <a href=#57 id=57 data-nosnippet>57</a>	};
@@ -211,9 +211,9 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#61 id=61 data-nosnippet>61</a>		<span class="macro-nonterminal">$current</span>:ident ( <span class="macro-nonterminal">$ce</span>:expr )
 <a href=#62 id=62 data-nosnippet>62</a>		$( <span class="macro-nonterminal">$remaining</span>:ident ( <span class="macro-nonterminal">$re</span>:expr ) )*
 <a href=#63 id=63 data-nosnippet>63</a>	) =&gt; {
-<a href=#64 id=64 data-nosnippet>64</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::paste::paste!</span> {
-<a href=#65 id=65 data-nosnippet>65</a>			<span class="macro-nonterminal">$</span><span class="macro">crate::generate_slot_range!</span>(@<span class="macro-nonterminal">inner
-<a href=#66 id=66 data-nosnippet>66</a>				</span>{
+<a href=#64 id=64 data-nosnippet>64</a>		<span class="macro-nonterminal">$crate::paste::paste</span>! {
+<a href=#65 id=65 data-nosnippet>65</a>			<span class="macro-nonterminal">$crate::generate_slot_range</span>!(@inner
+<a href=#66 id=66 data-nosnippet>66</a>				{
 <a href=#67 id=67 data-nosnippet>67</a>					$( <span class="macro-nonterminal">$parsed </span>( <span class="macro-nonterminal">$t1</span>, <span class="macro-nonterminal">$t2 </span>) )*
 <a href=#68 id=68 data-nosnippet>68</a>					[&lt; <span class="macro-nonterminal">$current $current </span>&gt;] ( <span class="macro-nonterminal">$ce</span>, <span class="macro-nonterminal">$ce </span>)
 <a href=#69 id=69 data-nosnippet>69</a>					$( [&lt; <span class="macro-nonterminal">$current $remaining </span>&gt;] (<span class="macro-nonterminal">$ce</span>, <span class="macro-nonterminal">$re</span>) )*
@@ -225,9 +225,9 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#75 id=75 data-nosnippet>75</a>	(@inner
 <a href=#76 id=76 data-nosnippet>76</a>		{ $( <span class="macro-nonterminal">$parsed</span>:ident ( <span class="macro-nonterminal">$t1</span>:expr, <span class="macro-nonterminal">$t2</span>:expr ) )* }
 <a href=#77 id=77 data-nosnippet>77</a>	) =&gt; {
-<a href=#78 id=78 data-nosnippet>78</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::generate_slot_range_enum!</span>(@<span class="macro-nonterminal">inner </span>$( <span class="macro-nonterminal">$parsed </span>)* );
+<a href=#78 id=78 data-nosnippet>78</a>		<span class="macro-nonterminal">$crate::generate_slot_range_enum</span>!(@inner $( <span class="macro-nonterminal">$parsed </span>)* );
 <a href=#79 id=79 data-nosnippet>79</a>
-<a href=#80 id=80 data-nosnippet>80</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::generate_slot_range_count!</span>( $( <span class="macro-nonterminal">$parsed </span>)* );
+<a href=#80 id=80 data-nosnippet>80</a>		<span class="macro-nonterminal">$crate::generate_slot_range_count</span>!( $( <span class="macro-nonterminal">$parsed </span>)* );
 <a href=#81 id=81 data-nosnippet>81</a>
 <a href=#82 id=82 data-nosnippet>82</a>		<span class="attr">#[cfg(feature = <span class="string">"std"</span>)]
 <a href=#83 id=83 data-nosnippet>83</a>		</span><span class="kw">impl </span>std::fmt::Debug <span class="kw">for </span>SlotRange {
@@ -241,11 +241,11 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#91 id=91 data-nosnippet>91</a>			<span class="kw">pub const </span>LEASE_PERIODS_PER_SLOT: usize = LEASE_PERIODS_PER_SLOT;
 <a href=#92 id=92 data-nosnippet>92</a>			<span class="kw">pub const </span>SLOT_RANGE_COUNT: usize = SLOT_RANGE_COUNT;
 <a href=#93 id=93 data-nosnippet>93</a>
-<a href=#94 id=94 data-nosnippet>94</a>			<span class="macro-nonterminal">$</span><span class="macro">crate::generate_slot_range_as_pair!</span>(@<span class="macro-nonterminal">inner </span>$( <span class="macro-nonterminal">$parsed </span>( <span class="macro-nonterminal">$t1</span>, <span class="macro-nonterminal">$t2 </span>) )* );
+<a href=#94 id=94 data-nosnippet>94</a>			<span class="macro-nonterminal">$crate::generate_slot_range_as_pair</span>!(@inner $( <span class="macro-nonterminal">$parsed </span>( <span class="macro-nonterminal">$t1</span>, <span class="macro-nonterminal">$t2 </span>) )* );
 <a href=#95 id=95 data-nosnippet>95</a>
-<a href=#96 id=96 data-nosnippet>96</a>			<span class="macro-nonterminal">$</span><span class="macro">crate::generate_slot_range_len!</span>(@<span class="macro-nonterminal">inner </span>$( <span class="macro-nonterminal">$parsed </span>( <span class="macro-nonterminal">$t1</span>, <span class="macro-nonterminal">$t2 </span>) )* );
+<a href=#96 id=96 data-nosnippet>96</a>			<span class="macro-nonterminal">$crate::generate_slot_range_len</span>!(@inner $( <span class="macro-nonterminal">$parsed </span>( <span class="macro-nonterminal">$t1</span>, <span class="macro-nonterminal">$t2 </span>) )* );
 <a href=#97 id=97 data-nosnippet>97</a>
-<a href=#98 id=98 data-nosnippet>98</a>			<span class="macro-nonterminal">$</span><span class="macro">crate::generate_slot_range_new_bounded!</span>(@<span class="macro-nonterminal">inner </span>$( <span class="macro-nonterminal">$parsed </span>( <span class="macro-nonterminal">$t1</span>, <span class="macro-nonterminal">$t2 </span>) )* );
+<a href=#98 id=98 data-nosnippet>98</a>			<span class="macro-nonterminal">$crate::generate_slot_range_new_bounded</span>!(@inner $( <span class="macro-nonterminal">$parsed </span>( <span class="macro-nonterminal">$t1</span>, <span class="macro-nonterminal">$t2 </span>) )* );
 <a href=#99 id=99 data-nosnippet>99</a>		}
 <a href=#100 id=100 data-nosnippet>100</a>	};
 <a href=#101 id=101 data-nosnippet>101</a>}
@@ -349,13 +349,13 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#199 id=199 data-nosnippet>199</a>	(
 <a href=#200 id=200 data-nosnippet>200</a>		<span class="macro-nonterminal">$start</span>:ident $( <span class="macro-nonterminal">$rest</span>:ident )*
 <a href=#201 id=201 data-nosnippet>201</a>	) =&gt; {
-<a href=#202 id=202 data-nosnippet>202</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::generate_slot_range_count!</span>(@<span class="macro-nonterminal">inner </span><span class="number">1</span>; $( <span class="macro-nonterminal">$rest </span>)<span class="kw-2">*</span>);
+<a href=#202 id=202 data-nosnippet>202</a>		<span class="macro-nonterminal">$crate::generate_slot_range_count</span>!(@inner <span class="number">1</span>; $( <span class="macro-nonterminal">$rest </span>)<span class="kw-2">*</span>);
 <a href=#203 id=203 data-nosnippet>203</a>	};
 <a href=#204 id=204 data-nosnippet>204</a>	(@inner
 <a href=#205 id=205 data-nosnippet>205</a>		<span class="macro-nonterminal">$count</span>:expr;
 <a href=#206 id=206 data-nosnippet>206</a>		<span class="macro-nonterminal">$start</span>:ident $( <span class="macro-nonterminal">$rest</span>:ident )*
 <a href=#207 id=207 data-nosnippet>207</a>	) =&gt; {
-<a href=#208 id=208 data-nosnippet>208</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::generate_slot_range_count!</span>(@<span class="macro-nonterminal">inner $count </span>+ <span class="number">1</span>; $( <span class="macro-nonterminal">$rest </span>)<span class="kw-2">*</span>);
+<a href=#208 id=208 data-nosnippet>208</a>		<span class="macro-nonterminal">$crate::generate_slot_range_count</span>!(@inner <span class="macro-nonterminal">$count </span>+ <span class="number">1</span>; $( <span class="macro-nonterminal">$rest </span>)<span class="kw-2">*</span>);
 <a href=#209 id=209 data-nosnippet>209</a>	};
 <a href=#210 id=210 data-nosnippet>210</a>	(@inner
 <a href=#211 id=211 data-nosnippet>211</a>		<span class="macro-nonterminal">$count</span>:expr;
@@ -370,13 +370,13 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#220 id=220 data-nosnippet>220</a>	(
 <a href=#221 id=221 data-nosnippet>221</a>		<span class="macro-nonterminal">$start</span>:ident $( <span class="macro-nonterminal">$rest</span>:ident )*
 <a href=#222 id=222 data-nosnippet>222</a>	) =&gt; {
-<a href=#223 id=223 data-nosnippet>223</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::generate_lease_period_per_slot!</span>(@<span class="macro-nonterminal">inner </span><span class="number">1</span>; $( <span class="macro-nonterminal">$rest </span>)<span class="kw-2">*</span>);
+<a href=#223 id=223 data-nosnippet>223</a>		<span class="macro-nonterminal">$crate::generate_lease_period_per_slot</span>!(@inner <span class="number">1</span>; $( <span class="macro-nonterminal">$rest </span>)<span class="kw-2">*</span>);
 <a href=#224 id=224 data-nosnippet>224</a>	};
 <a href=#225 id=225 data-nosnippet>225</a>	(@inner
 <a href=#226 id=226 data-nosnippet>226</a>		<span class="macro-nonterminal">$count</span>:expr;
 <a href=#227 id=227 data-nosnippet>227</a>		<span class="macro-nonterminal">$start</span>:ident $( <span class="macro-nonterminal">$rest</span>:ident )*
 <a href=#228 id=228 data-nosnippet>228</a>	) =&gt; {
-<a href=#229 id=229 data-nosnippet>229</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::generate_lease_period_per_slot!</span>(@<span class="macro-nonterminal">inner $count </span>+ <span class="number">1</span>; $( <span class="macro-nonterminal">$rest </span>)<span class="kw-2">*</span>);
+<a href=#229 id=229 data-nosnippet>229</a>		<span class="macro-nonterminal">$crate::generate_lease_period_per_slot</span>!(@inner <span class="macro-nonterminal">$count </span>+ <span class="number">1</span>; $( <span class="macro-nonterminal">$rest </span>)<span class="kw-2">*</span>);
 <a href=#230 id=230 data-nosnippet>230</a>	};
 <a href=#231 id=231 data-nosnippet>231</a>	(@inner
 <a href=#232 id=232 data-nosnippet>232</a>		<span class="macro-nonterminal">$count</span>:expr;
@@ -387,57 +387,56 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#237 id=237 data-nosnippet>237</a>
 <a href=#238 id=238 data-nosnippet>238</a><span class="attr">#[cfg(test)]
 <a href=#239 id=239 data-nosnippet>239</a></span><span class="kw">mod </span>tests {
-<a href=#240 id=240 data-nosnippet>240</a>	<span class="kw">use super</span>::<span class="kw-2">*</span>;
-<a href=#241 id=241 data-nosnippet>241</a>
-<a href=#242 id=242 data-nosnippet>242</a>	<span class="attr">#[test]
-<a href=#243 id=243 data-nosnippet>243</a>	</span><span class="kw">fn </span>slot_range_4_works() {
-<a href=#244 id=244 data-nosnippet>244</a>		<span class="macro">generate_slot_range!</span>(Zero(<span class="number">0</span>), One(<span class="number">1</span>), Two(<span class="number">2</span>), Three(<span class="number">3</span>));
-<a href=#245 id=245 data-nosnippet>245</a>
-<a href=#246 id=246 data-nosnippet>246</a>		<span class="macro">assert_eq!</span>(SlotRange::LEASE_PERIODS_PER_SLOT, <span class="number">4</span>);
-<a href=#247 id=247 data-nosnippet>247</a>		<span class="comment">// Sum over n from 0 - 4
-<a href=#248 id=248 data-nosnippet>248</a>		</span><span class="macro">assert_eq!</span>(SlotRange::SLOT_RANGE_COUNT, <span class="number">10</span>);
-<a href=#249 id=249 data-nosnippet>249</a>		<span class="macro">assert_eq!</span>(SlotRange::new_bounded(<span class="number">0u32</span>, <span class="number">1u32</span>, <span class="number">2u32</span>).unwrap(), SlotRange::OneTwo);
-<a href=#250 id=250 data-nosnippet>250</a>		<span class="macro">assert_eq!</span>(SlotRange::new_bounded(<span class="number">5u32</span>, <span class="number">6u32</span>, <span class="number">7u32</span>).unwrap(), SlotRange::OneTwo);
-<a href=#251 id=251 data-nosnippet>251</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">6u32</span>, <span class="number">7u32</span>).is_err());
-<a href=#252 id=252 data-nosnippet>252</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">16u32</span>, <span class="number">17u32</span>).is_err());
-<a href=#253 id=253 data-nosnippet>253</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">11u32</span>, <span class="number">10u32</span>).is_err());
-<a href=#254 id=254 data-nosnippet>254</a>		<span class="macro">assert_eq!</span>(SlotRange::TwoTwo.len(), <span class="number">1</span>);
-<a href=#255 id=255 data-nosnippet>255</a>		<span class="macro">assert_eq!</span>(SlotRange::OneTwo.len(), <span class="number">2</span>);
-<a href=#256 id=256 data-nosnippet>256</a>		<span class="macro">assert_eq!</span>(SlotRange::ZeroThree.len(), <span class="number">4</span>);
-<a href=#257 id=257 data-nosnippet>257</a>		<span class="macro">assert!</span>(SlotRange::ZeroOne.intersects(SlotRange::OneThree));
-<a href=#258 id=258 data-nosnippet>258</a>		<span class="macro">assert!</span>(!SlotRange::ZeroOne.intersects(SlotRange::TwoThree));
-<a href=#259 id=259 data-nosnippet>259</a>		<span class="macro">assert_eq!</span>(SlotRange::ZeroZero.as_pair(), (<span class="number">0</span>, <span class="number">0</span>));
-<a href=#260 id=260 data-nosnippet>260</a>		<span class="macro">assert_eq!</span>(SlotRange::OneThree.as_pair(), (<span class="number">1</span>, <span class="number">3</span>));
-<a href=#261 id=261 data-nosnippet>261</a>	}
-<a href=#262 id=262 data-nosnippet>262</a>
-<a href=#263 id=263 data-nosnippet>263</a>	<span class="attr">#[test]
-<a href=#264 id=264 data-nosnippet>264</a>	</span><span class="kw">fn </span>slot_range_8_works() {
-<a href=#265 id=265 data-nosnippet>265</a>		<span class="macro">generate_slot_range!</span>(Zero(<span class="number">0</span>), One(<span class="number">1</span>), Two(<span class="number">2</span>), Three(<span class="number">3</span>), Four(<span class="number">4</span>), Five(<span class="number">5</span>), Six(<span class="number">6</span>), Seven(<span class="number">7</span>));
-<a href=#266 id=266 data-nosnippet>266</a>
-<a href=#267 id=267 data-nosnippet>267</a>		<span class="macro">assert_eq!</span>(SlotRange::LEASE_PERIODS_PER_SLOT, <span class="number">8</span>);
-<a href=#268 id=268 data-nosnippet>268</a>		<span class="comment">// Sum over n from 0 to 8
-<a href=#269 id=269 data-nosnippet>269</a>		</span><span class="macro">assert_eq!</span>(SlotRange::SLOT_RANGE_COUNT, <span class="number">36</span>);
-<a href=#270 id=270 data-nosnippet>270</a>		<span class="macro">assert_eq!</span>(SlotRange::new_bounded(<span class="number">0u32</span>, <span class="number">1u32</span>, <span class="number">2u32</span>).unwrap(), SlotRange::OneTwo);
-<a href=#271 id=271 data-nosnippet>271</a>		<span class="macro">assert_eq!</span>(SlotRange::new_bounded(<span class="number">5u32</span>, <span class="number">6u32</span>, <span class="number">7u32</span>).unwrap(), SlotRange::OneTwo);
-<a href=#272 id=272 data-nosnippet>272</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">6u32</span>, <span class="number">7u32</span>).is_err());
-<a href=#273 id=273 data-nosnippet>273</a>		<span class="comment">// This one passes with slot range 8
-<a href=#274 id=274 data-nosnippet>274</a>		</span><span class="macro">assert_eq!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">16u32</span>, <span class="number">17u32</span>).unwrap(), SlotRange::SixSeven);
-<a href=#275 id=275 data-nosnippet>275</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">17u32</span>, <span class="number">18u32</span>).is_err());
-<a href=#276 id=276 data-nosnippet>276</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">20u32</span>, <span class="number">21u32</span>).is_err());
-<a href=#277 id=277 data-nosnippet>277</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">11u32</span>, <span class="number">10u32</span>).is_err());
-<a href=#278 id=278 data-nosnippet>278</a>		<span class="macro">assert_eq!</span>(SlotRange::TwoTwo.len(), <span class="number">1</span>);
-<a href=#279 id=279 data-nosnippet>279</a>		<span class="macro">assert_eq!</span>(SlotRange::OneTwo.len(), <span class="number">2</span>);
-<a href=#280 id=280 data-nosnippet>280</a>		<span class="macro">assert_eq!</span>(SlotRange::ZeroThree.len(), <span class="number">4</span>);
-<a href=#281 id=281 data-nosnippet>281</a>		<span class="macro">assert_eq!</span>(SlotRange::ZeroSeven.len(), <span class="number">8</span>);
-<a href=#282 id=282 data-nosnippet>282</a>		<span class="macro">assert!</span>(SlotRange::ZeroOne.intersects(SlotRange::OneThree));
-<a href=#283 id=283 data-nosnippet>283</a>		<span class="macro">assert!</span>(!SlotRange::ZeroOne.intersects(SlotRange::TwoThree));
-<a href=#284 id=284 data-nosnippet>284</a>		<span class="macro">assert!</span>(SlotRange::FiveSix.intersects(SlotRange::SixSeven));
-<a href=#285 id=285 data-nosnippet>285</a>		<span class="macro">assert!</span>(!SlotRange::ThreeFive.intersects(SlotRange::SixSeven));
-<a href=#286 id=286 data-nosnippet>286</a>		<span class="macro">assert_eq!</span>(SlotRange::ZeroZero.as_pair(), (<span class="number">0</span>, <span class="number">0</span>));
-<a href=#287 id=287 data-nosnippet>287</a>		<span class="macro">assert_eq!</span>(SlotRange::OneThree.as_pair(), (<span class="number">1</span>, <span class="number">3</span>));
-<a href=#288 id=288 data-nosnippet>288</a>		<span class="macro">assert_eq!</span>(SlotRange::SixSeven.as_pair(), (<span class="number">6</span>, <span class="number">7</span>));
-<a href=#289 id=289 data-nosnippet>289</a>	}
-<a href=#290 id=290 data-nosnippet>290</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#240 id=240 data-nosnippet>240</a>	<span class="attr">#[test]
+<a href=#241 id=241 data-nosnippet>241</a>	</span><span class="kw">fn </span>slot_range_4_works() {
+<a href=#242 id=242 data-nosnippet>242</a>		<span class="macro">generate_slot_range!</span>(Zero(<span class="number">0</span>), One(<span class="number">1</span>), Two(<span class="number">2</span>), Three(<span class="number">3</span>));
+<a href=#243 id=243 data-nosnippet>243</a>
+<a href=#244 id=244 data-nosnippet>244</a>		<span class="macro">assert_eq!</span>(SlotRange::LEASE_PERIODS_PER_SLOT, <span class="number">4</span>);
+<a href=#245 id=245 data-nosnippet>245</a>		<span class="comment">// Sum over n from 0 - 4
+<a href=#246 id=246 data-nosnippet>246</a>		</span><span class="macro">assert_eq!</span>(SlotRange::SLOT_RANGE_COUNT, <span class="number">10</span>);
+<a href=#247 id=247 data-nosnippet>247</a>		<span class="macro">assert_eq!</span>(SlotRange::new_bounded(<span class="number">0u32</span>, <span class="number">1u32</span>, <span class="number">2u32</span>).unwrap(), SlotRange::OneTwo);
+<a href=#248 id=248 data-nosnippet>248</a>		<span class="macro">assert_eq!</span>(SlotRange::new_bounded(<span class="number">5u32</span>, <span class="number">6u32</span>, <span class="number">7u32</span>).unwrap(), SlotRange::OneTwo);
+<a href=#249 id=249 data-nosnippet>249</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">6u32</span>, <span class="number">7u32</span>).is_err());
+<a href=#250 id=250 data-nosnippet>250</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">16u32</span>, <span class="number">17u32</span>).is_err());
+<a href=#251 id=251 data-nosnippet>251</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">11u32</span>, <span class="number">10u32</span>).is_err());
+<a href=#252 id=252 data-nosnippet>252</a>		<span class="macro">assert_eq!</span>(SlotRange::TwoTwo.len(), <span class="number">1</span>);
+<a href=#253 id=253 data-nosnippet>253</a>		<span class="macro">assert_eq!</span>(SlotRange::OneTwo.len(), <span class="number">2</span>);
+<a href=#254 id=254 data-nosnippet>254</a>		<span class="macro">assert_eq!</span>(SlotRange::ZeroThree.len(), <span class="number">4</span>);
+<a href=#255 id=255 data-nosnippet>255</a>		<span class="macro">assert!</span>(SlotRange::ZeroOne.intersects(SlotRange::OneThree));
+<a href=#256 id=256 data-nosnippet>256</a>		<span class="macro">assert!</span>(!SlotRange::ZeroOne.intersects(SlotRange::TwoThree));
+<a href=#257 id=257 data-nosnippet>257</a>		<span class="macro">assert_eq!</span>(SlotRange::ZeroZero.as_pair(), (<span class="number">0</span>, <span class="number">0</span>));
+<a href=#258 id=258 data-nosnippet>258</a>		<span class="macro">assert_eq!</span>(SlotRange::OneThree.as_pair(), (<span class="number">1</span>, <span class="number">3</span>));
+<a href=#259 id=259 data-nosnippet>259</a>	}
+<a href=#260 id=260 data-nosnippet>260</a>
+<a href=#261 id=261 data-nosnippet>261</a>	<span class="attr">#[test]
+<a href=#262 id=262 data-nosnippet>262</a>	</span><span class="kw">fn </span>slot_range_8_works() {
+<a href=#263 id=263 data-nosnippet>263</a>		<span class="macro">generate_slot_range!</span>(Zero(<span class="number">0</span>), One(<span class="number">1</span>), Two(<span class="number">2</span>), Three(<span class="number">3</span>), Four(<span class="number">4</span>), Five(<span class="number">5</span>), Six(<span class="number">6</span>), Seven(<span class="number">7</span>));
+<a href=#264 id=264 data-nosnippet>264</a>
+<a href=#265 id=265 data-nosnippet>265</a>		<span class="macro">assert_eq!</span>(SlotRange::LEASE_PERIODS_PER_SLOT, <span class="number">8</span>);
+<a href=#266 id=266 data-nosnippet>266</a>		<span class="comment">// Sum over n from 0 to 8
+<a href=#267 id=267 data-nosnippet>267</a>		</span><span class="macro">assert_eq!</span>(SlotRange::SLOT_RANGE_COUNT, <span class="number">36</span>);
+<a href=#268 id=268 data-nosnippet>268</a>		<span class="macro">assert_eq!</span>(SlotRange::new_bounded(<span class="number">0u32</span>, <span class="number">1u32</span>, <span class="number">2u32</span>).unwrap(), SlotRange::OneTwo);
+<a href=#269 id=269 data-nosnippet>269</a>		<span class="macro">assert_eq!</span>(SlotRange::new_bounded(<span class="number">5u32</span>, <span class="number">6u32</span>, <span class="number">7u32</span>).unwrap(), SlotRange::OneTwo);
+<a href=#270 id=270 data-nosnippet>270</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">6u32</span>, <span class="number">7u32</span>).is_err());
+<a href=#271 id=271 data-nosnippet>271</a>		<span class="comment">// This one passes with slot range 8
+<a href=#272 id=272 data-nosnippet>272</a>		</span><span class="macro">assert_eq!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">16u32</span>, <span class="number">17u32</span>).unwrap(), SlotRange::SixSeven);
+<a href=#273 id=273 data-nosnippet>273</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">17u32</span>, <span class="number">18u32</span>).is_err());
+<a href=#274 id=274 data-nosnippet>274</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">20u32</span>, <span class="number">21u32</span>).is_err());
+<a href=#275 id=275 data-nosnippet>275</a>		<span class="macro">assert!</span>(SlotRange::new_bounded(<span class="number">10u32</span>, <span class="number">11u32</span>, <span class="number">10u32</span>).is_err());
+<a href=#276 id=276 data-nosnippet>276</a>		<span class="macro">assert_eq!</span>(SlotRange::TwoTwo.len(), <span class="number">1</span>);
+<a href=#277 id=277 data-nosnippet>277</a>		<span class="macro">assert_eq!</span>(SlotRange::OneTwo.len(), <span class="number">2</span>);
+<a href=#278 id=278 data-nosnippet>278</a>		<span class="macro">assert_eq!</span>(SlotRange::ZeroThree.len(), <span class="number">4</span>);
+<a href=#279 id=279 data-nosnippet>279</a>		<span class="macro">assert_eq!</span>(SlotRange::ZeroSeven.len(), <span class="number">8</span>);
+<a href=#280 id=280 data-nosnippet>280</a>		<span class="macro">assert!</span>(SlotRange::ZeroOne.intersects(SlotRange::OneThree));
+<a href=#281 id=281 data-nosnippet>281</a>		<span class="macro">assert!</span>(!SlotRange::ZeroOne.intersects(SlotRange::TwoThree));
+<a href=#282 id=282 data-nosnippet>282</a>		<span class="macro">assert!</span>(SlotRange::FiveSix.intersects(SlotRange::SixSeven));
+<a href=#283 id=283 data-nosnippet>283</a>		<span class="macro">assert!</span>(!SlotRange::ThreeFive.intersects(SlotRange::SixSeven));
+<a href=#284 id=284 data-nosnippet>284</a>		<span class="macro">assert_eq!</span>(SlotRange::ZeroZero.as_pair(), (<span class="number">0</span>, <span class="number">0</span>));
+<a href=#285 id=285 data-nosnippet>285</a>		<span class="macro">assert_eq!</span>(SlotRange::OneThree.as_pair(), (<span class="number">1</span>, <span class="number">3</span>));
+<a href=#286 id=286 data-nosnippet>286</a>		<span class="macro">assert_eq!</span>(SlotRange::SixSeven.as_pair(), (<span class="number">6</span>, <span class="number">7</span>));
+<a href=#287 id=287 data-nosnippet>287</a>	}
+<a href=#288 id=288 data-nosnippet>288</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

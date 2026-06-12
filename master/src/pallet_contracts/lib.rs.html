@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/contracts/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/contracts/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_contracts" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_contracts" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_contracts/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_contracts/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -1053,7 +1053,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#903 id=903 data-nosnippet>903</a>				<span class="kw">let </span>contract = <span class="kw">if let </span><span class="prelude-val">Some</span>(contract) = contract {
 <a href=#904 id=904 data-nosnippet>904</a>					contract
 <a href=#905 id=905 data-nosnippet>905</a>				} <span class="kw">else </span>{
-<a href=#906 id=906 data-nosnippet>906</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(&lt;Error&lt;T&gt;&gt;::ContractNotFound.into())
+<a href=#906 id=906 data-nosnippet>906</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(&lt;Error&lt;T&gt;&gt;::ContractNotFound.into());
 <a href=#907 id=907 data-nosnippet>907</a>				};
 <a href=#908 id=908 data-nosnippet>908</a>				&lt;ExecStack&lt;T, WasmBlob&lt;T&gt;&gt;&gt;::increment_refcount(code_hash)<span class="question-mark">?</span>;
 <a href=#909 id=909 data-nosnippet>909</a>				&lt;ExecStack&lt;T, WasmBlob&lt;T&gt;&gt;&gt;::decrement_refcount(contract.code_hash);
@@ -1661,7 +1661,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1511 id=1511 data-nosnippet>1511</a>				gas_meter: GasMeter::new(gas_limit),
 <a href=#1512 id=1512 data-nosnippet>1512</a>				storage_deposit: Default::default(),
 <a href=#1513 id=1513 data-nosnippet>1513</a>				result: <span class="prelude-val">Err</span>(ExecError { error: e.into(), origin: ErrorOrigin::Caller }),
-<a href=#1514 id=1514 data-nosnippet>1514</a>			}
+<a href=#1514 id=1514 data-nosnippet>1514</a>			};
 <a href=#1515 id=1515 data-nosnippet>1515</a>		}
 <a href=#1516 id=1516 data-nosnippet>1516</a>
 <a href=#1517 id=1517 data-nosnippet>1517</a>		executing_contract::using_once(<span class="kw-2">&amp;mut </span><span class="bool-val">false</span>, || {
@@ -1716,425 +1716,428 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1566 id=1566 data-nosnippet>1566</a>		<span class="kw">let </span><span class="kw-2">mut </span>storage_meter =
 <a href=#1567 id=1567 data-nosnippet>1567</a>			<span class="kw">match </span>StorageMeter::new(<span class="kw-2">&amp;</span>origin, common.storage_deposit_limit, common.value) {
 <a href=#1568 id=1568 data-nosnippet>1568</a>				<span class="prelude-val">Ok</span>(meter) =&gt; meter,
-<a href=#1569 id=1569 data-nosnippet>1569</a>				<span class="prelude-val">Err</span>(err) =&gt;
+<a href=#1569 id=1569 data-nosnippet>1569</a>				<span class="prelude-val">Err</span>(err) =&gt; {
 <a href=#1570 id=1570 data-nosnippet>1570</a>					<span class="kw">return </span>InternalOutput {
 <a href=#1571 id=1571 data-nosnippet>1571</a>						result: <span class="prelude-val">Err</span>(err.into()),
 <a href=#1572 id=1572 data-nosnippet>1572</a>						gas_meter,
 <a href=#1573 id=1573 data-nosnippet>1573</a>						storage_deposit: Default::default(),
-<a href=#1574 id=1574 data-nosnippet>1574</a>					},
-<a href=#1575 id=1575 data-nosnippet>1575</a>			};
-<a href=#1576 id=1576 data-nosnippet>1576</a>		<span class="kw">let </span>schedule = T::Schedule::get();
-<a href=#1577 id=1577 data-nosnippet>1577</a>		<span class="kw">let </span>result = ExecStack::&lt;T, WasmBlob&lt;T&gt;&gt;::run_call(
-<a href=#1578 id=1578 data-nosnippet>1578</a>			origin.clone(),
-<a href=#1579 id=1579 data-nosnippet>1579</a>			dest.clone(),
-<a href=#1580 id=1580 data-nosnippet>1580</a>			<span class="kw-2">&amp;mut </span>gas_meter,
-<a href=#1581 id=1581 data-nosnippet>1581</a>			<span class="kw-2">&amp;mut </span>storage_meter,
-<a href=#1582 id=1582 data-nosnippet>1582</a>			<span class="kw-2">&amp;</span>schedule,
-<a href=#1583 id=1583 data-nosnippet>1583</a>			value,
-<a href=#1584 id=1584 data-nosnippet>1584</a>			data.clone(),
-<a href=#1585 id=1585 data-nosnippet>1585</a>			debug_message,
-<a href=#1586 id=1586 data-nosnippet>1586</a>			determinism,
-<a href=#1587 id=1587 data-nosnippet>1587</a>		);
-<a href=#1588 id=1588 data-nosnippet>1588</a>
-<a href=#1589 id=1589 data-nosnippet>1589</a>		<span class="kw">match </span>storage_meter.try_into_deposit(<span class="kw-2">&amp;</span>origin) {
-<a href=#1590 id=1590 data-nosnippet>1590</a>			<span class="prelude-val">Ok</span>(storage_deposit) =&gt; InternalOutput { gas_meter, storage_deposit, result },
-<a href=#1591 id=1591 data-nosnippet>1591</a>			<span class="prelude-val">Err</span>(err) =&gt; InternalOutput {
-<a href=#1592 id=1592 data-nosnippet>1592</a>				gas_meter,
-<a href=#1593 id=1593 data-nosnippet>1593</a>				storage_deposit: Default::default(),
-<a href=#1594 id=1594 data-nosnippet>1594</a>				result: <span class="prelude-val">Err</span>(err.into()),
-<a href=#1595 id=1595 data-nosnippet>1595</a>			},
-<a href=#1596 id=1596 data-nosnippet>1596</a>		}
-<a href=#1597 id=1597 data-nosnippet>1597</a>	}
-<a href=#1598 id=1598 data-nosnippet>1598</a>
-<a href=#1599 id=1599 data-nosnippet>1599</a>	<span class="kw">fn </span>ensure_origin(<span class="kw-2">&amp;</span><span class="self">self</span>, _origin: Origin&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), DispatchError&gt; {
-<a href=#1600 id=1600 data-nosnippet>1600</a>		<span class="prelude-val">Ok</span>(())
-<a href=#1601 id=1601 data-nosnippet>1601</a>	}
-<a href=#1602 id=1602 data-nosnippet>1602</a>}
-<a href=#1603 id=1603 data-nosnippet>1603</a>
-<a href=#1604 id=1604 data-nosnippet>1604</a><span class="kw">impl</span>&lt;T: Config&gt; Invokable&lt;T&gt; <span class="kw">for </span>InstantiateInput&lt;T&gt; {
-<a href=#1605 id=1605 data-nosnippet>1605</a>	<span class="kw">type </span>Output = (AccountIdOf&lt;T&gt;, ExecReturnValue);
-<a href=#1606 id=1606 data-nosnippet>1606</a>
-<a href=#1607 id=1607 data-nosnippet>1607</a>	<span class="kw">fn </span>run(
-<a href=#1608 id=1608 data-nosnippet>1608</a>		<span class="self">self</span>,
-<a href=#1609 id=1609 data-nosnippet>1609</a>		common: CommonInput&lt;T&gt;,
-<a href=#1610 id=1610 data-nosnippet>1610</a>		<span class="kw-2">mut </span>gas_meter: GasMeter&lt;T&gt;,
-<a href=#1611 id=1611 data-nosnippet>1611</a>	) -&gt; InternalOutput&lt;T, <span class="self">Self</span>::Output&gt; {
-<a href=#1612 id=1612 data-nosnippet>1612</a>		<span class="kw">let </span><span class="kw-2">mut </span>storage_deposit = Default::default();
-<a href=#1613 id=1613 data-nosnippet>1613</a>		<span class="kw">let </span>try_exec = || {
-<a href=#1614 id=1614 data-nosnippet>1614</a>			<span class="kw">let </span>schedule = T::Schedule::get();
-<a href=#1615 id=1615 data-nosnippet>1615</a>			<span class="kw">let </span>InstantiateInput { salt, .. } = <span class="self">self</span>;
-<a href=#1616 id=1616 data-nosnippet>1616</a>			<span class="kw">let </span>CommonInput { origin: contract_origin, .. } = common;
-<a href=#1617 id=1617 data-nosnippet>1617</a>			<span class="kw">let </span>origin = contract_origin.account_id()<span class="question-mark">?</span>;
-<a href=#1618 id=1618 data-nosnippet>1618</a>
-<a href=#1619 id=1619 data-nosnippet>1619</a>			<span class="kw">let </span>executable = <span class="kw">match </span><span class="self">self</span>.code {
-<a href=#1620 id=1620 data-nosnippet>1620</a>				WasmCode::Wasm(module) =&gt; module,
-<a href=#1621 id=1621 data-nosnippet>1621</a>				WasmCode::CodeHash(code_hash) =&gt; WasmBlob::from_storage(code_hash, <span class="kw-2">&amp;mut </span>gas_meter)<span class="question-mark">?</span>,
-<a href=#1622 id=1622 data-nosnippet>1622</a>			};
-<a href=#1623 id=1623 data-nosnippet>1623</a>
-<a href=#1624 id=1624 data-nosnippet>1624</a>			<span class="kw">let </span>contract_origin = Origin::from_account_id(origin.clone());
-<a href=#1625 id=1625 data-nosnippet>1625</a>			<span class="kw">let </span><span class="kw-2">mut </span>storage_meter =
-<a href=#1626 id=1626 data-nosnippet>1626</a>				StorageMeter::new(<span class="kw-2">&amp;</span>contract_origin, common.storage_deposit_limit, common.value)<span class="question-mark">?</span>;
-<a href=#1627 id=1627 data-nosnippet>1627</a>			<span class="kw">let </span>CommonInput { value, data, debug_message, .. } = common;
-<a href=#1628 id=1628 data-nosnippet>1628</a>			<span class="kw">let </span>result = ExecStack::&lt;T, WasmBlob&lt;T&gt;&gt;::run_instantiate(
-<a href=#1629 id=1629 data-nosnippet>1629</a>				origin.clone(),
-<a href=#1630 id=1630 data-nosnippet>1630</a>				executable,
-<a href=#1631 id=1631 data-nosnippet>1631</a>				<span class="kw-2">&amp;mut </span>gas_meter,
-<a href=#1632 id=1632 data-nosnippet>1632</a>				<span class="kw-2">&amp;mut </span>storage_meter,
-<a href=#1633 id=1633 data-nosnippet>1633</a>				<span class="kw-2">&amp;</span>schedule,
-<a href=#1634 id=1634 data-nosnippet>1634</a>				value,
-<a href=#1635 id=1635 data-nosnippet>1635</a>				data.clone(),
-<a href=#1636 id=1636 data-nosnippet>1636</a>				<span class="kw-2">&amp;</span>salt,
-<a href=#1637 id=1637 data-nosnippet>1637</a>				debug_message,
-<a href=#1638 id=1638 data-nosnippet>1638</a>			);
-<a href=#1639 id=1639 data-nosnippet>1639</a>
-<a href=#1640 id=1640 data-nosnippet>1640</a>			storage_deposit = storage_meter.try_into_deposit(<span class="kw-2">&amp;</span>contract_origin)<span class="question-mark">?</span>;
-<a href=#1641 id=1641 data-nosnippet>1641</a>			result
-<a href=#1642 id=1642 data-nosnippet>1642</a>		};
-<a href=#1643 id=1643 data-nosnippet>1643</a>		InternalOutput { result: try_exec(), gas_meter, storage_deposit }
-<a href=#1644 id=1644 data-nosnippet>1644</a>	}
-<a href=#1645 id=1645 data-nosnippet>1645</a>
-<a href=#1646 id=1646 data-nosnippet>1646</a>	<span class="kw">fn </span>ensure_origin(<span class="kw-2">&amp;</span><span class="self">self</span>, origin: Origin&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), DispatchError&gt; {
-<a href=#1647 id=1647 data-nosnippet>1647</a>		<span class="kw">match </span>origin {
-<a href=#1648 id=1648 data-nosnippet>1648</a>			Origin::Signed(<span class="kw">_</span>) =&gt; <span class="prelude-val">Ok</span>(()),
-<a href=#1649 id=1649 data-nosnippet>1649</a>			Origin::Root =&gt; <span class="prelude-val">Err</span>(DispatchError::RootNotAllowed),
-<a href=#1650 id=1650 data-nosnippet>1650</a>		}
-<a href=#1651 id=1651 data-nosnippet>1651</a>	}
-<a href=#1652 id=1652 data-nosnippet>1652</a>}
-<a href=#1653 id=1653 data-nosnippet>1653</a>
-<a href=#1654 id=1654 data-nosnippet>1654</a><span class="macro">macro_rules!</span> ensure_no_migration_in_progress {
-<a href=#1655 id=1655 data-nosnippet>1655</a>	() =&gt; {
-<a href=#1656 id=1656 data-nosnippet>1656</a>		<span class="kw">if </span>Migration::&lt;T&gt;::in_progress() {
-<a href=#1657 id=1657 data-nosnippet>1657</a>			<span class="kw">return </span>ContractResult {
-<a href=#1658 id=1658 data-nosnippet>1658</a>				gas_consumed: Zero::zero(),
-<a href=#1659 id=1659 data-nosnippet>1659</a>				gas_required: Zero::zero(),
-<a href=#1660 id=1660 data-nosnippet>1660</a>				storage_deposit: Default::default(),
-<a href=#1661 id=1661 data-nosnippet>1661</a>				debug_message: Vec::new(),
-<a href=#1662 id=1662 data-nosnippet>1662</a>				result: <span class="prelude-val">Err</span>(Error::&lt;T&gt;::MigrationInProgress.into()),
-<a href=#1663 id=1663 data-nosnippet>1663</a>				events: <span class="prelude-val">None</span>,
-<a href=#1664 id=1664 data-nosnippet>1664</a>			}
-<a href=#1665 id=1665 data-nosnippet>1665</a>		}
-<a href=#1666 id=1666 data-nosnippet>1666</a>	};
-<a href=#1667 id=1667 data-nosnippet>1667</a>}
-<a href=#1668 id=1668 data-nosnippet>1668</a>
-<a href=#1669 id=1669 data-nosnippet>1669</a><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
-<a href=#1670 id=1670 data-nosnippet>1670</a>	<span class="doccomment">/// Perform a call to a specified contract.
-<a href=#1671 id=1671 data-nosnippet>1671</a>	///
-<a href=#1672 id=1672 data-nosnippet>1672</a>	/// This function is similar to [`Self::call`], but doesn't perform any address lookups
-<a href=#1673 id=1673 data-nosnippet>1673</a>	/// and better suitable for calling directly from Rust.
-<a href=#1674 id=1674 data-nosnippet>1674</a>	///
-<a href=#1675 id=1675 data-nosnippet>1675</a>	/// # Note
-<a href=#1676 id=1676 data-nosnippet>1676</a>	///
-<a href=#1677 id=1677 data-nosnippet>1677</a>	/// If `debug` is set to `DebugInfo::UnsafeDebug` it returns additional human readable debugging
-<a href=#1678 id=1678 data-nosnippet>1678</a>	/// information.
-<a href=#1679 id=1679 data-nosnippet>1679</a>	///
-<a href=#1680 id=1680 data-nosnippet>1680</a>	/// If `collect_events` is set to `CollectEvents::UnsafeCollect` it collects all the Events
-<a href=#1681 id=1681 data-nosnippet>1681</a>	/// emitted in the block so far and the ones emitted during the execution of this contract.
-<a href=#1682 id=1682 data-nosnippet>1682</a>	</span><span class="kw">pub fn </span>bare_call(
-<a href=#1683 id=1683 data-nosnippet>1683</a>		origin: T::AccountId,
-<a href=#1684 id=1684 data-nosnippet>1684</a>		dest: T::AccountId,
-<a href=#1685 id=1685 data-nosnippet>1685</a>		value: BalanceOf&lt;T&gt;,
-<a href=#1686 id=1686 data-nosnippet>1686</a>		gas_limit: Weight,
-<a href=#1687 id=1687 data-nosnippet>1687</a>		storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;BalanceOf&lt;T&gt;&gt;,
-<a href=#1688 id=1688 data-nosnippet>1688</a>		data: Vec&lt;u8&gt;,
-<a href=#1689 id=1689 data-nosnippet>1689</a>		debug: DebugInfo,
-<a href=#1690 id=1690 data-nosnippet>1690</a>		collect_events: CollectEvents,
-<a href=#1691 id=1691 data-nosnippet>1691</a>		determinism: Determinism,
-<a href=#1692 id=1692 data-nosnippet>1692</a>	) -&gt; ContractExecResult&lt;BalanceOf&lt;T&gt;, EventRecordOf&lt;T&gt;&gt; {
-<a href=#1693 id=1693 data-nosnippet>1693</a>		<span class="macro">ensure_no_migration_in_progress!</span>();
-<a href=#1694 id=1694 data-nosnippet>1694</a>
-<a href=#1695 id=1695 data-nosnippet>1695</a>		<span class="kw">let </span><span class="kw-2">mut </span>debug_message = <span class="kw">if </span><span class="macro">matches!</span>(debug, DebugInfo::UnsafeDebug) {
-<a href=#1696 id=1696 data-nosnippet>1696</a>			<span class="prelude-val">Some</span>(DebugBufferVec::&lt;T&gt;::default())
-<a href=#1697 id=1697 data-nosnippet>1697</a>		} <span class="kw">else </span>{
-<a href=#1698 id=1698 data-nosnippet>1698</a>			<span class="prelude-val">None
-<a href=#1699 id=1699 data-nosnippet>1699</a>		</span>};
-<a href=#1700 id=1700 data-nosnippet>1700</a>		<span class="kw">let </span>origin = Origin::from_account_id(origin);
-<a href=#1701 id=1701 data-nosnippet>1701</a>		<span class="kw">let </span>common = CommonInput {
-<a href=#1702 id=1702 data-nosnippet>1702</a>			origin,
-<a href=#1703 id=1703 data-nosnippet>1703</a>			value,
-<a href=#1704 id=1704 data-nosnippet>1704</a>			data,
-<a href=#1705 id=1705 data-nosnippet>1705</a>			gas_limit,
-<a href=#1706 id=1706 data-nosnippet>1706</a>			storage_deposit_limit,
-<a href=#1707 id=1707 data-nosnippet>1707</a>			debug_message: debug_message.as_mut(),
-<a href=#1708 id=1708 data-nosnippet>1708</a>		};
-<a href=#1709 id=1709 data-nosnippet>1709</a>		<span class="kw">let </span>output = CallInput::&lt;T&gt; { dest, determinism }.run_guarded(common);
-<a href=#1710 id=1710 data-nosnippet>1710</a>		<span class="kw">let </span>events = <span class="kw">if </span><span class="macro">matches!</span>(collect_events, CollectEvents::UnsafeCollect) {
-<a href=#1711 id=1711 data-nosnippet>1711</a>			<span class="prelude-val">Some</span>(System::&lt;T&gt;::read_events_no_consensus().map(|e| <span class="kw-2">*</span>e).collect())
-<a href=#1712 id=1712 data-nosnippet>1712</a>		} <span class="kw">else </span>{
-<a href=#1713 id=1713 data-nosnippet>1713</a>			<span class="prelude-val">None
-<a href=#1714 id=1714 data-nosnippet>1714</a>		</span>};
-<a href=#1715 id=1715 data-nosnippet>1715</a>
-<a href=#1716 id=1716 data-nosnippet>1716</a>		ContractExecResult {
-<a href=#1717 id=1717 data-nosnippet>1717</a>			result: output.result.map_err(|r| r.error),
-<a href=#1718 id=1718 data-nosnippet>1718</a>			gas_consumed: output.gas_meter.gas_consumed(),
-<a href=#1719 id=1719 data-nosnippet>1719</a>			gas_required: output.gas_meter.gas_required(),
-<a href=#1720 id=1720 data-nosnippet>1720</a>			storage_deposit: output.storage_deposit,
-<a href=#1721 id=1721 data-nosnippet>1721</a>			debug_message: debug_message.unwrap_or_default().to_vec(),
-<a href=#1722 id=1722 data-nosnippet>1722</a>			events,
-<a href=#1723 id=1723 data-nosnippet>1723</a>		}
-<a href=#1724 id=1724 data-nosnippet>1724</a>	}
-<a href=#1725 id=1725 data-nosnippet>1725</a>
-<a href=#1726 id=1726 data-nosnippet>1726</a>	<span class="doccomment">/// Instantiate a new contract.
-<a href=#1727 id=1727 data-nosnippet>1727</a>	///
-<a href=#1728 id=1728 data-nosnippet>1728</a>	/// This function is similar to [`Self::instantiate`], but doesn't perform any address lookups
-<a href=#1729 id=1729 data-nosnippet>1729</a>	/// and better suitable for calling directly from Rust.
-<a href=#1730 id=1730 data-nosnippet>1730</a>	///
-<a href=#1731 id=1731 data-nosnippet>1731</a>	/// It returns the execution result, account id and the amount of used weight.
-<a href=#1732 id=1732 data-nosnippet>1732</a>	///
-<a href=#1733 id=1733 data-nosnippet>1733</a>	/// # Note
-<a href=#1734 id=1734 data-nosnippet>1734</a>	///
-<a href=#1735 id=1735 data-nosnippet>1735</a>	/// If `debug` is set to `DebugInfo::UnsafeDebug` it returns additional human readable debugging
-<a href=#1736 id=1736 data-nosnippet>1736</a>	/// information.
-<a href=#1737 id=1737 data-nosnippet>1737</a>	///
-<a href=#1738 id=1738 data-nosnippet>1738</a>	/// If `collect_events` is set to `CollectEvents::UnsafeCollect` it collects all the Events
-<a href=#1739 id=1739 data-nosnippet>1739</a>	/// emitted in the block so far.
-<a href=#1740 id=1740 data-nosnippet>1740</a>	</span><span class="kw">pub fn </span>bare_instantiate(
-<a href=#1741 id=1741 data-nosnippet>1741</a>		origin: T::AccountId,
-<a href=#1742 id=1742 data-nosnippet>1742</a>		value: BalanceOf&lt;T&gt;,
-<a href=#1743 id=1743 data-nosnippet>1743</a>		gas_limit: Weight,
-<a href=#1744 id=1744 data-nosnippet>1744</a>		<span class="kw-2">mut </span>storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;BalanceOf&lt;T&gt;&gt;,
-<a href=#1745 id=1745 data-nosnippet>1745</a>		code: Code&lt;CodeHash&lt;T&gt;&gt;,
-<a href=#1746 id=1746 data-nosnippet>1746</a>		data: Vec&lt;u8&gt;,
-<a href=#1747 id=1747 data-nosnippet>1747</a>		salt: Vec&lt;u8&gt;,
-<a href=#1748 id=1748 data-nosnippet>1748</a>		debug: DebugInfo,
-<a href=#1749 id=1749 data-nosnippet>1749</a>		collect_events: CollectEvents,
-<a href=#1750 id=1750 data-nosnippet>1750</a>	) -&gt; ContractInstantiateResult&lt;T::AccountId, BalanceOf&lt;T&gt;, EventRecordOf&lt;T&gt;&gt; {
-<a href=#1751 id=1751 data-nosnippet>1751</a>		<span class="macro">ensure_no_migration_in_progress!</span>();
-<a href=#1752 id=1752 data-nosnippet>1752</a>
-<a href=#1753 id=1753 data-nosnippet>1753</a>		<span class="kw">let </span><span class="kw-2">mut </span>debug_message = <span class="kw">if </span>debug == DebugInfo::UnsafeDebug {
-<a href=#1754 id=1754 data-nosnippet>1754</a>			<span class="prelude-val">Some</span>(DebugBufferVec::&lt;T&gt;::default())
-<a href=#1755 id=1755 data-nosnippet>1755</a>		} <span class="kw">else </span>{
-<a href=#1756 id=1756 data-nosnippet>1756</a>			<span class="prelude-val">None
-<a href=#1757 id=1757 data-nosnippet>1757</a>		</span>};
-<a href=#1758 id=1758 data-nosnippet>1758</a>		<span class="comment">// collect events if CollectEvents is UnsafeCollect
-<a href=#1759 id=1759 data-nosnippet>1759</a>		</span><span class="kw">let </span>events = || {
-<a href=#1760 id=1760 data-nosnippet>1760</a>			<span class="kw">if </span>collect_events == CollectEvents::UnsafeCollect {
-<a href=#1761 id=1761 data-nosnippet>1761</a>				<span class="prelude-val">Some</span>(System::&lt;T&gt;::read_events_no_consensus().map(|e| <span class="kw-2">*</span>e).collect())
-<a href=#1762 id=1762 data-nosnippet>1762</a>			} <span class="kw">else </span>{
-<a href=#1763 id=1763 data-nosnippet>1763</a>				<span class="prelude-val">None
-<a href=#1764 id=1764 data-nosnippet>1764</a>			</span>}
-<a href=#1765 id=1765 data-nosnippet>1765</a>		};
-<a href=#1766 id=1766 data-nosnippet>1766</a>
-<a href=#1767 id=1767 data-nosnippet>1767</a>		<span class="kw">let </span>(code, upload_deposit): (WasmCode&lt;T&gt;, BalanceOf&lt;T&gt;) = <span class="kw">match </span>code {
-<a href=#1768 id=1768 data-nosnippet>1768</a>			Code::Upload(code) =&gt; {
-<a href=#1769 id=1769 data-nosnippet>1769</a>				<span class="kw">let </span>result = <span class="self">Self</span>::try_upload_code(
-<a href=#1770 id=1770 data-nosnippet>1770</a>					origin.clone(),
-<a href=#1771 id=1771 data-nosnippet>1771</a>					code,
-<a href=#1772 id=1772 data-nosnippet>1772</a>					storage_deposit_limit.map(Into::into),
-<a href=#1773 id=1773 data-nosnippet>1773</a>					Determinism::Enforced,
-<a href=#1774 id=1774 data-nosnippet>1774</a>					debug_message.as_mut(),
-<a href=#1775 id=1775 data-nosnippet>1775</a>				);
-<a href=#1776 id=1776 data-nosnippet>1776</a>
-<a href=#1777 id=1777 data-nosnippet>1777</a>				<span class="kw">let </span>(module, deposit) = <span class="kw">match </span>result {
-<a href=#1778 id=1778 data-nosnippet>1778</a>					<span class="prelude-val">Ok</span>(result) =&gt; result,
-<a href=#1779 id=1779 data-nosnippet>1779</a>					<span class="prelude-val">Err</span>(error) =&gt;
-<a href=#1780 id=1780 data-nosnippet>1780</a>						<span class="kw">return </span>ContractResult {
-<a href=#1781 id=1781 data-nosnippet>1781</a>							gas_consumed: Zero::zero(),
-<a href=#1782 id=1782 data-nosnippet>1782</a>							gas_required: Zero::zero(),
-<a href=#1783 id=1783 data-nosnippet>1783</a>							storage_deposit: Default::default(),
-<a href=#1784 id=1784 data-nosnippet>1784</a>							debug_message: debug_message.unwrap_or(Default::default()).into(),
-<a href=#1785 id=1785 data-nosnippet>1785</a>							result: <span class="prelude-val">Err</span>(error),
-<a href=#1786 id=1786 data-nosnippet>1786</a>							events: events(),
-<a href=#1787 id=1787 data-nosnippet>1787</a>						},
-<a href=#1788 id=1788 data-nosnippet>1788</a>				};
-<a href=#1789 id=1789 data-nosnippet>1789</a>
-<a href=#1790 id=1790 data-nosnippet>1790</a>				storage_deposit_limit =
-<a href=#1791 id=1791 data-nosnippet>1791</a>					storage_deposit_limit.map(|l| l.saturating_sub(deposit.into()));
-<a href=#1792 id=1792 data-nosnippet>1792</a>				(WasmCode::Wasm(module), deposit)
-<a href=#1793 id=1793 data-nosnippet>1793</a>			},
-<a href=#1794 id=1794 data-nosnippet>1794</a>			Code::Existing(hash) =&gt; (WasmCode::CodeHash(hash), Default::default()),
-<a href=#1795 id=1795 data-nosnippet>1795</a>		};
-<a href=#1796 id=1796 data-nosnippet>1796</a>
-<a href=#1797 id=1797 data-nosnippet>1797</a>		<span class="kw">let </span>common = CommonInput {
-<a href=#1798 id=1798 data-nosnippet>1798</a>			origin: Origin::from_account_id(origin),
-<a href=#1799 id=1799 data-nosnippet>1799</a>			value,
-<a href=#1800 id=1800 data-nosnippet>1800</a>			data,
-<a href=#1801 id=1801 data-nosnippet>1801</a>			gas_limit,
-<a href=#1802 id=1802 data-nosnippet>1802</a>			storage_deposit_limit,
-<a href=#1803 id=1803 data-nosnippet>1803</a>			debug_message: debug_message.as_mut(),
-<a href=#1804 id=1804 data-nosnippet>1804</a>		};
-<a href=#1805 id=1805 data-nosnippet>1805</a>
-<a href=#1806 id=1806 data-nosnippet>1806</a>		<span class="kw">let </span>output = InstantiateInput::&lt;T&gt; { code, salt }.run_guarded(common);
-<a href=#1807 id=1807 data-nosnippet>1807</a>		ContractInstantiateResult {
-<a href=#1808 id=1808 data-nosnippet>1808</a>			result: output
-<a href=#1809 id=1809 data-nosnippet>1809</a>				.result
-<a href=#1810 id=1810 data-nosnippet>1810</a>				.map(|(account_id, result)| InstantiateReturnValue { result, account_id })
-<a href=#1811 id=1811 data-nosnippet>1811</a>				.map_err(|e| e.error),
-<a href=#1812 id=1812 data-nosnippet>1812</a>			gas_consumed: output.gas_meter.gas_consumed(),
-<a href=#1813 id=1813 data-nosnippet>1813</a>			gas_required: output.gas_meter.gas_required(),
-<a href=#1814 id=1814 data-nosnippet>1814</a>			storage_deposit: output
-<a href=#1815 id=1815 data-nosnippet>1815</a>				.storage_deposit
-<a href=#1816 id=1816 data-nosnippet>1816</a>				.saturating_add(<span class="kw-2">&amp;</span>StorageDeposit::Charge(upload_deposit)),
-<a href=#1817 id=1817 data-nosnippet>1817</a>			debug_message: debug_message.unwrap_or_default().to_vec(),
-<a href=#1818 id=1818 data-nosnippet>1818</a>			events: events(),
-<a href=#1819 id=1819 data-nosnippet>1819</a>		}
-<a href=#1820 id=1820 data-nosnippet>1820</a>	}
-<a href=#1821 id=1821 data-nosnippet>1821</a>
-<a href=#1822 id=1822 data-nosnippet>1822</a>	<span class="doccomment">/// Upload new code without instantiating a contract from it.
-<a href=#1823 id=1823 data-nosnippet>1823</a>	///
-<a href=#1824 id=1824 data-nosnippet>1824</a>	/// This function is similar to [`Self::upload_code`], but doesn't perform any address lookups
-<a href=#1825 id=1825 data-nosnippet>1825</a>	/// and better suitable for calling directly from Rust.
-<a href=#1826 id=1826 data-nosnippet>1826</a>	</span><span class="kw">pub fn </span>bare_upload_code(
-<a href=#1827 id=1827 data-nosnippet>1827</a>		origin: T::AccountId,
-<a href=#1828 id=1828 data-nosnippet>1828</a>		code: Vec&lt;u8&gt;,
-<a href=#1829 id=1829 data-nosnippet>1829</a>		storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;BalanceOf&lt;T&gt;&gt;,
-<a href=#1830 id=1830 data-nosnippet>1830</a>		determinism: Determinism,
-<a href=#1831 id=1831 data-nosnippet>1831</a>	) -&gt; CodeUploadResult&lt;CodeHash&lt;T&gt;, BalanceOf&lt;T&gt;&gt; {
-<a href=#1832 id=1832 data-nosnippet>1832</a>		Migration::&lt;T&gt;::ensure_migrated()<span class="question-mark">?</span>;
-<a href=#1833 id=1833 data-nosnippet>1833</a>		<span class="kw">let </span>(module, deposit) =
-<a href=#1834 id=1834 data-nosnippet>1834</a>			<span class="self">Self</span>::try_upload_code(origin, code, storage_deposit_limit, determinism, <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
-<a href=#1835 id=1835 data-nosnippet>1835</a>		<span class="prelude-val">Ok</span>(CodeUploadReturnValue { code_hash: <span class="kw-2">*</span>module.code_hash(), deposit })
-<a href=#1836 id=1836 data-nosnippet>1836</a>	}
-<a href=#1837 id=1837 data-nosnippet>1837</a>
-<a href=#1838 id=1838 data-nosnippet>1838</a>	<span class="doccomment">/// Uploads new code and returns the Wasm blob and deposit amount collected.
-<a href=#1839 id=1839 data-nosnippet>1839</a>	</span><span class="kw">fn </span>try_upload_code(
-<a href=#1840 id=1840 data-nosnippet>1840</a>		origin: T::AccountId,
-<a href=#1841 id=1841 data-nosnippet>1841</a>		code: Vec&lt;u8&gt;,
-<a href=#1842 id=1842 data-nosnippet>1842</a>		storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;BalanceOf&lt;T&gt;&gt;,
-<a href=#1843 id=1843 data-nosnippet>1843</a>		determinism: Determinism,
-<a href=#1844 id=1844 data-nosnippet>1844</a>		<span class="kw-2">mut </span>debug_message: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span>DebugBufferVec&lt;T&gt;&gt;,
-<a href=#1845 id=1845 data-nosnippet>1845</a>	) -&gt; <span class="prelude-ty">Result</span>&lt;(WasmBlob&lt;T&gt;, BalanceOf&lt;T&gt;), DispatchError&gt; {
-<a href=#1846 id=1846 data-nosnippet>1846</a>		<span class="kw">let </span>schedule = T::Schedule::get();
-<a href=#1847 id=1847 data-nosnippet>1847</a>		<span class="kw">let </span><span class="kw-2">mut </span>module =
-<a href=#1848 id=1848 data-nosnippet>1848</a>			WasmBlob::from_code(code, <span class="kw-2">&amp;</span>schedule, origin, determinism).map_err(|(err, msg)| {
-<a href=#1849 id=1849 data-nosnippet>1849</a>				debug_message.as_mut().map(|d| d.try_extend(msg.bytes()));
-<a href=#1850 id=1850 data-nosnippet>1850</a>				err
-<a href=#1851 id=1851 data-nosnippet>1851</a>			})<span class="question-mark">?</span>;
-<a href=#1852 id=1852 data-nosnippet>1852</a>		<span class="kw">let </span>deposit = module.store_code()<span class="question-mark">?</span>;
-<a href=#1853 id=1853 data-nosnippet>1853</a>		<span class="kw">if let </span><span class="prelude-val">Some</span>(storage_deposit_limit) = storage_deposit_limit {
-<a href=#1854 id=1854 data-nosnippet>1854</a>			<span class="macro">ensure!</span>(storage_deposit_limit &gt;= deposit, &lt;Error&lt;T&gt;&gt;::StorageDepositLimitExhausted);
-<a href=#1855 id=1855 data-nosnippet>1855</a>		}
-<a href=#1856 id=1856 data-nosnippet>1856</a>
-<a href=#1857 id=1857 data-nosnippet>1857</a>		<span class="prelude-val">Ok</span>((module, deposit))
-<a href=#1858 id=1858 data-nosnippet>1858</a>	}
-<a href=#1859 id=1859 data-nosnippet>1859</a>
-<a href=#1860 id=1860 data-nosnippet>1860</a>	<span class="doccomment">/// Query storage of a specified contract under a specified key.
-<a href=#1861 id=1861 data-nosnippet>1861</a>	</span><span class="kw">pub fn </span>get_storage(address: T::AccountId, key: Vec&lt;u8&gt;) -&gt; GetStorageResult {
-<a href=#1862 id=1862 data-nosnippet>1862</a>		<span class="kw">if </span>Migration::&lt;T&gt;::in_progress() {
-<a href=#1863 id=1863 data-nosnippet>1863</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ContractAccessError::MigrationInProgress)
-<a href=#1864 id=1864 data-nosnippet>1864</a>		}
-<a href=#1865 id=1865 data-nosnippet>1865</a>		<span class="kw">let </span>contract_info =
-<a href=#1866 id=1866 data-nosnippet>1866</a>			ContractInfoOf::&lt;T&gt;::get(<span class="kw-2">&amp;</span>address).ok_or(ContractAccessError::DoesntExist)<span class="question-mark">?</span>;
-<a href=#1867 id=1867 data-nosnippet>1867</a>
-<a href=#1868 id=1868 data-nosnippet>1868</a>		<span class="kw">let </span>maybe_value = contract_info.read(
-<a href=#1869 id=1869 data-nosnippet>1869</a>			<span class="kw-2">&amp;</span>Key::&lt;T&gt;::try_from_var(key)
-<a href=#1870 id=1870 data-nosnippet>1870</a>				.map_err(|<span class="kw">_</span>| ContractAccessError::KeyDecodingFailed)<span class="question-mark">?
-<a href=#1871 id=1871 data-nosnippet>1871</a>				</span>.into(),
-<a href=#1872 id=1872 data-nosnippet>1872</a>		);
-<a href=#1873 id=1873 data-nosnippet>1873</a>		<span class="prelude-val">Ok</span>(maybe_value)
-<a href=#1874 id=1874 data-nosnippet>1874</a>	}
-<a href=#1875 id=1875 data-nosnippet>1875</a>
-<a href=#1876 id=1876 data-nosnippet>1876</a>	<span class="doccomment">/// Determine the address of a contract.
-<a href=#1877 id=1877 data-nosnippet>1877</a>	///
-<a href=#1878 id=1878 data-nosnippet>1878</a>	/// This is the address generation function used by contract instantiation. See
-<a href=#1879 id=1879 data-nosnippet>1879</a>	/// [`DefaultAddressGenerator`] for the default implementation.
-<a href=#1880 id=1880 data-nosnippet>1880</a>	</span><span class="kw">pub fn </span>contract_address(
-<a href=#1881 id=1881 data-nosnippet>1881</a>		deploying_address: <span class="kw-2">&amp;</span>T::AccountId,
-<a href=#1882 id=1882 data-nosnippet>1882</a>		code_hash: <span class="kw-2">&amp;</span>CodeHash&lt;T&gt;,
-<a href=#1883 id=1883 data-nosnippet>1883</a>		input_data: <span class="kw-2">&amp;</span>[u8],
-<a href=#1884 id=1884 data-nosnippet>1884</a>		salt: <span class="kw-2">&amp;</span>[u8],
-<a href=#1885 id=1885 data-nosnippet>1885</a>	) -&gt; T::AccountId {
-<a href=#1886 id=1886 data-nosnippet>1886</a>		T::AddressGenerator::contract_address(deploying_address, code_hash, input_data, salt)
-<a href=#1887 id=1887 data-nosnippet>1887</a>	}
-<a href=#1888 id=1888 data-nosnippet>1888</a>
-<a href=#1889 id=1889 data-nosnippet>1889</a>	<span class="doccomment">/// Returns the code hash of the contract specified by `account` ID.
-<a href=#1890 id=1890 data-nosnippet>1890</a>	</span><span class="kw">pub fn </span>code_hash(account: <span class="kw-2">&amp;</span>AccountIdOf&lt;T&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;CodeHash&lt;T&gt;&gt; {
-<a href=#1891 id=1891 data-nosnippet>1891</a>		ContractInfo::&lt;T&gt;::load_code_hash(account)
-<a href=#1892 id=1892 data-nosnippet>1892</a>	}
-<a href=#1893 id=1893 data-nosnippet>1893</a>
-<a href=#1894 id=1894 data-nosnippet>1894</a>	<span class="doccomment">/// Store code for benchmarks which does not validate the code.
-<a href=#1895 id=1895 data-nosnippet>1895</a>	</span><span class="attr">#[cfg(feature = <span class="string">"runtime-benchmarks"</span>)]
-<a href=#1896 id=1896 data-nosnippet>1896</a>	</span><span class="kw">fn </span>store_code_raw(
-<a href=#1897 id=1897 data-nosnippet>1897</a>		code: Vec&lt;u8&gt;,
-<a href=#1898 id=1898 data-nosnippet>1898</a>		owner: T::AccountId,
-<a href=#1899 id=1899 data-nosnippet>1899</a>	) -&gt; frame_support::dispatch::DispatchResult {
-<a href=#1900 id=1900 data-nosnippet>1900</a>		<span class="kw">let </span>schedule = T::Schedule::get();
-<a href=#1901 id=1901 data-nosnippet>1901</a>		WasmBlob::&lt;T&gt;::from_code_unchecked(code, <span class="kw-2">&amp;</span>schedule, owner)<span class="question-mark">?</span>.store_code()<span class="question-mark">?</span>;
-<a href=#1902 id=1902 data-nosnippet>1902</a>		<span class="prelude-val">Ok</span>(())
-<a href=#1903 id=1903 data-nosnippet>1903</a>	}
-<a href=#1904 id=1904 data-nosnippet>1904</a>
-<a href=#1905 id=1905 data-nosnippet>1905</a>	<span class="doccomment">/// Deposit a pallet contracts event.
-<a href=#1906 id=1906 data-nosnippet>1906</a>	</span><span class="kw">fn </span>deposit_event(event: Event&lt;T&gt;) {
-<a href=#1907 id=1907 data-nosnippet>1907</a>		&lt;frame_system::Pallet&lt;T&gt;&gt;::deposit_event(&lt;T <span class="kw">as </span>Config&gt;::RuntimeEvent::from(event))
-<a href=#1908 id=1908 data-nosnippet>1908</a>	}
-<a href=#1909 id=1909 data-nosnippet>1909</a>
-<a href=#1910 id=1910 data-nosnippet>1910</a>	<span class="doccomment">/// Deposit a pallet contracts indexed event.
-<a href=#1911 id=1911 data-nosnippet>1911</a>	</span><span class="kw">fn </span>deposit_indexed_event(topics: Vec&lt;T::Hash&gt;, event: Event&lt;T&gt;) {
-<a href=#1912 id=1912 data-nosnippet>1912</a>		&lt;frame_system::Pallet&lt;T&gt;&gt;::deposit_event_indexed(
-<a href=#1913 id=1913 data-nosnippet>1913</a>			<span class="kw-2">&amp;</span>topics,
-<a href=#1914 id=1914 data-nosnippet>1914</a>			&lt;T <span class="kw">as </span>Config&gt;::RuntimeEvent::from(event).into(),
-<a href=#1915 id=1915 data-nosnippet>1915</a>		)
-<a href=#1916 id=1916 data-nosnippet>1916</a>	}
-<a href=#1917 id=1917 data-nosnippet>1917</a>
-<a href=#1918 id=1918 data-nosnippet>1918</a>	<span class="doccomment">/// Return the existential deposit of [`Config::Currency`].
-<a href=#1919 id=1919 data-nosnippet>1919</a>	</span><span class="kw">fn </span>min_balance() -&gt; BalanceOf&lt;T&gt; {
-<a href=#1920 id=1920 data-nosnippet>1920</a>		&lt;T::Currency <span class="kw">as </span>Inspect&lt;AccountIdOf&lt;T&gt;&gt;&gt;::minimum_balance()
-<a href=#1921 id=1921 data-nosnippet>1921</a>	}
-<a href=#1922 id=1922 data-nosnippet>1922</a>
-<a href=#1923 id=1923 data-nosnippet>1923</a>	<span class="doccomment">/// Convert gas_limit from 1D Weight to a 2D Weight.
-<a href=#1924 id=1924 data-nosnippet>1924</a>	///
-<a href=#1925 id=1925 data-nosnippet>1925</a>	/// Used by backwards compatible extrinsics. We cannot just set the proof_size weight limit to
-<a href=#1926 id=1926 data-nosnippet>1926</a>	/// zero or an old `Call` will just fail with OutOfGas.
-<a href=#1927 id=1927 data-nosnippet>1927</a>	</span><span class="kw">fn </span>compat_weight_limit(gas_limit: OldWeight) -&gt; Weight {
-<a href=#1928 id=1928 data-nosnippet>1928</a>		Weight::from_parts(gas_limit, u64::from(T::MaxCodeLen::get()) * <span class="number">2</span>)
-<a href=#1929 id=1929 data-nosnippet>1929</a>	}
-<a href=#1930 id=1930 data-nosnippet>1930</a>}
-<a href=#1931 id=1931 data-nosnippet>1931</a>
-<a href=#1932 id=1932 data-nosnippet>1932</a><span class="macro">sp_api::decl_runtime_apis!</span> {
-<a href=#1933 id=1933 data-nosnippet>1933</a>	<span class="doccomment">/// The API used to dry-run contract interactions.
-<a href=#1934 id=1934 data-nosnippet>1934</a>	</span><span class="attr">#[api_version(<span class="number">2</span>)]
-<a href=#1935 id=1935 data-nosnippet>1935</a>	</span><span class="kw">pub trait </span>ContractsApi&lt;AccountId, Balance, BlockNumber, Hash, EventRecord&gt; <span class="kw">where
-<a href=#1936 id=1936 data-nosnippet>1936</a>		</span>AccountId: Codec,
-<a href=#1937 id=1937 data-nosnippet>1937</a>		Balance: Codec,
-<a href=#1938 id=1938 data-nosnippet>1938</a>		BlockNumber: Codec,
-<a href=#1939 id=1939 data-nosnippet>1939</a>		Hash: Codec,
-<a href=#1940 id=1940 data-nosnippet>1940</a>		EventRecord: Codec,
-<a href=#1941 id=1941 data-nosnippet>1941</a>	{
-<a href=#1942 id=1942 data-nosnippet>1942</a>		<span class="doccomment">/// Perform a call from a specified account to a given contract.
-<a href=#1943 id=1943 data-nosnippet>1943</a>		///
-<a href=#1944 id=1944 data-nosnippet>1944</a>		/// See [`crate::Pallet::bare_call`].
-<a href=#1945 id=1945 data-nosnippet>1945</a>		</span><span class="kw">fn </span>call(
-<a href=#1946 id=1946 data-nosnippet>1946</a>			origin: AccountId,
-<a href=#1947 id=1947 data-nosnippet>1947</a>			dest: AccountId,
-<a href=#1948 id=1948 data-nosnippet>1948</a>			value: Balance,
-<a href=#1949 id=1949 data-nosnippet>1949</a>			gas_limit: <span class="prelude-ty">Option</span>&lt;Weight&gt;,
-<a href=#1950 id=1950 data-nosnippet>1950</a>			storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;Balance&gt;,
-<a href=#1951 id=1951 data-nosnippet>1951</a>			input_data: Vec&lt;u8&gt;,
-<a href=#1952 id=1952 data-nosnippet>1952</a>		) -&gt; ContractExecResult&lt;Balance, EventRecord&gt;;
-<a href=#1953 id=1953 data-nosnippet>1953</a>
-<a href=#1954 id=1954 data-nosnippet>1954</a>		<span class="doccomment">/// Instantiate a new contract.
-<a href=#1955 id=1955 data-nosnippet>1955</a>		///
-<a href=#1956 id=1956 data-nosnippet>1956</a>		/// See `[crate::Pallet::bare_instantiate]`.
-<a href=#1957 id=1957 data-nosnippet>1957</a>		</span><span class="kw">fn </span>instantiate(
-<a href=#1958 id=1958 data-nosnippet>1958</a>			origin: AccountId,
-<a href=#1959 id=1959 data-nosnippet>1959</a>			value: Balance,
-<a href=#1960 id=1960 data-nosnippet>1960</a>			gas_limit: <span class="prelude-ty">Option</span>&lt;Weight&gt;,
-<a href=#1961 id=1961 data-nosnippet>1961</a>			storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;Balance&gt;,
-<a href=#1962 id=1962 data-nosnippet>1962</a>			code: Code&lt;Hash&gt;,
-<a href=#1963 id=1963 data-nosnippet>1963</a>			data: Vec&lt;u8&gt;,
-<a href=#1964 id=1964 data-nosnippet>1964</a>			salt: Vec&lt;u8&gt;,
-<a href=#1965 id=1965 data-nosnippet>1965</a>		) -&gt; ContractInstantiateResult&lt;AccountId, Balance, EventRecord&gt;;
-<a href=#1966 id=1966 data-nosnippet>1966</a>
-<a href=#1967 id=1967 data-nosnippet>1967</a>		<span class="doccomment">/// Upload new code without instantiating a contract from it.
-<a href=#1968 id=1968 data-nosnippet>1968</a>		///
-<a href=#1969 id=1969 data-nosnippet>1969</a>		/// See [`crate::Pallet::bare_upload_code`].
-<a href=#1970 id=1970 data-nosnippet>1970</a>		</span><span class="kw">fn </span>upload_code(
-<a href=#1971 id=1971 data-nosnippet>1971</a>			origin: AccountId,
-<a href=#1972 id=1972 data-nosnippet>1972</a>			code: Vec&lt;u8&gt;,
-<a href=#1973 id=1973 data-nosnippet>1973</a>			storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;Balance&gt;,
-<a href=#1974 id=1974 data-nosnippet>1974</a>			determinism: Determinism,
-<a href=#1975 id=1975 data-nosnippet>1975</a>		) -&gt; CodeUploadResult&lt;Hash, Balance&gt;;
-<a href=#1976 id=1976 data-nosnippet>1976</a>
-<a href=#1977 id=1977 data-nosnippet>1977</a>		<span class="doccomment">/// Query a given storage key in a given contract.
-<a href=#1978 id=1978 data-nosnippet>1978</a>		///
-<a href=#1979 id=1979 data-nosnippet>1979</a>		/// Returns `Ok(Some(Vec&lt;u8&gt;))` if the storage value exists under the given key in the
-<a href=#1980 id=1980 data-nosnippet>1980</a>		/// specified account and `Ok(None)` if it doesn't. If the account specified by the address
-<a href=#1981 id=1981 data-nosnippet>1981</a>		/// doesn't exist, or doesn't have a contract then `Err` is returned.
-<a href=#1982 id=1982 data-nosnippet>1982</a>		</span><span class="kw">fn </span>get_storage(
-<a href=#1983 id=1983 data-nosnippet>1983</a>			address: AccountId,
-<a href=#1984 id=1984 data-nosnippet>1984</a>			key: Vec&lt;u8&gt;,
-<a href=#1985 id=1985 data-nosnippet>1985</a>		) -&gt; GetStorageResult;
-<a href=#1986 id=1986 data-nosnippet>1986</a>	}
-<a href=#1987 id=1987 data-nosnippet>1987</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#1574 id=1574 data-nosnippet>1574</a>					}
+<a href=#1575 id=1575 data-nosnippet>1575</a>				},
+<a href=#1576 id=1576 data-nosnippet>1576</a>			};
+<a href=#1577 id=1577 data-nosnippet>1577</a>		<span class="kw">let </span>schedule = T::Schedule::get();
+<a href=#1578 id=1578 data-nosnippet>1578</a>		<span class="kw">let </span>result = ExecStack::&lt;T, WasmBlob&lt;T&gt;&gt;::run_call(
+<a href=#1579 id=1579 data-nosnippet>1579</a>			origin.clone(),
+<a href=#1580 id=1580 data-nosnippet>1580</a>			dest.clone(),
+<a href=#1581 id=1581 data-nosnippet>1581</a>			<span class="kw-2">&amp;mut </span>gas_meter,
+<a href=#1582 id=1582 data-nosnippet>1582</a>			<span class="kw-2">&amp;mut </span>storage_meter,
+<a href=#1583 id=1583 data-nosnippet>1583</a>			<span class="kw-2">&amp;</span>schedule,
+<a href=#1584 id=1584 data-nosnippet>1584</a>			value,
+<a href=#1585 id=1585 data-nosnippet>1585</a>			data.clone(),
+<a href=#1586 id=1586 data-nosnippet>1586</a>			debug_message,
+<a href=#1587 id=1587 data-nosnippet>1587</a>			determinism,
+<a href=#1588 id=1588 data-nosnippet>1588</a>		);
+<a href=#1589 id=1589 data-nosnippet>1589</a>
+<a href=#1590 id=1590 data-nosnippet>1590</a>		<span class="kw">match </span>storage_meter.try_into_deposit(<span class="kw-2">&amp;</span>origin) {
+<a href=#1591 id=1591 data-nosnippet>1591</a>			<span class="prelude-val">Ok</span>(storage_deposit) =&gt; InternalOutput { gas_meter, storage_deposit, result },
+<a href=#1592 id=1592 data-nosnippet>1592</a>			<span class="prelude-val">Err</span>(err) =&gt; InternalOutput {
+<a href=#1593 id=1593 data-nosnippet>1593</a>				gas_meter,
+<a href=#1594 id=1594 data-nosnippet>1594</a>				storage_deposit: Default::default(),
+<a href=#1595 id=1595 data-nosnippet>1595</a>				result: <span class="prelude-val">Err</span>(err.into()),
+<a href=#1596 id=1596 data-nosnippet>1596</a>			},
+<a href=#1597 id=1597 data-nosnippet>1597</a>		}
+<a href=#1598 id=1598 data-nosnippet>1598</a>	}
+<a href=#1599 id=1599 data-nosnippet>1599</a>
+<a href=#1600 id=1600 data-nosnippet>1600</a>	<span class="kw">fn </span>ensure_origin(<span class="kw-2">&amp;</span><span class="self">self</span>, _origin: Origin&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), DispatchError&gt; {
+<a href=#1601 id=1601 data-nosnippet>1601</a>		<span class="prelude-val">Ok</span>(())
+<a href=#1602 id=1602 data-nosnippet>1602</a>	}
+<a href=#1603 id=1603 data-nosnippet>1603</a>}
+<a href=#1604 id=1604 data-nosnippet>1604</a>
+<a href=#1605 id=1605 data-nosnippet>1605</a><span class="kw">impl</span>&lt;T: Config&gt; Invokable&lt;T&gt; <span class="kw">for </span>InstantiateInput&lt;T&gt; {
+<a href=#1606 id=1606 data-nosnippet>1606</a>	<span class="kw">type </span>Output = (AccountIdOf&lt;T&gt;, ExecReturnValue);
+<a href=#1607 id=1607 data-nosnippet>1607</a>
+<a href=#1608 id=1608 data-nosnippet>1608</a>	<span class="kw">fn </span>run(
+<a href=#1609 id=1609 data-nosnippet>1609</a>		<span class="self">self</span>,
+<a href=#1610 id=1610 data-nosnippet>1610</a>		common: CommonInput&lt;T&gt;,
+<a href=#1611 id=1611 data-nosnippet>1611</a>		<span class="kw-2">mut </span>gas_meter: GasMeter&lt;T&gt;,
+<a href=#1612 id=1612 data-nosnippet>1612</a>	) -&gt; InternalOutput&lt;T, <span class="self">Self</span>::Output&gt; {
+<a href=#1613 id=1613 data-nosnippet>1613</a>		<span class="kw">let </span><span class="kw-2">mut </span>storage_deposit = Default::default();
+<a href=#1614 id=1614 data-nosnippet>1614</a>		<span class="kw">let </span>try_exec = || {
+<a href=#1615 id=1615 data-nosnippet>1615</a>			<span class="kw">let </span>schedule = T::Schedule::get();
+<a href=#1616 id=1616 data-nosnippet>1616</a>			<span class="kw">let </span>InstantiateInput { salt, .. } = <span class="self">self</span>;
+<a href=#1617 id=1617 data-nosnippet>1617</a>			<span class="kw">let </span>CommonInput { origin: contract_origin, .. } = common;
+<a href=#1618 id=1618 data-nosnippet>1618</a>			<span class="kw">let </span>origin = contract_origin.account_id()<span class="question-mark">?</span>;
+<a href=#1619 id=1619 data-nosnippet>1619</a>
+<a href=#1620 id=1620 data-nosnippet>1620</a>			<span class="kw">let </span>executable = <span class="kw">match </span><span class="self">self</span>.code {
+<a href=#1621 id=1621 data-nosnippet>1621</a>				WasmCode::Wasm(module) =&gt; module,
+<a href=#1622 id=1622 data-nosnippet>1622</a>				WasmCode::CodeHash(code_hash) =&gt; WasmBlob::from_storage(code_hash, <span class="kw-2">&amp;mut </span>gas_meter)<span class="question-mark">?</span>,
+<a href=#1623 id=1623 data-nosnippet>1623</a>			};
+<a href=#1624 id=1624 data-nosnippet>1624</a>
+<a href=#1625 id=1625 data-nosnippet>1625</a>			<span class="kw">let </span>contract_origin = Origin::from_account_id(origin.clone());
+<a href=#1626 id=1626 data-nosnippet>1626</a>			<span class="kw">let </span><span class="kw-2">mut </span>storage_meter =
+<a href=#1627 id=1627 data-nosnippet>1627</a>				StorageMeter::new(<span class="kw-2">&amp;</span>contract_origin, common.storage_deposit_limit, common.value)<span class="question-mark">?</span>;
+<a href=#1628 id=1628 data-nosnippet>1628</a>			<span class="kw">let </span>CommonInput { value, data, debug_message, .. } = common;
+<a href=#1629 id=1629 data-nosnippet>1629</a>			<span class="kw">let </span>result = ExecStack::&lt;T, WasmBlob&lt;T&gt;&gt;::run_instantiate(
+<a href=#1630 id=1630 data-nosnippet>1630</a>				origin.clone(),
+<a href=#1631 id=1631 data-nosnippet>1631</a>				executable,
+<a href=#1632 id=1632 data-nosnippet>1632</a>				<span class="kw-2">&amp;mut </span>gas_meter,
+<a href=#1633 id=1633 data-nosnippet>1633</a>				<span class="kw-2">&amp;mut </span>storage_meter,
+<a href=#1634 id=1634 data-nosnippet>1634</a>				<span class="kw-2">&amp;</span>schedule,
+<a href=#1635 id=1635 data-nosnippet>1635</a>				value,
+<a href=#1636 id=1636 data-nosnippet>1636</a>				data.clone(),
+<a href=#1637 id=1637 data-nosnippet>1637</a>				<span class="kw-2">&amp;</span>salt,
+<a href=#1638 id=1638 data-nosnippet>1638</a>				debug_message,
+<a href=#1639 id=1639 data-nosnippet>1639</a>			);
+<a href=#1640 id=1640 data-nosnippet>1640</a>
+<a href=#1641 id=1641 data-nosnippet>1641</a>			storage_deposit = storage_meter.try_into_deposit(<span class="kw-2">&amp;</span>contract_origin)<span class="question-mark">?</span>;
+<a href=#1642 id=1642 data-nosnippet>1642</a>			result
+<a href=#1643 id=1643 data-nosnippet>1643</a>		};
+<a href=#1644 id=1644 data-nosnippet>1644</a>		InternalOutput { result: try_exec(), gas_meter, storage_deposit }
+<a href=#1645 id=1645 data-nosnippet>1645</a>	}
+<a href=#1646 id=1646 data-nosnippet>1646</a>
+<a href=#1647 id=1647 data-nosnippet>1647</a>	<span class="kw">fn </span>ensure_origin(<span class="kw-2">&amp;</span><span class="self">self</span>, origin: Origin&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), DispatchError&gt; {
+<a href=#1648 id=1648 data-nosnippet>1648</a>		<span class="kw">match </span>origin {
+<a href=#1649 id=1649 data-nosnippet>1649</a>			Origin::Signed(<span class="kw">_</span>) =&gt; <span class="prelude-val">Ok</span>(()),
+<a href=#1650 id=1650 data-nosnippet>1650</a>			Origin::Root =&gt; <span class="prelude-val">Err</span>(DispatchError::RootNotAllowed),
+<a href=#1651 id=1651 data-nosnippet>1651</a>		}
+<a href=#1652 id=1652 data-nosnippet>1652</a>	}
+<a href=#1653 id=1653 data-nosnippet>1653</a>}
+<a href=#1654 id=1654 data-nosnippet>1654</a>
+<a href=#1655 id=1655 data-nosnippet>1655</a><span class="macro">macro_rules!</span> ensure_no_migration_in_progress {
+<a href=#1656 id=1656 data-nosnippet>1656</a>	() =&gt; {
+<a href=#1657 id=1657 data-nosnippet>1657</a>		<span class="kw">if </span>Migration::&lt;T&gt;::in_progress() {
+<a href=#1658 id=1658 data-nosnippet>1658</a>			<span class="kw">return </span>ContractResult {
+<a href=#1659 id=1659 data-nosnippet>1659</a>				gas_consumed: Zero::zero(),
+<a href=#1660 id=1660 data-nosnippet>1660</a>				gas_required: Zero::zero(),
+<a href=#1661 id=1661 data-nosnippet>1661</a>				storage_deposit: Default::default(),
+<a href=#1662 id=1662 data-nosnippet>1662</a>				debug_message: Vec::new(),
+<a href=#1663 id=1663 data-nosnippet>1663</a>				result: <span class="prelude-val">Err</span>(Error::&lt;T&gt;::MigrationInProgress.into()),
+<a href=#1664 id=1664 data-nosnippet>1664</a>				events: <span class="prelude-val">None</span>,
+<a href=#1665 id=1665 data-nosnippet>1665</a>			};
+<a href=#1666 id=1666 data-nosnippet>1666</a>		}
+<a href=#1667 id=1667 data-nosnippet>1667</a>	};
+<a href=#1668 id=1668 data-nosnippet>1668</a>}
+<a href=#1669 id=1669 data-nosnippet>1669</a>
+<a href=#1670 id=1670 data-nosnippet>1670</a><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+<a href=#1671 id=1671 data-nosnippet>1671</a>	<span class="doccomment">/// Perform a call to a specified contract.
+<a href=#1672 id=1672 data-nosnippet>1672</a>	///
+<a href=#1673 id=1673 data-nosnippet>1673</a>	/// This function is similar to [`Self::call`], but doesn't perform any address lookups
+<a href=#1674 id=1674 data-nosnippet>1674</a>	/// and better suitable for calling directly from Rust.
+<a href=#1675 id=1675 data-nosnippet>1675</a>	///
+<a href=#1676 id=1676 data-nosnippet>1676</a>	/// # Note
+<a href=#1677 id=1677 data-nosnippet>1677</a>	///
+<a href=#1678 id=1678 data-nosnippet>1678</a>	/// If `debug` is set to `DebugInfo::UnsafeDebug` it returns additional human readable debugging
+<a href=#1679 id=1679 data-nosnippet>1679</a>	/// information.
+<a href=#1680 id=1680 data-nosnippet>1680</a>	///
+<a href=#1681 id=1681 data-nosnippet>1681</a>	/// If `collect_events` is set to `CollectEvents::UnsafeCollect` it collects all the Events
+<a href=#1682 id=1682 data-nosnippet>1682</a>	/// emitted in the block so far and the ones emitted during the execution of this contract.
+<a href=#1683 id=1683 data-nosnippet>1683</a>	</span><span class="kw">pub fn </span>bare_call(
+<a href=#1684 id=1684 data-nosnippet>1684</a>		origin: T::AccountId,
+<a href=#1685 id=1685 data-nosnippet>1685</a>		dest: T::AccountId,
+<a href=#1686 id=1686 data-nosnippet>1686</a>		value: BalanceOf&lt;T&gt;,
+<a href=#1687 id=1687 data-nosnippet>1687</a>		gas_limit: Weight,
+<a href=#1688 id=1688 data-nosnippet>1688</a>		storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;BalanceOf&lt;T&gt;&gt;,
+<a href=#1689 id=1689 data-nosnippet>1689</a>		data: Vec&lt;u8&gt;,
+<a href=#1690 id=1690 data-nosnippet>1690</a>		debug: DebugInfo,
+<a href=#1691 id=1691 data-nosnippet>1691</a>		collect_events: CollectEvents,
+<a href=#1692 id=1692 data-nosnippet>1692</a>		determinism: Determinism,
+<a href=#1693 id=1693 data-nosnippet>1693</a>	) -&gt; ContractExecResult&lt;BalanceOf&lt;T&gt;, EventRecordOf&lt;T&gt;&gt; {
+<a href=#1694 id=1694 data-nosnippet>1694</a>		<span class="macro">ensure_no_migration_in_progress!</span>();
+<a href=#1695 id=1695 data-nosnippet>1695</a>
+<a href=#1696 id=1696 data-nosnippet>1696</a>		<span class="kw">let </span><span class="kw-2">mut </span>debug_message = <span class="kw">if </span><span class="macro">matches!</span>(debug, DebugInfo::UnsafeDebug) {
+<a href=#1697 id=1697 data-nosnippet>1697</a>			<span class="prelude-val">Some</span>(DebugBufferVec::&lt;T&gt;::default())
+<a href=#1698 id=1698 data-nosnippet>1698</a>		} <span class="kw">else </span>{
+<a href=#1699 id=1699 data-nosnippet>1699</a>			<span class="prelude-val">None
+<a href=#1700 id=1700 data-nosnippet>1700</a>		</span>};
+<a href=#1701 id=1701 data-nosnippet>1701</a>		<span class="kw">let </span>origin = Origin::from_account_id(origin);
+<a href=#1702 id=1702 data-nosnippet>1702</a>		<span class="kw">let </span>common = CommonInput {
+<a href=#1703 id=1703 data-nosnippet>1703</a>			origin,
+<a href=#1704 id=1704 data-nosnippet>1704</a>			value,
+<a href=#1705 id=1705 data-nosnippet>1705</a>			data,
+<a href=#1706 id=1706 data-nosnippet>1706</a>			gas_limit,
+<a href=#1707 id=1707 data-nosnippet>1707</a>			storage_deposit_limit,
+<a href=#1708 id=1708 data-nosnippet>1708</a>			debug_message: debug_message.as_mut(),
+<a href=#1709 id=1709 data-nosnippet>1709</a>		};
+<a href=#1710 id=1710 data-nosnippet>1710</a>		<span class="kw">let </span>output = CallInput::&lt;T&gt; { dest, determinism }.run_guarded(common);
+<a href=#1711 id=1711 data-nosnippet>1711</a>		<span class="kw">let </span>events = <span class="kw">if </span><span class="macro">matches!</span>(collect_events, CollectEvents::UnsafeCollect) {
+<a href=#1712 id=1712 data-nosnippet>1712</a>			<span class="prelude-val">Some</span>(System::&lt;T&gt;::read_events_no_consensus().map(|e| <span class="kw-2">*</span>e).collect())
+<a href=#1713 id=1713 data-nosnippet>1713</a>		} <span class="kw">else </span>{
+<a href=#1714 id=1714 data-nosnippet>1714</a>			<span class="prelude-val">None
+<a href=#1715 id=1715 data-nosnippet>1715</a>		</span>};
+<a href=#1716 id=1716 data-nosnippet>1716</a>
+<a href=#1717 id=1717 data-nosnippet>1717</a>		ContractExecResult {
+<a href=#1718 id=1718 data-nosnippet>1718</a>			result: output.result.map_err(|r| r.error),
+<a href=#1719 id=1719 data-nosnippet>1719</a>			gas_consumed: output.gas_meter.gas_consumed(),
+<a href=#1720 id=1720 data-nosnippet>1720</a>			gas_required: output.gas_meter.gas_required(),
+<a href=#1721 id=1721 data-nosnippet>1721</a>			storage_deposit: output.storage_deposit,
+<a href=#1722 id=1722 data-nosnippet>1722</a>			debug_message: debug_message.unwrap_or_default().to_vec(),
+<a href=#1723 id=1723 data-nosnippet>1723</a>			events,
+<a href=#1724 id=1724 data-nosnippet>1724</a>		}
+<a href=#1725 id=1725 data-nosnippet>1725</a>	}
+<a href=#1726 id=1726 data-nosnippet>1726</a>
+<a href=#1727 id=1727 data-nosnippet>1727</a>	<span class="doccomment">/// Instantiate a new contract.
+<a href=#1728 id=1728 data-nosnippet>1728</a>	///
+<a href=#1729 id=1729 data-nosnippet>1729</a>	/// This function is similar to [`Self::instantiate`], but doesn't perform any address lookups
+<a href=#1730 id=1730 data-nosnippet>1730</a>	/// and better suitable for calling directly from Rust.
+<a href=#1731 id=1731 data-nosnippet>1731</a>	///
+<a href=#1732 id=1732 data-nosnippet>1732</a>	/// It returns the execution result, account id and the amount of used weight.
+<a href=#1733 id=1733 data-nosnippet>1733</a>	///
+<a href=#1734 id=1734 data-nosnippet>1734</a>	/// # Note
+<a href=#1735 id=1735 data-nosnippet>1735</a>	///
+<a href=#1736 id=1736 data-nosnippet>1736</a>	/// If `debug` is set to `DebugInfo::UnsafeDebug` it returns additional human readable debugging
+<a href=#1737 id=1737 data-nosnippet>1737</a>	/// information.
+<a href=#1738 id=1738 data-nosnippet>1738</a>	///
+<a href=#1739 id=1739 data-nosnippet>1739</a>	/// If `collect_events` is set to `CollectEvents::UnsafeCollect` it collects all the Events
+<a href=#1740 id=1740 data-nosnippet>1740</a>	/// emitted in the block so far.
+<a href=#1741 id=1741 data-nosnippet>1741</a>	</span><span class="kw">pub fn </span>bare_instantiate(
+<a href=#1742 id=1742 data-nosnippet>1742</a>		origin: T::AccountId,
+<a href=#1743 id=1743 data-nosnippet>1743</a>		value: BalanceOf&lt;T&gt;,
+<a href=#1744 id=1744 data-nosnippet>1744</a>		gas_limit: Weight,
+<a href=#1745 id=1745 data-nosnippet>1745</a>		<span class="kw-2">mut </span>storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;BalanceOf&lt;T&gt;&gt;,
+<a href=#1746 id=1746 data-nosnippet>1746</a>		code: Code&lt;CodeHash&lt;T&gt;&gt;,
+<a href=#1747 id=1747 data-nosnippet>1747</a>		data: Vec&lt;u8&gt;,
+<a href=#1748 id=1748 data-nosnippet>1748</a>		salt: Vec&lt;u8&gt;,
+<a href=#1749 id=1749 data-nosnippet>1749</a>		debug: DebugInfo,
+<a href=#1750 id=1750 data-nosnippet>1750</a>		collect_events: CollectEvents,
+<a href=#1751 id=1751 data-nosnippet>1751</a>	) -&gt; ContractInstantiateResult&lt;T::AccountId, BalanceOf&lt;T&gt;, EventRecordOf&lt;T&gt;&gt; {
+<a href=#1752 id=1752 data-nosnippet>1752</a>		<span class="macro">ensure_no_migration_in_progress!</span>();
+<a href=#1753 id=1753 data-nosnippet>1753</a>
+<a href=#1754 id=1754 data-nosnippet>1754</a>		<span class="kw">let </span><span class="kw-2">mut </span>debug_message = <span class="kw">if </span>debug == DebugInfo::UnsafeDebug {
+<a href=#1755 id=1755 data-nosnippet>1755</a>			<span class="prelude-val">Some</span>(DebugBufferVec::&lt;T&gt;::default())
+<a href=#1756 id=1756 data-nosnippet>1756</a>		} <span class="kw">else </span>{
+<a href=#1757 id=1757 data-nosnippet>1757</a>			<span class="prelude-val">None
+<a href=#1758 id=1758 data-nosnippet>1758</a>		</span>};
+<a href=#1759 id=1759 data-nosnippet>1759</a>		<span class="comment">// collect events if CollectEvents is UnsafeCollect
+<a href=#1760 id=1760 data-nosnippet>1760</a>		</span><span class="kw">let </span>events = || {
+<a href=#1761 id=1761 data-nosnippet>1761</a>			<span class="kw">if </span>collect_events == CollectEvents::UnsafeCollect {
+<a href=#1762 id=1762 data-nosnippet>1762</a>				<span class="prelude-val">Some</span>(System::&lt;T&gt;::read_events_no_consensus().map(|e| <span class="kw-2">*</span>e).collect())
+<a href=#1763 id=1763 data-nosnippet>1763</a>			} <span class="kw">else </span>{
+<a href=#1764 id=1764 data-nosnippet>1764</a>				<span class="prelude-val">None
+<a href=#1765 id=1765 data-nosnippet>1765</a>			</span>}
+<a href=#1766 id=1766 data-nosnippet>1766</a>		};
+<a href=#1767 id=1767 data-nosnippet>1767</a>
+<a href=#1768 id=1768 data-nosnippet>1768</a>		<span class="kw">let </span>(code, upload_deposit): (WasmCode&lt;T&gt;, BalanceOf&lt;T&gt;) = <span class="kw">match </span>code {
+<a href=#1769 id=1769 data-nosnippet>1769</a>			Code::Upload(code) =&gt; {
+<a href=#1770 id=1770 data-nosnippet>1770</a>				<span class="kw">let </span>result = <span class="self">Self</span>::try_upload_code(
+<a href=#1771 id=1771 data-nosnippet>1771</a>					origin.clone(),
+<a href=#1772 id=1772 data-nosnippet>1772</a>					code,
+<a href=#1773 id=1773 data-nosnippet>1773</a>					storage_deposit_limit.map(Into::into),
+<a href=#1774 id=1774 data-nosnippet>1774</a>					Determinism::Enforced,
+<a href=#1775 id=1775 data-nosnippet>1775</a>					debug_message.as_mut(),
+<a href=#1776 id=1776 data-nosnippet>1776</a>				);
+<a href=#1777 id=1777 data-nosnippet>1777</a>
+<a href=#1778 id=1778 data-nosnippet>1778</a>				<span class="kw">let </span>(module, deposit) = <span class="kw">match </span>result {
+<a href=#1779 id=1779 data-nosnippet>1779</a>					<span class="prelude-val">Ok</span>(result) =&gt; result,
+<a href=#1780 id=1780 data-nosnippet>1780</a>					<span class="prelude-val">Err</span>(error) =&gt; {
+<a href=#1781 id=1781 data-nosnippet>1781</a>						<span class="kw">return </span>ContractResult {
+<a href=#1782 id=1782 data-nosnippet>1782</a>							gas_consumed: Zero::zero(),
+<a href=#1783 id=1783 data-nosnippet>1783</a>							gas_required: Zero::zero(),
+<a href=#1784 id=1784 data-nosnippet>1784</a>							storage_deposit: Default::default(),
+<a href=#1785 id=1785 data-nosnippet>1785</a>							debug_message: debug_message.unwrap_or(Default::default()).into(),
+<a href=#1786 id=1786 data-nosnippet>1786</a>							result: <span class="prelude-val">Err</span>(error),
+<a href=#1787 id=1787 data-nosnippet>1787</a>							events: events(),
+<a href=#1788 id=1788 data-nosnippet>1788</a>						}
+<a href=#1789 id=1789 data-nosnippet>1789</a>					},
+<a href=#1790 id=1790 data-nosnippet>1790</a>				};
+<a href=#1791 id=1791 data-nosnippet>1791</a>
+<a href=#1792 id=1792 data-nosnippet>1792</a>				storage_deposit_limit =
+<a href=#1793 id=1793 data-nosnippet>1793</a>					storage_deposit_limit.map(|l| l.saturating_sub(deposit.into()));
+<a href=#1794 id=1794 data-nosnippet>1794</a>				(WasmCode::Wasm(module), deposit)
+<a href=#1795 id=1795 data-nosnippet>1795</a>			},
+<a href=#1796 id=1796 data-nosnippet>1796</a>			Code::Existing(hash) =&gt; (WasmCode::CodeHash(hash), Default::default()),
+<a href=#1797 id=1797 data-nosnippet>1797</a>		};
+<a href=#1798 id=1798 data-nosnippet>1798</a>
+<a href=#1799 id=1799 data-nosnippet>1799</a>		<span class="kw">let </span>common = CommonInput {
+<a href=#1800 id=1800 data-nosnippet>1800</a>			origin: Origin::from_account_id(origin),
+<a href=#1801 id=1801 data-nosnippet>1801</a>			value,
+<a href=#1802 id=1802 data-nosnippet>1802</a>			data,
+<a href=#1803 id=1803 data-nosnippet>1803</a>			gas_limit,
+<a href=#1804 id=1804 data-nosnippet>1804</a>			storage_deposit_limit,
+<a href=#1805 id=1805 data-nosnippet>1805</a>			debug_message: debug_message.as_mut(),
+<a href=#1806 id=1806 data-nosnippet>1806</a>		};
+<a href=#1807 id=1807 data-nosnippet>1807</a>
+<a href=#1808 id=1808 data-nosnippet>1808</a>		<span class="kw">let </span>output = InstantiateInput::&lt;T&gt; { code, salt }.run_guarded(common);
+<a href=#1809 id=1809 data-nosnippet>1809</a>		ContractInstantiateResult {
+<a href=#1810 id=1810 data-nosnippet>1810</a>			result: output
+<a href=#1811 id=1811 data-nosnippet>1811</a>				.result
+<a href=#1812 id=1812 data-nosnippet>1812</a>				.map(|(account_id, result)| InstantiateReturnValue { result, account_id })
+<a href=#1813 id=1813 data-nosnippet>1813</a>				.map_err(|e| e.error),
+<a href=#1814 id=1814 data-nosnippet>1814</a>			gas_consumed: output.gas_meter.gas_consumed(),
+<a href=#1815 id=1815 data-nosnippet>1815</a>			gas_required: output.gas_meter.gas_required(),
+<a href=#1816 id=1816 data-nosnippet>1816</a>			storage_deposit: output
+<a href=#1817 id=1817 data-nosnippet>1817</a>				.storage_deposit
+<a href=#1818 id=1818 data-nosnippet>1818</a>				.saturating_add(<span class="kw-2">&amp;</span>StorageDeposit::Charge(upload_deposit)),
+<a href=#1819 id=1819 data-nosnippet>1819</a>			debug_message: debug_message.unwrap_or_default().to_vec(),
+<a href=#1820 id=1820 data-nosnippet>1820</a>			events: events(),
+<a href=#1821 id=1821 data-nosnippet>1821</a>		}
+<a href=#1822 id=1822 data-nosnippet>1822</a>	}
+<a href=#1823 id=1823 data-nosnippet>1823</a>
+<a href=#1824 id=1824 data-nosnippet>1824</a>	<span class="doccomment">/// Upload new code without instantiating a contract from it.
+<a href=#1825 id=1825 data-nosnippet>1825</a>	///
+<a href=#1826 id=1826 data-nosnippet>1826</a>	/// This function is similar to [`Self::upload_code`], but doesn't perform any address lookups
+<a href=#1827 id=1827 data-nosnippet>1827</a>	/// and better suitable for calling directly from Rust.
+<a href=#1828 id=1828 data-nosnippet>1828</a>	</span><span class="kw">pub fn </span>bare_upload_code(
+<a href=#1829 id=1829 data-nosnippet>1829</a>		origin: T::AccountId,
+<a href=#1830 id=1830 data-nosnippet>1830</a>		code: Vec&lt;u8&gt;,
+<a href=#1831 id=1831 data-nosnippet>1831</a>		storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;BalanceOf&lt;T&gt;&gt;,
+<a href=#1832 id=1832 data-nosnippet>1832</a>		determinism: Determinism,
+<a href=#1833 id=1833 data-nosnippet>1833</a>	) -&gt; CodeUploadResult&lt;CodeHash&lt;T&gt;, BalanceOf&lt;T&gt;&gt; {
+<a href=#1834 id=1834 data-nosnippet>1834</a>		Migration::&lt;T&gt;::ensure_migrated()<span class="question-mark">?</span>;
+<a href=#1835 id=1835 data-nosnippet>1835</a>		<span class="kw">let </span>(module, deposit) =
+<a href=#1836 id=1836 data-nosnippet>1836</a>			<span class="self">Self</span>::try_upload_code(origin, code, storage_deposit_limit, determinism, <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
+<a href=#1837 id=1837 data-nosnippet>1837</a>		<span class="prelude-val">Ok</span>(CodeUploadReturnValue { code_hash: <span class="kw-2">*</span>module.code_hash(), deposit })
+<a href=#1838 id=1838 data-nosnippet>1838</a>	}
+<a href=#1839 id=1839 data-nosnippet>1839</a>
+<a href=#1840 id=1840 data-nosnippet>1840</a>	<span class="doccomment">/// Uploads new code and returns the Wasm blob and deposit amount collected.
+<a href=#1841 id=1841 data-nosnippet>1841</a>	</span><span class="kw">fn </span>try_upload_code(
+<a href=#1842 id=1842 data-nosnippet>1842</a>		origin: T::AccountId,
+<a href=#1843 id=1843 data-nosnippet>1843</a>		code: Vec&lt;u8&gt;,
+<a href=#1844 id=1844 data-nosnippet>1844</a>		storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;BalanceOf&lt;T&gt;&gt;,
+<a href=#1845 id=1845 data-nosnippet>1845</a>		determinism: Determinism,
+<a href=#1846 id=1846 data-nosnippet>1846</a>		<span class="kw-2">mut </span>debug_message: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span>DebugBufferVec&lt;T&gt;&gt;,
+<a href=#1847 id=1847 data-nosnippet>1847</a>	) -&gt; <span class="prelude-ty">Result</span>&lt;(WasmBlob&lt;T&gt;, BalanceOf&lt;T&gt;), DispatchError&gt; {
+<a href=#1848 id=1848 data-nosnippet>1848</a>		<span class="kw">let </span>schedule = T::Schedule::get();
+<a href=#1849 id=1849 data-nosnippet>1849</a>		<span class="kw">let </span><span class="kw-2">mut </span>module =
+<a href=#1850 id=1850 data-nosnippet>1850</a>			WasmBlob::from_code(code, <span class="kw-2">&amp;</span>schedule, origin, determinism).map_err(|(err, msg)| {
+<a href=#1851 id=1851 data-nosnippet>1851</a>				debug_message.as_mut().map(|d| d.try_extend(msg.bytes()));
+<a href=#1852 id=1852 data-nosnippet>1852</a>				err
+<a href=#1853 id=1853 data-nosnippet>1853</a>			})<span class="question-mark">?</span>;
+<a href=#1854 id=1854 data-nosnippet>1854</a>		<span class="kw">let </span>deposit = module.store_code()<span class="question-mark">?</span>;
+<a href=#1855 id=1855 data-nosnippet>1855</a>		<span class="kw">if let </span><span class="prelude-val">Some</span>(storage_deposit_limit) = storage_deposit_limit {
+<a href=#1856 id=1856 data-nosnippet>1856</a>			<span class="macro">ensure!</span>(storage_deposit_limit &gt;= deposit, &lt;Error&lt;T&gt;&gt;::StorageDepositLimitExhausted);
+<a href=#1857 id=1857 data-nosnippet>1857</a>		}
+<a href=#1858 id=1858 data-nosnippet>1858</a>
+<a href=#1859 id=1859 data-nosnippet>1859</a>		<span class="prelude-val">Ok</span>((module, deposit))
+<a href=#1860 id=1860 data-nosnippet>1860</a>	}
+<a href=#1861 id=1861 data-nosnippet>1861</a>
+<a href=#1862 id=1862 data-nosnippet>1862</a>	<span class="doccomment">/// Query storage of a specified contract under a specified key.
+<a href=#1863 id=1863 data-nosnippet>1863</a>	</span><span class="kw">pub fn </span>get_storage(address: T::AccountId, key: Vec&lt;u8&gt;) -&gt; GetStorageResult {
+<a href=#1864 id=1864 data-nosnippet>1864</a>		<span class="kw">if </span>Migration::&lt;T&gt;::in_progress() {
+<a href=#1865 id=1865 data-nosnippet>1865</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ContractAccessError::MigrationInProgress);
+<a href=#1866 id=1866 data-nosnippet>1866</a>		}
+<a href=#1867 id=1867 data-nosnippet>1867</a>		<span class="kw">let </span>contract_info =
+<a href=#1868 id=1868 data-nosnippet>1868</a>			ContractInfoOf::&lt;T&gt;::get(<span class="kw-2">&amp;</span>address).ok_or(ContractAccessError::DoesntExist)<span class="question-mark">?</span>;
+<a href=#1869 id=1869 data-nosnippet>1869</a>
+<a href=#1870 id=1870 data-nosnippet>1870</a>		<span class="kw">let </span>maybe_value = contract_info.read(
+<a href=#1871 id=1871 data-nosnippet>1871</a>			<span class="kw-2">&amp;</span>Key::&lt;T&gt;::try_from_var(key)
+<a href=#1872 id=1872 data-nosnippet>1872</a>				.map_err(|<span class="kw">_</span>| ContractAccessError::KeyDecodingFailed)<span class="question-mark">?
+<a href=#1873 id=1873 data-nosnippet>1873</a>				</span>.into(),
+<a href=#1874 id=1874 data-nosnippet>1874</a>		);
+<a href=#1875 id=1875 data-nosnippet>1875</a>		<span class="prelude-val">Ok</span>(maybe_value)
+<a href=#1876 id=1876 data-nosnippet>1876</a>	}
+<a href=#1877 id=1877 data-nosnippet>1877</a>
+<a href=#1878 id=1878 data-nosnippet>1878</a>	<span class="doccomment">/// Determine the address of a contract.
+<a href=#1879 id=1879 data-nosnippet>1879</a>	///
+<a href=#1880 id=1880 data-nosnippet>1880</a>	/// This is the address generation function used by contract instantiation. See
+<a href=#1881 id=1881 data-nosnippet>1881</a>	/// [`DefaultAddressGenerator`] for the default implementation.
+<a href=#1882 id=1882 data-nosnippet>1882</a>	</span><span class="kw">pub fn </span>contract_address(
+<a href=#1883 id=1883 data-nosnippet>1883</a>		deploying_address: <span class="kw-2">&amp;</span>T::AccountId,
+<a href=#1884 id=1884 data-nosnippet>1884</a>		code_hash: <span class="kw-2">&amp;</span>CodeHash&lt;T&gt;,
+<a href=#1885 id=1885 data-nosnippet>1885</a>		input_data: <span class="kw-2">&amp;</span>[u8],
+<a href=#1886 id=1886 data-nosnippet>1886</a>		salt: <span class="kw-2">&amp;</span>[u8],
+<a href=#1887 id=1887 data-nosnippet>1887</a>	) -&gt; T::AccountId {
+<a href=#1888 id=1888 data-nosnippet>1888</a>		T::AddressGenerator::contract_address(deploying_address, code_hash, input_data, salt)
+<a href=#1889 id=1889 data-nosnippet>1889</a>	}
+<a href=#1890 id=1890 data-nosnippet>1890</a>
+<a href=#1891 id=1891 data-nosnippet>1891</a>	<span class="doccomment">/// Returns the code hash of the contract specified by `account` ID.
+<a href=#1892 id=1892 data-nosnippet>1892</a>	</span><span class="kw">pub fn </span>code_hash(account: <span class="kw-2">&amp;</span>AccountIdOf&lt;T&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;CodeHash&lt;T&gt;&gt; {
+<a href=#1893 id=1893 data-nosnippet>1893</a>		ContractInfo::&lt;T&gt;::load_code_hash(account)
+<a href=#1894 id=1894 data-nosnippet>1894</a>	}
+<a href=#1895 id=1895 data-nosnippet>1895</a>
+<a href=#1896 id=1896 data-nosnippet>1896</a>	<span class="doccomment">/// Store code for benchmarks which does not validate the code.
+<a href=#1897 id=1897 data-nosnippet>1897</a>	</span><span class="attr">#[cfg(feature = <span class="string">"runtime-benchmarks"</span>)]
+<a href=#1898 id=1898 data-nosnippet>1898</a>	</span><span class="kw">fn </span>store_code_raw(
+<a href=#1899 id=1899 data-nosnippet>1899</a>		code: Vec&lt;u8&gt;,
+<a href=#1900 id=1900 data-nosnippet>1900</a>		owner: T::AccountId,
+<a href=#1901 id=1901 data-nosnippet>1901</a>	) -&gt; frame_support::dispatch::DispatchResult {
+<a href=#1902 id=1902 data-nosnippet>1902</a>		<span class="kw">let </span>schedule = T::Schedule::get();
+<a href=#1903 id=1903 data-nosnippet>1903</a>		WasmBlob::&lt;T&gt;::from_code_unchecked(code, <span class="kw-2">&amp;</span>schedule, owner)<span class="question-mark">?</span>.store_code()<span class="question-mark">?</span>;
+<a href=#1904 id=1904 data-nosnippet>1904</a>		<span class="prelude-val">Ok</span>(())
+<a href=#1905 id=1905 data-nosnippet>1905</a>	}
+<a href=#1906 id=1906 data-nosnippet>1906</a>
+<a href=#1907 id=1907 data-nosnippet>1907</a>	<span class="doccomment">/// Deposit a pallet contracts event.
+<a href=#1908 id=1908 data-nosnippet>1908</a>	</span><span class="kw">fn </span>deposit_event(event: Event&lt;T&gt;) {
+<a href=#1909 id=1909 data-nosnippet>1909</a>		&lt;frame_system::Pallet&lt;T&gt;&gt;::deposit_event(&lt;T <span class="kw">as </span>Config&gt;::RuntimeEvent::from(event))
+<a href=#1910 id=1910 data-nosnippet>1910</a>	}
+<a href=#1911 id=1911 data-nosnippet>1911</a>
+<a href=#1912 id=1912 data-nosnippet>1912</a>	<span class="doccomment">/// Deposit a pallet contracts indexed event.
+<a href=#1913 id=1913 data-nosnippet>1913</a>	</span><span class="kw">fn </span>deposit_indexed_event(topics: Vec&lt;T::Hash&gt;, event: Event&lt;T&gt;) {
+<a href=#1914 id=1914 data-nosnippet>1914</a>		&lt;frame_system::Pallet&lt;T&gt;&gt;::deposit_event_indexed(
+<a href=#1915 id=1915 data-nosnippet>1915</a>			<span class="kw-2">&amp;</span>topics,
+<a href=#1916 id=1916 data-nosnippet>1916</a>			&lt;T <span class="kw">as </span>Config&gt;::RuntimeEvent::from(event).into(),
+<a href=#1917 id=1917 data-nosnippet>1917</a>		)
+<a href=#1918 id=1918 data-nosnippet>1918</a>	}
+<a href=#1919 id=1919 data-nosnippet>1919</a>
+<a href=#1920 id=1920 data-nosnippet>1920</a>	<span class="doccomment">/// Return the existential deposit of [`Config::Currency`].
+<a href=#1921 id=1921 data-nosnippet>1921</a>	</span><span class="kw">fn </span>min_balance() -&gt; BalanceOf&lt;T&gt; {
+<a href=#1922 id=1922 data-nosnippet>1922</a>		&lt;T::Currency <span class="kw">as </span>Inspect&lt;AccountIdOf&lt;T&gt;&gt;&gt;::minimum_balance()
+<a href=#1923 id=1923 data-nosnippet>1923</a>	}
+<a href=#1924 id=1924 data-nosnippet>1924</a>
+<a href=#1925 id=1925 data-nosnippet>1925</a>	<span class="doccomment">/// Convert gas_limit from 1D Weight to a 2D Weight.
+<a href=#1926 id=1926 data-nosnippet>1926</a>	///
+<a href=#1927 id=1927 data-nosnippet>1927</a>	/// Used by backwards compatible extrinsics. We cannot just set the proof_size weight limit to
+<a href=#1928 id=1928 data-nosnippet>1928</a>	/// zero or an old `Call` will just fail with OutOfGas.
+<a href=#1929 id=1929 data-nosnippet>1929</a>	</span><span class="kw">fn </span>compat_weight_limit(gas_limit: OldWeight) -&gt; Weight {
+<a href=#1930 id=1930 data-nosnippet>1930</a>		Weight::from_parts(gas_limit, u64::from(T::MaxCodeLen::get()) * <span class="number">2</span>)
+<a href=#1931 id=1931 data-nosnippet>1931</a>	}
+<a href=#1932 id=1932 data-nosnippet>1932</a>}
+<a href=#1933 id=1933 data-nosnippet>1933</a>
+<a href=#1934 id=1934 data-nosnippet>1934</a><span class="macro">sp_api::decl_runtime_apis!</span> {
+<a href=#1935 id=1935 data-nosnippet>1935</a>	<span class="doccomment">/// The API used to dry-run contract interactions.
+<a href=#1936 id=1936 data-nosnippet>1936</a>	</span><span class="attr">#[api_version(<span class="number">2</span>)]
+<a href=#1937 id=1937 data-nosnippet>1937</a>	</span><span class="kw">pub trait </span>ContractsApi&lt;AccountId, Balance, BlockNumber, Hash, EventRecord&gt; <span class="kw">where
+<a href=#1938 id=1938 data-nosnippet>1938</a>		</span>AccountId: Codec,
+<a href=#1939 id=1939 data-nosnippet>1939</a>		Balance: Codec,
+<a href=#1940 id=1940 data-nosnippet>1940</a>		BlockNumber: Codec,
+<a href=#1941 id=1941 data-nosnippet>1941</a>		Hash: Codec,
+<a href=#1942 id=1942 data-nosnippet>1942</a>		EventRecord: Codec,
+<a href=#1943 id=1943 data-nosnippet>1943</a>	{
+<a href=#1944 id=1944 data-nosnippet>1944</a>		<span class="doccomment">/// Perform a call from a specified account to a given contract.
+<a href=#1945 id=1945 data-nosnippet>1945</a>		///
+<a href=#1946 id=1946 data-nosnippet>1946</a>		/// See [`crate::Pallet::bare_call`].
+<a href=#1947 id=1947 data-nosnippet>1947</a>		</span><span class="kw">fn </span>call(
+<a href=#1948 id=1948 data-nosnippet>1948</a>			origin: AccountId,
+<a href=#1949 id=1949 data-nosnippet>1949</a>			dest: AccountId,
+<a href=#1950 id=1950 data-nosnippet>1950</a>			value: Balance,
+<a href=#1951 id=1951 data-nosnippet>1951</a>			gas_limit: <span class="prelude-ty">Option</span>&lt;Weight&gt;,
+<a href=#1952 id=1952 data-nosnippet>1952</a>			storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;Balance&gt;,
+<a href=#1953 id=1953 data-nosnippet>1953</a>			input_data: Vec&lt;u8&gt;,
+<a href=#1954 id=1954 data-nosnippet>1954</a>		) -&gt; ContractExecResult&lt;Balance, EventRecord&gt;;
+<a href=#1955 id=1955 data-nosnippet>1955</a>
+<a href=#1956 id=1956 data-nosnippet>1956</a>		<span class="doccomment">/// Instantiate a new contract.
+<a href=#1957 id=1957 data-nosnippet>1957</a>		///
+<a href=#1958 id=1958 data-nosnippet>1958</a>		/// See `[crate::Pallet::bare_instantiate]`.
+<a href=#1959 id=1959 data-nosnippet>1959</a>		</span><span class="kw">fn </span>instantiate(
+<a href=#1960 id=1960 data-nosnippet>1960</a>			origin: AccountId,
+<a href=#1961 id=1961 data-nosnippet>1961</a>			value: Balance,
+<a href=#1962 id=1962 data-nosnippet>1962</a>			gas_limit: <span class="prelude-ty">Option</span>&lt;Weight&gt;,
+<a href=#1963 id=1963 data-nosnippet>1963</a>			storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;Balance&gt;,
+<a href=#1964 id=1964 data-nosnippet>1964</a>			code: Code&lt;Hash&gt;,
+<a href=#1965 id=1965 data-nosnippet>1965</a>			data: Vec&lt;u8&gt;,
+<a href=#1966 id=1966 data-nosnippet>1966</a>			salt: Vec&lt;u8&gt;,
+<a href=#1967 id=1967 data-nosnippet>1967</a>		) -&gt; ContractInstantiateResult&lt;AccountId, Balance, EventRecord&gt;;
+<a href=#1968 id=1968 data-nosnippet>1968</a>
+<a href=#1969 id=1969 data-nosnippet>1969</a>		<span class="doccomment">/// Upload new code without instantiating a contract from it.
+<a href=#1970 id=1970 data-nosnippet>1970</a>		///
+<a href=#1971 id=1971 data-nosnippet>1971</a>		/// See [`crate::Pallet::bare_upload_code`].
+<a href=#1972 id=1972 data-nosnippet>1972</a>		</span><span class="kw">fn </span>upload_code(
+<a href=#1973 id=1973 data-nosnippet>1973</a>			origin: AccountId,
+<a href=#1974 id=1974 data-nosnippet>1974</a>			code: Vec&lt;u8&gt;,
+<a href=#1975 id=1975 data-nosnippet>1975</a>			storage_deposit_limit: <span class="prelude-ty">Option</span>&lt;Balance&gt;,
+<a href=#1976 id=1976 data-nosnippet>1976</a>			determinism: Determinism,
+<a href=#1977 id=1977 data-nosnippet>1977</a>		) -&gt; CodeUploadResult&lt;Hash, Balance&gt;;
+<a href=#1978 id=1978 data-nosnippet>1978</a>
+<a href=#1979 id=1979 data-nosnippet>1979</a>		<span class="doccomment">/// Query a given storage key in a given contract.
+<a href=#1980 id=1980 data-nosnippet>1980</a>		///
+<a href=#1981 id=1981 data-nosnippet>1981</a>		/// Returns `Ok(Some(Vec&lt;u8&gt;))` if the storage value exists under the given key in the
+<a href=#1982 id=1982 data-nosnippet>1982</a>		/// specified account and `Ok(None)` if it doesn't. If the account specified by the address
+<a href=#1983 id=1983 data-nosnippet>1983</a>		/// doesn't exist, or doesn't have a contract then `Err` is returned.
+<a href=#1984 id=1984 data-nosnippet>1984</a>		</span><span class="kw">fn </span>get_storage(
+<a href=#1985 id=1985 data-nosnippet>1985</a>			address: AccountId,
+<a href=#1986 id=1986 data-nosnippet>1986</a>			key: Vec&lt;u8&gt;,
+<a href=#1987 id=1987 data-nosnippet>1987</a>		) -&gt; GetStorageResult;
+<a href=#1988 id=1988 data-nosnippet>1988</a>	}
+<a href=#1989 id=1989 data-nosnippet>1989</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

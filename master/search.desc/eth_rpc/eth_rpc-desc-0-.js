@@ -1,1 +1,0 @@
-searchState.loadedDescShard("eth_rpc", 0, "The Ethereum JSON-RPC server.")

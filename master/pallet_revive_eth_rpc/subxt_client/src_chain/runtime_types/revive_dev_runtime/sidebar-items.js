@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["RuntimeCall","RuntimeError","RuntimeEvent","RuntimeHoldReason"]};
+window.SIDEBAR_ITEMS = {"enum":["RuntimeCall","RuntimeError","RuntimeEvent","RuntimeFreezeReason","RuntimeHoldReason"]};

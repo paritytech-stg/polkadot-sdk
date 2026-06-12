@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["Call"],"mod":["common","migration","pallet"],"struct":["Pallet"],"trait":["Config"],"type":["BlockNumber","ClaimQueue","Module","SessionStartBlock","ValidatorGroups"]};
+window.SIDEBAR_ITEMS = {"enum":["Call","CoreAssignment","Error"],"mod":["migration","pallet"],"struct":["Pallet","PartsOf57600"],"trait":["Config"],"type":["BlockNumber","Module","SessionStartBlock","ValidatorGroups"]};

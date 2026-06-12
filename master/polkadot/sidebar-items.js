@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["main"],"static":["ALLOC"]};
+window.SIDEBAR_ITEMS = {"fn":["main"]};

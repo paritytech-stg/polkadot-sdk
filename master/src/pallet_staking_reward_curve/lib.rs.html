@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/staking/reward-curve/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/staking/reward-curve/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_staking_reward_curve" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_staking_reward_curve" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_staking_reward_curve/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_staking_reward_curve/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -331,7 +331,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#181 id=181 data-nosnippet>181</a>				value,
 <a href=#182 id=182 data-nosnippet>182</a>				bounds,
 <a href=#183 id=183 data-nosnippet>183</a>			),
-<a href=#184 id=184 data-nosnippet>184</a>		))
+<a href=#184 id=184 data-nosnippet>184</a>		));
 <a href=#185 id=185 data-nosnippet>185</a>	}
 <a href=#186 id=186 data-nosnippet>186</a>
 <a href=#187 id=187 data-nosnippet>187</a>	<span class="prelude-val">Ok</span>(value)
@@ -352,7 +352,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#202 id=202 data-nosnippet>202</a>		&lt;<span class="macro">syn::Token!</span>[;]&gt;::parse(input)<span class="question-mark">?</span>;
 <a href=#203 id=203 data-nosnippet>203</a>
 <a href=#204 id=204 data-nosnippet>204</a>		<span class="kw">if </span>!input.is_empty() {
-<a href=#205 id=205 data-nosnippet>205</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(input.error(<span class="string">"expected end of input stream, no token expected"</span>))
+<a href=#205 id=205 data-nosnippet>205</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(input.error(<span class="string">"expected end of input stream, no token expected"</span>));
 <a href=#206 id=206 data-nosnippet>206</a>		}
 <a href=#207 id=207 data-nosnippet>207</a>
 <a href=#208 id=208 data-nosnippet>208</a>		<span class="kw">let </span>min_inflation = parse_field::&lt;keyword::min_inflation&gt;(
@@ -387,7 +387,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#237 id=237 data-nosnippet>237</a>		&lt;<span class="prelude-ty">Option</span>&lt;<span class="macro">syn::Token!</span>[,]&gt;&gt;::parse(<span class="kw-2">&amp;</span>args_input)<span class="question-mark">?</span>;
 <a href=#238 id=238 data-nosnippet>238</a>
 <a href=#239 id=239 data-nosnippet>239</a>		<span class="kw">if </span>!args_input.is_empty() {
-<a href=#240 id=240 data-nosnippet>240</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(args_input.error(<span class="string">"expected end of input stream, no token expected"</span>))
+<a href=#240 id=240 data-nosnippet>240</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(args_input.error(<span class="string">"expected end of input stream, no token expected"</span>));
 <a href=#241 id=241 data-nosnippet>241</a>		}
 <a href=#242 id=242 data-nosnippet>242</a>
 <a href=#243 id=243 data-nosnippet>243</a>		<span class="prelude-val">Ok</span>(<span class="self">Self </span>{
@@ -429,7 +429,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#279 id=279 data-nosnippet>279</a>	// See web3 docs for the details
 <a href=#280 id=280 data-nosnippet>280</a>	</span><span class="kw">fn </span>compute_opposite_after_x_ideal(<span class="kw-2">&amp;</span><span class="self">self</span>, y: u32) -&gt; u32 {
 <a href=#281 id=281 data-nosnippet>281</a>		<span class="kw">if </span>y == <span class="self">self</span>.i_0 {
-<a href=#282 id=282 data-nosnippet>282</a>			<span class="kw">return </span>u32::MAX
+<a href=#282 id=282 data-nosnippet>282</a>			<span class="kw">return </span>u32::MAX;
 <a href=#283 id=283 data-nosnippet>283</a>		}
 <a href=#284 id=284 data-nosnippet>284</a>		<span class="comment">// Note: the log term calculated here represents a per_million value
 <a href=#285 id=285 data-nosnippet>285</a>		</span><span class="kw">let </span>log = log2(<span class="self">self</span>.i_ideal_times_x_ideal - <span class="self">self</span>.i_0, y - <span class="self">self</span>.i_0);
@@ -455,20 +455,20 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#305 id=305 data-nosnippet>305</a>
 <a href=#306 id=306 data-nosnippet>306</a>	<span class="comment">// The algorithm divides the curve in segments with vertical and horizontal lenghts less
 <a href=#307 id=307 data-nosnippet>307</a>	// than `max_length`. This is not very accurate in case of very consequent step.
-<a href=#308 id=308 data-nosnippet>308</a>	</span><span class="kw">while </span>delta_y != <span class="number">0 </span>{
+<a href=#308 id=308 data-nosnippet>308</a>	</span><span class="kw">while </span><span class="macro">delta_y !</span>= <span class="number">0 </span>{
 <a href=#309 id=309 data-nosnippet>309</a>		<span class="kw">let </span>next_y = y - delta_y;
 <a href=#310 id=310 data-nosnippet>310</a>
 <a href=#311 id=311 data-nosnippet>311</a>		<span class="kw">if </span>next_y &lt;= input.min_inflation {
 <a href=#312 id=312 data-nosnippet>312</a>			delta_y = delta_y.saturating_sub(<span class="number">1</span>);
-<a href=#313 id=313 data-nosnippet>313</a>			<span class="kw">continue
-<a href=#314 id=314 data-nosnippet>314</a>		</span>}
+<a href=#313 id=313 data-nosnippet>313</a>			<span class="kw">continue</span>;
+<a href=#314 id=314 data-nosnippet>314</a>		}
 <a href=#315 id=315 data-nosnippet>315</a>
 <a href=#316 id=316 data-nosnippet>316</a>		<span class="kw">let </span>next_x = inpos.compute_opposite_after_x_ideal(next_y);
 <a href=#317 id=317 data-nosnippet>317</a>
 <a href=#318 id=318 data-nosnippet>318</a>		<span class="kw">if </span>(next_x - points.last().unwrap().<span class="number">0</span>) &gt; max_length {
 <a href=#319 id=319 data-nosnippet>319</a>			delta_y = delta_y.saturating_sub(<span class="number">1</span>);
-<a href=#320 id=320 data-nosnippet>320</a>			<span class="kw">continue
-<a href=#321 id=321 data-nosnippet>321</a>		</span>}
+<a href=#320 id=320 data-nosnippet>320</a>			<span class="kw">continue</span>;
+<a href=#321 id=321 data-nosnippet>321</a>		}
 <a href=#322 id=322 data-nosnippet>322</a>
 <a href=#323 id=323 data-nosnippet>323</a>		<span class="kw">if </span>next_x &gt;= <span class="number">1_000_000 </span>{
 <a href=#324 id=324 data-nosnippet>324</a>			<span class="kw">let </span>prev = points.last().unwrap();
@@ -483,7 +483,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#333 id=333 data-nosnippet>333</a>			<span class="kw">let </span>y = next_y + delta_y;
 <a href=#334 id=334 data-nosnippet>334</a>
 <a href=#335 id=335 data-nosnippet>335</a>			points.push((<span class="number">1_000_000</span>, y));
-<a href=#336 id=336 data-nosnippet>336</a>			<span class="kw">return </span>points
+<a href=#336 id=336 data-nosnippet>336</a>			<span class="kw">return </span>points;
 <a href=#337 id=337 data-nosnippet>337</a>		}
 <a href=#338 id=338 data-nosnippet>338</a>		points.push((next_x, next_y));
 <a href=#339 id=339 data-nosnippet>339</a>		y = next_y;
@@ -599,7 +599,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#449 id=449 data-nosnippet>449</a>			}
 <a href=#450 id=450 data-nosnippet>450</a>		}
 <a href=#451 id=451 data-nosnippet>451</a>	)
-<a href=#452 id=452 data-nosnippet>452</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#452 id=452 data-nosnippet>452</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

@@ -1,1 +1,0 @@
-searchState.loadedDescShard("cumulus_pallet_parachain_system_proc_macro", 0, "")

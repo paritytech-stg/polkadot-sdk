@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["common","migration","pallet"],"type":["BlockNumber"]};
+window.SIDEBAR_ITEMS = {"enum":["CoreAssignment"],"mod":["migration","pallet"],"struct":["PartsOf57600"],"type":["BlockNumber"]};

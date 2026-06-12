@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":["DelegationStakeMigration","TotalValueLockedSync"]};
+window.SIDEBAR_ITEMS = {"struct":["ClaimTrappedBalance","DelegationStakeMigration","TotalValueLockedSync"]};

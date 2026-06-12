@@ -1,5 +1,5 @@
 (function() {
-    var implementors = Object.fromEntries([["rococo_runtime",[["impl <a class=\"trait\" href=\"pallet_tips/migrations/unreserve_deposits/trait.UnlockConfig.html\" title=\"trait pallet_tips::migrations::unreserve_deposits::UnlockConfig\">UnlockConfig</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.88.0/std/primitive.unit.html\">()</a>&gt; for <a class=\"struct\" href=\"rococo_runtime/migrations/struct.UnlockConfig.html\" title=\"struct rococo_runtime::migrations::UnlockConfig\">UnlockConfig</a>"]]],["yet_another_parachain_runtime",[]]]);
+    var implementors = Object.fromEntries([["rococo_runtime",[["impl <a class=\"trait\" href=\"pallet_tips/migrations/unreserve_deposits/trait.UnlockConfig.html\" title=\"trait pallet_tips::migrations::unreserve_deposits::UnlockConfig\">UnlockConfig</a>&lt;<a class=\"primitive\" href=\"https://doc.rust-lang.org/1.93.0/std/primitive.unit.html\">()</a>&gt; for <a class=\"struct\" href=\"rococo_runtime/migrations/struct.UnlockConfig.html\" title=\"struct rococo_runtime::migrations::UnlockConfig\">UnlockConfig</a>"]]],["yet_another_parachain_runtime",[]]]);
     if (window.register_implementors) {
         window.register_implementors(implementors);
     } else {

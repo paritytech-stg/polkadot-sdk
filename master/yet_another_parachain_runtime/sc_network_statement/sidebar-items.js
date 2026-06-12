@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["config"],"struct":["StatementHandler","StatementHandlerPrototype"],"type":["StatementImportFuture","Statements"]};
+window.SIDEBAR_ITEMS = {"mod":["config"],"struct":["Peer","StatementHandler","StatementHandlerPrototype"],"type":["StatementImportFuture","Statements"]};

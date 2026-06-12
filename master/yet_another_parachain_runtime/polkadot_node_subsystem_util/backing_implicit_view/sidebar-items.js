@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["BlockHeaderUnavailableReason","FetchError"],"struct":["BlockInfoProspectiveParachains","View"]};
+window.SIDEBAR_ITEMS = {"enum":["BlockHeaderUnavailableReason","FetchError"],"struct":["View"]};

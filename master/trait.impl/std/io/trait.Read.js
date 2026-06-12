@@ -1,5 +1,5 @@
 (function() {
-    var implementors = Object.fromEntries([["polkadot_node_core_pvf_common",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/std/io/trait.Read.html\" title=\"trait std::io::Read\">Read</a> for <a class=\"struct\" href=\"polkadot_node_core_pvf_common/worker/struct.PipeFd.html\" title=\"struct polkadot_node_core_pvf_common::worker::PipeFd\">PipeFd</a>"]]]]);
+    var implementors = Object.fromEntries([["polkadot_node_core_pvf_common",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.93.0/std/io/trait.Read.html\" title=\"trait std::io::Read\">Read</a> for <a class=\"struct\" href=\"polkadot_node_core_pvf_common/worker/struct.PipeFd.html\" title=\"struct polkadot_node_core_pvf_common::worker::PipeFd\">PipeFd</a>"]]]]);
     if (window.register_implementors) {
         window.register_implementors(implementors);
     } else {

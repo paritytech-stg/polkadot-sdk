@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["VerificationError"],"struct":["EventFixture","EventProof","Log","Proof"],"trait":["Verifier"]};
+window.SIDEBAR_ITEMS = {"enum":["VerificationError"],"mod":["receipt"],"struct":["EventFixture","EventProof","Log","Proof"],"trait":["Verifier"]};

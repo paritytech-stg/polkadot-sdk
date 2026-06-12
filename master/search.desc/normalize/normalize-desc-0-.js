@@ -1,1 +1,0 @@
-searchState.loadedDescShard("normalize", 0, "Running")

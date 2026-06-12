@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `cumulus/pallets/parachain-system/src/descendant_validation.rs`."><title>descendant_validation.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `cumulus/pallets/parachain-system/src/descendant_validation.rs`."><title>descendant_validation.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cumulus_pallet_parachain_system" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cumulus_pallet_parachain_system" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">cumulus_pallet_parachain_system/</div>descendant_validation.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">cumulus_pallet_parachain_system/</div>descendant_validation.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// SPDX-License-Identifier: Apache-2.0
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Licensed under the Apache License, Version 2.0 (the "License");
@@ -219,7 +219,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#69 id=69 data-nosnippet>69</a>	}
 <a href=#70 id=70 data-nosnippet>70</a>
 <a href=#71 id=71 data-nosnippet>71</a>	<span class="kw">let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>current_authorities) = relay_state_proof.read_authorities() <span class="kw">else </span>{
-<a href=#72 id=72 data-nosnippet>72</a>		<span class="kw">return </span><span class="prelude-val">Err</span>(RelayParentVerificationError::MissingAuthorities)
+<a href=#72 id=72 data-nosnippet>72</a>		<span class="kw">return </span><span class="prelude-val">Err</span>(RelayParentVerificationError::MissingAuthorities);
 <a href=#73 id=73 data-nosnippet>73</a>	};
 <a href=#74 id=74 data-nosnippet>74</a>	<span class="kw">let </span><span class="kw-2">mut </span>maybe_next_authorities = relay_state_proof.read_next_authorities().ok().flatten();
 <a href=#75 id=75 data-nosnippet>75</a>
@@ -267,7 +267,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#117 id=117 data-nosnippet>117</a>		</span><span class="kw">if let </span><span class="prelude-val">Some</span>(descriptor) = next_epoch_descriptor {
 <a href=#118 id=118 data-nosnippet>118</a>			<span class="comment">// If the relay parent itself contains the epoch change, we must _not_ use the next
 <a href=#119 id=119 data-nosnippet>119</a>			// authorities, as they have already been rotated in storage.
-<a href=#120 id=120 data-nosnippet>120</a>			</span><span class="kw">if </span>index != <span class="number">0 </span>{
+<a href=#120 id=120 data-nosnippet>120</a>			</span><span class="kw">if </span><span class="macro">index !</span>= <span class="number">0 </span>{
 <a href=#121 id=121 data-nosnippet>121</a>				<span class="kw">let </span><span class="prelude-val">Some</span>(next_authorities) = maybe_next_authorities <span class="kw">else </span>{
 <a href=#122 id=122 data-nosnippet>122</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(RelayParentVerificationError::MissingNextEpochAuthorities {
 <a href=#123 id=123 data-nosnippet>123</a>						number: relay_number,
@@ -292,10 +292,10 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#142 id=142 data-nosnippet>142</a>		};
 <a href=#143 id=143 data-nosnippet>143</a>
 <a href=#144 id=144 data-nosnippet>144</a>		<span class="kw">let </span><span class="prelude-val">Some</span>(seal) = current_header.digest_mut().pop() <span class="kw">else </span>{
-<a href=#145 id=145 data-nosnippet>145</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(RelayParentVerificationError::MissingSeal { hash: sealed_header_hash })
+<a href=#145 id=145 data-nosnippet>145</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(RelayParentVerificationError::MissingSeal { hash: sealed_header_hash });
 <a href=#146 id=146 data-nosnippet>146</a>		};
 <a href=#147 id=147 data-nosnippet>147</a>		<span class="kw">let </span><span class="prelude-val">Some</span>(signature) = seal.as_babe_seal() <span class="kw">else </span>{
-<a href=#148 id=148 data-nosnippet>148</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(RelayParentVerificationError::InvalidSeal { hash: sealed_header_hash })
+<a href=#148 id=148 data-nosnippet>148</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(RelayParentVerificationError::InvalidSeal { hash: sealed_header_hash });
 <a href=#149 id=149 data-nosnippet>149</a>		};
 <a href=#150 id=150 data-nosnippet>150</a>
 <a href=#151 id=151 data-nosnippet>151</a>		<span class="kw">if </span>!authority_id.<span class="number">0</span>.verify(<span class="kw-2">&amp;</span>current_header.hash(), <span class="kw-2">&amp;</span>signature) {
@@ -765,7 +765,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#615 id=615 data-nosnippet>615</a>			.encode(),
 <a href=#616 id=616 data-nosnippet>616</a>		));
 <a href=#617 id=617 data-nosnippet>617</a>	}
-<a href=#618 id=618 data-nosnippet>618</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#618 id=618 data-nosnippet>618</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

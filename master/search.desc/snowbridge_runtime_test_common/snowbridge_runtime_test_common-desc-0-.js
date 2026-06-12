@@ -1,1 +1,0 @@
-searchState.loadedDescShard("snowbridge_runtime_test_common", 0, "")

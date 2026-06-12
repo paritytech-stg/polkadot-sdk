@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/snowbridge/primitives/inbound-queue/src/v2/message.rs`."><title>message.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/snowbridge/primitives/inbound-queue/src/v2/message.rs`."><title>message.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="snowbridge_inbound_queue_primitives" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="snowbridge_inbound_queue_primitives" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,11 +148,11 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">snowbridge_inbound_queue_primitives/v2/</div>message.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// SPDX-License-Identifier: Apache-2.0
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">snowbridge_inbound_queue_primitives/v2/</div>message.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// SPDX-License-Identifier: Apache-2.0
 <a href=#2 id=2 data-nosnippet>2</a>// SPDX-FileCopyrightText: 2023 Snowfork &lt;hello@snowfork.com&gt;
 <a href=#3 id=3 data-nosnippet>3</a></span><span class="doccomment">//! Converts messages from Ethereum to XCM messages
 <a href=#4 id=4 data-nosnippet>4</a>
-<a href=#5 id=5 data-nosnippet>5</a></span><span class="kw">use crate</span>::{v2::IGatewayV2::Payload, Log};
+<a href=#5 id=5 data-nosnippet>5</a></span><span class="kw">use crate</span>::{v2::IGatewayV2::Payload <span class="kw">as </span>GatewayV2Payload, Log};
 <a href=#6 id=6 data-nosnippet>6</a><span class="kw">use </span>alloy_core::{
 <a href=#7 id=7 data-nosnippet>7</a>	primitives::B256,
 <a href=#8 id=8 data-nosnippet>8</a>	sol,
@@ -231,8 +231,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#81 id=81 data-nosnippet>81</a>}
 <a href=#82 id=82 data-nosnippet>82</a>
 <a href=#83 id=83 data-nosnippet>83</a><span class="attr">#[derive(Clone, Encode, Decode, Debug, TypeInfo)]
-<a href=#84 id=84 data-nosnippet>84</a></span><span class="kw">pub enum </span>XcmPayload {
-<a href=#85 id=85 data-nosnippet>85</a>	<span class="doccomment">/// Represents raw XCM bytes
+<a href=#84 id=84 data-nosnippet>84</a></span><span class="kw">pub enum </span>Payload {
+<a href=#85 id=85 data-nosnippet>85</a>	<span class="doccomment">/// Raw bytes payload. Commonly used to represent raw XCM bytes
 <a href=#86 id=86 data-nosnippet>86</a>	</span>Raw(Vec&lt;u8&gt;),
 <a href=#87 id=87 data-nosnippet>87</a>	<span class="doccomment">/// A token registration template
 <a href=#88 id=88 data-nosnippet>88</a>	</span>CreateAsset { token: H160, network: Network },
@@ -258,7 +258,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#108 id=108 data-nosnippet>108</a>	<span class="doccomment">/// The assets sent from Ethereum (ERC-20s).
 <a href=#109 id=109 data-nosnippet>109</a>	</span><span class="kw">pub </span>assets: Vec&lt;EthereumAsset&gt;,
 <a href=#110 id=110 data-nosnippet>110</a>	<span class="doccomment">/// The command originating from the Gateway contract.
-<a href=#111 id=111 data-nosnippet>111</a>	</span><span class="kw">pub </span>xcm: XcmPayload,
+<a href=#111 id=111 data-nosnippet>111</a>	</span><span class="kw">pub </span>payload: Payload,
 <a href=#112 id=112 data-nosnippet>112</a>	<span class="doccomment">/// The claimer in the case that funds get trapped. Expected to be an XCM::v5::Location.
 <a href=#113 id=113 data-nosnippet>113</a>	</span><span class="kw">pub </span>claimer: <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;,
 <a href=#114 id=114 data-nosnippet>114</a>	<span class="doccomment">/// Native ether bridged over from Ethereum
@@ -302,27 +302,27 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#152 id=152 data-nosnippet>152</a>		</span><span class="kw">let </span>event = IGatewayV2::OutboundMessageAccepted::decode_raw_log_validate(topics, <span class="kw-2">&amp;</span>log.data)
 <a href=#153 id=153 data-nosnippet>153</a>			.map_err(|<span class="kw">_</span>| MessageDecodeError)<span class="question-mark">?</span>;
 <a href=#154 id=154 data-nosnippet>154</a>
-<a href=#155 id=155 data-nosnippet>155</a>		<span class="kw">let </span>payload = event.payload;
+<a href=#155 id=155 data-nosnippet>155</a>		<span class="kw">let </span>event_payload = event.payload;
 <a href=#156 id=156 data-nosnippet>156</a>
-<a href=#157 id=157 data-nosnippet>157</a>		<span class="kw">let </span>substrate_assets = <span class="self">Self</span>::extract_assets(<span class="kw-2">&amp;</span>payload)<span class="question-mark">?</span>;
+<a href=#157 id=157 data-nosnippet>157</a>		<span class="kw">let </span>substrate_assets = <span class="self">Self</span>::extract_assets(<span class="kw-2">&amp;</span>event_payload)<span class="question-mark">?</span>;
 <a href=#158 id=158 data-nosnippet>158</a>
-<a href=#159 id=159 data-nosnippet>159</a>		<span class="kw">let </span>xcm = XcmPayload::try_from(<span class="kw-2">&amp;</span>payload)<span class="question-mark">?</span>;
+<a href=#159 id=159 data-nosnippet>159</a>		<span class="kw">let </span>message_payload = Payload::try_from(<span class="kw-2">&amp;</span>event_payload)<span class="question-mark">?</span>;
 <a href=#160 id=160 data-nosnippet>160</a>
 <a href=#161 id=161 data-nosnippet>161</a>		<span class="kw">let </span><span class="kw-2">mut </span>claimer = <span class="prelude-val">None</span>;
-<a href=#162 id=162 data-nosnippet>162</a>		<span class="kw">if </span>payload.claimer.len() &gt; <span class="number">0 </span>{
-<a href=#163 id=163 data-nosnippet>163</a>			claimer = <span class="prelude-val">Some</span>(payload.claimer.to_vec());
+<a href=#162 id=162 data-nosnippet>162</a>		<span class="kw">if </span>event_payload.claimer.len() &gt; <span class="number">0 </span>{
+<a href=#163 id=163 data-nosnippet>163</a>			claimer = <span class="prelude-val">Some</span>(event_payload.claimer.to_vec());
 <a href=#164 id=164 data-nosnippet>164</a>		}
 <a href=#165 id=165 data-nosnippet>165</a>
 <a href=#166 id=166 data-nosnippet>166</a>		<span class="kw">let </span>message = Message {
 <a href=#167 id=167 data-nosnippet>167</a>			gateway: log.address,
 <a href=#168 id=168 data-nosnippet>168</a>			nonce: event.nonce,
-<a href=#169 id=169 data-nosnippet>169</a>			origin: H160::from(payload.origin.as_ref()),
+<a href=#169 id=169 data-nosnippet>169</a>			origin: H160::from(event_payload.origin.as_ref()),
 <a href=#170 id=170 data-nosnippet>170</a>			assets: substrate_assets,
-<a href=#171 id=171 data-nosnippet>171</a>			xcm,
+<a href=#171 id=171 data-nosnippet>171</a>			payload: message_payload,
 <a href=#172 id=172 data-nosnippet>172</a>			claimer,
-<a href=#173 id=173 data-nosnippet>173</a>			value: payload.value,
-<a href=#174 id=174 data-nosnippet>174</a>			execution_fee: payload.executionFee,
-<a href=#175 id=175 data-nosnippet>175</a>			relayer_fee: payload.relayerFee,
+<a href=#173 id=173 data-nosnippet>173</a>			value: event_payload.value,
+<a href=#174 id=174 data-nosnippet>174</a>			execution_fee: event_payload.executionFee,
+<a href=#175 id=175 data-nosnippet>175</a>			relayer_fee: event_payload.relayerFee,
 <a href=#176 id=176 data-nosnippet>176</a>		};
 <a href=#177 id=177 data-nosnippet>177</a>
 <a href=#178 id=178 data-nosnippet>178</a>		<span class="prelude-val">Ok</span>(message)
@@ -341,12 +341,12 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#191 id=191 data-nosnippet>191</a>	}
 <a href=#192 id=192 data-nosnippet>192</a>}
 <a href=#193 id=193 data-nosnippet>193</a>
-<a href=#194 id=194 data-nosnippet>194</a><span class="kw">impl </span>TryFrom&lt;<span class="kw-2">&amp;</span>IGatewayV2::Payload&gt; <span class="kw">for </span>XcmPayload {
+<a href=#194 id=194 data-nosnippet>194</a><span class="kw">impl </span>TryFrom&lt;<span class="kw-2">&amp;</span>IGatewayV2::Payload&gt; <span class="kw">for </span>Payload {
 <a href=#195 id=195 data-nosnippet>195</a>	<span class="kw">type </span>Error = MessageDecodeError;
 <a href=#196 id=196 data-nosnippet>196</a>
-<a href=#197 id=197 data-nosnippet>197</a>	<span class="kw">fn </span>try_from(payload: <span class="kw-2">&amp;</span>Payload) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
+<a href=#197 id=197 data-nosnippet>197</a>	<span class="kw">fn </span>try_from(payload: <span class="kw-2">&amp;</span>GatewayV2Payload) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
 <a href=#198 id=198 data-nosnippet>198</a>		<span class="kw">let </span>xcm = <span class="kw">match </span>payload.xcm.kind {
-<a href=#199 id=199 data-nosnippet>199</a>			<span class="number">0 </span>=&gt; XcmPayload::Raw(payload.xcm.data.to_vec()),
+<a href=#199 id=199 data-nosnippet>199</a>			<span class="number">0 </span>=&gt; Payload::Raw(payload.xcm.data.to_vec()),
 <a href=#200 id=200 data-nosnippet>200</a>			<span class="number">1 </span>=&gt; {
 <a href=#201 id=201 data-nosnippet>201</a>				<span class="kw">let </span>create_asset =
 <a href=#202 id=202 data-nosnippet>202</a>					IGatewayV2::XcmCreateAsset::abi_decode_validate(<span class="kw-2">&amp;</span>payload.xcm.data)
@@ -356,7 +356,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#206 id=206 data-nosnippet>206</a>					<span class="number">0 </span>=&gt; Network::Polkadot,
 <a href=#207 id=207 data-nosnippet>207</a>					<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(MessageDecodeError),
 <a href=#208 id=208 data-nosnippet>208</a>				};
-<a href=#209 id=209 data-nosnippet>209</a>				XcmPayload::CreateAsset { token: H160::from(create_asset.token.as_ref()), network }
+<a href=#209 id=209 data-nosnippet>209</a>				Payload::CreateAsset { token: H160::from(create_asset.token.as_ref()), network }
 <a href=#210 id=210 data-nosnippet>210</a>			},
 <a href=#211 id=211 data-nosnippet>211</a>			<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(MessageDecodeError),
 <a href=#212 id=212 data-nosnippet>212</a>		};
@@ -405,16 +405,18 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#255 id=255 data-nosnippet>255</a>			address: <span class="macro">hex!</span>(<span class="string">"b1185ede04202fe62d38f5db72f71e38ff3e8305"</span>).into(),
 <a href=#256 id=256 data-nosnippet>256</a>			topics: <span class="macro">vec!</span>[<span class="macro">hex!</span>(<span class="string">"550e2067494b1736ea5573f2d19cdc0ac95b410fff161bf16f11c6229655ec9c"</span>).into()],
 <a href=#257 id=257 data-nosnippet>257</a>			data: <span class="macro">hex!</span>(<span class="string">"00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000040000000000000000000000000b1185ede04202fe62d38f5db72f71e38ff3e830500000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001a0000000000000000000000000000000000000000000000000000009184e72a0000000000000000000000000000000000000000000000000000000015d3ef798000000000000000000000000000000000000000000000000000000015d3ef798000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000040000000000000000000000000b8ea8cb425d85536b158d661da1ef0895bb92f1d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"</span>).to_vec(),
-<a href=#258 id=258 data-nosnippet>258</a>		};
-<a href=#259 id=259 data-nosnippet>259</a>
-<a href=#260 id=260 data-nosnippet>260</a>		<span class="kw">let </span>result = Message::try_from(<span class="kw-2">&amp;</span>log);
-<a href=#261 id=261 data-nosnippet>261</a>		<span class="macro">assert_ok!</span>(result.clone());
-<a href=#262 id=262 data-nosnippet>262</a>		<span class="kw">let </span>message = result.unwrap();
-<a href=#263 id=263 data-nosnippet>263</a>
-<a href=#264 id=264 data-nosnippet>264</a>		<span class="macro">assert_eq!</span>(H160::from(<span class="macro">hex!</span>(<span class="string">"b1185ede04202fe62d38f5db72f71e38ff3e8305"</span>)), message.gateway);
-<a href=#265 id=265 data-nosnippet>265</a>		<span class="macro">assert_eq!</span>(H160::from(<span class="macro">hex!</span>(<span class="string">"b1185ede04202fe62d38f5db72f71e38ff3e8305"</span>)), message.origin);
-<a href=#266 id=266 data-nosnippet>266</a>	}
-<a href=#267 id=267 data-nosnippet>267</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#258 id=258 data-nosnippet>258</a>			tx_index: <span class="number">0</span>,
+<a href=#259 id=259 data-nosnippet>259</a>		};
+<a href=#260 id=260 data-nosnippet>260</a>
+<a href=#261 id=261 data-nosnippet>261</a>		<span class="kw">let </span>result = Message::try_from(<span class="kw-2">&amp;</span>log);
+<a href=#262 id=262 data-nosnippet>262</a>		<span class="macro">assert_ok!</span>(result.clone());
+<a href=#263 id=263 data-nosnippet>263</a>		<span class="kw">let </span>message = result.unwrap();
+<a href=#264 id=264 data-nosnippet>264</a>
+<a href=#265 id=265 data-nosnippet>265</a>		<span class="macro">assert_eq!</span>(H160::from(<span class="macro">hex!</span>(<span class="string">"b1185ede04202fe62d38f5db72f71e38ff3e8305"</span>)), message.gateway);
+<a href=#266 id=266 data-nosnippet>266</a>		<span class="macro">assert_eq!</span>(H160::from(<span class="macro">hex!</span>(<span class="string">"b1185ede04202fe62d38f5db72f71e38ff3e8305"</span>)), message.origin);
+<a href=#267 id=267 data-nosnippet>267</a>	}
+<a href=#268 id=268 data-nosnippet>268</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/nfts/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/nfts/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_nfts" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_nfts" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_nfts/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_nfts/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -1179,7 +1179,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1029 id=1029 data-nosnippet>1029</a>			<span class="kw">let </span>dest = T::Lookup::lookup(dest)<span class="question-mark">?</span>;
 <a href=#1030 id=1030 data-nosnippet>1030</a>
 <a href=#1031 id=1031 data-nosnippet>1031</a>			<span class="self">Self</span>::do_transfer(collection, item, dest, |<span class="kw">_</span>, details| {
-<a href=#1032 id=1032 data-nosnippet>1032</a>				<span class="kw">if </span>details.owner != origin {
+<a href=#1032 id=1032 data-nosnippet>1032</a>				<span class="kw">if </span>details.<span class="macro">owner !</span>= origin {
 <a href=#1033 id=1033 data-nosnippet>1033</a>					<span class="kw">let </span>deadline =
 <a href=#1034 id=1034 data-nosnippet>1034</a>						details.approvals.get(<span class="kw-2">&amp;</span>origin).ok_or(Error::&lt;T, I&gt;::NoPermission)<span class="question-mark">?</span>;
 <a href=#1035 id=1035 data-nosnippet>1035</a>					<span class="kw">if let </span><span class="prelude-val">Some</span>(d) = deadline {
@@ -1240,11 +1240,11 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1090 id=1090 data-nosnippet>1090</a>					<span class="kw">if </span>T::Currency::reserve(<span class="kw-2">&amp;</span>details.deposit.account, deposit - old).is_err() {
 <a href=#1091 id=1091 data-nosnippet>1091</a>						<span class="comment">// NOTE: No alterations made to collection_details in this iteration so far,
 <a href=#1092 id=1092 data-nosnippet>1092</a>						// so this is OK to do.
-<a href=#1093 id=1093 data-nosnippet>1093</a>						</span><span class="kw">continue
-<a href=#1094 id=1094 data-nosnippet>1094</a>					</span>}
+<a href=#1093 id=1093 data-nosnippet>1093</a>						</span><span class="kw">continue</span>;
+<a href=#1094 id=1094 data-nosnippet>1094</a>					}
 <a href=#1095 id=1095 data-nosnippet>1095</a>				} <span class="kw">else </span>{
-<a href=#1096 id=1096 data-nosnippet>1096</a>					<span class="kw">continue
-<a href=#1097 id=1097 data-nosnippet>1097</a>				</span>}
+<a href=#1096 id=1096 data-nosnippet>1096</a>					<span class="kw">continue</span>;
+<a href=#1097 id=1097 data-nosnippet>1097</a>				}
 <a href=#1098 id=1098 data-nosnippet>1098</a>				details.deposit.amount = deposit;
 <a href=#1099 id=1099 data-nosnippet>1099</a>				Item::&lt;T, I&gt;::insert(<span class="kw-2">&amp;</span>collection, <span class="kw-2">&amp;</span>item, <span class="kw-2">&amp;</span>details);
 <a href=#1100 id=1100 data-nosnippet>1100</a>				successful.push(item);
@@ -1586,505 +1586,507 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1436 id=1436 data-nosnippet>1436</a>		) -&gt; DispatchResult {
 <a href=#1437 id=1437 data-nosnippet>1437</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
 <a href=#1438 id=1438 data-nosnippet>1438</a>			<span class="kw">let </span>depositor = <span class="kw">match </span>namespace {
-<a href=#1439 id=1439 data-nosnippet>1439</a>				AttributeNamespace::CollectionOwner =&gt;
-<a href=#1440 id=1440 data-nosnippet>1440</a>					<span class="self">Self</span>::collection_owner(collection).ok_or(Error::&lt;T, I&gt;::UnknownCollection)<span class="question-mark">?</span>,
-<a href=#1441 id=1441 data-nosnippet>1441</a>				<span class="kw">_ </span>=&gt; origin.clone(),
-<a href=#1442 id=1442 data-nosnippet>1442</a>			};
-<a href=#1443 id=1443 data-nosnippet>1443</a>			<span class="self">Self</span>::do_set_attribute(origin, collection, maybe_item, namespace, key, value, depositor)
-<a href=#1444 id=1444 data-nosnippet>1444</a>		}
-<a href=#1445 id=1445 data-nosnippet>1445</a>
-<a href=#1446 id=1446 data-nosnippet>1446</a>		<span class="doccomment">/// Force-set an attribute for a collection or item.
-<a href=#1447 id=1447 data-nosnippet>1447</a>		///
-<a href=#1448 id=1448 data-nosnippet>1448</a>		/// Origin must be `ForceOrigin`.
-<a href=#1449 id=1449 data-nosnippet>1449</a>		///
-<a href=#1450 id=1450 data-nosnippet>1450</a>		/// If the attribute already exists and it was set by another account, the deposit
-<a href=#1451 id=1451 data-nosnippet>1451</a>		/// will be returned to the previous owner.
-<a href=#1452 id=1452 data-nosnippet>1452</a>		///
-<a href=#1453 id=1453 data-nosnippet>1453</a>		/// - `set_as`: An optional owner of the attribute.
-<a href=#1454 id=1454 data-nosnippet>1454</a>		/// - `collection`: The identifier of the collection whose item's metadata to set.
-<a href=#1455 id=1455 data-nosnippet>1455</a>		/// - `maybe_item`: The identifier of the item whose metadata to set.
-<a href=#1456 id=1456 data-nosnippet>1456</a>		/// - `namespace`: Attribute's namespace.
-<a href=#1457 id=1457 data-nosnippet>1457</a>		/// - `key`: The key of the attribute.
-<a href=#1458 id=1458 data-nosnippet>1458</a>		/// - `value`: The value to which to set the attribute.
-<a href=#1459 id=1459 data-nosnippet>1459</a>		///
-<a href=#1460 id=1460 data-nosnippet>1460</a>		/// Emits `AttributeSet`.
-<a href=#1461 id=1461 data-nosnippet>1461</a>		///
-<a href=#1462 id=1462 data-nosnippet>1462</a>		/// Weight: `O(1)`
-<a href=#1463 id=1463 data-nosnippet>1463</a>		</span><span class="attr">#[pallet::call_index(<span class="number">20</span>)]
-<a href=#1464 id=1464 data-nosnippet>1464</a>		#[pallet::weight(T::WeightInfo::force_set_attribute())]
-<a href=#1465 id=1465 data-nosnippet>1465</a>		</span><span class="kw">pub fn </span>force_set_attribute(
-<a href=#1466 id=1466 data-nosnippet>1466</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1467 id=1467 data-nosnippet>1467</a>			set_as: <span class="prelude-ty">Option</span>&lt;T::AccountId&gt;,
-<a href=#1468 id=1468 data-nosnippet>1468</a>			collection: T::CollectionId,
-<a href=#1469 id=1469 data-nosnippet>1469</a>			maybe_item: <span class="prelude-ty">Option</span>&lt;T::ItemId&gt;,
-<a href=#1470 id=1470 data-nosnippet>1470</a>			namespace: AttributeNamespace&lt;T::AccountId&gt;,
-<a href=#1471 id=1471 data-nosnippet>1471</a>			key: BoundedVec&lt;u8, T::KeyLimit&gt;,
-<a href=#1472 id=1472 data-nosnippet>1472</a>			value: BoundedVec&lt;u8, T::ValueLimit&gt;,
-<a href=#1473 id=1473 data-nosnippet>1473</a>		) -&gt; DispatchResult {
-<a href=#1474 id=1474 data-nosnippet>1474</a>			T::ForceOrigin::ensure_origin(origin)<span class="question-mark">?</span>;
-<a href=#1475 id=1475 data-nosnippet>1475</a>			<span class="self">Self</span>::do_force_set_attribute(set_as, collection, maybe_item, namespace, key, value)
-<a href=#1476 id=1476 data-nosnippet>1476</a>		}
-<a href=#1477 id=1477 data-nosnippet>1477</a>
-<a href=#1478 id=1478 data-nosnippet>1478</a>		<span class="doccomment">/// Clear an attribute for a collection or item.
-<a href=#1479 id=1479 data-nosnippet>1479</a>		///
-<a href=#1480 id=1480 data-nosnippet>1480</a>		/// Origin must be either `ForceOrigin` or Signed and the sender should be the Owner of the
-<a href=#1481 id=1481 data-nosnippet>1481</a>		/// attribute.
-<a href=#1482 id=1482 data-nosnippet>1482</a>		///
-<a href=#1483 id=1483 data-nosnippet>1483</a>		/// Any deposit is freed for the collection's owner.
-<a href=#1484 id=1484 data-nosnippet>1484</a>		///
-<a href=#1485 id=1485 data-nosnippet>1485</a>		/// - `collection`: The identifier of the collection whose item's metadata to clear.
-<a href=#1486 id=1486 data-nosnippet>1486</a>		/// - `maybe_item`: The identifier of the item whose metadata to clear.
-<a href=#1487 id=1487 data-nosnippet>1487</a>		/// - `namespace`: Attribute's namespace.
-<a href=#1488 id=1488 data-nosnippet>1488</a>		/// - `key`: The key of the attribute.
-<a href=#1489 id=1489 data-nosnippet>1489</a>		///
-<a href=#1490 id=1490 data-nosnippet>1490</a>		/// Emits `AttributeCleared`.
-<a href=#1491 id=1491 data-nosnippet>1491</a>		///
-<a href=#1492 id=1492 data-nosnippet>1492</a>		/// Weight: `O(1)`
-<a href=#1493 id=1493 data-nosnippet>1493</a>		</span><span class="attr">#[pallet::call_index(<span class="number">21</span>)]
-<a href=#1494 id=1494 data-nosnippet>1494</a>		#[pallet::weight(T::WeightInfo::clear_attribute())]
-<a href=#1495 id=1495 data-nosnippet>1495</a>		</span><span class="kw">pub fn </span>clear_attribute(
-<a href=#1496 id=1496 data-nosnippet>1496</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1497 id=1497 data-nosnippet>1497</a>			collection: T::CollectionId,
-<a href=#1498 id=1498 data-nosnippet>1498</a>			maybe_item: <span class="prelude-ty">Option</span>&lt;T::ItemId&gt;,
-<a href=#1499 id=1499 data-nosnippet>1499</a>			namespace: AttributeNamespace&lt;T::AccountId&gt;,
-<a href=#1500 id=1500 data-nosnippet>1500</a>			key: BoundedVec&lt;u8, T::KeyLimit&gt;,
-<a href=#1501 id=1501 data-nosnippet>1501</a>		) -&gt; DispatchResult {
-<a href=#1502 id=1502 data-nosnippet>1502</a>			<span class="kw">let </span>maybe_check_owner = T::ForceOrigin::try_origin(origin)
-<a href=#1503 id=1503 data-nosnippet>1503</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
-<a href=#1504 id=1504 data-nosnippet>1504</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
-<a href=#1505 id=1505 data-nosnippet>1505</a>			<span class="self">Self</span>::do_clear_attribute(maybe_check_owner, collection, maybe_item, namespace, key)
-<a href=#1506 id=1506 data-nosnippet>1506</a>		}
-<a href=#1507 id=1507 data-nosnippet>1507</a>
-<a href=#1508 id=1508 data-nosnippet>1508</a>		<span class="doccomment">/// Approve item's attributes to be changed by a delegated third-party account.
-<a href=#1509 id=1509 data-nosnippet>1509</a>		///
-<a href=#1510 id=1510 data-nosnippet>1510</a>		/// Origin must be Signed and must be an owner of the `item`.
-<a href=#1511 id=1511 data-nosnippet>1511</a>		///
-<a href=#1512 id=1512 data-nosnippet>1512</a>		/// - `collection`: A collection of the item.
-<a href=#1513 id=1513 data-nosnippet>1513</a>		/// - `item`: The item that holds attributes.
-<a href=#1514 id=1514 data-nosnippet>1514</a>		/// - `delegate`: The account to delegate permission to change attributes of the item.
-<a href=#1515 id=1515 data-nosnippet>1515</a>		///
-<a href=#1516 id=1516 data-nosnippet>1516</a>		/// Emits `ItemAttributesApprovalAdded` on success.
-<a href=#1517 id=1517 data-nosnippet>1517</a>		</span><span class="attr">#[pallet::call_index(<span class="number">22</span>)]
-<a href=#1518 id=1518 data-nosnippet>1518</a>		#[pallet::weight(T::WeightInfo::approve_item_attributes())]
-<a href=#1519 id=1519 data-nosnippet>1519</a>		</span><span class="kw">pub fn </span>approve_item_attributes(
-<a href=#1520 id=1520 data-nosnippet>1520</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1521 id=1521 data-nosnippet>1521</a>			collection: T::CollectionId,
-<a href=#1522 id=1522 data-nosnippet>1522</a>			item: T::ItemId,
-<a href=#1523 id=1523 data-nosnippet>1523</a>			delegate: AccountIdLookupOf&lt;T&gt;,
-<a href=#1524 id=1524 data-nosnippet>1524</a>		) -&gt; DispatchResult {
-<a href=#1525 id=1525 data-nosnippet>1525</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
-<a href=#1526 id=1526 data-nosnippet>1526</a>			<span class="kw">let </span>delegate = T::Lookup::lookup(delegate)<span class="question-mark">?</span>;
-<a href=#1527 id=1527 data-nosnippet>1527</a>			<span class="self">Self</span>::do_approve_item_attributes(origin, collection, item, delegate)
-<a href=#1528 id=1528 data-nosnippet>1528</a>		}
-<a href=#1529 id=1529 data-nosnippet>1529</a>
-<a href=#1530 id=1530 data-nosnippet>1530</a>		<span class="doccomment">/// Cancel the previously provided approval to change item's attributes.
-<a href=#1531 id=1531 data-nosnippet>1531</a>		/// All the previously set attributes by the `delegate` will be removed.
-<a href=#1532 id=1532 data-nosnippet>1532</a>		///
-<a href=#1533 id=1533 data-nosnippet>1533</a>		/// Origin must be Signed and must be an owner of the `item`.
-<a href=#1534 id=1534 data-nosnippet>1534</a>		///
-<a href=#1535 id=1535 data-nosnippet>1535</a>		/// - `collection`: Collection that the item is contained within.
-<a href=#1536 id=1536 data-nosnippet>1536</a>		/// - `item`: The item that holds attributes.
-<a href=#1537 id=1537 data-nosnippet>1537</a>		/// - `delegate`: The previously approved account to remove.
-<a href=#1538 id=1538 data-nosnippet>1538</a>		///
-<a href=#1539 id=1539 data-nosnippet>1539</a>		/// Emits `ItemAttributesApprovalRemoved` on success.
-<a href=#1540 id=1540 data-nosnippet>1540</a>		</span><span class="attr">#[pallet::call_index(<span class="number">23</span>)]
-<a href=#1541 id=1541 data-nosnippet>1541</a>		#[pallet::weight(T::WeightInfo::cancel_item_attributes_approval(
-<a href=#1542 id=1542 data-nosnippet>1542</a>			witness.account_attributes
-<a href=#1543 id=1543 data-nosnippet>1543</a>		))]
-<a href=#1544 id=1544 data-nosnippet>1544</a>		</span><span class="kw">pub fn </span>cancel_item_attributes_approval(
-<a href=#1545 id=1545 data-nosnippet>1545</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1546 id=1546 data-nosnippet>1546</a>			collection: T::CollectionId,
-<a href=#1547 id=1547 data-nosnippet>1547</a>			item: T::ItemId,
-<a href=#1548 id=1548 data-nosnippet>1548</a>			delegate: AccountIdLookupOf&lt;T&gt;,
-<a href=#1549 id=1549 data-nosnippet>1549</a>			witness: CancelAttributesApprovalWitness,
-<a href=#1550 id=1550 data-nosnippet>1550</a>		) -&gt; DispatchResult {
-<a href=#1551 id=1551 data-nosnippet>1551</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
-<a href=#1552 id=1552 data-nosnippet>1552</a>			<span class="kw">let </span>delegate = T::Lookup::lookup(delegate)<span class="question-mark">?</span>;
-<a href=#1553 id=1553 data-nosnippet>1553</a>			<span class="self">Self</span>::do_cancel_item_attributes_approval(origin, collection, item, delegate, witness)
-<a href=#1554 id=1554 data-nosnippet>1554</a>		}
-<a href=#1555 id=1555 data-nosnippet>1555</a>
-<a href=#1556 id=1556 data-nosnippet>1556</a>		<span class="doccomment">/// Set the metadata for an item.
-<a href=#1557 id=1557 data-nosnippet>1557</a>		///
-<a href=#1558 id=1558 data-nosnippet>1558</a>		/// Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the
-<a href=#1559 id=1559 data-nosnippet>1559</a>		/// `collection`.
-<a href=#1560 id=1560 data-nosnippet>1560</a>		///
-<a href=#1561 id=1561 data-nosnippet>1561</a>		/// If the origin is Signed, then funds of signer are reserved according to the formula:
-<a href=#1562 id=1562 data-nosnippet>1562</a>		/// `MetadataDepositBase + DepositPerByte * data.len` taking into
-<a href=#1563 id=1563 data-nosnippet>1563</a>		/// account any already reserved funds.
-<a href=#1564 id=1564 data-nosnippet>1564</a>		///
-<a href=#1565 id=1565 data-nosnippet>1565</a>		/// - `collection`: The identifier of the collection whose item's metadata to set.
-<a href=#1566 id=1566 data-nosnippet>1566</a>		/// - `item`: The identifier of the item whose metadata to set.
-<a href=#1567 id=1567 data-nosnippet>1567</a>		/// - `data`: The general information of this item. Limited in length by `StringLimit`.
-<a href=#1568 id=1568 data-nosnippet>1568</a>		///
-<a href=#1569 id=1569 data-nosnippet>1569</a>		/// Emits `ItemMetadataSet`.
-<a href=#1570 id=1570 data-nosnippet>1570</a>		///
-<a href=#1571 id=1571 data-nosnippet>1571</a>		/// Weight: `O(1)`
-<a href=#1572 id=1572 data-nosnippet>1572</a>		</span><span class="attr">#[pallet::call_index(<span class="number">24</span>)]
-<a href=#1573 id=1573 data-nosnippet>1573</a>		#[pallet::weight(T::WeightInfo::set_metadata())]
-<a href=#1574 id=1574 data-nosnippet>1574</a>		</span><span class="kw">pub fn </span>set_metadata(
-<a href=#1575 id=1575 data-nosnippet>1575</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1576 id=1576 data-nosnippet>1576</a>			collection: T::CollectionId,
-<a href=#1577 id=1577 data-nosnippet>1577</a>			item: T::ItemId,
-<a href=#1578 id=1578 data-nosnippet>1578</a>			data: BoundedVec&lt;u8, T::StringLimit&gt;,
-<a href=#1579 id=1579 data-nosnippet>1579</a>		) -&gt; DispatchResult {
-<a href=#1580 id=1580 data-nosnippet>1580</a>			<span class="kw">let </span>maybe_check_origin = T::ForceOrigin::try_origin(origin)
-<a href=#1581 id=1581 data-nosnippet>1581</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
-<a href=#1582 id=1582 data-nosnippet>1582</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
-<a href=#1583 id=1583 data-nosnippet>1583</a>			<span class="self">Self</span>::do_set_item_metadata(maybe_check_origin, collection, item, data, <span class="prelude-val">None</span>)
-<a href=#1584 id=1584 data-nosnippet>1584</a>		}
-<a href=#1585 id=1585 data-nosnippet>1585</a>
-<a href=#1586 id=1586 data-nosnippet>1586</a>		<span class="doccomment">/// Clear the metadata for an item.
-<a href=#1587 id=1587 data-nosnippet>1587</a>		///
-<a href=#1588 id=1588 data-nosnippet>1588</a>		/// Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the
-<a href=#1589 id=1589 data-nosnippet>1589</a>		/// `collection`.
-<a href=#1590 id=1590 data-nosnippet>1590</a>		///
-<a href=#1591 id=1591 data-nosnippet>1591</a>		/// Any deposit is freed for the collection's owner.
-<a href=#1592 id=1592 data-nosnippet>1592</a>		///
-<a href=#1593 id=1593 data-nosnippet>1593</a>		/// - `collection`: The identifier of the collection whose item's metadata to clear.
-<a href=#1594 id=1594 data-nosnippet>1594</a>		/// - `item`: The identifier of the item whose metadata to clear.
-<a href=#1595 id=1595 data-nosnippet>1595</a>		///
-<a href=#1596 id=1596 data-nosnippet>1596</a>		/// Emits `ItemMetadataCleared`.
-<a href=#1597 id=1597 data-nosnippet>1597</a>		///
-<a href=#1598 id=1598 data-nosnippet>1598</a>		/// Weight: `O(1)`
-<a href=#1599 id=1599 data-nosnippet>1599</a>		</span><span class="attr">#[pallet::call_index(<span class="number">25</span>)]
-<a href=#1600 id=1600 data-nosnippet>1600</a>		#[pallet::weight(T::WeightInfo::clear_metadata())]
-<a href=#1601 id=1601 data-nosnippet>1601</a>		</span><span class="kw">pub fn </span>clear_metadata(
-<a href=#1602 id=1602 data-nosnippet>1602</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1603 id=1603 data-nosnippet>1603</a>			collection: T::CollectionId,
-<a href=#1604 id=1604 data-nosnippet>1604</a>			item: T::ItemId,
-<a href=#1605 id=1605 data-nosnippet>1605</a>		) -&gt; DispatchResult {
-<a href=#1606 id=1606 data-nosnippet>1606</a>			<span class="kw">let </span>maybe_check_origin = T::ForceOrigin::try_origin(origin)
-<a href=#1607 id=1607 data-nosnippet>1607</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
-<a href=#1608 id=1608 data-nosnippet>1608</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
-<a href=#1609 id=1609 data-nosnippet>1609</a>			<span class="self">Self</span>::do_clear_item_metadata(maybe_check_origin, collection, item)
-<a href=#1610 id=1610 data-nosnippet>1610</a>		}
-<a href=#1611 id=1611 data-nosnippet>1611</a>
-<a href=#1612 id=1612 data-nosnippet>1612</a>		<span class="doccomment">/// Set the metadata for a collection.
-<a href=#1613 id=1613 data-nosnippet>1613</a>		///
-<a href=#1614 id=1614 data-nosnippet>1614</a>		/// Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of
-<a href=#1615 id=1615 data-nosnippet>1615</a>		/// the `collection`.
-<a href=#1616 id=1616 data-nosnippet>1616</a>		///
-<a href=#1617 id=1617 data-nosnippet>1617</a>		/// If the origin is `Signed`, then funds of signer are reserved according to the formula:
-<a href=#1618 id=1618 data-nosnippet>1618</a>		/// `MetadataDepositBase + DepositPerByte * data.len` taking into
-<a href=#1619 id=1619 data-nosnippet>1619</a>		/// account any already reserved funds.
-<a href=#1620 id=1620 data-nosnippet>1620</a>		///
-<a href=#1621 id=1621 data-nosnippet>1621</a>		/// - `collection`: The identifier of the item whose metadata to update.
-<a href=#1622 id=1622 data-nosnippet>1622</a>		/// - `data`: The general information of this item. Limited in length by `StringLimit`.
-<a href=#1623 id=1623 data-nosnippet>1623</a>		///
-<a href=#1624 id=1624 data-nosnippet>1624</a>		/// Emits `CollectionMetadataSet`.
-<a href=#1625 id=1625 data-nosnippet>1625</a>		///
-<a href=#1626 id=1626 data-nosnippet>1626</a>		/// Weight: `O(1)`
-<a href=#1627 id=1627 data-nosnippet>1627</a>		</span><span class="attr">#[pallet::call_index(<span class="number">26</span>)]
-<a href=#1628 id=1628 data-nosnippet>1628</a>		#[pallet::weight(T::WeightInfo::set_collection_metadata())]
-<a href=#1629 id=1629 data-nosnippet>1629</a>		</span><span class="kw">pub fn </span>set_collection_metadata(
-<a href=#1630 id=1630 data-nosnippet>1630</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1631 id=1631 data-nosnippet>1631</a>			collection: T::CollectionId,
-<a href=#1632 id=1632 data-nosnippet>1632</a>			data: BoundedVec&lt;u8, T::StringLimit&gt;,
-<a href=#1633 id=1633 data-nosnippet>1633</a>		) -&gt; DispatchResult {
-<a href=#1634 id=1634 data-nosnippet>1634</a>			<span class="kw">let </span>maybe_check_origin = T::ForceOrigin::try_origin(origin)
-<a href=#1635 id=1635 data-nosnippet>1635</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
-<a href=#1636 id=1636 data-nosnippet>1636</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
-<a href=#1637 id=1637 data-nosnippet>1637</a>			<span class="self">Self</span>::do_set_collection_metadata(maybe_check_origin, collection, data)
-<a href=#1638 id=1638 data-nosnippet>1638</a>		}
-<a href=#1639 id=1639 data-nosnippet>1639</a>
-<a href=#1640 id=1640 data-nosnippet>1640</a>		<span class="doccomment">/// Clear the metadata for a collection.
-<a href=#1641 id=1641 data-nosnippet>1641</a>		///
-<a href=#1642 id=1642 data-nosnippet>1642</a>		/// Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of
-<a href=#1643 id=1643 data-nosnippet>1643</a>		/// the `collection`.
-<a href=#1644 id=1644 data-nosnippet>1644</a>		///
-<a href=#1645 id=1645 data-nosnippet>1645</a>		/// Any deposit is freed for the collection's owner.
-<a href=#1646 id=1646 data-nosnippet>1646</a>		///
-<a href=#1647 id=1647 data-nosnippet>1647</a>		/// - `collection`: The identifier of the collection whose metadata to clear.
-<a href=#1648 id=1648 data-nosnippet>1648</a>		///
-<a href=#1649 id=1649 data-nosnippet>1649</a>		/// Emits `CollectionMetadataCleared`.
-<a href=#1650 id=1650 data-nosnippet>1650</a>		///
-<a href=#1651 id=1651 data-nosnippet>1651</a>		/// Weight: `O(1)`
-<a href=#1652 id=1652 data-nosnippet>1652</a>		</span><span class="attr">#[pallet::call_index(<span class="number">27</span>)]
-<a href=#1653 id=1653 data-nosnippet>1653</a>		#[pallet::weight(T::WeightInfo::clear_collection_metadata())]
-<a href=#1654 id=1654 data-nosnippet>1654</a>		</span><span class="kw">pub fn </span>clear_collection_metadata(
-<a href=#1655 id=1655 data-nosnippet>1655</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1656 id=1656 data-nosnippet>1656</a>			collection: T::CollectionId,
-<a href=#1657 id=1657 data-nosnippet>1657</a>		) -&gt; DispatchResult {
-<a href=#1658 id=1658 data-nosnippet>1658</a>			<span class="kw">let </span>maybe_check_origin = T::ForceOrigin::try_origin(origin)
-<a href=#1659 id=1659 data-nosnippet>1659</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
-<a href=#1660 id=1660 data-nosnippet>1660</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
-<a href=#1661 id=1661 data-nosnippet>1661</a>			<span class="self">Self</span>::do_clear_collection_metadata(maybe_check_origin, collection)
-<a href=#1662 id=1662 data-nosnippet>1662</a>		}
-<a href=#1663 id=1663 data-nosnippet>1663</a>
-<a href=#1664 id=1664 data-nosnippet>1664</a>		<span class="doccomment">/// Set (or reset) the acceptance of ownership for a particular account.
-<a href=#1665 id=1665 data-nosnippet>1665</a>		///
-<a href=#1666 id=1666 data-nosnippet>1666</a>		/// Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a
-<a href=#1667 id=1667 data-nosnippet>1667</a>		/// provider reference.
-<a href=#1668 id=1668 data-nosnippet>1668</a>		///
-<a href=#1669 id=1669 data-nosnippet>1669</a>		/// - `maybe_collection`: The identifier of the collection whose ownership the signer is
-<a href=#1670 id=1670 data-nosnippet>1670</a>		///   willing to accept, or if `None`, an indication that the signer is willing to accept no
-<a href=#1671 id=1671 data-nosnippet>1671</a>		///   ownership transferal.
-<a href=#1672 id=1672 data-nosnippet>1672</a>		///
-<a href=#1673 id=1673 data-nosnippet>1673</a>		/// Emits `OwnershipAcceptanceChanged`.
-<a href=#1674 id=1674 data-nosnippet>1674</a>		</span><span class="attr">#[pallet::call_index(<span class="number">28</span>)]
-<a href=#1675 id=1675 data-nosnippet>1675</a>		#[pallet::weight(T::WeightInfo::set_accept_ownership())]
-<a href=#1676 id=1676 data-nosnippet>1676</a>		</span><span class="kw">pub fn </span>set_accept_ownership(
-<a href=#1677 id=1677 data-nosnippet>1677</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1678 id=1678 data-nosnippet>1678</a>			maybe_collection: <span class="prelude-ty">Option</span>&lt;T::CollectionId&gt;,
-<a href=#1679 id=1679 data-nosnippet>1679</a>		) -&gt; DispatchResult {
-<a href=#1680 id=1680 data-nosnippet>1680</a>			<span class="kw">let </span>who = ensure_signed(origin)<span class="question-mark">?</span>;
-<a href=#1681 id=1681 data-nosnippet>1681</a>			<span class="self">Self</span>::do_set_accept_ownership(who, maybe_collection)
-<a href=#1682 id=1682 data-nosnippet>1682</a>		}
-<a href=#1683 id=1683 data-nosnippet>1683</a>
-<a href=#1684 id=1684 data-nosnippet>1684</a>		<span class="doccomment">/// Set the maximum number of items a collection could have.
-<a href=#1685 id=1685 data-nosnippet>1685</a>		///
-<a href=#1686 id=1686 data-nosnippet>1686</a>		/// Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of
-<a href=#1687 id=1687 data-nosnippet>1687</a>		/// the `collection`.
-<a href=#1688 id=1688 data-nosnippet>1688</a>		///
-<a href=#1689 id=1689 data-nosnippet>1689</a>		/// - `collection`: The identifier of the collection to change.
-<a href=#1690 id=1690 data-nosnippet>1690</a>		/// - `max_supply`: The maximum number of items a collection could have.
-<a href=#1691 id=1691 data-nosnippet>1691</a>		///
-<a href=#1692 id=1692 data-nosnippet>1692</a>		/// Emits `CollectionMaxSupplySet` event when successful.
-<a href=#1693 id=1693 data-nosnippet>1693</a>		</span><span class="attr">#[pallet::call_index(<span class="number">29</span>)]
-<a href=#1694 id=1694 data-nosnippet>1694</a>		#[pallet::weight(T::WeightInfo::set_collection_max_supply())]
-<a href=#1695 id=1695 data-nosnippet>1695</a>		</span><span class="kw">pub fn </span>set_collection_max_supply(
-<a href=#1696 id=1696 data-nosnippet>1696</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1697 id=1697 data-nosnippet>1697</a>			collection: T::CollectionId,
-<a href=#1698 id=1698 data-nosnippet>1698</a>			max_supply: u32,
-<a href=#1699 id=1699 data-nosnippet>1699</a>		) -&gt; DispatchResult {
-<a href=#1700 id=1700 data-nosnippet>1700</a>			<span class="kw">let </span>maybe_check_owner = T::ForceOrigin::try_origin(origin)
-<a href=#1701 id=1701 data-nosnippet>1701</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
-<a href=#1702 id=1702 data-nosnippet>1702</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
-<a href=#1703 id=1703 data-nosnippet>1703</a>			<span class="self">Self</span>::do_set_collection_max_supply(maybe_check_owner, collection, max_supply)
-<a href=#1704 id=1704 data-nosnippet>1704</a>		}
-<a href=#1705 id=1705 data-nosnippet>1705</a>
-<a href=#1706 id=1706 data-nosnippet>1706</a>		<span class="doccomment">/// Update mint settings.
-<a href=#1707 id=1707 data-nosnippet>1707</a>		///
-<a href=#1708 id=1708 data-nosnippet>1708</a>		/// Origin must be either `ForceOrigin` or `Signed` and the sender should be the Issuer
-<a href=#1709 id=1709 data-nosnippet>1709</a>		/// of the `collection`.
-<a href=#1710 id=1710 data-nosnippet>1710</a>		///
-<a href=#1711 id=1711 data-nosnippet>1711</a>		/// - `collection`: The identifier of the collection to change.
-<a href=#1712 id=1712 data-nosnippet>1712</a>		/// - `mint_settings`: The new mint settings.
-<a href=#1713 id=1713 data-nosnippet>1713</a>		///
-<a href=#1714 id=1714 data-nosnippet>1714</a>		/// Emits `CollectionMintSettingsUpdated` event when successful.
-<a href=#1715 id=1715 data-nosnippet>1715</a>		</span><span class="attr">#[pallet::call_index(<span class="number">30</span>)]
-<a href=#1716 id=1716 data-nosnippet>1716</a>		#[pallet::weight(T::WeightInfo::update_mint_settings())]
-<a href=#1717 id=1717 data-nosnippet>1717</a>		</span><span class="kw">pub fn </span>update_mint_settings(
-<a href=#1718 id=1718 data-nosnippet>1718</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1719 id=1719 data-nosnippet>1719</a>			collection: T::CollectionId,
-<a href=#1720 id=1720 data-nosnippet>1720</a>			mint_settings: MintSettings&lt;BalanceOf&lt;T, I&gt;, BlockNumberFor&lt;T, I&gt;, T::CollectionId&gt;,
-<a href=#1721 id=1721 data-nosnippet>1721</a>		) -&gt; DispatchResult {
-<a href=#1722 id=1722 data-nosnippet>1722</a>			<span class="kw">let </span>maybe_check_origin = T::ForceOrigin::try_origin(origin)
-<a href=#1723 id=1723 data-nosnippet>1723</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
-<a href=#1724 id=1724 data-nosnippet>1724</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
-<a href=#1725 id=1725 data-nosnippet>1725</a>			<span class="self">Self</span>::do_update_mint_settings(maybe_check_origin, collection, mint_settings)
-<a href=#1726 id=1726 data-nosnippet>1726</a>		}
-<a href=#1727 id=1727 data-nosnippet>1727</a>
-<a href=#1728 id=1728 data-nosnippet>1728</a>		<span class="doccomment">/// Set (or reset) the price for an item.
-<a href=#1729 id=1729 data-nosnippet>1729</a>		///
-<a href=#1730 id=1730 data-nosnippet>1730</a>		/// Origin must be Signed and must be the owner of the `item`.
-<a href=#1731 id=1731 data-nosnippet>1731</a>		///
-<a href=#1732 id=1732 data-nosnippet>1732</a>		/// - `collection`: The collection of the item.
-<a href=#1733 id=1733 data-nosnippet>1733</a>		/// - `item`: The item to set the price for.
-<a href=#1734 id=1734 data-nosnippet>1734</a>		/// - `price`: The price for the item. Pass `None`, to reset the price.
-<a href=#1735 id=1735 data-nosnippet>1735</a>		/// - `buyer`: Restricts the buy operation to a specific account.
-<a href=#1736 id=1736 data-nosnippet>1736</a>		///
-<a href=#1737 id=1737 data-nosnippet>1737</a>		/// Emits `ItemPriceSet` on success if the price is not `None`.
-<a href=#1738 id=1738 data-nosnippet>1738</a>		/// Emits `ItemPriceRemoved` on success if the price is `None`.
-<a href=#1739 id=1739 data-nosnippet>1739</a>		</span><span class="attr">#[pallet::call_index(<span class="number">31</span>)]
-<a href=#1740 id=1740 data-nosnippet>1740</a>		#[pallet::weight(T::WeightInfo::set_price())]
-<a href=#1741 id=1741 data-nosnippet>1741</a>		</span><span class="kw">pub fn </span>set_price(
-<a href=#1742 id=1742 data-nosnippet>1742</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1743 id=1743 data-nosnippet>1743</a>			collection: T::CollectionId,
-<a href=#1744 id=1744 data-nosnippet>1744</a>			item: T::ItemId,
-<a href=#1745 id=1745 data-nosnippet>1745</a>			price: <span class="prelude-ty">Option</span>&lt;ItemPrice&lt;T, I&gt;&gt;,
-<a href=#1746 id=1746 data-nosnippet>1746</a>			whitelisted_buyer: <span class="prelude-ty">Option</span>&lt;AccountIdLookupOf&lt;T&gt;&gt;,
-<a href=#1747 id=1747 data-nosnippet>1747</a>		) -&gt; DispatchResult {
-<a href=#1748 id=1748 data-nosnippet>1748</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
-<a href=#1749 id=1749 data-nosnippet>1749</a>			<span class="kw">let </span>whitelisted_buyer = whitelisted_buyer.map(T::Lookup::lookup).transpose()<span class="question-mark">?</span>;
-<a href=#1750 id=1750 data-nosnippet>1750</a>			<span class="self">Self</span>::do_set_price(collection, item, origin, price, whitelisted_buyer)
-<a href=#1751 id=1751 data-nosnippet>1751</a>		}
-<a href=#1752 id=1752 data-nosnippet>1752</a>
-<a href=#1753 id=1753 data-nosnippet>1753</a>		<span class="doccomment">/// Allows to buy an item if it's up for sale.
-<a href=#1754 id=1754 data-nosnippet>1754</a>		///
-<a href=#1755 id=1755 data-nosnippet>1755</a>		/// Origin must be Signed and must not be the owner of the `item`.
-<a href=#1756 id=1756 data-nosnippet>1756</a>		///
-<a href=#1757 id=1757 data-nosnippet>1757</a>		/// - `collection`: The collection of the item.
-<a href=#1758 id=1758 data-nosnippet>1758</a>		/// - `item`: The item the sender wants to buy.
-<a href=#1759 id=1759 data-nosnippet>1759</a>		/// - `bid_price`: The price the sender is willing to pay.
-<a href=#1760 id=1760 data-nosnippet>1760</a>		///
-<a href=#1761 id=1761 data-nosnippet>1761</a>		/// Emits `ItemBought` on success.
-<a href=#1762 id=1762 data-nosnippet>1762</a>		</span><span class="attr">#[pallet::call_index(<span class="number">32</span>)]
-<a href=#1763 id=1763 data-nosnippet>1763</a>		#[pallet::weight(T::WeightInfo::buy_item())]
-<a href=#1764 id=1764 data-nosnippet>1764</a>		</span><span class="kw">pub fn </span>buy_item(
-<a href=#1765 id=1765 data-nosnippet>1765</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1766 id=1766 data-nosnippet>1766</a>			collection: T::CollectionId,
-<a href=#1767 id=1767 data-nosnippet>1767</a>			item: T::ItemId,
-<a href=#1768 id=1768 data-nosnippet>1768</a>			bid_price: ItemPrice&lt;T, I&gt;,
-<a href=#1769 id=1769 data-nosnippet>1769</a>		) -&gt; DispatchResult {
-<a href=#1770 id=1770 data-nosnippet>1770</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
-<a href=#1771 id=1771 data-nosnippet>1771</a>			<span class="self">Self</span>::do_buy_item(collection, item, origin, bid_price)
-<a href=#1772 id=1772 data-nosnippet>1772</a>		}
-<a href=#1773 id=1773 data-nosnippet>1773</a>
-<a href=#1774 id=1774 data-nosnippet>1774</a>		<span class="doccomment">/// Allows to pay the tips.
-<a href=#1775 id=1775 data-nosnippet>1775</a>		///
-<a href=#1776 id=1776 data-nosnippet>1776</a>		/// Origin must be Signed.
-<a href=#1777 id=1777 data-nosnippet>1777</a>		///
-<a href=#1778 id=1778 data-nosnippet>1778</a>		/// - `tips`: Tips array.
-<a href=#1779 id=1779 data-nosnippet>1779</a>		///
-<a href=#1780 id=1780 data-nosnippet>1780</a>		/// Emits `TipSent` on every tip transfer.
-<a href=#1781 id=1781 data-nosnippet>1781</a>		</span><span class="attr">#[pallet::call_index(<span class="number">33</span>)]
-<a href=#1782 id=1782 data-nosnippet>1782</a>		#[pallet::weight(T::WeightInfo::pay_tips(tips.len() <span class="kw">as </span>u32))]
-<a href=#1783 id=1783 data-nosnippet>1783</a>		</span><span class="kw">pub fn </span>pay_tips(
-<a href=#1784 id=1784 data-nosnippet>1784</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1785 id=1785 data-nosnippet>1785</a>			tips: BoundedVec&lt;ItemTipOf&lt;T, I&gt;, T::MaxTips&gt;,
-<a href=#1786 id=1786 data-nosnippet>1786</a>		) -&gt; DispatchResult {
-<a href=#1787 id=1787 data-nosnippet>1787</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
-<a href=#1788 id=1788 data-nosnippet>1788</a>			<span class="self">Self</span>::do_pay_tips(origin, tips)
-<a href=#1789 id=1789 data-nosnippet>1789</a>		}
-<a href=#1790 id=1790 data-nosnippet>1790</a>
-<a href=#1791 id=1791 data-nosnippet>1791</a>		<span class="doccomment">/// Register a new atomic swap, declaring an intention to send an `item` in exchange for
-<a href=#1792 id=1792 data-nosnippet>1792</a>		/// `desired_item` from origin to target on the current blockchain.
-<a href=#1793 id=1793 data-nosnippet>1793</a>		/// The target can execute the swap during the specified `duration` of blocks (if set).
-<a href=#1794 id=1794 data-nosnippet>1794</a>		/// Additionally, the price could be set for the desired `item`.
-<a href=#1795 id=1795 data-nosnippet>1795</a>		///
-<a href=#1796 id=1796 data-nosnippet>1796</a>		/// Origin must be Signed and must be an owner of the `item`.
-<a href=#1797 id=1797 data-nosnippet>1797</a>		///
-<a href=#1798 id=1798 data-nosnippet>1798</a>		/// - `collection`: The collection of the item.
-<a href=#1799 id=1799 data-nosnippet>1799</a>		/// - `item`: The item an owner wants to give.
-<a href=#1800 id=1800 data-nosnippet>1800</a>		/// - `desired_collection`: The collection of the desired item.
-<a href=#1801 id=1801 data-nosnippet>1801</a>		/// - `desired_item`: The desired item an owner wants to receive.
-<a href=#1802 id=1802 data-nosnippet>1802</a>		/// - `maybe_price`: The price an owner is willing to pay or receive for the desired `item`.
-<a href=#1803 id=1803 data-nosnippet>1803</a>		/// - `duration`: A deadline for the swap. Specified by providing the number of blocks
-<a href=#1804 id=1804 data-nosnippet>1804</a>		/// 	after which the swap will expire.
-<a href=#1805 id=1805 data-nosnippet>1805</a>		///
-<a href=#1806 id=1806 data-nosnippet>1806</a>		/// Emits `SwapCreated` on success.
-<a href=#1807 id=1807 data-nosnippet>1807</a>		</span><span class="attr">#[pallet::call_index(<span class="number">34</span>)]
-<a href=#1808 id=1808 data-nosnippet>1808</a>		#[pallet::weight(T::WeightInfo::create_swap())]
-<a href=#1809 id=1809 data-nosnippet>1809</a>		</span><span class="kw">pub fn </span>create_swap(
-<a href=#1810 id=1810 data-nosnippet>1810</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1811 id=1811 data-nosnippet>1811</a>			offered_collection: T::CollectionId,
-<a href=#1812 id=1812 data-nosnippet>1812</a>			offered_item: T::ItemId,
-<a href=#1813 id=1813 data-nosnippet>1813</a>			desired_collection: T::CollectionId,
-<a href=#1814 id=1814 data-nosnippet>1814</a>			maybe_desired_item: <span class="prelude-ty">Option</span>&lt;T::ItemId&gt;,
-<a href=#1815 id=1815 data-nosnippet>1815</a>			maybe_price: <span class="prelude-ty">Option</span>&lt;PriceWithDirection&lt;ItemPrice&lt;T, I&gt;&gt;&gt;,
-<a href=#1816 id=1816 data-nosnippet>1816</a>			duration: BlockNumberFor&lt;T, I&gt;,
-<a href=#1817 id=1817 data-nosnippet>1817</a>		) -&gt; DispatchResult {
-<a href=#1818 id=1818 data-nosnippet>1818</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
-<a href=#1819 id=1819 data-nosnippet>1819</a>			<span class="self">Self</span>::do_create_swap(
-<a href=#1820 id=1820 data-nosnippet>1820</a>				origin,
-<a href=#1821 id=1821 data-nosnippet>1821</a>				offered_collection,
-<a href=#1822 id=1822 data-nosnippet>1822</a>				offered_item,
-<a href=#1823 id=1823 data-nosnippet>1823</a>				desired_collection,
-<a href=#1824 id=1824 data-nosnippet>1824</a>				maybe_desired_item,
-<a href=#1825 id=1825 data-nosnippet>1825</a>				maybe_price,
-<a href=#1826 id=1826 data-nosnippet>1826</a>				duration,
-<a href=#1827 id=1827 data-nosnippet>1827</a>			)
-<a href=#1828 id=1828 data-nosnippet>1828</a>		}
-<a href=#1829 id=1829 data-nosnippet>1829</a>
-<a href=#1830 id=1830 data-nosnippet>1830</a>		<span class="doccomment">/// Cancel an atomic swap.
-<a href=#1831 id=1831 data-nosnippet>1831</a>		///
-<a href=#1832 id=1832 data-nosnippet>1832</a>		/// Origin must be Signed.
-<a href=#1833 id=1833 data-nosnippet>1833</a>		/// Origin must be an owner of the `item` if the deadline hasn't expired.
-<a href=#1834 id=1834 data-nosnippet>1834</a>		///
-<a href=#1835 id=1835 data-nosnippet>1835</a>		/// - `collection`: The collection of the item.
-<a href=#1836 id=1836 data-nosnippet>1836</a>		/// - `item`: The item an owner wants to give.
-<a href=#1837 id=1837 data-nosnippet>1837</a>		///
-<a href=#1838 id=1838 data-nosnippet>1838</a>		/// Emits `SwapCancelled` on success.
-<a href=#1839 id=1839 data-nosnippet>1839</a>		</span><span class="attr">#[pallet::call_index(<span class="number">35</span>)]
-<a href=#1840 id=1840 data-nosnippet>1840</a>		#[pallet::weight(T::WeightInfo::cancel_swap())]
-<a href=#1841 id=1841 data-nosnippet>1841</a>		</span><span class="kw">pub fn </span>cancel_swap(
-<a href=#1842 id=1842 data-nosnippet>1842</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1843 id=1843 data-nosnippet>1843</a>			offered_collection: T::CollectionId,
-<a href=#1844 id=1844 data-nosnippet>1844</a>			offered_item: T::ItemId,
-<a href=#1845 id=1845 data-nosnippet>1845</a>		) -&gt; DispatchResult {
-<a href=#1846 id=1846 data-nosnippet>1846</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
-<a href=#1847 id=1847 data-nosnippet>1847</a>			<span class="self">Self</span>::do_cancel_swap(origin, offered_collection, offered_item)
-<a href=#1848 id=1848 data-nosnippet>1848</a>		}
-<a href=#1849 id=1849 data-nosnippet>1849</a>
-<a href=#1850 id=1850 data-nosnippet>1850</a>		<span class="doccomment">/// Claim an atomic swap.
-<a href=#1851 id=1851 data-nosnippet>1851</a>		/// This method executes a pending swap, that was created by a counterpart before.
-<a href=#1852 id=1852 data-nosnippet>1852</a>		///
-<a href=#1853 id=1853 data-nosnippet>1853</a>		/// Origin must be Signed and must be an owner of the `item`.
-<a href=#1854 id=1854 data-nosnippet>1854</a>		///
-<a href=#1855 id=1855 data-nosnippet>1855</a>		/// - `send_collection`: The collection of the item to be sent.
-<a href=#1856 id=1856 data-nosnippet>1856</a>		/// - `send_item`: The item to be sent.
-<a href=#1857 id=1857 data-nosnippet>1857</a>		/// - `receive_collection`: The collection of the item to be received.
-<a href=#1858 id=1858 data-nosnippet>1858</a>		/// - `receive_item`: The item to be received.
-<a href=#1859 id=1859 data-nosnippet>1859</a>		/// - `witness_price`: A price that was previously agreed on.
-<a href=#1860 id=1860 data-nosnippet>1860</a>		///
-<a href=#1861 id=1861 data-nosnippet>1861</a>		/// Emits `SwapClaimed` on success.
-<a href=#1862 id=1862 data-nosnippet>1862</a>		</span><span class="attr">#[pallet::call_index(<span class="number">36</span>)]
-<a href=#1863 id=1863 data-nosnippet>1863</a>		#[pallet::weight(T::WeightInfo::claim_swap())]
-<a href=#1864 id=1864 data-nosnippet>1864</a>		</span><span class="kw">pub fn </span>claim_swap(
-<a href=#1865 id=1865 data-nosnippet>1865</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1866 id=1866 data-nosnippet>1866</a>			send_collection: T::CollectionId,
-<a href=#1867 id=1867 data-nosnippet>1867</a>			send_item: T::ItemId,
-<a href=#1868 id=1868 data-nosnippet>1868</a>			receive_collection: T::CollectionId,
-<a href=#1869 id=1869 data-nosnippet>1869</a>			receive_item: T::ItemId,
-<a href=#1870 id=1870 data-nosnippet>1870</a>			witness_price: <span class="prelude-ty">Option</span>&lt;PriceWithDirection&lt;ItemPrice&lt;T, I&gt;&gt;&gt;,
-<a href=#1871 id=1871 data-nosnippet>1871</a>		) -&gt; DispatchResult {
-<a href=#1872 id=1872 data-nosnippet>1872</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
-<a href=#1873 id=1873 data-nosnippet>1873</a>			<span class="self">Self</span>::do_claim_swap(
-<a href=#1874 id=1874 data-nosnippet>1874</a>				origin,
-<a href=#1875 id=1875 data-nosnippet>1875</a>				send_collection,
-<a href=#1876 id=1876 data-nosnippet>1876</a>				send_item,
-<a href=#1877 id=1877 data-nosnippet>1877</a>				receive_collection,
-<a href=#1878 id=1878 data-nosnippet>1878</a>				receive_item,
-<a href=#1879 id=1879 data-nosnippet>1879</a>				witness_price,
-<a href=#1880 id=1880 data-nosnippet>1880</a>			)
-<a href=#1881 id=1881 data-nosnippet>1881</a>		}
-<a href=#1882 id=1882 data-nosnippet>1882</a>
-<a href=#1883 id=1883 data-nosnippet>1883</a>		<span class="doccomment">/// Mint an item by providing the pre-signed approval.
-<a href=#1884 id=1884 data-nosnippet>1884</a>		///
-<a href=#1885 id=1885 data-nosnippet>1885</a>		/// Origin must be Signed.
-<a href=#1886 id=1886 data-nosnippet>1886</a>		///
-<a href=#1887 id=1887 data-nosnippet>1887</a>		/// - `mint_data`: The pre-signed approval that consists of the information about the item,
-<a href=#1888 id=1888 data-nosnippet>1888</a>		///   its metadata, attributes, who can mint it (`None` for anyone) and until what block
-<a href=#1889 id=1889 data-nosnippet>1889</a>		///   number.
-<a href=#1890 id=1890 data-nosnippet>1890</a>		/// - `signature`: The signature of the `data` object.
-<a href=#1891 id=1891 data-nosnippet>1891</a>		/// - `signer`: The `data` object's signer. Should be an Issuer of the collection.
-<a href=#1892 id=1892 data-nosnippet>1892</a>		///
-<a href=#1893 id=1893 data-nosnippet>1893</a>		/// Emits `Issued` on success.
-<a href=#1894 id=1894 data-nosnippet>1894</a>		/// Emits `AttributeSet` if the attributes were provided.
-<a href=#1895 id=1895 data-nosnippet>1895</a>		/// Emits `ItemMetadataSet` if the metadata was not empty.
-<a href=#1896 id=1896 data-nosnippet>1896</a>		</span><span class="attr">#[pallet::call_index(<span class="number">37</span>)]
-<a href=#1897 id=1897 data-nosnippet>1897</a>		#[pallet::weight(T::WeightInfo::mint_pre_signed(mint_data.attributes.len() <span class="kw">as </span>u32))]
-<a href=#1898 id=1898 data-nosnippet>1898</a>		</span><span class="kw">pub fn </span>mint_pre_signed(
-<a href=#1899 id=1899 data-nosnippet>1899</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1900 id=1900 data-nosnippet>1900</a>			mint_data: Box&lt;PreSignedMintOf&lt;T, I&gt;&gt;,
-<a href=#1901 id=1901 data-nosnippet>1901</a>			signature: T::OffchainSignature,
-<a href=#1902 id=1902 data-nosnippet>1902</a>			signer: T::AccountId,
-<a href=#1903 id=1903 data-nosnippet>1903</a>		) -&gt; DispatchResult {
-<a href=#1904 id=1904 data-nosnippet>1904</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
-<a href=#1905 id=1905 data-nosnippet>1905</a>			<span class="self">Self</span>::validate_signature(<span class="kw-2">&amp;</span>Encode::encode(<span class="kw-2">&amp;</span>mint_data), <span class="kw-2">&amp;</span>signature, <span class="kw-2">&amp;</span>signer)<span class="question-mark">?</span>;
-<a href=#1906 id=1906 data-nosnippet>1906</a>			<span class="self">Self</span>::do_mint_pre_signed(origin, <span class="kw-2">*</span>mint_data, signer)
-<a href=#1907 id=1907 data-nosnippet>1907</a>		}
-<a href=#1908 id=1908 data-nosnippet>1908</a>
-<a href=#1909 id=1909 data-nosnippet>1909</a>		<span class="doccomment">/// Set attributes for an item by providing the pre-signed approval.
-<a href=#1910 id=1910 data-nosnippet>1910</a>		///
-<a href=#1911 id=1911 data-nosnippet>1911</a>		/// Origin must be Signed and must be an owner of the `data.item`.
-<a href=#1912 id=1912 data-nosnippet>1912</a>		///
-<a href=#1913 id=1913 data-nosnippet>1913</a>		/// - `data`: The pre-signed approval that consists of the information about the item,
-<a href=#1914 id=1914 data-nosnippet>1914</a>		///   attributes to update and until what block number.
-<a href=#1915 id=1915 data-nosnippet>1915</a>		/// - `signature`: The signature of the `data` object.
-<a href=#1916 id=1916 data-nosnippet>1916</a>		/// - `signer`: The `data` object's signer. Should be an Admin of the collection for the
-<a href=#1917 id=1917 data-nosnippet>1917</a>		///   `CollectionOwner` namespace.
-<a href=#1918 id=1918 data-nosnippet>1918</a>		///
-<a href=#1919 id=1919 data-nosnippet>1919</a>		/// Emits `AttributeSet` for each provided attribute.
-<a href=#1920 id=1920 data-nosnippet>1920</a>		/// Emits `ItemAttributesApprovalAdded` if the approval wasn't set before.
-<a href=#1921 id=1921 data-nosnippet>1921</a>		/// Emits `PreSignedAttributesSet` on success.
-<a href=#1922 id=1922 data-nosnippet>1922</a>		</span><span class="attr">#[pallet::call_index(<span class="number">38</span>)]
-<a href=#1923 id=1923 data-nosnippet>1923</a>		#[pallet::weight(T::WeightInfo::set_attributes_pre_signed(data.attributes.len() <span class="kw">as </span>u32))]
-<a href=#1924 id=1924 data-nosnippet>1924</a>		</span><span class="kw">pub fn </span>set_attributes_pre_signed(
-<a href=#1925 id=1925 data-nosnippet>1925</a>			origin: OriginFor&lt;T&gt;,
-<a href=#1926 id=1926 data-nosnippet>1926</a>			data: PreSignedAttributesOf&lt;T, I&gt;,
-<a href=#1927 id=1927 data-nosnippet>1927</a>			signature: T::OffchainSignature,
-<a href=#1928 id=1928 data-nosnippet>1928</a>			signer: T::AccountId,
-<a href=#1929 id=1929 data-nosnippet>1929</a>		) -&gt; DispatchResult {
-<a href=#1930 id=1930 data-nosnippet>1930</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
-<a href=#1931 id=1931 data-nosnippet>1931</a>			<span class="self">Self</span>::validate_signature(<span class="kw-2">&amp;</span>Encode::encode(<span class="kw-2">&amp;</span>data), <span class="kw-2">&amp;</span>signature, <span class="kw-2">&amp;</span>signer)<span class="question-mark">?</span>;
-<a href=#1932 id=1932 data-nosnippet>1932</a>			<span class="self">Self</span>::do_set_attributes_pre_signed(origin, data, signer)
-<a href=#1933 id=1933 data-nosnippet>1933</a>		}
-<a href=#1934 id=1934 data-nosnippet>1934</a>	}
-<a href=#1935 id=1935 data-nosnippet>1935</a>}
-<a href=#1936 id=1936 data-nosnippet>1936</a>
-<a href=#1937 id=1937 data-nosnippet>1937</a><span class="macro">sp_core::generate_feature_enabled_macro!</span>(runtime_benchmarks_enabled, feature = <span class="string">"runtime-benchmarks"</span>, $);</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#1439 id=1439 data-nosnippet>1439</a>				AttributeNamespace::CollectionOwner =&gt; {
+<a href=#1440 id=1440 data-nosnippet>1440</a>					<span class="self">Self</span>::collection_owner(collection).ok_or(Error::&lt;T, I&gt;::UnknownCollection)<span class="question-mark">?
+<a href=#1441 id=1441 data-nosnippet>1441</a>				</span>},
+<a href=#1442 id=1442 data-nosnippet>1442</a>				<span class="kw">_ </span>=&gt; origin.clone(),
+<a href=#1443 id=1443 data-nosnippet>1443</a>			};
+<a href=#1444 id=1444 data-nosnippet>1444</a>			<span class="self">Self</span>::do_set_attribute(origin, collection, maybe_item, namespace, key, value, depositor)
+<a href=#1445 id=1445 data-nosnippet>1445</a>		}
+<a href=#1446 id=1446 data-nosnippet>1446</a>
+<a href=#1447 id=1447 data-nosnippet>1447</a>		<span class="doccomment">/// Force-set an attribute for a collection or item.
+<a href=#1448 id=1448 data-nosnippet>1448</a>		///
+<a href=#1449 id=1449 data-nosnippet>1449</a>		/// Origin must be `ForceOrigin`.
+<a href=#1450 id=1450 data-nosnippet>1450</a>		///
+<a href=#1451 id=1451 data-nosnippet>1451</a>		/// If the attribute already exists and it was set by another account, the deposit
+<a href=#1452 id=1452 data-nosnippet>1452</a>		/// will be returned to the previous owner.
+<a href=#1453 id=1453 data-nosnippet>1453</a>		///
+<a href=#1454 id=1454 data-nosnippet>1454</a>		/// - `set_as`: An optional owner of the attribute.
+<a href=#1455 id=1455 data-nosnippet>1455</a>		/// - `collection`: The identifier of the collection whose item's metadata to set.
+<a href=#1456 id=1456 data-nosnippet>1456</a>		/// - `maybe_item`: The identifier of the item whose metadata to set.
+<a href=#1457 id=1457 data-nosnippet>1457</a>		/// - `namespace`: Attribute's namespace.
+<a href=#1458 id=1458 data-nosnippet>1458</a>		/// - `key`: The key of the attribute.
+<a href=#1459 id=1459 data-nosnippet>1459</a>		/// - `value`: The value to which to set the attribute.
+<a href=#1460 id=1460 data-nosnippet>1460</a>		///
+<a href=#1461 id=1461 data-nosnippet>1461</a>		/// Emits `AttributeSet`.
+<a href=#1462 id=1462 data-nosnippet>1462</a>		///
+<a href=#1463 id=1463 data-nosnippet>1463</a>		/// Weight: `O(1)`
+<a href=#1464 id=1464 data-nosnippet>1464</a>		</span><span class="attr">#[pallet::call_index(<span class="number">20</span>)]
+<a href=#1465 id=1465 data-nosnippet>1465</a>		#[pallet::weight(T::WeightInfo::force_set_attribute())]
+<a href=#1466 id=1466 data-nosnippet>1466</a>		</span><span class="kw">pub fn </span>force_set_attribute(
+<a href=#1467 id=1467 data-nosnippet>1467</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1468 id=1468 data-nosnippet>1468</a>			set_as: <span class="prelude-ty">Option</span>&lt;T::AccountId&gt;,
+<a href=#1469 id=1469 data-nosnippet>1469</a>			collection: T::CollectionId,
+<a href=#1470 id=1470 data-nosnippet>1470</a>			maybe_item: <span class="prelude-ty">Option</span>&lt;T::ItemId&gt;,
+<a href=#1471 id=1471 data-nosnippet>1471</a>			namespace: AttributeNamespace&lt;T::AccountId&gt;,
+<a href=#1472 id=1472 data-nosnippet>1472</a>			key: BoundedVec&lt;u8, T::KeyLimit&gt;,
+<a href=#1473 id=1473 data-nosnippet>1473</a>			value: BoundedVec&lt;u8, T::ValueLimit&gt;,
+<a href=#1474 id=1474 data-nosnippet>1474</a>		) -&gt; DispatchResult {
+<a href=#1475 id=1475 data-nosnippet>1475</a>			T::ForceOrigin::ensure_origin(origin)<span class="question-mark">?</span>;
+<a href=#1476 id=1476 data-nosnippet>1476</a>			<span class="self">Self</span>::do_force_set_attribute(set_as, collection, maybe_item, namespace, key, value)
+<a href=#1477 id=1477 data-nosnippet>1477</a>		}
+<a href=#1478 id=1478 data-nosnippet>1478</a>
+<a href=#1479 id=1479 data-nosnippet>1479</a>		<span class="doccomment">/// Clear an attribute for a collection or item.
+<a href=#1480 id=1480 data-nosnippet>1480</a>		///
+<a href=#1481 id=1481 data-nosnippet>1481</a>		/// Origin must be either `ForceOrigin` or Signed and the sender should be the Owner of the
+<a href=#1482 id=1482 data-nosnippet>1482</a>		/// attribute.
+<a href=#1483 id=1483 data-nosnippet>1483</a>		///
+<a href=#1484 id=1484 data-nosnippet>1484</a>		/// Any deposit is freed for the collection's owner.
+<a href=#1485 id=1485 data-nosnippet>1485</a>		///
+<a href=#1486 id=1486 data-nosnippet>1486</a>		/// - `collection`: The identifier of the collection whose item's metadata to clear.
+<a href=#1487 id=1487 data-nosnippet>1487</a>		/// - `maybe_item`: The identifier of the item whose metadata to clear.
+<a href=#1488 id=1488 data-nosnippet>1488</a>		/// - `namespace`: Attribute's namespace.
+<a href=#1489 id=1489 data-nosnippet>1489</a>		/// - `key`: The key of the attribute.
+<a href=#1490 id=1490 data-nosnippet>1490</a>		///
+<a href=#1491 id=1491 data-nosnippet>1491</a>		/// Emits `AttributeCleared`.
+<a href=#1492 id=1492 data-nosnippet>1492</a>		///
+<a href=#1493 id=1493 data-nosnippet>1493</a>		/// Weight: `O(1)`
+<a href=#1494 id=1494 data-nosnippet>1494</a>		</span><span class="attr">#[pallet::call_index(<span class="number">21</span>)]
+<a href=#1495 id=1495 data-nosnippet>1495</a>		#[pallet::weight(T::WeightInfo::clear_attribute())]
+<a href=#1496 id=1496 data-nosnippet>1496</a>		</span><span class="kw">pub fn </span>clear_attribute(
+<a href=#1497 id=1497 data-nosnippet>1497</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1498 id=1498 data-nosnippet>1498</a>			collection: T::CollectionId,
+<a href=#1499 id=1499 data-nosnippet>1499</a>			maybe_item: <span class="prelude-ty">Option</span>&lt;T::ItemId&gt;,
+<a href=#1500 id=1500 data-nosnippet>1500</a>			namespace: AttributeNamespace&lt;T::AccountId&gt;,
+<a href=#1501 id=1501 data-nosnippet>1501</a>			key: BoundedVec&lt;u8, T::KeyLimit&gt;,
+<a href=#1502 id=1502 data-nosnippet>1502</a>		) -&gt; DispatchResult {
+<a href=#1503 id=1503 data-nosnippet>1503</a>			<span class="kw">let </span>maybe_check_owner = T::ForceOrigin::try_origin(origin)
+<a href=#1504 id=1504 data-nosnippet>1504</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
+<a href=#1505 id=1505 data-nosnippet>1505</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
+<a href=#1506 id=1506 data-nosnippet>1506</a>			<span class="self">Self</span>::do_clear_attribute(maybe_check_owner, collection, maybe_item, namespace, key)
+<a href=#1507 id=1507 data-nosnippet>1507</a>		}
+<a href=#1508 id=1508 data-nosnippet>1508</a>
+<a href=#1509 id=1509 data-nosnippet>1509</a>		<span class="doccomment">/// Approve item's attributes to be changed by a delegated third-party account.
+<a href=#1510 id=1510 data-nosnippet>1510</a>		///
+<a href=#1511 id=1511 data-nosnippet>1511</a>		/// Origin must be Signed and must be an owner of the `item`.
+<a href=#1512 id=1512 data-nosnippet>1512</a>		///
+<a href=#1513 id=1513 data-nosnippet>1513</a>		/// - `collection`: A collection of the item.
+<a href=#1514 id=1514 data-nosnippet>1514</a>		/// - `item`: The item that holds attributes.
+<a href=#1515 id=1515 data-nosnippet>1515</a>		/// - `delegate`: The account to delegate permission to change attributes of the item.
+<a href=#1516 id=1516 data-nosnippet>1516</a>		///
+<a href=#1517 id=1517 data-nosnippet>1517</a>		/// Emits `ItemAttributesApprovalAdded` on success.
+<a href=#1518 id=1518 data-nosnippet>1518</a>		</span><span class="attr">#[pallet::call_index(<span class="number">22</span>)]
+<a href=#1519 id=1519 data-nosnippet>1519</a>		#[pallet::weight(T::WeightInfo::approve_item_attributes())]
+<a href=#1520 id=1520 data-nosnippet>1520</a>		</span><span class="kw">pub fn </span>approve_item_attributes(
+<a href=#1521 id=1521 data-nosnippet>1521</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1522 id=1522 data-nosnippet>1522</a>			collection: T::CollectionId,
+<a href=#1523 id=1523 data-nosnippet>1523</a>			item: T::ItemId,
+<a href=#1524 id=1524 data-nosnippet>1524</a>			delegate: AccountIdLookupOf&lt;T&gt;,
+<a href=#1525 id=1525 data-nosnippet>1525</a>		) -&gt; DispatchResult {
+<a href=#1526 id=1526 data-nosnippet>1526</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
+<a href=#1527 id=1527 data-nosnippet>1527</a>			<span class="kw">let </span>delegate = T::Lookup::lookup(delegate)<span class="question-mark">?</span>;
+<a href=#1528 id=1528 data-nosnippet>1528</a>			<span class="self">Self</span>::do_approve_item_attributes(origin, collection, item, delegate)
+<a href=#1529 id=1529 data-nosnippet>1529</a>		}
+<a href=#1530 id=1530 data-nosnippet>1530</a>
+<a href=#1531 id=1531 data-nosnippet>1531</a>		<span class="doccomment">/// Cancel the previously provided approval to change item's attributes.
+<a href=#1532 id=1532 data-nosnippet>1532</a>		/// All the previously set attributes by the `delegate` will be removed.
+<a href=#1533 id=1533 data-nosnippet>1533</a>		///
+<a href=#1534 id=1534 data-nosnippet>1534</a>		/// Origin must be Signed and must be an owner of the `item`.
+<a href=#1535 id=1535 data-nosnippet>1535</a>		///
+<a href=#1536 id=1536 data-nosnippet>1536</a>		/// - `collection`: Collection that the item is contained within.
+<a href=#1537 id=1537 data-nosnippet>1537</a>		/// - `item`: The item that holds attributes.
+<a href=#1538 id=1538 data-nosnippet>1538</a>		/// - `delegate`: The previously approved account to remove.
+<a href=#1539 id=1539 data-nosnippet>1539</a>		///
+<a href=#1540 id=1540 data-nosnippet>1540</a>		/// Emits `ItemAttributesApprovalRemoved` on success.
+<a href=#1541 id=1541 data-nosnippet>1541</a>		</span><span class="attr">#[pallet::call_index(<span class="number">23</span>)]
+<a href=#1542 id=1542 data-nosnippet>1542</a>		#[pallet::weight(T::WeightInfo::cancel_item_attributes_approval(
+<a href=#1543 id=1543 data-nosnippet>1543</a>			witness.account_attributes
+<a href=#1544 id=1544 data-nosnippet>1544</a>		))]
+<a href=#1545 id=1545 data-nosnippet>1545</a>		</span><span class="kw">pub fn </span>cancel_item_attributes_approval(
+<a href=#1546 id=1546 data-nosnippet>1546</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1547 id=1547 data-nosnippet>1547</a>			collection: T::CollectionId,
+<a href=#1548 id=1548 data-nosnippet>1548</a>			item: T::ItemId,
+<a href=#1549 id=1549 data-nosnippet>1549</a>			delegate: AccountIdLookupOf&lt;T&gt;,
+<a href=#1550 id=1550 data-nosnippet>1550</a>			witness: CancelAttributesApprovalWitness,
+<a href=#1551 id=1551 data-nosnippet>1551</a>		) -&gt; DispatchResult {
+<a href=#1552 id=1552 data-nosnippet>1552</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
+<a href=#1553 id=1553 data-nosnippet>1553</a>			<span class="kw">let </span>delegate = T::Lookup::lookup(delegate)<span class="question-mark">?</span>;
+<a href=#1554 id=1554 data-nosnippet>1554</a>			<span class="self">Self</span>::do_cancel_item_attributes_approval(origin, collection, item, delegate, witness)
+<a href=#1555 id=1555 data-nosnippet>1555</a>		}
+<a href=#1556 id=1556 data-nosnippet>1556</a>
+<a href=#1557 id=1557 data-nosnippet>1557</a>		<span class="doccomment">/// Set the metadata for an item.
+<a href=#1558 id=1558 data-nosnippet>1558</a>		///
+<a href=#1559 id=1559 data-nosnippet>1559</a>		/// Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the
+<a href=#1560 id=1560 data-nosnippet>1560</a>		/// `collection`.
+<a href=#1561 id=1561 data-nosnippet>1561</a>		///
+<a href=#1562 id=1562 data-nosnippet>1562</a>		/// If the origin is Signed, then funds of signer are reserved according to the formula:
+<a href=#1563 id=1563 data-nosnippet>1563</a>		/// `MetadataDepositBase + DepositPerByte * data.len` taking into
+<a href=#1564 id=1564 data-nosnippet>1564</a>		/// account any already reserved funds.
+<a href=#1565 id=1565 data-nosnippet>1565</a>		///
+<a href=#1566 id=1566 data-nosnippet>1566</a>		/// - `collection`: The identifier of the collection whose item's metadata to set.
+<a href=#1567 id=1567 data-nosnippet>1567</a>		/// - `item`: The identifier of the item whose metadata to set.
+<a href=#1568 id=1568 data-nosnippet>1568</a>		/// - `data`: The general information of this item. Limited in length by `StringLimit`.
+<a href=#1569 id=1569 data-nosnippet>1569</a>		///
+<a href=#1570 id=1570 data-nosnippet>1570</a>		/// Emits `ItemMetadataSet`.
+<a href=#1571 id=1571 data-nosnippet>1571</a>		///
+<a href=#1572 id=1572 data-nosnippet>1572</a>		/// Weight: `O(1)`
+<a href=#1573 id=1573 data-nosnippet>1573</a>		</span><span class="attr">#[pallet::call_index(<span class="number">24</span>)]
+<a href=#1574 id=1574 data-nosnippet>1574</a>		#[pallet::weight(T::WeightInfo::set_metadata())]
+<a href=#1575 id=1575 data-nosnippet>1575</a>		</span><span class="kw">pub fn </span>set_metadata(
+<a href=#1576 id=1576 data-nosnippet>1576</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1577 id=1577 data-nosnippet>1577</a>			collection: T::CollectionId,
+<a href=#1578 id=1578 data-nosnippet>1578</a>			item: T::ItemId,
+<a href=#1579 id=1579 data-nosnippet>1579</a>			data: BoundedVec&lt;u8, T::StringLimit&gt;,
+<a href=#1580 id=1580 data-nosnippet>1580</a>		) -&gt; DispatchResult {
+<a href=#1581 id=1581 data-nosnippet>1581</a>			<span class="kw">let </span>maybe_check_origin = T::ForceOrigin::try_origin(origin)
+<a href=#1582 id=1582 data-nosnippet>1582</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
+<a href=#1583 id=1583 data-nosnippet>1583</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
+<a href=#1584 id=1584 data-nosnippet>1584</a>			<span class="self">Self</span>::do_set_item_metadata(maybe_check_origin, collection, item, data, <span class="prelude-val">None</span>)
+<a href=#1585 id=1585 data-nosnippet>1585</a>		}
+<a href=#1586 id=1586 data-nosnippet>1586</a>
+<a href=#1587 id=1587 data-nosnippet>1587</a>		<span class="doccomment">/// Clear the metadata for an item.
+<a href=#1588 id=1588 data-nosnippet>1588</a>		///
+<a href=#1589 id=1589 data-nosnippet>1589</a>		/// Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the
+<a href=#1590 id=1590 data-nosnippet>1590</a>		/// `collection`.
+<a href=#1591 id=1591 data-nosnippet>1591</a>		///
+<a href=#1592 id=1592 data-nosnippet>1592</a>		/// Any deposit is freed for the collection's owner.
+<a href=#1593 id=1593 data-nosnippet>1593</a>		///
+<a href=#1594 id=1594 data-nosnippet>1594</a>		/// - `collection`: The identifier of the collection whose item's metadata to clear.
+<a href=#1595 id=1595 data-nosnippet>1595</a>		/// - `item`: The identifier of the item whose metadata to clear.
+<a href=#1596 id=1596 data-nosnippet>1596</a>		///
+<a href=#1597 id=1597 data-nosnippet>1597</a>		/// Emits `ItemMetadataCleared`.
+<a href=#1598 id=1598 data-nosnippet>1598</a>		///
+<a href=#1599 id=1599 data-nosnippet>1599</a>		/// Weight: `O(1)`
+<a href=#1600 id=1600 data-nosnippet>1600</a>		</span><span class="attr">#[pallet::call_index(<span class="number">25</span>)]
+<a href=#1601 id=1601 data-nosnippet>1601</a>		#[pallet::weight(T::WeightInfo::clear_metadata())]
+<a href=#1602 id=1602 data-nosnippet>1602</a>		</span><span class="kw">pub fn </span>clear_metadata(
+<a href=#1603 id=1603 data-nosnippet>1603</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1604 id=1604 data-nosnippet>1604</a>			collection: T::CollectionId,
+<a href=#1605 id=1605 data-nosnippet>1605</a>			item: T::ItemId,
+<a href=#1606 id=1606 data-nosnippet>1606</a>		) -&gt; DispatchResult {
+<a href=#1607 id=1607 data-nosnippet>1607</a>			<span class="kw">let </span>maybe_check_origin = T::ForceOrigin::try_origin(origin)
+<a href=#1608 id=1608 data-nosnippet>1608</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
+<a href=#1609 id=1609 data-nosnippet>1609</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
+<a href=#1610 id=1610 data-nosnippet>1610</a>			<span class="self">Self</span>::do_clear_item_metadata(maybe_check_origin, collection, item)
+<a href=#1611 id=1611 data-nosnippet>1611</a>		}
+<a href=#1612 id=1612 data-nosnippet>1612</a>
+<a href=#1613 id=1613 data-nosnippet>1613</a>		<span class="doccomment">/// Set the metadata for a collection.
+<a href=#1614 id=1614 data-nosnippet>1614</a>		///
+<a href=#1615 id=1615 data-nosnippet>1615</a>		/// Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of
+<a href=#1616 id=1616 data-nosnippet>1616</a>		/// the `collection`.
+<a href=#1617 id=1617 data-nosnippet>1617</a>		///
+<a href=#1618 id=1618 data-nosnippet>1618</a>		/// If the origin is `Signed`, then funds of signer are reserved according to the formula:
+<a href=#1619 id=1619 data-nosnippet>1619</a>		/// `MetadataDepositBase + DepositPerByte * data.len` taking into
+<a href=#1620 id=1620 data-nosnippet>1620</a>		/// account any already reserved funds.
+<a href=#1621 id=1621 data-nosnippet>1621</a>		///
+<a href=#1622 id=1622 data-nosnippet>1622</a>		/// - `collection`: The identifier of the item whose metadata to update.
+<a href=#1623 id=1623 data-nosnippet>1623</a>		/// - `data`: The general information of this item. Limited in length by `StringLimit`.
+<a href=#1624 id=1624 data-nosnippet>1624</a>		///
+<a href=#1625 id=1625 data-nosnippet>1625</a>		/// Emits `CollectionMetadataSet`.
+<a href=#1626 id=1626 data-nosnippet>1626</a>		///
+<a href=#1627 id=1627 data-nosnippet>1627</a>		/// Weight: `O(1)`
+<a href=#1628 id=1628 data-nosnippet>1628</a>		</span><span class="attr">#[pallet::call_index(<span class="number">26</span>)]
+<a href=#1629 id=1629 data-nosnippet>1629</a>		#[pallet::weight(T::WeightInfo::set_collection_metadata())]
+<a href=#1630 id=1630 data-nosnippet>1630</a>		</span><span class="kw">pub fn </span>set_collection_metadata(
+<a href=#1631 id=1631 data-nosnippet>1631</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1632 id=1632 data-nosnippet>1632</a>			collection: T::CollectionId,
+<a href=#1633 id=1633 data-nosnippet>1633</a>			data: BoundedVec&lt;u8, T::StringLimit&gt;,
+<a href=#1634 id=1634 data-nosnippet>1634</a>		) -&gt; DispatchResult {
+<a href=#1635 id=1635 data-nosnippet>1635</a>			<span class="kw">let </span>maybe_check_origin = T::ForceOrigin::try_origin(origin)
+<a href=#1636 id=1636 data-nosnippet>1636</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
+<a href=#1637 id=1637 data-nosnippet>1637</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
+<a href=#1638 id=1638 data-nosnippet>1638</a>			<span class="self">Self</span>::do_set_collection_metadata(maybe_check_origin, collection, data)
+<a href=#1639 id=1639 data-nosnippet>1639</a>		}
+<a href=#1640 id=1640 data-nosnippet>1640</a>
+<a href=#1641 id=1641 data-nosnippet>1641</a>		<span class="doccomment">/// Clear the metadata for a collection.
+<a href=#1642 id=1642 data-nosnippet>1642</a>		///
+<a href=#1643 id=1643 data-nosnippet>1643</a>		/// Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of
+<a href=#1644 id=1644 data-nosnippet>1644</a>		/// the `collection`.
+<a href=#1645 id=1645 data-nosnippet>1645</a>		///
+<a href=#1646 id=1646 data-nosnippet>1646</a>		/// Any deposit is freed for the collection's owner.
+<a href=#1647 id=1647 data-nosnippet>1647</a>		///
+<a href=#1648 id=1648 data-nosnippet>1648</a>		/// - `collection`: The identifier of the collection whose metadata to clear.
+<a href=#1649 id=1649 data-nosnippet>1649</a>		///
+<a href=#1650 id=1650 data-nosnippet>1650</a>		/// Emits `CollectionMetadataCleared`.
+<a href=#1651 id=1651 data-nosnippet>1651</a>		///
+<a href=#1652 id=1652 data-nosnippet>1652</a>		/// Weight: `O(1)`
+<a href=#1653 id=1653 data-nosnippet>1653</a>		</span><span class="attr">#[pallet::call_index(<span class="number">27</span>)]
+<a href=#1654 id=1654 data-nosnippet>1654</a>		#[pallet::weight(T::WeightInfo::clear_collection_metadata())]
+<a href=#1655 id=1655 data-nosnippet>1655</a>		</span><span class="kw">pub fn </span>clear_collection_metadata(
+<a href=#1656 id=1656 data-nosnippet>1656</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1657 id=1657 data-nosnippet>1657</a>			collection: T::CollectionId,
+<a href=#1658 id=1658 data-nosnippet>1658</a>		) -&gt; DispatchResult {
+<a href=#1659 id=1659 data-nosnippet>1659</a>			<span class="kw">let </span>maybe_check_origin = T::ForceOrigin::try_origin(origin)
+<a href=#1660 id=1660 data-nosnippet>1660</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
+<a href=#1661 id=1661 data-nosnippet>1661</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
+<a href=#1662 id=1662 data-nosnippet>1662</a>			<span class="self">Self</span>::do_clear_collection_metadata(maybe_check_origin, collection)
+<a href=#1663 id=1663 data-nosnippet>1663</a>		}
+<a href=#1664 id=1664 data-nosnippet>1664</a>
+<a href=#1665 id=1665 data-nosnippet>1665</a>		<span class="doccomment">/// Set (or reset) the acceptance of ownership for a particular account.
+<a href=#1666 id=1666 data-nosnippet>1666</a>		///
+<a href=#1667 id=1667 data-nosnippet>1667</a>		/// Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a
+<a href=#1668 id=1668 data-nosnippet>1668</a>		/// provider reference.
+<a href=#1669 id=1669 data-nosnippet>1669</a>		///
+<a href=#1670 id=1670 data-nosnippet>1670</a>		/// - `maybe_collection`: The identifier of the collection whose ownership the signer is
+<a href=#1671 id=1671 data-nosnippet>1671</a>		///   willing to accept, or if `None`, an indication that the signer is willing to accept no
+<a href=#1672 id=1672 data-nosnippet>1672</a>		///   ownership transferal.
+<a href=#1673 id=1673 data-nosnippet>1673</a>		///
+<a href=#1674 id=1674 data-nosnippet>1674</a>		/// Emits `OwnershipAcceptanceChanged`.
+<a href=#1675 id=1675 data-nosnippet>1675</a>		</span><span class="attr">#[pallet::call_index(<span class="number">28</span>)]
+<a href=#1676 id=1676 data-nosnippet>1676</a>		#[pallet::weight(T::WeightInfo::set_accept_ownership())]
+<a href=#1677 id=1677 data-nosnippet>1677</a>		</span><span class="kw">pub fn </span>set_accept_ownership(
+<a href=#1678 id=1678 data-nosnippet>1678</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1679 id=1679 data-nosnippet>1679</a>			maybe_collection: <span class="prelude-ty">Option</span>&lt;T::CollectionId&gt;,
+<a href=#1680 id=1680 data-nosnippet>1680</a>		) -&gt; DispatchResult {
+<a href=#1681 id=1681 data-nosnippet>1681</a>			<span class="kw">let </span>who = ensure_signed(origin)<span class="question-mark">?</span>;
+<a href=#1682 id=1682 data-nosnippet>1682</a>			<span class="self">Self</span>::do_set_accept_ownership(who, maybe_collection)
+<a href=#1683 id=1683 data-nosnippet>1683</a>		}
+<a href=#1684 id=1684 data-nosnippet>1684</a>
+<a href=#1685 id=1685 data-nosnippet>1685</a>		<span class="doccomment">/// Set the maximum number of items a collection could have.
+<a href=#1686 id=1686 data-nosnippet>1686</a>		///
+<a href=#1687 id=1687 data-nosnippet>1687</a>		/// Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of
+<a href=#1688 id=1688 data-nosnippet>1688</a>		/// the `collection`.
+<a href=#1689 id=1689 data-nosnippet>1689</a>		///
+<a href=#1690 id=1690 data-nosnippet>1690</a>		/// - `collection`: The identifier of the collection to change.
+<a href=#1691 id=1691 data-nosnippet>1691</a>		/// - `max_supply`: The maximum number of items a collection could have.
+<a href=#1692 id=1692 data-nosnippet>1692</a>		///
+<a href=#1693 id=1693 data-nosnippet>1693</a>		/// Emits `CollectionMaxSupplySet` event when successful.
+<a href=#1694 id=1694 data-nosnippet>1694</a>		</span><span class="attr">#[pallet::call_index(<span class="number">29</span>)]
+<a href=#1695 id=1695 data-nosnippet>1695</a>		#[pallet::weight(T::WeightInfo::set_collection_max_supply())]
+<a href=#1696 id=1696 data-nosnippet>1696</a>		</span><span class="kw">pub fn </span>set_collection_max_supply(
+<a href=#1697 id=1697 data-nosnippet>1697</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1698 id=1698 data-nosnippet>1698</a>			collection: T::CollectionId,
+<a href=#1699 id=1699 data-nosnippet>1699</a>			max_supply: u32,
+<a href=#1700 id=1700 data-nosnippet>1700</a>		) -&gt; DispatchResult {
+<a href=#1701 id=1701 data-nosnippet>1701</a>			<span class="kw">let </span>maybe_check_owner = T::ForceOrigin::try_origin(origin)
+<a href=#1702 id=1702 data-nosnippet>1702</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
+<a href=#1703 id=1703 data-nosnippet>1703</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
+<a href=#1704 id=1704 data-nosnippet>1704</a>			<span class="self">Self</span>::do_set_collection_max_supply(maybe_check_owner, collection, max_supply)
+<a href=#1705 id=1705 data-nosnippet>1705</a>		}
+<a href=#1706 id=1706 data-nosnippet>1706</a>
+<a href=#1707 id=1707 data-nosnippet>1707</a>		<span class="doccomment">/// Update mint settings.
+<a href=#1708 id=1708 data-nosnippet>1708</a>		///
+<a href=#1709 id=1709 data-nosnippet>1709</a>		/// Origin must be either `ForceOrigin` or `Signed` and the sender should be the Issuer
+<a href=#1710 id=1710 data-nosnippet>1710</a>		/// of the `collection`.
+<a href=#1711 id=1711 data-nosnippet>1711</a>		///
+<a href=#1712 id=1712 data-nosnippet>1712</a>		/// - `collection`: The identifier of the collection to change.
+<a href=#1713 id=1713 data-nosnippet>1713</a>		/// - `mint_settings`: The new mint settings.
+<a href=#1714 id=1714 data-nosnippet>1714</a>		///
+<a href=#1715 id=1715 data-nosnippet>1715</a>		/// Emits `CollectionMintSettingsUpdated` event when successful.
+<a href=#1716 id=1716 data-nosnippet>1716</a>		</span><span class="attr">#[pallet::call_index(<span class="number">30</span>)]
+<a href=#1717 id=1717 data-nosnippet>1717</a>		#[pallet::weight(T::WeightInfo::update_mint_settings())]
+<a href=#1718 id=1718 data-nosnippet>1718</a>		</span><span class="kw">pub fn </span>update_mint_settings(
+<a href=#1719 id=1719 data-nosnippet>1719</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1720 id=1720 data-nosnippet>1720</a>			collection: T::CollectionId,
+<a href=#1721 id=1721 data-nosnippet>1721</a>			mint_settings: MintSettings&lt;BalanceOf&lt;T, I&gt;, BlockNumberFor&lt;T, I&gt;, T::CollectionId&gt;,
+<a href=#1722 id=1722 data-nosnippet>1722</a>		) -&gt; DispatchResult {
+<a href=#1723 id=1723 data-nosnippet>1723</a>			<span class="kw">let </span>maybe_check_origin = T::ForceOrigin::try_origin(origin)
+<a href=#1724 id=1724 data-nosnippet>1724</a>				.map(|<span class="kw">_</span>| <span class="prelude-val">None</span>)
+<a href=#1725 id=1725 data-nosnippet>1725</a>				.or_else(|origin| ensure_signed(origin).map(<span class="prelude-val">Some</span>).map_err(DispatchError::from))<span class="question-mark">?</span>;
+<a href=#1726 id=1726 data-nosnippet>1726</a>			<span class="self">Self</span>::do_update_mint_settings(maybe_check_origin, collection, mint_settings)
+<a href=#1727 id=1727 data-nosnippet>1727</a>		}
+<a href=#1728 id=1728 data-nosnippet>1728</a>
+<a href=#1729 id=1729 data-nosnippet>1729</a>		<span class="doccomment">/// Set (or reset) the price for an item.
+<a href=#1730 id=1730 data-nosnippet>1730</a>		///
+<a href=#1731 id=1731 data-nosnippet>1731</a>		/// Origin must be Signed and must be the owner of the `item`.
+<a href=#1732 id=1732 data-nosnippet>1732</a>		///
+<a href=#1733 id=1733 data-nosnippet>1733</a>		/// - `collection`: The collection of the item.
+<a href=#1734 id=1734 data-nosnippet>1734</a>		/// - `item`: The item to set the price for.
+<a href=#1735 id=1735 data-nosnippet>1735</a>		/// - `price`: The price for the item. Pass `None`, to reset the price.
+<a href=#1736 id=1736 data-nosnippet>1736</a>		/// - `buyer`: Restricts the buy operation to a specific account.
+<a href=#1737 id=1737 data-nosnippet>1737</a>		///
+<a href=#1738 id=1738 data-nosnippet>1738</a>		/// Emits `ItemPriceSet` on success if the price is not `None`.
+<a href=#1739 id=1739 data-nosnippet>1739</a>		/// Emits `ItemPriceRemoved` on success if the price is `None`.
+<a href=#1740 id=1740 data-nosnippet>1740</a>		</span><span class="attr">#[pallet::call_index(<span class="number">31</span>)]
+<a href=#1741 id=1741 data-nosnippet>1741</a>		#[pallet::weight(T::WeightInfo::set_price())]
+<a href=#1742 id=1742 data-nosnippet>1742</a>		</span><span class="kw">pub fn </span>set_price(
+<a href=#1743 id=1743 data-nosnippet>1743</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1744 id=1744 data-nosnippet>1744</a>			collection: T::CollectionId,
+<a href=#1745 id=1745 data-nosnippet>1745</a>			item: T::ItemId,
+<a href=#1746 id=1746 data-nosnippet>1746</a>			price: <span class="prelude-ty">Option</span>&lt;ItemPrice&lt;T, I&gt;&gt;,
+<a href=#1747 id=1747 data-nosnippet>1747</a>			whitelisted_buyer: <span class="prelude-ty">Option</span>&lt;AccountIdLookupOf&lt;T&gt;&gt;,
+<a href=#1748 id=1748 data-nosnippet>1748</a>		) -&gt; DispatchResult {
+<a href=#1749 id=1749 data-nosnippet>1749</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
+<a href=#1750 id=1750 data-nosnippet>1750</a>			<span class="kw">let </span>whitelisted_buyer = whitelisted_buyer.map(T::Lookup::lookup).transpose()<span class="question-mark">?</span>;
+<a href=#1751 id=1751 data-nosnippet>1751</a>			<span class="self">Self</span>::do_set_price(collection, item, origin, price, whitelisted_buyer)
+<a href=#1752 id=1752 data-nosnippet>1752</a>		}
+<a href=#1753 id=1753 data-nosnippet>1753</a>
+<a href=#1754 id=1754 data-nosnippet>1754</a>		<span class="doccomment">/// Allows to buy an item if it's up for sale.
+<a href=#1755 id=1755 data-nosnippet>1755</a>		///
+<a href=#1756 id=1756 data-nosnippet>1756</a>		/// Origin must be Signed and must not be the owner of the `item`.
+<a href=#1757 id=1757 data-nosnippet>1757</a>		///
+<a href=#1758 id=1758 data-nosnippet>1758</a>		/// - `collection`: The collection of the item.
+<a href=#1759 id=1759 data-nosnippet>1759</a>		/// - `item`: The item the sender wants to buy.
+<a href=#1760 id=1760 data-nosnippet>1760</a>		/// - `bid_price`: The price the sender is willing to pay.
+<a href=#1761 id=1761 data-nosnippet>1761</a>		///
+<a href=#1762 id=1762 data-nosnippet>1762</a>		/// Emits `ItemBought` on success.
+<a href=#1763 id=1763 data-nosnippet>1763</a>		</span><span class="attr">#[pallet::call_index(<span class="number">32</span>)]
+<a href=#1764 id=1764 data-nosnippet>1764</a>		#[pallet::weight(T::WeightInfo::buy_item())]
+<a href=#1765 id=1765 data-nosnippet>1765</a>		</span><span class="kw">pub fn </span>buy_item(
+<a href=#1766 id=1766 data-nosnippet>1766</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1767 id=1767 data-nosnippet>1767</a>			collection: T::CollectionId,
+<a href=#1768 id=1768 data-nosnippet>1768</a>			item: T::ItemId,
+<a href=#1769 id=1769 data-nosnippet>1769</a>			bid_price: ItemPrice&lt;T, I&gt;,
+<a href=#1770 id=1770 data-nosnippet>1770</a>		) -&gt; DispatchResult {
+<a href=#1771 id=1771 data-nosnippet>1771</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
+<a href=#1772 id=1772 data-nosnippet>1772</a>			<span class="self">Self</span>::do_buy_item(collection, item, origin, bid_price)
+<a href=#1773 id=1773 data-nosnippet>1773</a>		}
+<a href=#1774 id=1774 data-nosnippet>1774</a>
+<a href=#1775 id=1775 data-nosnippet>1775</a>		<span class="doccomment">/// Allows to pay the tips.
+<a href=#1776 id=1776 data-nosnippet>1776</a>		///
+<a href=#1777 id=1777 data-nosnippet>1777</a>		/// Origin must be Signed.
+<a href=#1778 id=1778 data-nosnippet>1778</a>		///
+<a href=#1779 id=1779 data-nosnippet>1779</a>		/// - `tips`: Tips array.
+<a href=#1780 id=1780 data-nosnippet>1780</a>		///
+<a href=#1781 id=1781 data-nosnippet>1781</a>		/// Emits `TipSent` on every tip transfer.
+<a href=#1782 id=1782 data-nosnippet>1782</a>		</span><span class="attr">#[pallet::call_index(<span class="number">33</span>)]
+<a href=#1783 id=1783 data-nosnippet>1783</a>		#[pallet::weight(T::WeightInfo::pay_tips(tips.len() <span class="kw">as </span>u32))]
+<a href=#1784 id=1784 data-nosnippet>1784</a>		</span><span class="kw">pub fn </span>pay_tips(
+<a href=#1785 id=1785 data-nosnippet>1785</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1786 id=1786 data-nosnippet>1786</a>			tips: BoundedVec&lt;ItemTipOf&lt;T, I&gt;, T::MaxTips&gt;,
+<a href=#1787 id=1787 data-nosnippet>1787</a>		) -&gt; DispatchResult {
+<a href=#1788 id=1788 data-nosnippet>1788</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
+<a href=#1789 id=1789 data-nosnippet>1789</a>			<span class="self">Self</span>::do_pay_tips(origin, tips)
+<a href=#1790 id=1790 data-nosnippet>1790</a>		}
+<a href=#1791 id=1791 data-nosnippet>1791</a>
+<a href=#1792 id=1792 data-nosnippet>1792</a>		<span class="doccomment">/// Register a new atomic swap, declaring an intention to send an `item` in exchange for
+<a href=#1793 id=1793 data-nosnippet>1793</a>		/// `desired_item` from origin to target on the current blockchain.
+<a href=#1794 id=1794 data-nosnippet>1794</a>		/// The target can execute the swap during the specified `duration` of blocks (if set).
+<a href=#1795 id=1795 data-nosnippet>1795</a>		/// Additionally, the price could be set for the desired `item`.
+<a href=#1796 id=1796 data-nosnippet>1796</a>		///
+<a href=#1797 id=1797 data-nosnippet>1797</a>		/// Origin must be Signed and must be an owner of the `item`.
+<a href=#1798 id=1798 data-nosnippet>1798</a>		///
+<a href=#1799 id=1799 data-nosnippet>1799</a>		/// - `collection`: The collection of the item.
+<a href=#1800 id=1800 data-nosnippet>1800</a>		/// - `item`: The item an owner wants to give.
+<a href=#1801 id=1801 data-nosnippet>1801</a>		/// - `desired_collection`: The collection of the desired item.
+<a href=#1802 id=1802 data-nosnippet>1802</a>		/// - `desired_item`: The desired item an owner wants to receive.
+<a href=#1803 id=1803 data-nosnippet>1803</a>		/// - `maybe_price`: The price an owner is willing to pay or receive for the desired `item`.
+<a href=#1804 id=1804 data-nosnippet>1804</a>		/// - `duration`: A deadline for the swap. Specified by providing the number of blocks
+<a href=#1805 id=1805 data-nosnippet>1805</a>		/// 	after which the swap will expire.
+<a href=#1806 id=1806 data-nosnippet>1806</a>		///
+<a href=#1807 id=1807 data-nosnippet>1807</a>		/// Emits `SwapCreated` on success.
+<a href=#1808 id=1808 data-nosnippet>1808</a>		</span><span class="attr">#[pallet::call_index(<span class="number">34</span>)]
+<a href=#1809 id=1809 data-nosnippet>1809</a>		#[pallet::weight(T::WeightInfo::create_swap())]
+<a href=#1810 id=1810 data-nosnippet>1810</a>		</span><span class="kw">pub fn </span>create_swap(
+<a href=#1811 id=1811 data-nosnippet>1811</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1812 id=1812 data-nosnippet>1812</a>			offered_collection: T::CollectionId,
+<a href=#1813 id=1813 data-nosnippet>1813</a>			offered_item: T::ItemId,
+<a href=#1814 id=1814 data-nosnippet>1814</a>			desired_collection: T::CollectionId,
+<a href=#1815 id=1815 data-nosnippet>1815</a>			maybe_desired_item: <span class="prelude-ty">Option</span>&lt;T::ItemId&gt;,
+<a href=#1816 id=1816 data-nosnippet>1816</a>			maybe_price: <span class="prelude-ty">Option</span>&lt;PriceWithDirection&lt;ItemPrice&lt;T, I&gt;&gt;&gt;,
+<a href=#1817 id=1817 data-nosnippet>1817</a>			duration: BlockNumberFor&lt;T, I&gt;,
+<a href=#1818 id=1818 data-nosnippet>1818</a>		) -&gt; DispatchResult {
+<a href=#1819 id=1819 data-nosnippet>1819</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
+<a href=#1820 id=1820 data-nosnippet>1820</a>			<span class="self">Self</span>::do_create_swap(
+<a href=#1821 id=1821 data-nosnippet>1821</a>				origin,
+<a href=#1822 id=1822 data-nosnippet>1822</a>				offered_collection,
+<a href=#1823 id=1823 data-nosnippet>1823</a>				offered_item,
+<a href=#1824 id=1824 data-nosnippet>1824</a>				desired_collection,
+<a href=#1825 id=1825 data-nosnippet>1825</a>				maybe_desired_item,
+<a href=#1826 id=1826 data-nosnippet>1826</a>				maybe_price,
+<a href=#1827 id=1827 data-nosnippet>1827</a>				duration,
+<a href=#1828 id=1828 data-nosnippet>1828</a>			)
+<a href=#1829 id=1829 data-nosnippet>1829</a>		}
+<a href=#1830 id=1830 data-nosnippet>1830</a>
+<a href=#1831 id=1831 data-nosnippet>1831</a>		<span class="doccomment">/// Cancel an atomic swap.
+<a href=#1832 id=1832 data-nosnippet>1832</a>		///
+<a href=#1833 id=1833 data-nosnippet>1833</a>		/// Origin must be Signed.
+<a href=#1834 id=1834 data-nosnippet>1834</a>		/// Origin must be an owner of the `item` if the deadline hasn't expired.
+<a href=#1835 id=1835 data-nosnippet>1835</a>		///
+<a href=#1836 id=1836 data-nosnippet>1836</a>		/// - `collection`: The collection of the item.
+<a href=#1837 id=1837 data-nosnippet>1837</a>		/// - `item`: The item an owner wants to give.
+<a href=#1838 id=1838 data-nosnippet>1838</a>		///
+<a href=#1839 id=1839 data-nosnippet>1839</a>		/// Emits `SwapCancelled` on success.
+<a href=#1840 id=1840 data-nosnippet>1840</a>		</span><span class="attr">#[pallet::call_index(<span class="number">35</span>)]
+<a href=#1841 id=1841 data-nosnippet>1841</a>		#[pallet::weight(T::WeightInfo::cancel_swap())]
+<a href=#1842 id=1842 data-nosnippet>1842</a>		</span><span class="kw">pub fn </span>cancel_swap(
+<a href=#1843 id=1843 data-nosnippet>1843</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1844 id=1844 data-nosnippet>1844</a>			offered_collection: T::CollectionId,
+<a href=#1845 id=1845 data-nosnippet>1845</a>			offered_item: T::ItemId,
+<a href=#1846 id=1846 data-nosnippet>1846</a>		) -&gt; DispatchResult {
+<a href=#1847 id=1847 data-nosnippet>1847</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
+<a href=#1848 id=1848 data-nosnippet>1848</a>			<span class="self">Self</span>::do_cancel_swap(origin, offered_collection, offered_item)
+<a href=#1849 id=1849 data-nosnippet>1849</a>		}
+<a href=#1850 id=1850 data-nosnippet>1850</a>
+<a href=#1851 id=1851 data-nosnippet>1851</a>		<span class="doccomment">/// Claim an atomic swap.
+<a href=#1852 id=1852 data-nosnippet>1852</a>		/// This method executes a pending swap, that was created by a counterpart before.
+<a href=#1853 id=1853 data-nosnippet>1853</a>		///
+<a href=#1854 id=1854 data-nosnippet>1854</a>		/// Origin must be Signed and must be an owner of the `item`.
+<a href=#1855 id=1855 data-nosnippet>1855</a>		///
+<a href=#1856 id=1856 data-nosnippet>1856</a>		/// - `send_collection`: The collection of the item to be sent.
+<a href=#1857 id=1857 data-nosnippet>1857</a>		/// - `send_item`: The item to be sent.
+<a href=#1858 id=1858 data-nosnippet>1858</a>		/// - `receive_collection`: The collection of the item to be received.
+<a href=#1859 id=1859 data-nosnippet>1859</a>		/// - `receive_item`: The item to be received.
+<a href=#1860 id=1860 data-nosnippet>1860</a>		/// - `witness_price`: A price that was previously agreed on.
+<a href=#1861 id=1861 data-nosnippet>1861</a>		///
+<a href=#1862 id=1862 data-nosnippet>1862</a>		/// Emits `SwapClaimed` on success.
+<a href=#1863 id=1863 data-nosnippet>1863</a>		</span><span class="attr">#[pallet::call_index(<span class="number">36</span>)]
+<a href=#1864 id=1864 data-nosnippet>1864</a>		#[pallet::weight(T::WeightInfo::claim_swap())]
+<a href=#1865 id=1865 data-nosnippet>1865</a>		</span><span class="kw">pub fn </span>claim_swap(
+<a href=#1866 id=1866 data-nosnippet>1866</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1867 id=1867 data-nosnippet>1867</a>			send_collection: T::CollectionId,
+<a href=#1868 id=1868 data-nosnippet>1868</a>			send_item: T::ItemId,
+<a href=#1869 id=1869 data-nosnippet>1869</a>			receive_collection: T::CollectionId,
+<a href=#1870 id=1870 data-nosnippet>1870</a>			receive_item: T::ItemId,
+<a href=#1871 id=1871 data-nosnippet>1871</a>			witness_price: <span class="prelude-ty">Option</span>&lt;PriceWithDirection&lt;ItemPrice&lt;T, I&gt;&gt;&gt;,
+<a href=#1872 id=1872 data-nosnippet>1872</a>		) -&gt; DispatchResult {
+<a href=#1873 id=1873 data-nosnippet>1873</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
+<a href=#1874 id=1874 data-nosnippet>1874</a>			<span class="self">Self</span>::do_claim_swap(
+<a href=#1875 id=1875 data-nosnippet>1875</a>				origin,
+<a href=#1876 id=1876 data-nosnippet>1876</a>				send_collection,
+<a href=#1877 id=1877 data-nosnippet>1877</a>				send_item,
+<a href=#1878 id=1878 data-nosnippet>1878</a>				receive_collection,
+<a href=#1879 id=1879 data-nosnippet>1879</a>				receive_item,
+<a href=#1880 id=1880 data-nosnippet>1880</a>				witness_price,
+<a href=#1881 id=1881 data-nosnippet>1881</a>			)
+<a href=#1882 id=1882 data-nosnippet>1882</a>		}
+<a href=#1883 id=1883 data-nosnippet>1883</a>
+<a href=#1884 id=1884 data-nosnippet>1884</a>		<span class="doccomment">/// Mint an item by providing the pre-signed approval.
+<a href=#1885 id=1885 data-nosnippet>1885</a>		///
+<a href=#1886 id=1886 data-nosnippet>1886</a>		/// Origin must be Signed.
+<a href=#1887 id=1887 data-nosnippet>1887</a>		///
+<a href=#1888 id=1888 data-nosnippet>1888</a>		/// - `mint_data`: The pre-signed approval that consists of the information about the item,
+<a href=#1889 id=1889 data-nosnippet>1889</a>		///   its metadata, attributes, who can mint it (`None` for anyone) and until what block
+<a href=#1890 id=1890 data-nosnippet>1890</a>		///   number.
+<a href=#1891 id=1891 data-nosnippet>1891</a>		/// - `signature`: The signature of the `data` object.
+<a href=#1892 id=1892 data-nosnippet>1892</a>		/// - `signer`: The `data` object's signer. Should be an Issuer of the collection.
+<a href=#1893 id=1893 data-nosnippet>1893</a>		///
+<a href=#1894 id=1894 data-nosnippet>1894</a>		/// Emits `Issued` on success.
+<a href=#1895 id=1895 data-nosnippet>1895</a>		/// Emits `AttributeSet` if the attributes were provided.
+<a href=#1896 id=1896 data-nosnippet>1896</a>		/// Emits `ItemMetadataSet` if the metadata was not empty.
+<a href=#1897 id=1897 data-nosnippet>1897</a>		</span><span class="attr">#[pallet::call_index(<span class="number">37</span>)]
+<a href=#1898 id=1898 data-nosnippet>1898</a>		#[pallet::weight(T::WeightInfo::mint_pre_signed(mint_data.attributes.len() <span class="kw">as </span>u32))]
+<a href=#1899 id=1899 data-nosnippet>1899</a>		</span><span class="kw">pub fn </span>mint_pre_signed(
+<a href=#1900 id=1900 data-nosnippet>1900</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1901 id=1901 data-nosnippet>1901</a>			mint_data: Box&lt;PreSignedMintOf&lt;T, I&gt;&gt;,
+<a href=#1902 id=1902 data-nosnippet>1902</a>			signature: T::OffchainSignature,
+<a href=#1903 id=1903 data-nosnippet>1903</a>			signer: T::AccountId,
+<a href=#1904 id=1904 data-nosnippet>1904</a>		) -&gt; DispatchResult {
+<a href=#1905 id=1905 data-nosnippet>1905</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
+<a href=#1906 id=1906 data-nosnippet>1906</a>			<span class="self">Self</span>::validate_signature(<span class="kw-2">&amp;</span>Encode::encode(<span class="kw-2">&amp;</span>mint_data), <span class="kw-2">&amp;</span>signature, <span class="kw-2">&amp;</span>signer)<span class="question-mark">?</span>;
+<a href=#1907 id=1907 data-nosnippet>1907</a>			<span class="self">Self</span>::do_mint_pre_signed(origin, <span class="kw-2">*</span>mint_data, signer)
+<a href=#1908 id=1908 data-nosnippet>1908</a>		}
+<a href=#1909 id=1909 data-nosnippet>1909</a>
+<a href=#1910 id=1910 data-nosnippet>1910</a>		<span class="doccomment">/// Set attributes for an item by providing the pre-signed approval.
+<a href=#1911 id=1911 data-nosnippet>1911</a>		///
+<a href=#1912 id=1912 data-nosnippet>1912</a>		/// Origin must be Signed and must be an owner of the `data.item`.
+<a href=#1913 id=1913 data-nosnippet>1913</a>		///
+<a href=#1914 id=1914 data-nosnippet>1914</a>		/// - `data`: The pre-signed approval that consists of the information about the item,
+<a href=#1915 id=1915 data-nosnippet>1915</a>		///   attributes to update and until what block number.
+<a href=#1916 id=1916 data-nosnippet>1916</a>		/// - `signature`: The signature of the `data` object.
+<a href=#1917 id=1917 data-nosnippet>1917</a>		/// - `signer`: The `data` object's signer. Should be an Admin of the collection for the
+<a href=#1918 id=1918 data-nosnippet>1918</a>		///   `CollectionOwner` namespace.
+<a href=#1919 id=1919 data-nosnippet>1919</a>		///
+<a href=#1920 id=1920 data-nosnippet>1920</a>		/// Emits `AttributeSet` for each provided attribute.
+<a href=#1921 id=1921 data-nosnippet>1921</a>		/// Emits `ItemAttributesApprovalAdded` if the approval wasn't set before.
+<a href=#1922 id=1922 data-nosnippet>1922</a>		/// Emits `PreSignedAttributesSet` on success.
+<a href=#1923 id=1923 data-nosnippet>1923</a>		</span><span class="attr">#[pallet::call_index(<span class="number">38</span>)]
+<a href=#1924 id=1924 data-nosnippet>1924</a>		#[pallet::weight(T::WeightInfo::set_attributes_pre_signed(data.attributes.len() <span class="kw">as </span>u32))]
+<a href=#1925 id=1925 data-nosnippet>1925</a>		</span><span class="kw">pub fn </span>set_attributes_pre_signed(
+<a href=#1926 id=1926 data-nosnippet>1926</a>			origin: OriginFor&lt;T&gt;,
+<a href=#1927 id=1927 data-nosnippet>1927</a>			data: PreSignedAttributesOf&lt;T, I&gt;,
+<a href=#1928 id=1928 data-nosnippet>1928</a>			signature: T::OffchainSignature,
+<a href=#1929 id=1929 data-nosnippet>1929</a>			signer: T::AccountId,
+<a href=#1930 id=1930 data-nosnippet>1930</a>		) -&gt; DispatchResult {
+<a href=#1931 id=1931 data-nosnippet>1931</a>			<span class="kw">let </span>origin = ensure_signed(origin)<span class="question-mark">?</span>;
+<a href=#1932 id=1932 data-nosnippet>1932</a>			<span class="self">Self</span>::validate_signature(<span class="kw-2">&amp;</span>Encode::encode(<span class="kw-2">&amp;</span>data), <span class="kw-2">&amp;</span>signature, <span class="kw-2">&amp;</span>signer)<span class="question-mark">?</span>;
+<a href=#1933 id=1933 data-nosnippet>1933</a>			<span class="self">Self</span>::do_set_attributes_pre_signed(origin, data, signer)
+<a href=#1934 id=1934 data-nosnippet>1934</a>		}
+<a href=#1935 id=1935 data-nosnippet>1935</a>	}
+<a href=#1936 id=1936 data-nosnippet>1936</a>}
+<a href=#1937 id=1937 data-nosnippet>1937</a>
+<a href=#1938 id=1938 data-nosnippet>1938</a><span class="macro">sp_core::generate_feature_enabled_macro!</span>(runtime_benchmarks_enabled, feature = <span class="string">"runtime-benchmarks"</span>, $);
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/runtime/common/src/paras_registrar/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/runtime/common/src/paras_registrar/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="polkadot_runtime_common" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="polkadot_runtime_common" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">polkadot_runtime_common/paras_registrar/</div>mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">polkadot_runtime_common/paras_registrar/</div>mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Polkadot.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Polkadot is free software: you can redistribute it and/or modify
@@ -169,7 +169,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#19 id=19 data-nosnippet>19</a>
 <a href=#20 id=20 data-nosnippet>20</a></span><span class="kw">pub mod </span>migration;
 <a href=#21 id=21 data-nosnippet>21</a>
-<a href=#22 id=22 data-nosnippet>22</a><span class="kw">use </span>alloc::{vec, vec::Vec};
+<a href=#22 id=22 data-nosnippet>22</a><span class="kw">use </span>alloc::vec::Vec;
 <a href=#23 id=23 data-nosnippet>23</a><span class="kw">use </span>core::result;
 <a href=#24 id=24 data-nosnippet>24</a><span class="kw">use </span>frame_support::{
 <a href=#25 id=25 data-nosnippet>25</a>	dispatch::DispatchResult,
@@ -697,14 +697,14 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#547 id=547 data-nosnippet>547</a>	</span><span class="kw">fn </span>worst_head_data() -&gt; HeadData {
 <a href=#548 id=548 data-nosnippet>548</a>		<span class="kw">let </span>max_head_size = configuration::ActiveConfig::&lt;T&gt;::get().max_head_data_size;
 <a href=#549 id=549 data-nosnippet>549</a>		<span class="macro">assert!</span>(max_head_size &gt; <span class="number">0</span>, <span class="string">"max_head_data can't be zero for generating worst head data."</span>);
-<a href=#550 id=550 data-nosnippet>550</a>		<span class="macro">vec!</span>[<span class="number">0u8</span>; max_head_size <span class="kw">as </span>usize].into()
+<a href=#550 id=550 data-nosnippet>550</a>		<span class="macro">alloc::vec!</span>[<span class="number">0u8</span>; max_head_size <span class="kw">as </span>usize].into()
 <a href=#551 id=551 data-nosnippet>551</a>	}
 <a href=#552 id=552 data-nosnippet>552</a>
 <a href=#553 id=553 data-nosnippet>553</a>	<span class="attr">#[cfg(any(feature = <span class="string">"runtime-benchmarks"</span>, test))]
 <a href=#554 id=554 data-nosnippet>554</a>	</span><span class="kw">fn </span>worst_validation_code() -&gt; ValidationCode {
 <a href=#555 id=555 data-nosnippet>555</a>		<span class="kw">let </span>max_code_size = configuration::ActiveConfig::&lt;T&gt;::get().max_code_size;
 <a href=#556 id=556 data-nosnippet>556</a>		<span class="macro">assert!</span>(max_code_size &gt; <span class="number">0</span>, <span class="string">"max_code_size can't be zero for generating worst code data."</span>);
-<a href=#557 id=557 data-nosnippet>557</a>		<span class="kw">let </span>validation_code = <span class="macro">vec!</span>[<span class="number">0u8</span>; max_code_size <span class="kw">as </span>usize];
+<a href=#557 id=557 data-nosnippet>557</a>		<span class="kw">let </span>validation_code = <span class="macro">alloc::vec!</span>[<span class="number">0u8</span>; max_code_size <span class="kw">as </span>usize];
 <a href=#558 id=558 data-nosnippet>558</a>		validation_code.into()
 <a href=#559 id=559 data-nosnippet>559</a>	}
 <a href=#560 id=560 data-nosnippet>560</a>
@@ -728,7 +728,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#578 id=578 data-nosnippet>578</a>
 <a href=#579 id=579 data-nosnippet>579</a>			<span class="kw">if </span>para_info.manager == who {
 <a href=#580 id=580 data-nosnippet>580</a>				<span class="macro">ensure!</span>(!para_info.is_locked(), Error::&lt;T&gt;::ParaLocked);
-<a href=#581 id=581 data-nosnippet>581</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(())
+<a href=#581 id=581 data-nosnippet>581</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(());
 <a href=#582 id=582 data-nosnippet>582</a>			}
 <a href=#583 id=583 data-nosnippet>583</a>		}
 <a href=#584 id=584 data-nosnippet>584</a>
@@ -741,7 +741,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#591 id=591 data-nosnippet>591</a>		id: ParaId,
 <a href=#592 id=592 data-nosnippet>592</a>	) -&gt; DispatchResult {
 <a href=#593 id=593 data-nosnippet>593</a>		<span class="kw">if </span>ensure_root(origin.clone()).is_ok() {
-<a href=#594 id=594 data-nosnippet>594</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(())
+<a href=#594 id=594 data-nosnippet>594</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(());
 <a href=#595 id=595 data-nosnippet>595</a>		}
 <a href=#596 id=596 data-nosnippet>596</a>
 <a href=#597 id=597 data-nosnippet>597</a>		<span class="kw">let </span>caller_id = ensure_parachain(&lt;T <span class="kw">as </span>Config&gt;::RuntimeOrigin::from(origin))<span class="question-mark">?</span>;
@@ -882,7 +882,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#732 id=732 data-nosnippet>732</a></span><span class="kw">mod </span>tests;
 <a href=#733 id=733 data-nosnippet>733</a>
 <a href=#734 id=734 data-nosnippet>734</a><span class="attr">#[cfg(feature = <span class="string">"runtime-benchmarks"</span>)]
-<a href=#735 id=735 data-nosnippet>735</a></span><span class="kw">mod </span>benchmarking;</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#735 id=735 data-nosnippet>735</a></span><span class="kw">mod </span>benchmarking;
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

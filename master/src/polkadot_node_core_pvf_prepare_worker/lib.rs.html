@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/node/core/pvf/prepare-worker/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/node/core/pvf/prepare-worker/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="polkadot_node_core_pvf_prepare_worker" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="polkadot_node_core_pvf_prepare_worker" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">polkadot_node_core_pvf_prepare_worker/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">polkadot_node_core_pvf_prepare_worker/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Polkadot.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Polkadot is free software: you can redistribute it and/or modify
@@ -381,8 +381,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#231 id=231 data-nosnippet>231</a>						<span class="kw">let </span>result: PrepareWorkerResult =
 <a href=#232 id=232 data-nosnippet>232</a>							<span class="prelude-val">Err</span>(error_from_errno(<span class="string">"getrusage before"</span>, errno));
 <a href=#233 id=233 data-nosnippet>233</a>						send_result(<span class="kw-2">&amp;mut </span>stream, result, worker_info)<span class="question-mark">?</span>;
-<a href=#234 id=234 data-nosnippet>234</a>						<span class="kw">continue
-<a href=#235 id=235 data-nosnippet>235</a>					</span>},
+<a href=#234 id=234 data-nosnippet>234</a>						<span class="kw">continue</span>;
+<a href=#235 id=235 data-nosnippet>235</a>					},
 <a href=#236 id=236 data-nosnippet>236</a>				};
 <a href=#237 id=237 data-nosnippet>237</a>
 <a href=#238 id=238 data-nosnippet>238</a>				<span class="kw">let </span>stream_fd = stream.as_raw_fd();
@@ -757,181 +757,183 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#607 id=607 data-nosnippet>607</a>			<span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; <span class="prelude-val">Err</span>(PrepareError::IoErr(<span class="string">"error communicating over closed channel"</span>.into())),
 <a href=#608 id=608 data-nosnippet>608</a>			<span class="prelude-val">Err</span>(err) =&gt; <span class="prelude-val">Err</span>(PrepareError::IoErr(stringify_panic_payload(err))),
 <a href=#609 id=609 data-nosnippet>609</a>		},
-<a href=#610 id=610 data-nosnippet>610</a>		WaitOutcome::Pending =&gt;
-<a href=#611 id=611 data-nosnippet>611</a>			<span class="macro">unreachable!</span>(<span class="string">"we run wait_while until the outcome is no longer pending; qed"</span>),
-<a href=#612 id=612 data-nosnippet>612</a>	};
-<a href=#613 id=613 data-nosnippet>613</a>
-<a href=#614 id=614 data-nosnippet>614</a>	send_child_response(<span class="kw-2">&amp;mut </span>pipe_write, result);
-<a href=#615 id=615 data-nosnippet>615</a>}
-<a href=#616 id=616 data-nosnippet>616</a>
-<a href=#617 id=617 data-nosnippet>617</a><span class="doccomment">/// Waits for child process to finish and handle child response from pipe.
-<a href=#618 id=618 data-nosnippet>618</a>///
-<a href=#619 id=619 data-nosnippet>619</a>/// # Returns
-<a href=#620 id=620 data-nosnippet>620</a>///
-<a href=#621 id=621 data-nosnippet>621</a>/// - If the child send response without an error, this function returns `Ok(PrepareStats)`
-<a href=#622 id=622 data-nosnippet>622</a>///   containing memory and CPU usage statistics.
-<a href=#623 id=623 data-nosnippet>623</a>///
-<a href=#624 id=624 data-nosnippet>624</a>/// - If the child send response with an error, it returns a `PrepareError` with that error.
-<a href=#625 id=625 data-nosnippet>625</a>///
-<a href=#626 id=626 data-nosnippet>626</a>/// - If the child process timeout, it returns `PrepareError::TimedOut`.
-<a href=#627 id=627 data-nosnippet>627</a></span><span class="kw">fn </span>handle_parent_process(
-<a href=#628 id=628 data-nosnippet>628</a>	pipe_read_fd: i32,
-<a href=#629 id=629 data-nosnippet>629</a>	pipe_write_fd: i32,
-<a href=#630 id=630 data-nosnippet>630</a>	worker_info: <span class="kw-2">&amp;</span>WorkerInfo,
-<a href=#631 id=631 data-nosnippet>631</a>	job_pid: Pid,
-<a href=#632 id=632 data-nosnippet>632</a>	temp_artifact_dest: <span class="kw-2">&amp;</span>Path,
-<a href=#633 id=633 data-nosnippet>633</a>	usage_before: Usage,
-<a href=#634 id=634 data-nosnippet>634</a>	timeout: Duration,
-<a href=#635 id=635 data-nosnippet>635</a>) -&gt; <span class="prelude-ty">Result</span>&lt;PrepareWorkerSuccess, PrepareError&gt; {
-<a href=#636 id=636 data-nosnippet>636</a>	<span class="comment">// the read end will wait until all write ends have been closed,
-<a href=#637 id=637 data-nosnippet>637</a>	// this drop is necessary to avoid deadlock
-<a href=#638 id=638 data-nosnippet>638</a>	</span><span class="kw">if let </span><span class="prelude-val">Err</span>(errno) = nix::unistd::close(pipe_write_fd) {
-<a href=#639 id=639 data-nosnippet>639</a>		<span class="kw">return </span><span class="prelude-val">Err</span>(error_from_errno(<span class="string">"closing pipe write fd"</span>, errno));
-<a href=#640 id=640 data-nosnippet>640</a>	};
-<a href=#641 id=641 data-nosnippet>641</a>
-<a href=#642 id=642 data-nosnippet>642</a>	<span class="comment">// SAFETY: this is an open and owned file descriptor at this point.
-<a href=#643 id=643 data-nosnippet>643</a>	</span><span class="kw">let </span><span class="kw-2">mut </span>pipe_read = <span class="kw">unsafe </span>{ PipeFd::from_raw_fd(pipe_read_fd) };
-<a href=#644 id=644 data-nosnippet>644</a>
-<a href=#645 id=645 data-nosnippet>645</a>	<span class="comment">// Read from the child. Don't decode unless the process exited normally, which we check later.
-<a href=#646 id=646 data-nosnippet>646</a>	</span><span class="kw">let </span><span class="kw-2">mut </span>received_data = Vec::new();
-<a href=#647 id=647 data-nosnippet>647</a>	pipe_read
-<a href=#648 id=648 data-nosnippet>648</a>		.read_to_end(<span class="kw-2">&amp;mut </span>received_data)
-<a href=#649 id=649 data-nosnippet>649</a>		.map_err(|err| PrepareError::IoErr(err.to_string()))<span class="question-mark">?</span>;
-<a href=#650 id=650 data-nosnippet>650</a>
-<a href=#651 id=651 data-nosnippet>651</a>	<span class="kw">let </span>status = nix::sys::wait::waitpid(job_pid, <span class="prelude-val">None</span>);
-<a href=#652 id=652 data-nosnippet>652</a>	<span class="macro">gum::trace!</span>(
-<a href=#653 id=653 data-nosnippet>653</a>		target: LOG_TARGET,
-<a href=#654 id=654 data-nosnippet>654</a>		<span class="question-mark">?</span>worker_info,
-<a href=#655 id=655 data-nosnippet>655</a>		%job_pid,
-<a href=#656 id=656 data-nosnippet>656</a>		<span class="string">"prepare worker received wait status from job: {:?}"</span>,
-<a href=#657 id=657 data-nosnippet>657</a>		status,
-<a href=#658 id=658 data-nosnippet>658</a>	);
-<a href=#659 id=659 data-nosnippet>659</a>
-<a href=#660 id=660 data-nosnippet>660</a>	<span class="kw">let </span>usage_after = nix::sys::resource::getrusage(UsageWho::RUSAGE_CHILDREN)
-<a href=#661 id=661 data-nosnippet>661</a>		.map_err(|errno| error_from_errno(<span class="string">"getrusage after"</span>, errno))<span class="question-mark">?</span>;
-<a href=#662 id=662 data-nosnippet>662</a>
-<a href=#663 id=663 data-nosnippet>663</a>	<span class="comment">// Using `getrusage` is needed to check whether child has timedout since we cannot rely on
-<a href=#664 id=664 data-nosnippet>664</a>	// child to report its own time.
-<a href=#665 id=665 data-nosnippet>665</a>	// As `getrusage` returns resource usage from all terminated child processes,
-<a href=#666 id=666 data-nosnippet>666</a>	// it is necessary to subtract the usage before the current child process to isolate its cpu
-<a href=#667 id=667 data-nosnippet>667</a>	// time
-<a href=#668 id=668 data-nosnippet>668</a>	</span><span class="kw">let </span>cpu_tv = get_total_cpu_usage(usage_after) - get_total_cpu_usage(usage_before);
-<a href=#669 id=669 data-nosnippet>669</a>	<span class="kw">if </span>cpu_tv &gt;= timeout {
-<a href=#670 id=670 data-nosnippet>670</a>		<span class="macro">gum::warn!</span>(
-<a href=#671 id=671 data-nosnippet>671</a>			target: LOG_TARGET,
-<a href=#672 id=672 data-nosnippet>672</a>			<span class="question-mark">?</span>worker_info,
-<a href=#673 id=673 data-nosnippet>673</a>			%job_pid,
-<a href=#674 id=674 data-nosnippet>674</a>			<span class="string">"prepare job took {}ms cpu time, exceeded prepare timeout {}ms"</span>,
-<a href=#675 id=675 data-nosnippet>675</a>			cpu_tv.as_millis(),
-<a href=#676 id=676 data-nosnippet>676</a>			timeout.as_millis(),
-<a href=#677 id=677 data-nosnippet>677</a>		);
-<a href=#678 id=678 data-nosnippet>678</a>		<span class="kw">return </span><span class="prelude-val">Err</span>(PrepareError::TimedOut)
-<a href=#679 id=679 data-nosnippet>679</a>	}
-<a href=#680 id=680 data-nosnippet>680</a>
-<a href=#681 id=681 data-nosnippet>681</a>	<span class="kw">match </span>status {
-<a href=#682 id=682 data-nosnippet>682</a>		<span class="prelude-val">Ok</span>(WaitStatus::Exited(_pid, exit_status)) =&gt; {
-<a href=#683 id=683 data-nosnippet>683</a>			<span class="kw">let </span><span class="kw-2">mut </span>reader = io::BufReader::new(received_data.as_slice());
-<a href=#684 id=684 data-nosnippet>684</a>			<span class="kw">let </span>result = recv_child_response(<span class="kw-2">&amp;mut </span>reader, <span class="string">"prepare"</span>)
-<a href=#685 id=685 data-nosnippet>685</a>				.map_err(|err| PrepareError::JobError(err.to_string()))<span class="question-mark">?</span>;
-<a href=#686 id=686 data-nosnippet>686</a>
-<a href=#687 id=687 data-nosnippet>687</a>			<span class="kw">match </span>result {
-<a href=#688 id=688 data-nosnippet>688</a>				<span class="prelude-val">Err</span>(err) =&gt; <span class="prelude-val">Err</span>(err),
-<a href=#689 id=689 data-nosnippet>689</a>				<span class="prelude-val">Ok</span>(JobResponse { artifact, memory_stats, observed_wasm_code_len }) =&gt; {
-<a href=#690 id=690 data-nosnippet>690</a>					<span class="comment">// The exit status should have been zero if no error occurred.
-<a href=#691 id=691 data-nosnippet>691</a>					</span><span class="kw">if </span>exit_status != <span class="number">0 </span>{
-<a href=#692 id=692 data-nosnippet>692</a>						<span class="kw">return </span><span class="prelude-val">Err</span>(PrepareError::JobError(<span class="macro">format!</span>(
-<a href=#693 id=693 data-nosnippet>693</a>							<span class="string">"unexpected exit status: {}"</span>,
-<a href=#694 id=694 data-nosnippet>694</a>							exit_status
-<a href=#695 id=695 data-nosnippet>695</a>						)))
-<a href=#696 id=696 data-nosnippet>696</a>					}
-<a href=#697 id=697 data-nosnippet>697</a>
-<a href=#698 id=698 data-nosnippet>698</a>					<span class="comment">// Write the serialized artifact into a temp file.
-<a href=#699 id=699 data-nosnippet>699</a>					//
-<a href=#700 id=700 data-nosnippet>700</a>					// PVF host only keeps artifacts statuses in its memory,
-<a href=#701 id=701 data-nosnippet>701</a>					// successfully compiled code gets stored on the disk (and
-<a href=#702 id=702 data-nosnippet>702</a>					// consequently deserialized by execute-workers). The prepare worker
-<a href=#703 id=703 data-nosnippet>703</a>					// is only required to send `Ok` to the pool to indicate the
-<a href=#704 id=704 data-nosnippet>704</a>					// success.
-<a href=#705 id=705 data-nosnippet>705</a>					</span><span class="macro">gum::debug!</span>(
-<a href=#706 id=706 data-nosnippet>706</a>						target: LOG_TARGET,
-<a href=#707 id=707 data-nosnippet>707</a>						<span class="question-mark">?</span>worker_info,
-<a href=#708 id=708 data-nosnippet>708</a>						%job_pid,
-<a href=#709 id=709 data-nosnippet>709</a>						<span class="string">"worker: writing artifact to {}"</span>,
-<a href=#710 id=710 data-nosnippet>710</a>						temp_artifact_dest.display(),
-<a href=#711 id=711 data-nosnippet>711</a>					);
-<a href=#712 id=712 data-nosnippet>712</a>					<span class="comment">// Write to the temp file created by the host.
-<a href=#713 id=713 data-nosnippet>713</a>					</span><span class="kw">if let </span><span class="prelude-val">Err</span>(err) = fs::write(temp_artifact_dest, <span class="kw-2">&amp;</span>artifact) {
-<a href=#714 id=714 data-nosnippet>714</a>						<span class="kw">return </span><span class="prelude-val">Err</span>(PrepareError::IoErr(err.to_string()))
-<a href=#715 id=715 data-nosnippet>715</a>					};
-<a href=#716 id=716 data-nosnippet>716</a>
-<a href=#717 id=717 data-nosnippet>717</a>					<span class="kw">let </span>checksum = compute_checksum(<span class="kw-2">&amp;</span>artifact.as_ref());
-<a href=#718 id=718 data-nosnippet>718</a>					<span class="prelude-val">Ok</span>(PrepareWorkerSuccess {
-<a href=#719 id=719 data-nosnippet>719</a>						checksum,
-<a href=#720 id=720 data-nosnippet>720</a>						stats: PrepareStats {
-<a href=#721 id=721 data-nosnippet>721</a>							memory_stats,
-<a href=#722 id=722 data-nosnippet>722</a>							cpu_time_elapsed: cpu_tv,
-<a href=#723 id=723 data-nosnippet>723</a>							observed_wasm_code_len,
-<a href=#724 id=724 data-nosnippet>724</a>						},
-<a href=#725 id=725 data-nosnippet>725</a>					})
-<a href=#726 id=726 data-nosnippet>726</a>				},
-<a href=#727 id=727 data-nosnippet>727</a>			}
-<a href=#728 id=728 data-nosnippet>728</a>		},
-<a href=#729 id=729 data-nosnippet>729</a>		<span class="comment">// The job was killed by the given signal.
-<a href=#730 id=730 data-nosnippet>730</a>		//
-<a href=#731 id=731 data-nosnippet>731</a>		// The job gets SIGSYS on seccomp violations, but this signal may have been sent for some
-<a href=#732 id=732 data-nosnippet>732</a>		// other reason, so we still need to check for seccomp violations elsewhere.
-<a href=#733 id=733 data-nosnippet>733</a>		</span><span class="prelude-val">Ok</span>(WaitStatus::Signaled(_pid, signal, _core_dump)) =&gt; <span class="prelude-val">Err</span>(PrepareError::JobDied {
-<a href=#734 id=734 data-nosnippet>734</a>			err: <span class="macro">format!</span>(<span class="string">"received signal: {signal:?}"</span>),
-<a href=#735 id=735 data-nosnippet>735</a>			job_pid: job_pid.as_raw(),
-<a href=#736 id=736 data-nosnippet>736</a>		}),
-<a href=#737 id=737 data-nosnippet>737</a>		<span class="prelude-val">Err</span>(errno) =&gt; <span class="prelude-val">Err</span>(error_from_errno(<span class="string">"waitpid"</span>, errno)),
-<a href=#738 id=738 data-nosnippet>738</a>
-<a href=#739 id=739 data-nosnippet>739</a>		<span class="comment">// An attacker can make the child process return any exit status it wants. So we can treat
-<a href=#740 id=740 data-nosnippet>740</a>		// all unexpected cases the same way.
-<a href=#741 id=741 data-nosnippet>741</a>		</span><span class="prelude-val">Ok</span>(unexpected_wait_status) =&gt; <span class="prelude-val">Err</span>(PrepareError::JobDied {
-<a href=#742 id=742 data-nosnippet>742</a>			err: <span class="macro">format!</span>(<span class="string">"unexpected status from wait: {unexpected_wait_status:?}"</span>),
-<a href=#743 id=743 data-nosnippet>743</a>			job_pid: job_pid.as_raw(),
-<a href=#744 id=744 data-nosnippet>744</a>		}),
-<a href=#745 id=745 data-nosnippet>745</a>	}
-<a href=#746 id=746 data-nosnippet>746</a>}
-<a href=#747 id=747 data-nosnippet>747</a>
-<a href=#748 id=748 data-nosnippet>748</a><span class="doccomment">/// Write a job response to the pipe and exit process after.
-<a href=#749 id=749 data-nosnippet>749</a>///
-<a href=#750 id=750 data-nosnippet>750</a>/// # Arguments
-<a href=#751 id=751 data-nosnippet>751</a>///
-<a href=#752 id=752 data-nosnippet>752</a>/// - `pipe_write`: A `PipeFd` structure, the writing end of a pipe.
-<a href=#753 id=753 data-nosnippet>753</a>///
-<a href=#754 id=754 data-nosnippet>754</a>/// - `response`: Child process response
-<a href=#755 id=755 data-nosnippet>755</a></span><span class="kw">fn </span>send_child_response(pipe_write: <span class="kw-2">&amp;mut </span>PipeFd, response: JobResult) -&gt; ! {
-<a href=#756 id=756 data-nosnippet>756</a>	framed_send_blocking(pipe_write, response.encode().as_slice())
-<a href=#757 id=757 data-nosnippet>757</a>		.unwrap_or_else(|<span class="kw">_</span>| process::exit(libc::EXIT_FAILURE));
-<a href=#758 id=758 data-nosnippet>758</a>
-<a href=#759 id=759 data-nosnippet>759</a>	<span class="kw">if </span>response.is_ok() {
-<a href=#760 id=760 data-nosnippet>760</a>		process::exit(libc::EXIT_SUCCESS)
-<a href=#761 id=761 data-nosnippet>761</a>	} <span class="kw">else </span>{
-<a href=#762 id=762 data-nosnippet>762</a>		process::exit(libc::EXIT_FAILURE)
-<a href=#763 id=763 data-nosnippet>763</a>	}
-<a href=#764 id=764 data-nosnippet>764</a>}
-<a href=#765 id=765 data-nosnippet>765</a>
-<a href=#766 id=766 data-nosnippet>766</a><span class="kw">fn </span>error_from_errno(context: <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str, errno: Errno) -&gt; PrepareError {
-<a href=#767 id=767 data-nosnippet>767</a>	PrepareError::Kernel(stringify_errno(context, errno))
-<a href=#768 id=768 data-nosnippet>768</a>}
-<a href=#769 id=769 data-nosnippet>769</a>
-<a href=#770 id=770 data-nosnippet>770</a><span class="kw">type </span>JobResult = <span class="prelude-ty">Result</span>&lt;JobResponse, PrepareError&gt;;
-<a href=#771 id=771 data-nosnippet>771</a>
-<a href=#772 id=772 data-nosnippet>772</a><span class="doccomment">/// Pre-encoded length-prefixed `JobResult::Err(PrepareError::OutOfMemory)`
-<a href=#773 id=773 data-nosnippet>773</a></span><span class="kw">const </span>OOM_PAYLOAD: <span class="kw-2">&amp;</span>[u8] = <span class="string">b"\x02\x00\x00\x00\x00\x00\x00\x00\x01\x08"</span>;
-<a href=#774 id=774 data-nosnippet>774</a>
-<a href=#775 id=775 data-nosnippet>775</a><span class="attr">#[test]
-<a href=#776 id=776 data-nosnippet>776</a></span><span class="kw">fn </span>pre_encoded_payloads() {
-<a href=#777 id=777 data-nosnippet>777</a>	<span class="comment">// NOTE: This must match the type of `response` in `send_child_response`.
-<a href=#778 id=778 data-nosnippet>778</a>	</span><span class="kw">let </span>oom_unencoded: JobResult = JobResult::Err(PrepareError::OutOfMemory);
-<a href=#779 id=779 data-nosnippet>779</a>	<span class="kw">let </span>oom_encoded = oom_unencoded.encode();
-<a href=#780 id=780 data-nosnippet>780</a>	<span class="comment">// The payload is prefixed with	its length in `framed_send`.
-<a href=#781 id=781 data-nosnippet>781</a>	</span><span class="kw">let </span><span class="kw-2">mut </span>oom_payload = oom_encoded.len().to_le_bytes().to_vec();
-<a href=#782 id=782 data-nosnippet>782</a>	oom_payload.extend(oom_encoded);
-<a href=#783 id=783 data-nosnippet>783</a>	<span class="macro">assert_eq!</span>(oom_payload, OOM_PAYLOAD);
-<a href=#784 id=784 data-nosnippet>784</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#610 id=610 data-nosnippet>610</a>		WaitOutcome::Pending =&gt; {
+<a href=#611 id=611 data-nosnippet>611</a>			<span class="macro">unreachable!</span>(<span class="string">"we run wait_while until the outcome is no longer pending; qed"</span>)
+<a href=#612 id=612 data-nosnippet>612</a>		},
+<a href=#613 id=613 data-nosnippet>613</a>	};
+<a href=#614 id=614 data-nosnippet>614</a>
+<a href=#615 id=615 data-nosnippet>615</a>	send_child_response(<span class="kw-2">&amp;mut </span>pipe_write, result);
+<a href=#616 id=616 data-nosnippet>616</a>}
+<a href=#617 id=617 data-nosnippet>617</a>
+<a href=#618 id=618 data-nosnippet>618</a><span class="doccomment">/// Waits for child process to finish and handle child response from pipe.
+<a href=#619 id=619 data-nosnippet>619</a>///
+<a href=#620 id=620 data-nosnippet>620</a>/// # Returns
+<a href=#621 id=621 data-nosnippet>621</a>///
+<a href=#622 id=622 data-nosnippet>622</a>/// - If the child send response without an error, this function returns `Ok(PrepareStats)`
+<a href=#623 id=623 data-nosnippet>623</a>///   containing memory and CPU usage statistics.
+<a href=#624 id=624 data-nosnippet>624</a>///
+<a href=#625 id=625 data-nosnippet>625</a>/// - If the child send response with an error, it returns a `PrepareError` with that error.
+<a href=#626 id=626 data-nosnippet>626</a>///
+<a href=#627 id=627 data-nosnippet>627</a>/// - If the child process timeout, it returns `PrepareError::TimedOut`.
+<a href=#628 id=628 data-nosnippet>628</a></span><span class="kw">fn </span>handle_parent_process(
+<a href=#629 id=629 data-nosnippet>629</a>	pipe_read_fd: i32,
+<a href=#630 id=630 data-nosnippet>630</a>	pipe_write_fd: i32,
+<a href=#631 id=631 data-nosnippet>631</a>	worker_info: <span class="kw-2">&amp;</span>WorkerInfo,
+<a href=#632 id=632 data-nosnippet>632</a>	job_pid: Pid,
+<a href=#633 id=633 data-nosnippet>633</a>	temp_artifact_dest: <span class="kw-2">&amp;</span>Path,
+<a href=#634 id=634 data-nosnippet>634</a>	usage_before: Usage,
+<a href=#635 id=635 data-nosnippet>635</a>	timeout: Duration,
+<a href=#636 id=636 data-nosnippet>636</a>) -&gt; <span class="prelude-ty">Result</span>&lt;PrepareWorkerSuccess, PrepareError&gt; {
+<a href=#637 id=637 data-nosnippet>637</a>	<span class="comment">// the read end will wait until all write ends have been closed,
+<a href=#638 id=638 data-nosnippet>638</a>	// this drop is necessary to avoid deadlock
+<a href=#639 id=639 data-nosnippet>639</a>	</span><span class="kw">if let </span><span class="prelude-val">Err</span>(errno) = nix::unistd::close(pipe_write_fd) {
+<a href=#640 id=640 data-nosnippet>640</a>		<span class="kw">return </span><span class="prelude-val">Err</span>(error_from_errno(<span class="string">"closing pipe write fd"</span>, errno));
+<a href=#641 id=641 data-nosnippet>641</a>	};
+<a href=#642 id=642 data-nosnippet>642</a>
+<a href=#643 id=643 data-nosnippet>643</a>	<span class="comment">// SAFETY: this is an open and owned file descriptor at this point.
+<a href=#644 id=644 data-nosnippet>644</a>	</span><span class="kw">let </span><span class="kw-2">mut </span>pipe_read = <span class="kw">unsafe </span>{ PipeFd::from_raw_fd(pipe_read_fd) };
+<a href=#645 id=645 data-nosnippet>645</a>
+<a href=#646 id=646 data-nosnippet>646</a>	<span class="comment">// Read from the child. Don't decode unless the process exited normally, which we check later.
+<a href=#647 id=647 data-nosnippet>647</a>	</span><span class="kw">let </span><span class="kw-2">mut </span>received_data = Vec::new();
+<a href=#648 id=648 data-nosnippet>648</a>	pipe_read
+<a href=#649 id=649 data-nosnippet>649</a>		.read_to_end(<span class="kw-2">&amp;mut </span>received_data)
+<a href=#650 id=650 data-nosnippet>650</a>		.map_err(|err| PrepareError::IoErr(err.to_string()))<span class="question-mark">?</span>;
+<a href=#651 id=651 data-nosnippet>651</a>
+<a href=#652 id=652 data-nosnippet>652</a>	<span class="kw">let </span>status = nix::sys::wait::waitpid(job_pid, <span class="prelude-val">None</span>);
+<a href=#653 id=653 data-nosnippet>653</a>	<span class="macro">gum::trace!</span>(
+<a href=#654 id=654 data-nosnippet>654</a>		target: LOG_TARGET,
+<a href=#655 id=655 data-nosnippet>655</a>		<span class="question-mark">?</span>worker_info,
+<a href=#656 id=656 data-nosnippet>656</a>		%job_pid,
+<a href=#657 id=657 data-nosnippet>657</a>		<span class="string">"prepare worker received wait status from job: {:?}"</span>,
+<a href=#658 id=658 data-nosnippet>658</a>		status,
+<a href=#659 id=659 data-nosnippet>659</a>	);
+<a href=#660 id=660 data-nosnippet>660</a>
+<a href=#661 id=661 data-nosnippet>661</a>	<span class="kw">let </span>usage_after = nix::sys::resource::getrusage(UsageWho::RUSAGE_CHILDREN)
+<a href=#662 id=662 data-nosnippet>662</a>		.map_err(|errno| error_from_errno(<span class="string">"getrusage after"</span>, errno))<span class="question-mark">?</span>;
+<a href=#663 id=663 data-nosnippet>663</a>
+<a href=#664 id=664 data-nosnippet>664</a>	<span class="comment">// Using `getrusage` is needed to check whether child has timedout since we cannot rely on
+<a href=#665 id=665 data-nosnippet>665</a>	// child to report its own time.
+<a href=#666 id=666 data-nosnippet>666</a>	// As `getrusage` returns resource usage from all terminated child processes,
+<a href=#667 id=667 data-nosnippet>667</a>	// it is necessary to subtract the usage before the current child process to isolate its cpu
+<a href=#668 id=668 data-nosnippet>668</a>	// time
+<a href=#669 id=669 data-nosnippet>669</a>	</span><span class="kw">let </span>cpu_tv = get_total_cpu_usage(usage_after) - get_total_cpu_usage(usage_before);
+<a href=#670 id=670 data-nosnippet>670</a>	<span class="kw">if </span>cpu_tv &gt;= timeout {
+<a href=#671 id=671 data-nosnippet>671</a>		<span class="macro">gum::warn!</span>(
+<a href=#672 id=672 data-nosnippet>672</a>			target: LOG_TARGET,
+<a href=#673 id=673 data-nosnippet>673</a>			<span class="question-mark">?</span>worker_info,
+<a href=#674 id=674 data-nosnippet>674</a>			%job_pid,
+<a href=#675 id=675 data-nosnippet>675</a>			<span class="string">"prepare job took {}ms cpu time, exceeded prepare timeout {}ms"</span>,
+<a href=#676 id=676 data-nosnippet>676</a>			cpu_tv.as_millis(),
+<a href=#677 id=677 data-nosnippet>677</a>			timeout.as_millis(),
+<a href=#678 id=678 data-nosnippet>678</a>		);
+<a href=#679 id=679 data-nosnippet>679</a>		<span class="kw">return </span><span class="prelude-val">Err</span>(PrepareError::TimedOut);
+<a href=#680 id=680 data-nosnippet>680</a>	}
+<a href=#681 id=681 data-nosnippet>681</a>
+<a href=#682 id=682 data-nosnippet>682</a>	<span class="kw">match </span>status {
+<a href=#683 id=683 data-nosnippet>683</a>		<span class="prelude-val">Ok</span>(WaitStatus::Exited(_pid, exit_status)) =&gt; {
+<a href=#684 id=684 data-nosnippet>684</a>			<span class="kw">let </span><span class="kw-2">mut </span>reader = io::BufReader::new(received_data.as_slice());
+<a href=#685 id=685 data-nosnippet>685</a>			<span class="kw">let </span>result = recv_child_response(<span class="kw-2">&amp;mut </span>reader, <span class="string">"prepare"</span>)
+<a href=#686 id=686 data-nosnippet>686</a>				.map_err(|err| PrepareError::JobError(err.to_string()))<span class="question-mark">?</span>;
+<a href=#687 id=687 data-nosnippet>687</a>
+<a href=#688 id=688 data-nosnippet>688</a>			<span class="kw">match </span>result {
+<a href=#689 id=689 data-nosnippet>689</a>				<span class="prelude-val">Err</span>(err) =&gt; <span class="prelude-val">Err</span>(err),
+<a href=#690 id=690 data-nosnippet>690</a>				<span class="prelude-val">Ok</span>(JobResponse { artifact, memory_stats, observed_wasm_code_len }) =&gt; {
+<a href=#691 id=691 data-nosnippet>691</a>					<span class="comment">// The exit status should have been zero if no error occurred.
+<a href=#692 id=692 data-nosnippet>692</a>					</span><span class="kw">if </span><span class="macro">exit_status !</span>= <span class="number">0 </span>{
+<a href=#693 id=693 data-nosnippet>693</a>						<span class="kw">return </span><span class="prelude-val">Err</span>(PrepareError::JobError(<span class="macro">format!</span>(
+<a href=#694 id=694 data-nosnippet>694</a>							<span class="string">"unexpected exit status: {}"</span>,
+<a href=#695 id=695 data-nosnippet>695</a>							exit_status
+<a href=#696 id=696 data-nosnippet>696</a>						)));
+<a href=#697 id=697 data-nosnippet>697</a>					}
+<a href=#698 id=698 data-nosnippet>698</a>
+<a href=#699 id=699 data-nosnippet>699</a>					<span class="comment">// Write the serialized artifact into a temp file.
+<a href=#700 id=700 data-nosnippet>700</a>					//
+<a href=#701 id=701 data-nosnippet>701</a>					// PVF host only keeps artifacts statuses in its memory,
+<a href=#702 id=702 data-nosnippet>702</a>					// successfully compiled code gets stored on the disk (and
+<a href=#703 id=703 data-nosnippet>703</a>					// consequently deserialized by execute-workers). The prepare worker
+<a href=#704 id=704 data-nosnippet>704</a>					// is only required to send `Ok` to the pool to indicate the
+<a href=#705 id=705 data-nosnippet>705</a>					// success.
+<a href=#706 id=706 data-nosnippet>706</a>					</span><span class="macro">gum::debug!</span>(
+<a href=#707 id=707 data-nosnippet>707</a>						target: LOG_TARGET,
+<a href=#708 id=708 data-nosnippet>708</a>						<span class="question-mark">?</span>worker_info,
+<a href=#709 id=709 data-nosnippet>709</a>						%job_pid,
+<a href=#710 id=710 data-nosnippet>710</a>						<span class="string">"worker: writing artifact to {}"</span>,
+<a href=#711 id=711 data-nosnippet>711</a>						temp_artifact_dest.display(),
+<a href=#712 id=712 data-nosnippet>712</a>					);
+<a href=#713 id=713 data-nosnippet>713</a>					<span class="comment">// Write to the temp file created by the host.
+<a href=#714 id=714 data-nosnippet>714</a>					</span><span class="kw">if let </span><span class="prelude-val">Err</span>(err) = fs::write(temp_artifact_dest, <span class="kw-2">&amp;</span>artifact) {
+<a href=#715 id=715 data-nosnippet>715</a>						<span class="kw">return </span><span class="prelude-val">Err</span>(PrepareError::IoErr(err.to_string()));
+<a href=#716 id=716 data-nosnippet>716</a>					};
+<a href=#717 id=717 data-nosnippet>717</a>
+<a href=#718 id=718 data-nosnippet>718</a>					<span class="kw">let </span>checksum = compute_checksum(<span class="kw-2">&amp;</span>artifact.as_ref());
+<a href=#719 id=719 data-nosnippet>719</a>					<span class="prelude-val">Ok</span>(PrepareWorkerSuccess {
+<a href=#720 id=720 data-nosnippet>720</a>						checksum,
+<a href=#721 id=721 data-nosnippet>721</a>						stats: PrepareStats {
+<a href=#722 id=722 data-nosnippet>722</a>							memory_stats,
+<a href=#723 id=723 data-nosnippet>723</a>							cpu_time_elapsed: cpu_tv,
+<a href=#724 id=724 data-nosnippet>724</a>							observed_wasm_code_len,
+<a href=#725 id=725 data-nosnippet>725</a>						},
+<a href=#726 id=726 data-nosnippet>726</a>					})
+<a href=#727 id=727 data-nosnippet>727</a>				},
+<a href=#728 id=728 data-nosnippet>728</a>			}
+<a href=#729 id=729 data-nosnippet>729</a>		},
+<a href=#730 id=730 data-nosnippet>730</a>		<span class="comment">// The job was killed by the given signal.
+<a href=#731 id=731 data-nosnippet>731</a>		//
+<a href=#732 id=732 data-nosnippet>732</a>		// The job gets SIGSYS on seccomp violations, but this signal may have been sent for some
+<a href=#733 id=733 data-nosnippet>733</a>		// other reason, so we still need to check for seccomp violations elsewhere.
+<a href=#734 id=734 data-nosnippet>734</a>		</span><span class="prelude-val">Ok</span>(WaitStatus::Signaled(_pid, signal, _core_dump)) =&gt; <span class="prelude-val">Err</span>(PrepareError::JobDied {
+<a href=#735 id=735 data-nosnippet>735</a>			err: <span class="macro">format!</span>(<span class="string">"received signal: {signal:?}"</span>),
+<a href=#736 id=736 data-nosnippet>736</a>			job_pid: job_pid.as_raw(),
+<a href=#737 id=737 data-nosnippet>737</a>		}),
+<a href=#738 id=738 data-nosnippet>738</a>		<span class="prelude-val">Err</span>(errno) =&gt; <span class="prelude-val">Err</span>(error_from_errno(<span class="string">"waitpid"</span>, errno)),
+<a href=#739 id=739 data-nosnippet>739</a>
+<a href=#740 id=740 data-nosnippet>740</a>		<span class="comment">// An attacker can make the child process return any exit status it wants. So we can treat
+<a href=#741 id=741 data-nosnippet>741</a>		// all unexpected cases the same way.
+<a href=#742 id=742 data-nosnippet>742</a>		</span><span class="prelude-val">Ok</span>(unexpected_wait_status) =&gt; <span class="prelude-val">Err</span>(PrepareError::JobDied {
+<a href=#743 id=743 data-nosnippet>743</a>			err: <span class="macro">format!</span>(<span class="string">"unexpected status from wait: {unexpected_wait_status:?}"</span>),
+<a href=#744 id=744 data-nosnippet>744</a>			job_pid: job_pid.as_raw(),
+<a href=#745 id=745 data-nosnippet>745</a>		}),
+<a href=#746 id=746 data-nosnippet>746</a>	}
+<a href=#747 id=747 data-nosnippet>747</a>}
+<a href=#748 id=748 data-nosnippet>748</a>
+<a href=#749 id=749 data-nosnippet>749</a><span class="doccomment">/// Write a job response to the pipe and exit process after.
+<a href=#750 id=750 data-nosnippet>750</a>///
+<a href=#751 id=751 data-nosnippet>751</a>/// # Arguments
+<a href=#752 id=752 data-nosnippet>752</a>///
+<a href=#753 id=753 data-nosnippet>753</a>/// - `pipe_write`: A `PipeFd` structure, the writing end of a pipe.
+<a href=#754 id=754 data-nosnippet>754</a>///
+<a href=#755 id=755 data-nosnippet>755</a>/// - `response`: Child process response
+<a href=#756 id=756 data-nosnippet>756</a></span><span class="kw">fn </span>send_child_response(pipe_write: <span class="kw-2">&amp;mut </span>PipeFd, response: JobResult) -&gt; ! {
+<a href=#757 id=757 data-nosnippet>757</a>	framed_send_blocking(pipe_write, response.encode().as_slice())
+<a href=#758 id=758 data-nosnippet>758</a>		.unwrap_or_else(|<span class="kw">_</span>| process::exit(libc::EXIT_FAILURE));
+<a href=#759 id=759 data-nosnippet>759</a>
+<a href=#760 id=760 data-nosnippet>760</a>	<span class="kw">if </span>response.is_ok() {
+<a href=#761 id=761 data-nosnippet>761</a>		process::exit(libc::EXIT_SUCCESS)
+<a href=#762 id=762 data-nosnippet>762</a>	} <span class="kw">else </span>{
+<a href=#763 id=763 data-nosnippet>763</a>		process::exit(libc::EXIT_FAILURE)
+<a href=#764 id=764 data-nosnippet>764</a>	}
+<a href=#765 id=765 data-nosnippet>765</a>}
+<a href=#766 id=766 data-nosnippet>766</a>
+<a href=#767 id=767 data-nosnippet>767</a><span class="kw">fn </span>error_from_errno(context: <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str, errno: Errno) -&gt; PrepareError {
+<a href=#768 id=768 data-nosnippet>768</a>	PrepareError::Kernel(stringify_errno(context, errno))
+<a href=#769 id=769 data-nosnippet>769</a>}
+<a href=#770 id=770 data-nosnippet>770</a>
+<a href=#771 id=771 data-nosnippet>771</a><span class="kw">type </span>JobResult = <span class="prelude-ty">Result</span>&lt;JobResponse, PrepareError&gt;;
+<a href=#772 id=772 data-nosnippet>772</a>
+<a href=#773 id=773 data-nosnippet>773</a><span class="doccomment">/// Pre-encoded length-prefixed `JobResult::Err(PrepareError::OutOfMemory)`
+<a href=#774 id=774 data-nosnippet>774</a></span><span class="kw">const </span>OOM_PAYLOAD: <span class="kw-2">&amp;</span>[u8] = <span class="string">b"\x02\x00\x00\x00\x00\x00\x00\x00\x01\x08"</span>;
+<a href=#775 id=775 data-nosnippet>775</a>
+<a href=#776 id=776 data-nosnippet>776</a><span class="attr">#[test]
+<a href=#777 id=777 data-nosnippet>777</a></span><span class="kw">fn </span>pre_encoded_payloads() {
+<a href=#778 id=778 data-nosnippet>778</a>	<span class="comment">// NOTE: This must match the type of `response` in `send_child_response`.
+<a href=#779 id=779 data-nosnippet>779</a>	</span><span class="kw">let </span>oom_unencoded: JobResult = JobResult::Err(PrepareError::OutOfMemory);
+<a href=#780 id=780 data-nosnippet>780</a>	<span class="kw">let </span>oom_encoded = oom_unencoded.encode();
+<a href=#781 id=781 data-nosnippet>781</a>	<span class="comment">// The payload is prefixed with	its length in `framed_send`.
+<a href=#782 id=782 data-nosnippet>782</a>	</span><span class="kw">let </span><span class="kw-2">mut </span>oom_payload = oom_encoded.len().to_le_bytes().to_vec();
+<a href=#783 id=783 data-nosnippet>783</a>	oom_payload.extend(oom_encoded);
+<a href=#784 id=784 data-nosnippet>784</a>	<span class="macro">assert_eq!</span>(oom_payload, OOM_PAYLOAD);
+<a href=#785 id=785 data-nosnippet>785</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

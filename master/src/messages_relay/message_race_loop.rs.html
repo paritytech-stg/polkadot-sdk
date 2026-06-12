@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/relays/messages/src/message_race_loop.rs`."><title>message_race_loop.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/relays/messages/src/message_race_loop.rs`."><title>message_race_loop.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="messages_relay" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="messages_relay" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">messages_relay/</div>message_race_loop.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">messages_relay/</div>message_race_loop.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Parity Bridges Common.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Parity Bridges Common is free software: you can redistribute it and/or modify
@@ -565,7 +565,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#415 id=415 data-nosnippet>415</a>						strategy.source_nonces_updated(at_block, nonces);
 <a href=#416 id=416 data-nosnippet>416</a>					},
 <a href=#417 id=417 data-nosnippet>417</a>					<span class="kw-2">&amp;mut </span>source_go_offline_future,
-<a href=#418 id=418 data-nosnippet>418</a>					async_std::task::sleep,
+<a href=#418 id=418 data-nosnippet>418</a>					tokio::time::sleep,
 <a href=#419 id=419 data-nosnippet>419</a>					|| <span class="macro">format!</span>(<span class="string">"Error retrieving nonces from {}"</span>, P::source_name()),
 <a href=#420 id=420 data-nosnippet>420</a>				).fail_if_connection_error(FailedClient::Source)<span class="question-mark">?</span>;
 <a href=#421 id=421 data-nosnippet>421</a>
@@ -591,7 +591,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#441 id=441 data-nosnippet>441</a>						strategy.best_target_nonces_updated(nonces, <span class="kw-2">&amp;mut </span>race_state);
 <a href=#442 id=442 data-nosnippet>442</a>					},
 <a href=#443 id=443 data-nosnippet>443</a>					<span class="kw-2">&amp;mut </span>target_go_offline_future,
-<a href=#444 id=444 data-nosnippet>444</a>					async_std::task::sleep,
+<a href=#444 id=444 data-nosnippet>444</a>					tokio::time::sleep,
 <a href=#445 id=445 data-nosnippet>445</a>					|| <span class="macro">format!</span>(<span class="string">"Error retrieving best nonces from {}"</span>, P::target_name()),
 <a href=#446 id=446 data-nosnippet>446</a>				).fail_if_connection_error(FailedClient::Target)<span class="question-mark">?</span>;
 <a href=#447 id=447 data-nosnippet>447</a>			},
@@ -612,7 +612,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#462 id=462 data-nosnippet>462</a>						strategy.finalized_target_nonces_updated(nonces, <span class="kw-2">&amp;mut </span>race_state);
 <a href=#463 id=463 data-nosnippet>463</a>					},
 <a href=#464 id=464 data-nosnippet>464</a>					<span class="kw-2">&amp;mut </span>target_go_offline_future,
-<a href=#465 id=465 data-nosnippet>465</a>					async_std::task::sleep,
+<a href=#465 id=465 data-nosnippet>465</a>					tokio::time::sleep,
 <a href=#466 id=466 data-nosnippet>466</a>					|| <span class="macro">format!</span>(<span class="string">"Error retrieving finalized nonces from {}"</span>, P::target_name()),
 <a href=#467 id=467 data-nosnippet>467</a>				).fail_if_connection_error(FailedClient::Target)<span class="question-mark">?</span>;
 <a href=#468 id=468 data-nosnippet>468</a>			},
@@ -639,7 +639,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#489 id=489 data-nosnippet>489</a>						target_batch_transaction = maybe_batch_transaction;
 <a href=#490 id=490 data-nosnippet>490</a>					},
 <a href=#491 id=491 data-nosnippet>491</a>					<span class="kw-2">&amp;mut </span>target_go_offline_future,
-<a href=#492 id=492 data-nosnippet>492</a>					async_std::task::sleep,
+<a href=#492 id=492 data-nosnippet>492</a>					tokio::time::sleep,
 <a href=#493 id=493 data-nosnippet>493</a>					|| <span class="macro">format!</span>(<span class="string">"Error asking for source headers at {}"</span>, P::target_name()),
 <a href=#494 id=494 data-nosnippet>494</a>				).fail_if_connection_error(FailedClient::Target)<span class="question-mark">?</span>;
 <a href=#495 id=495 data-nosnippet>495</a>			},
@@ -659,7 +659,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#509 id=509 data-nosnippet>509</a>						race_state.nonces_to_submit_batch = batch_transaction;
 <a href=#510 id=510 data-nosnippet>510</a>					},
 <a href=#511 id=511 data-nosnippet>511</a>					<span class="kw-2">&amp;mut </span>source_go_offline_future,
-<a href=#512 id=512 data-nosnippet>512</a>					async_std::task::sleep,
+<a href=#512 id=512 data-nosnippet>512</a>					tokio::time::sleep,
 <a href=#513 id=513 data-nosnippet>513</a>					|| <span class="macro">format!</span>(<span class="string">"Error generating proof at {}"</span>, P::source_name()),
 <a href=#514 id=514 data-nosnippet>514</a>				).fail_if_error(FailedClient::Source).map(|<span class="kw">_</span>| <span class="bool-val">true</span>)<span class="question-mark">?</span>;
 <a href=#515 id=515 data-nosnippet>515</a>			},
@@ -679,7 +679,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#529 id=529 data-nosnippet>529</a>						target_tx_tracker.set(artifacts.tx_tracker.wait().fuse());
 <a href=#530 id=530 data-nosnippet>530</a>					},
 <a href=#531 id=531 data-nosnippet>531</a>					<span class="kw-2">&amp;mut </span>target_go_offline_future,
-<a href=#532 id=532 data-nosnippet>532</a>					async_std::task::sleep,
+<a href=#532 id=532 data-nosnippet>532</a>					tokio::time::sleep,
 <a href=#533 id=533 data-nosnippet>533</a>					|| <span class="macro">format!</span>(<span class="string">"Error submitting proof {}"</span>, P::target_name()),
 <a href=#534 id=534 data-nosnippet>534</a>				).fail_if_connection_error(FailedClient::Target)<span class="question-mark">?</span>;
 <a href=#535 id=535 data-nosnippet>535</a>
@@ -881,7 +881,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#731 id=731 data-nosnippet>731</a>
 <a href=#732 id=732 data-nosnippet>732</a>	<span class="kw">let </span>need_update = now_time.saturating_duration_since(prev_time) &gt; Duration::from_secs(<span class="number">10</span>);
 <a href=#733 id=733 data-nosnippet>733</a>	<span class="kw">if </span>!need_update {
-<a href=#734 id=734 data-nosnippet>734</a>		<span class="kw">return </span>prev_time
+<a href=#734 id=734 data-nosnippet>734</a>		<span class="kw">return </span>prev_time;
 <a href=#735 id=735 data-nosnippet>735</a>	}
 <a href=#736 id=736 data-nosnippet>736</a>
 <a href=#737 id=737 data-nosnippet>737</a>	<span class="kw">let </span>now_best_nonce_at_source = strategy.best_at_source();
@@ -922,7 +922,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#772 id=772 data-nosnippet>772</a>	<span class="kw">use </span><span class="kw">crate</span>::message_race_strategy::BasicStrategy;
 <a href=#773 id=773 data-nosnippet>773</a>	<span class="kw">use </span>relay_utils::HeaderId;
 <a href=#774 id=774 data-nosnippet>774</a>
-<a href=#775 id=775 data-nosnippet>775</a>	<span class="attr">#[async_std::test]
+<a href=#775 id=775 data-nosnippet>775</a>	<span class="attr">#[tokio::test]
 <a href=#776 id=776 data-nosnippet>776</a>	</span><span class="kw">async fn </span>proof_is_generated_at_best_block_known_to_target_node() {
 <a href=#777 id=777 data-nosnippet>777</a>		<span class="kw">const </span>GENERATED_AT: u64 = <span class="number">6</span>;
 <a href=#778 id=778 data-nosnippet>778</a>		<span class="kw">const </span>BEST_AT_SOURCE: u64 = <span class="number">10</span>;
@@ -963,7 +963,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#813 id=813 data-nosnippet>813</a>			<span class="prelude-val">Some</span>((HeaderId(BEST_AT_TARGET, BEST_AT_TARGET), <span class="number">6</span>..=<span class="number">10</span>, (),))
 <a href=#814 id=814 data-nosnippet>814</a>		);
 <a href=#815 id=815 data-nosnippet>815</a>	}
-<a href=#816 id=816 data-nosnippet>816</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#816 id=816 data-nosnippet>816</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

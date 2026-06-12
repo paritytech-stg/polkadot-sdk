@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":["ActiveRecoveries","Proxy","Recoverable"]};
+window.SIDEBAR_ITEMS = {"struct":["Attempt","FriendGroups","Inheritor"]};

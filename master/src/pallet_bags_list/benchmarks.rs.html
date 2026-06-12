@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/bags-list/src/benchmarks.rs`."><title>benchmarks.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/bags-list/src/benchmarks.rs`."><title>benchmarks.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_bags_list" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_bags_list" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_bags_list/</div>benchmarks.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_bags_list/</div>benchmarks.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -498,114 +498,67 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#348 id=348 data-nosnippet>348</a>		)
 <a href=#349 id=349 data-nosnippet>349</a>	}
 <a href=#350 id=350 data-nosnippet>350</a>
-<a href=#351 id=351 data-nosnippet>351</a>	on_idle {
-<a href=#352 id=352 data-nosnippet>352</a>		<span class="comment">// This benchmark generates weights for `on_idle` based on runtime configuration.
-<a href=#353 id=353 data-nosnippet>353</a>		// The main input is the runtime's `MaxAutoRebagPerBlock` type, which defines how many
-<a href=#354 id=354 data-nosnippet>354</a>		// nodes can be rebagged per block.
-<a href=#355 id=355 data-nosnippet>355</a>		// This benchmark simulates a scenario with both pending rebag processing
-<a href=#356 id=356 data-nosnippet>356</a>		// and fragmented rebag scenario.
-<a href=#357 id=357 data-nosnippet>357</a>
-<a href=#358 id=358 data-nosnippet>358</a>		</span>List::&lt;T, <span class="kw">_</span>&gt;::unsafe_clear();
-<a href=#359 id=359 data-nosnippet>359</a>
-<a href=#360 id=360 data-nosnippet>360</a>		<span class="kw">let </span>bag_thresh = T::BagThresholds::get();
-<a href=#361 id=361 data-nosnippet>361</a>		<span class="kw">let </span>low = bag_thresh[<span class="number">0</span>];
-<a href=#362 id=362 data-nosnippet>362</a>		<span class="kw">let </span>mid = bag_thresh[<span class="number">1</span>];
-<a href=#363 id=363 data-nosnippet>363</a>		<span class="kw">let </span>high = bag_thresh[<span class="number">2</span>];
-<a href=#364 id=364 data-nosnippet>364</a>
-<a href=#365 id=365 data-nosnippet>365</a>		<span class="kw">let </span>rebag_budget = &lt;T <span class="kw">as </span>Config&lt;I&gt;&gt;::MaxAutoRebagPerBlock::get();
-<a href=#366 id=366 data-nosnippet>366</a>
-<a href=#367 id=367 data-nosnippet>367</a>		<span class="comment">// Adjust counts to ensure exact budget usage
-<a href=#368 id=368 data-nosnippet>368</a>		</span><span class="kw">let </span>pending_count = rebag_budget / <span class="number">3</span>; <span class="comment">// Smaller portion for pending
-<a href=#369 id=369 data-nosnippet>369</a>		</span><span class="kw">let </span>regular_count = rebag_budget + <span class="number">5</span>;
+<a href=#351 id=351 data-nosnippet>351</a>	on_idle_rebag {
+<a href=#352 id=352 data-nosnippet>352</a>		<span class="comment">// Worst-case cost of a single `rebag_internal` call inside `on_idle`.
+<a href=#353 id=353 data-nosnippet>353</a>		// This measures one non-terminal rebag with a pending rebag entry, which is the
+<a href=#354 id=354 data-nosnippet>354</a>		// most expensive per-item path. `on_idle` consumes this weight per iteration via
+<a href=#355 id=355 data-nosnippet>355</a>		// `WeightMeter`, so the benchmark is independent of `MaxAutoRebagPerBlock`.
+<a href=#356 id=356 data-nosnippet>356</a>
+<a href=#357 id=357 data-nosnippet>357</a>		</span>List::&lt;T, I&gt;::unsafe_clear();
+<a href=#358 id=358 data-nosnippet>358</a>
+<a href=#359 id=359 data-nosnippet>359</a>		<span class="kw">let </span>bag_thresh = T::BagThresholds::get();
+<a href=#360 id=360 data-nosnippet>360</a>		<span class="macro">assert!</span>(bag_thresh.len() &gt;= <span class="number">2</span>, <span class="string">"on_idle_rebag benchmark requires at least 2 bag thresholds"</span>);
+<a href=#361 id=361 data-nosnippet>361</a>		<span class="kw">let </span>origin_bag_thresh = bag_thresh[<span class="number">0</span>];
+<a href=#362 id=362 data-nosnippet>362</a>		<span class="kw">let </span>dest_bag_thresh = bag_thresh[<span class="number">1</span>];
+<a href=#363 id=363 data-nosnippet>363</a>
+<a href=#364 id=364 data-nosnippet>364</a>		<span class="comment">// Seed 3 nodes in the origin bag so the target node is non-terminal (has prev + next).
+<a href=#365 id=365 data-nosnippet>365</a>		</span><span class="kw">let </span>origin_head: T::AccountId = account(<span class="string">"origin_head"</span>, <span class="number">0</span>, <span class="number">0</span>);
+<a href=#366 id=366 data-nosnippet>366</a>		<span class="macro">assert_ok!</span>(List::&lt;T, I&gt;::insert(origin_head.clone(), origin_bag_thresh));
+<a href=#367 id=367 data-nosnippet>367</a>
+<a href=#368 id=368 data-nosnippet>368</a>		<span class="kw">let </span>target: T::AccountId = account(<span class="string">"target"</span>, <span class="number">0</span>, <span class="number">0</span>);
+<a href=#369 id=369 data-nosnippet>369</a>		<span class="macro">assert_ok!</span>(List::&lt;T, I&gt;::insert(target.clone(), origin_bag_thresh));
 <a href=#370 id=370 data-nosnippet>370</a>
-<a href=#371 id=371 data-nosnippet>371</a>		<span class="comment">// Insert regular nodes with varying scores
-<a href=#372 id=372 data-nosnippet>372</a>		</span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..regular_count {
-<a href=#373 id=373 data-nosnippet>373</a>			<span class="kw">let </span>node: T::AccountId = account(<span class="string">"regular_node"</span>, i, <span class="number">0</span>);
-<a href=#374 id=374 data-nosnippet>374</a>			<span class="kw">let </span>score = <span class="kw">match </span>i % <span class="number">3 </span>{
-<a href=#375 id=375 data-nosnippet>375</a>				<span class="number">0 </span>=&gt; low - One::one(),
-<a href=#376 id=376 data-nosnippet>376</a>				<span class="number">1 </span>=&gt; mid - One::one(),
-<a href=#377 id=377 data-nosnippet>377</a>				<span class="kw">_ </span>=&gt; high - One::one(),
-<a href=#378 id=378 data-nosnippet>378</a>			};
-<a href=#379 id=379 data-nosnippet>379</a>			<span class="macro">assert_ok!</span>(List::&lt;T, <span class="kw">_</span>&gt;::insert(node.clone(), score));
-<a href=#380 id=380 data-nosnippet>380</a>		}
-<a href=#381 id=381 data-nosnippet>381</a>
-<a href=#382 id=382 data-nosnippet>382</a>		<span class="comment">// Corrupt some nodes to simulate edge cases
-<a href=#383 id=383 data-nosnippet>383</a>		</span><span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0</span>..regular_count).step_by(<span class="number">4</span>) {
-<a href=#384 id=384 data-nosnippet>384</a>			<span class="kw">let </span>node: T::AccountId = account(<span class="string">"regular_node"</span>, i, <span class="number">0</span>);
-<a href=#385 id=385 data-nosnippet>385</a>			<span class="kw">let _ </span>= List::&lt;T, <span class="kw">_</span>&gt;::remove(<span class="kw-2">&amp;</span>node); <span class="comment">// orphan nodes
-<a href=#386 id=386 data-nosnippet>386</a>		</span>}
-<a href=#387 id=387 data-nosnippet>387</a>
-<a href=#388 id=388 data-nosnippet>388</a>		<span class="comment">// Lock the list and simulate pending rebag insertions
-<a href=#389 id=389 data-nosnippet>389</a>		</span>&lt;Pallet&lt;T, I&gt;&gt;::lock();
-<a href=#390 id=390 data-nosnippet>390</a>
-<a href=#391 id=391 data-nosnippet>391</a>		<span class="comment">// Create pending rebag entries (mix of valid and corrupted)
-<a href=#392 id=392 data-nosnippet>392</a>		</span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..pending_count {
-<a href=#393 id=393 data-nosnippet>393</a>			<span class="kw">let </span>pending_node: T::AccountId = account(<span class="string">"pending_node"</span>, i, <span class="number">0</span>);
-<a href=#394 id=394 data-nosnippet>394</a>			<span class="kw">let </span>pending_score = <span class="kw">match </span>i % <span class="number">3 </span>{
-<a href=#395 id=395 data-nosnippet>395</a>				<span class="number">0 </span>=&gt; mid,
-<a href=#396 id=396 data-nosnippet>396</a>				<span class="number">1 </span>=&gt; high,
-<a href=#397 id=397 data-nosnippet>397</a>				<span class="kw">_ </span>=&gt; high + high,
-<a href=#398 id=398 data-nosnippet>398</a>			};
-<a href=#399 id=399 data-nosnippet>399</a>
-<a href=#400 id=400 data-nosnippet>400</a>			<span class="comment">// Set score first for most nodes, but skip some to simulate cleanup scenarios
-<a href=#401 id=401 data-nosnippet>401</a>			</span><span class="kw">if </span>i % <span class="number">7 </span>!= <span class="number">0 </span>{
-<a href=#402 id=402 data-nosnippet>402</a>				T::ScoreProvider::set_score_of(<span class="kw-2">&amp;</span>pending_node, pending_score);
-<a href=#403 id=403 data-nosnippet>403</a>			}
+<a href=#371 id=371 data-nosnippet>371</a>		<span class="kw">let </span>origin_tail: T::AccountId = account(<span class="string">"origin_tail"</span>, <span class="number">0</span>, <span class="number">0</span>);
+<a href=#372 id=372 data-nosnippet>372</a>		<span class="macro">assert_ok!</span>(List::&lt;T, I&gt;::insert(origin_tail.clone(), origin_bag_thresh));
+<a href=#373 id=373 data-nosnippet>373</a>
+<a href=#374 id=374 data-nosnippet>374</a>		<span class="comment">// Seed a node in the destination bag so it's not empty (requires updating dest tail).
+<a href=#375 id=375 data-nosnippet>375</a>		</span><span class="kw">let </span>dest_head: T::AccountId = account(<span class="string">"dest_head"</span>, <span class="number">0</span>, <span class="number">0</span>);
+<a href=#376 id=376 data-nosnippet>376</a>		<span class="macro">assert_ok!</span>(List::&lt;T, I&gt;::insert(dest_head.clone(), dest_bag_thresh));
+<a href=#377 id=377 data-nosnippet>377</a>
+<a href=#378 id=378 data-nosnippet>378</a>		<span class="comment">// Add a PendingRebag entry for the target to exercise the contains_key + remove path.
+<a href=#379 id=379 data-nosnippet>379</a>		</span>PendingRebag::&lt;T, I&gt;::insert(<span class="kw-2">&amp;</span>target, ());
+<a href=#380 id=380 data-nosnippet>380</a>
+<a href=#381 id=381 data-nosnippet>381</a>		<span class="comment">// Update score to force a rebag into the destination bag.
+<a href=#382 id=382 data-nosnippet>382</a>		</span>T::ScoreProvider::set_score_of(<span class="kw-2">&amp;</span>target, dest_bag_thresh);
+<a href=#383 id=383 data-nosnippet>383</a>
+<a href=#384 id=384 data-nosnippet>384</a>		<span class="macro">assert_eq!</span>(
+<a href=#385 id=385 data-nosnippet>385</a>			List::&lt;T, I&gt;::get_bags(),
+<a href=#386 id=386 data-nosnippet>386</a>			<span class="macro">vec!</span>[
+<a href=#387 id=387 data-nosnippet>387</a>				(origin_bag_thresh, <span class="macro">vec!</span>[origin_head.clone(), target.clone(), origin_tail.clone()]),
+<a href=#388 id=388 data-nosnippet>388</a>				(dest_bag_thresh, <span class="macro">vec!</span>[dest_head.clone()])
+<a href=#389 id=389 data-nosnippet>389</a>			]
+<a href=#390 id=390 data-nosnippet>390</a>		);
+<a href=#391 id=391 data-nosnippet>391</a>	}: {
+<a href=#392 id=392 data-nosnippet>392</a>		Pallet::&lt;T, I&gt;::rebag_internal(<span class="kw-2">&amp;</span>target).unwrap();
+<a href=#393 id=393 data-nosnippet>393</a>	}
+<a href=#394 id=394 data-nosnippet>394</a>	verify {
+<a href=#395 id=395 data-nosnippet>395</a>		<span class="macro">assert_eq!</span>(
+<a href=#396 id=396 data-nosnippet>396</a>			List::&lt;T, I&gt;::get_bags(),
+<a href=#397 id=397 data-nosnippet>397</a>			<span class="macro">vec!</span>[
+<a href=#398 id=398 data-nosnippet>398</a>				(origin_bag_thresh, <span class="macro">vec!</span>[origin_head, origin_tail]),
+<a href=#399 id=399 data-nosnippet>399</a>				(dest_bag_thresh, <span class="macro">vec!</span>[dest_head, target])
+<a href=#400 id=400 data-nosnippet>400</a>			]
+<a href=#401 id=401 data-nosnippet>401</a>		);
+<a href=#402 id=402 data-nosnippet>402</a>		<span class="macro">assert!</span>(!PendingRebag::&lt;T, I&gt;::contains_key(<span class="kw-2">&amp;</span>account::&lt;T::AccountId&gt;(<span class="string">"target"</span>, <span class="number">0</span>, <span class="number">0</span>)));
+<a href=#403 id=403 data-nosnippet>403</a>	}
 <a href=#404 id=404 data-nosnippet>404</a>
-<a href=#405 id=405 data-nosnippet>405</a>			<span class="kw">let _ </span>= &lt;Pallet&lt;T, I&gt; <span class="kw">as </span>SortedListProvider&lt;T::AccountId&gt;&gt;::on_insert(
-<a href=#406 id=406 data-nosnippet>406</a>				pending_node, pending_score
-<a href=#407 id=407 data-nosnippet>407</a>			);
-<a href=#408 id=408 data-nosnippet>408</a>		}
-<a href=#409 id=409 data-nosnippet>409</a>
-<a href=#410 id=410 data-nosnippet>410</a>		&lt;Pallet&lt;T, I&gt;&gt;::unlock();
-<a href=#411 id=411 data-nosnippet>411</a>
-<a href=#412 id=412 data-nosnippet>412</a>		<span class="comment">// Now set new scores that will move nodes into higher bags
-<a href=#413 id=413 data-nosnippet>413</a>		</span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..regular_count {
-<a href=#414 id=414 data-nosnippet>414</a>			<span class="kw">let </span>node: T::AccountId = account(<span class="string">"regular_node"</span>, i, <span class="number">0</span>);
-<a href=#415 id=415 data-nosnippet>415</a>			<span class="kw">let </span>new_score = <span class="kw">match </span>i % <span class="number">3 </span>{
-<a href=#416 id=416 data-nosnippet>416</a>				<span class="number">0 </span>=&gt; mid,
-<a href=#417 id=417 data-nosnippet>417</a>				<span class="number">1 </span>=&gt; high,
-<a href=#418 id=418 data-nosnippet>418</a>				<span class="kw">_ </span>=&gt; high + high, <span class="comment">// force into a new top bag
-<a href=#419 id=419 data-nosnippet>419</a>			</span>};
-<a href=#420 id=420 data-nosnippet>420</a>			T::ScoreProvider::set_score_of(<span class="kw-2">&amp;</span>node, new_score);
-<a href=#421 id=421 data-nosnippet>421</a>		}
-<a href=#422 id=422 data-nosnippet>422</a>
-<a href=#423 id=423 data-nosnippet>423</a>		<span class="macro">assert_eq!</span>(
-<a href=#424 id=424 data-nosnippet>424</a>			PendingRebag::&lt;T, I&gt;::count(),
-<a href=#425 id=425 data-nosnippet>425</a>			pending_count,
-<a href=#426 id=426 data-nosnippet>426</a>			<span class="string">"Expected exactly {} pending rebag entries"</span>,
-<a href=#427 id=427 data-nosnippet>427</a>			pending_count
-<a href=#428 id=428 data-nosnippet>428</a>		);
-<a href=#429 id=429 data-nosnippet>429</a>		<span class="comment">// Ensure we have at least three bags populated before rebag
-<a href=#430 id=430 data-nosnippet>430</a>		</span><span class="macro">assert!</span>(List::&lt;T, <span class="kw">_</span>&gt;::get_bags().len() &gt;= <span class="number">2</span>);
-<a href=#431 id=431 data-nosnippet>431</a>	}
-<a href=#432 id=432 data-nosnippet>432</a>	: {
-<a href=#433 id=433 data-nosnippet>433</a>		<span class="kw">use </span>frame_support::traits::Hooks;
-<a href=#434 id=434 data-nosnippet>434</a>		&lt;Pallet&lt;T, I&gt; <span class="kw">as </span>Hooks&lt;<span class="kw">_</span>&gt;&gt;::on_idle(Default::default(), Weight::MAX);
-<a href=#435 id=435 data-nosnippet>435</a>	}
-<a href=#436 id=436 data-nosnippet>436</a>	verify {
-<a href=#437 id=437 data-nosnippet>437</a>		<span class="comment">// Verify all pending rebag entries were processed.
-<a href=#438 id=438 data-nosnippet>438</a>		// This should always be true since pending_count = rebag_budget / 3 &lt; rebag_budget,
-<a href=#439 id=439 data-nosnippet>439</a>		// and pending accounts are processed first so all pending entries fit within the budget.
-<a href=#440 id=440 data-nosnippet>440</a>		</span><span class="macro">assert_eq!</span>(PendingRebag::&lt;T, I&gt;::count(), <span class="number">0</span>, <span class="string">"All pending rebag entries should be processed"</span>);
-<a href=#441 id=441 data-nosnippet>441</a>
-<a href=#442 id=442 data-nosnippet>442</a>		<span class="comment">// Count how many nodes ended up in higher bags
-<a href=#443 id=443 data-nosnippet>443</a>		</span><span class="kw">let </span>total_rebagged: usize = List::&lt;T, <span class="kw">_</span>&gt;::get_bags()
-<a href=#444 id=444 data-nosnippet>444</a>			.iter()
-<a href=#445 id=445 data-nosnippet>445</a>			.filter(|(b, <span class="kw">_</span>)| <span class="kw-2">*</span>b &gt; T::BagThresholds::get()[<span class="number">0</span>])
-<a href=#446 id=446 data-nosnippet>446</a>			.map(|(<span class="kw">_</span>, nodes)| nodes.len())
-<a href=#447 id=447 data-nosnippet>447</a>			.sum();
-<a href=#448 id=448 data-nosnippet>448</a>
-<a href=#449 id=449 data-nosnippet>449</a>		<span class="kw">let </span>expected = &lt;T <span class="kw">as </span>Config&lt;I&gt;&gt;::MaxAutoRebagPerBlock::get() <span class="kw">as </span>usize;
-<a href=#450 id=450 data-nosnippet>450</a>		<span class="macro">assert_eq!</span>(total_rebagged, expected, <span class="string">"Expected exactly {:?} rebagged nodes, found {:?}"</span>, expected, total_rebagged);
-<a href=#451 id=451 data-nosnippet>451</a>	}
-<a href=#452 id=452 data-nosnippet>452</a>
-<a href=#453 id=453 data-nosnippet>453</a>	<span class="macro">impl_benchmark_test_suite!</span>(
-<a href=#454 id=454 data-nosnippet>454</a>		Pallet,
-<a href=#455 id=455 data-nosnippet>455</a>		mock::ExtBuilder::default().skip_genesis_ids().build(),
-<a href=#456 id=456 data-nosnippet>456</a>		mock::Runtime
-<a href=#457 id=457 data-nosnippet>457</a>	);
-<a href=#458 id=458 data-nosnippet>458</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#405 id=405 data-nosnippet>405</a>	<span class="macro">impl_benchmark_test_suite!</span>(
+<a href=#406 id=406 data-nosnippet>406</a>		Pallet,
+<a href=#407 id=407 data-nosnippet>407</a>		mock::ExtBuilder::default().skip_genesis_ids().build(),
+<a href=#408 id=408 data-nosnippet>408</a>		mock::Runtime
+<a href=#409 id=409 data-nosnippet>409</a>	);
+<a href=#410 id=410 data-nosnippet>410</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

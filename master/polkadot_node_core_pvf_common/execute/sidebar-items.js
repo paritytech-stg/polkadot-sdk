@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["JobError","JobResponse","WorkerError"],"struct":["ExecuteRequest","Handshake","WorkerResponse"],"type":["JobResult"]};
+window.SIDEBAR_ITEMS = {"enum":["JobError","JobResponse","WorkerError"],"struct":["ExecuteRequest","Handshake","ValidationContext","WorkerResponse"],"type":["JobResult"]};

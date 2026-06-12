@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Write your first simple pallet, learning the most most basic features of FRAME along the way."><title>polkadot_sdk_docs::guides::your_first_pallet - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Write your first simple pallet, learning the most most basic features of FRAME along the way."><title>polkadot_sdk_docs::guides::your_first_pallet - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="polkadot_sdk_docs" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="icon" href="https://polkadot.com/favicon.ico"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="polkadot_sdk_docs" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button><a class="logo-container" href="../../../polkadot_sdk_docs/index.html"><img src="https://raw.githubusercontent.com/paritytech/polkadot-sdk/master/docs/images/Polkadot_Logo_Horizontal_Pink_White.png" alt=""></a></nav><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../../polkadot_sdk_docs/index.html"><img src="https://raw.githubusercontent.com/paritytech/polkadot-sdk/master/docs/images/Polkadot_Logo_Horizontal_Pink_White.png" alt="logo"></a><h2><a href="../../../polkadot_sdk_docs/index.html">polkadot_<wbr>sdk_<wbr>docs</a><span class="version">0.0.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module your_<wbr>first_<wbr>pallet</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#currency-pallet" title="Currency Pallet">Currency Pallet</a><ul><li><a href="#writing-your-first-pallet" title="Writing Your First Pallet">Writing Your First Pallet</a></li><li><a href="#topics-covered" title="Topics Covered">Topics Covered</a></li><li><a href="#improving-the-currency-pallet" title="Improving the Currency Pallet">Improving the Currency Pallet</a></li><li><a href="#what-next" title="What Next?">What Next?</a></li></ul></li></ul><h3><a href="#modules">Module Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In polkadot_<wbr>sdk_<wbr>docs::<wbr>guides</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">polkadot_sdk_docs</a>::<wbr><a href="../index.html">guides</a></div><h1>Module <span>your_first_pallet</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/polkadot_sdk_docs/guides/your_first_pallet/mod.rs.html#1-789">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Write your first simple pallet, learning the most most basic features of FRAME along the way.</p>
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Module your_first_pallet</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../../polkadot_sdk_docs/index.html"><img src="https://raw.githubusercontent.com/paritytech/polkadot-sdk/master/docs/images/Polkadot_Logo_Horizontal_Pink_White.png" alt="logo"></a><h2><a href="../../../polkadot_sdk_docs/index.html">polkadot_<wbr>sdk_<wbr>docs</a><span class="version">0.0.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module your_<wbr>first_<wbr>pallet</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#currency-pallet" title="Currency Pallet">Currency Pallet</a><ul><li><a href="#writing-your-first-pallet" title="Writing Your First Pallet">Writing Your First Pallet</a></li><li><a href="#topics-covered" title="Topics Covered">Topics Covered</a></li><li><a href="#improving-the-currency-pallet" title="Improving the Currency Pallet">Improving the Currency Pallet</a></li><li><a href="#what-next" title="What Next?">What Next?</a></li></ul></li></ul><h3><a href="#modules">Module Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In polkadot_<wbr>sdk_<wbr>docs::<wbr>guides</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">polkadot_sdk_docs</a>::<wbr><a href="../index.html">guides</a></div><h1>Module <span>your_<wbr>first_<wbr>pallet</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/polkadot_sdk_docs/guides/your_first_pallet/mod.rs.html#1-768">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Write your first simple pallet, learning the most most basic features of FRAME along the way.</p>
 <h2 id="currency-pallet"><a class="doc-anchor" href="#currency-pallet">§</a>Currency Pallet</h2>
 <p>By the end of this guide, you will have written a small FRAME pallet (see
 <a href="../../polkadot_sdk/frame_runtime/index.html" title="mod polkadot_sdk_docs::polkadot_sdk::frame_runtime"><code>crate::polkadot_sdk::frame_runtime</code></a>) that is capable of handling a simple crypto-currency.
@@ -221,10 +221,8 @@ generic bounded type in the <code>Config</code> trait, and then specify it in th
 
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::storage]
 </span><span class="kw">pub type </span>TotalIssuance&lt;T: Config&gt; = StorageValue&lt;<span class="kw">_</span>, Balance&gt;;</code></pre></div>
-
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::storage]
-</span><span class="kw">pub type </span>Balances&lt;T: Config&gt; = StorageMap&lt;<span class="kw">_</span>, <span class="kw">_</span>, T::AccountId, Balance&gt;;</code></pre></div>
-<h4 id="dispatchables"><a class="doc-anchor" href="#dispatchables">§</a>Dispatchables</h4>
+</span><span class="kw">pub type </span>Balances&lt;T: Config&gt; = StorageMap&lt;<span class="kw">_</span>, <span class="kw">_</span>, T::AccountId, Balance&gt;;</code></pre></div><h4 id="dispatchables"><a class="doc-anchor" href="#dispatchables">§</a>Dispatchables</h4>
 <p>Next, we will define the dispatchable functions. As per <a href="../../../frame_support_procedural/attr.call.html" title="attr frame_support_procedural::call"><code>pallet::call</code></a>, these will be defined
 as normal <code>fn</code>s attached to <code>struct Pallet</code>.</p>
 
@@ -258,7 +256,7 @@ as normal <code>fn</code>s attached to <code>struct Pallet</code>.</p>
 		<span class="comment">// ensure sender has enough balance, and if so, calculate what is left after `amount`.
 		</span><span class="kw">let </span>sender_balance = Balances::&lt;T&gt;::get(<span class="kw-2">&amp;</span>sender).ok_or(<span class="string">"NonExistentAccount"</span>)<span class="question-mark">?</span>;
 		<span class="kw">if </span>sender_balance &lt; amount {
-			<span class="kw">return </span><span class="prelude-val">Err</span>(<span class="string">"InsufficientBalance"</span>.into())
+			<span class="kw">return </span><span class="prelude-val">Err</span>(<span class="string">"InsufficientBalance"</span>.into());
 		}
 		<span class="kw">let </span>remainder = sender_balance - amount;
 
@@ -540,15 +538,13 @@ is working exactly as intended.</p>
 		<span class="macro">assert_eq!</span>(TotalIssuance::&lt;Runtime&gt;::get(), <span class="prelude-val">Some</span>(<span class="number">200</span>));
 	});
 }</code></pre></div>
-
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[test]
 </span><span class="kw">fn </span>state_builder_add_balance() {
 	StateBuilder::default().add_balance(CHARLIE, <span class="number">42</span>).build_and_execute(|| {
 		<span class="macro">assert_eq!</span>(Balances::&lt;Runtime&gt;::get(<span class="kw-2">&amp;</span>CHARLIE), <span class="prelude-val">Some</span>(<span class="number">42</span>));
 		<span class="macro">assert_eq!</span>(TotalIssuance::&lt;Runtime&gt;::get(), <span class="prelude-val">Some</span>(<span class="number">242</span>));
 	})
-}</code></pre></div>
-<h4 id="more-tests"><a class="doc-anchor" href="#more-tests">§</a>More Tests</h4>
+}</code></pre></div><h4 id="more-tests"><a class="doc-anchor" href="#more-tests">§</a>More Tests</h4>
 <p>Now that we have a more ergonomic test setup, let’s see how a well written test for transfer and
 mint would look like.</p>
 
@@ -572,7 +568,6 @@ mint would look like.</p>
 		<span class="macro">assert_eq!</span>(TotalIssuance::&lt;Runtime&gt;::get(), <span class="prelude-val">Some</span>(<span class="number">200</span>));
 	});
 }</code></pre></div>
-
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[test]
 </span><span class="kw">fn </span>mint_works() {
 	StateBuilder::default().build_and_execute(|| {
@@ -649,7 +644,6 @@ attributes attached.</p>
 	<span class="doccomment">/// A transfer succeeded.
 	</span>Transferred { from: T::AccountId, to: T::AccountId, amount: Balance },
 }</code></pre></div>
-
 <div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="attr">#[pallet::error]
 </span><span class="kw">pub enum </span>Error&lt;T&gt; {
 	<span class="doccomment">/// Account does not exist.

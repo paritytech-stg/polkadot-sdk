@@ -1,1 +1,0 @@
-searchState.loadedDescShard("polkadot_zombienet_sdk_tests", 0, "")

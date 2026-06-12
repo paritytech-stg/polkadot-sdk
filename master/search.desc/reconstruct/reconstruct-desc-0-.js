@@ -1,1 +1,0 @@
-searchState.loadedDescShard("reconstruct", 0, "")

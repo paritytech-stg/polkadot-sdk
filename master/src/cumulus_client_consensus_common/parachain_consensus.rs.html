@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `cumulus/client/consensus/common/src/parachain_consensus.rs`."><title>parachain_consensus.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `cumulus/client/consensus/common/src/parachain_consensus.rs`."><title>parachain_consensus.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cumulus_client_consensus_common" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cumulus_client_consensus_common" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">cumulus_client_consensus_common/</div>parachain_consensus.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">cumulus_client_consensus_common/</div>parachain_consensus.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Cumulus.
 <a href=#3 id=3 data-nosnippet>3</a>// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
 <a href=#4 id=4 data-nosnippet>4</a>
@@ -248,8 +248,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#98 id=98 data-nosnippet>98</a>		<span class="prelude-val">Ok</span>(finalized_heads_stream) =&gt; finalized_heads_stream.fuse(),
 <a href=#99 id=99 data-nosnippet>99</a>		<span class="prelude-val">Err</span>(err) =&gt; {
 <a href=#100 id=100 data-nosnippet>100</a>			<span class="macro">tracing::error!</span>(target: LOG_TARGET, error = <span class="question-mark">?</span>err, <span class="string">"Unable to retrieve finalized heads stream."</span>);
-<a href=#101 id=101 data-nosnippet>101</a>			<span class="kw">return
-<a href=#102 id=102 data-nosnippet>102</a>		</span>},
+<a href=#101 id=101 data-nosnippet>101</a>			<span class="kw">return</span>;
+<a href=#102 id=102 data-nosnippet>102</a>		},
 <a href=#103 id=103 data-nosnippet>103</a>	};
 <a href=#104 id=104 data-nosnippet>104</a>
 <a href=#105 id=105 data-nosnippet>105</a>	<span class="macro">pin_mut!</span>(finalized_heads);
@@ -263,8 +263,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#113 id=113 data-nosnippet>113</a>						error = <span class="question-mark">?</span>err,
 <a href=#114 id=114 data-nosnippet>114</a>						<span class="string">"Could not decode parachain header while following finalized heads."</span>,
 <a href=#115 id=115 data-nosnippet>115</a>					);
-<a href=#116 id=116 data-nosnippet>116</a>					<span class="kw">continue
-<a href=#117 id=117 data-nosnippet>117</a>				</span>},
+<a href=#116 id=116 data-nosnippet>116</a>					<span class="kw">continue</span>;
+<a href=#117 id=117 data-nosnippet>117</a>				},
 <a href=#118 id=118 data-nosnippet>118</a>			};
 <a href=#119 id=119 data-nosnippet>119</a>			<span class="kw">if let </span><span class="prelude-val">Err</span>(e) = tx.send(header).<span class="kw">await </span>{
 <a href=#120 id=120 data-nosnippet>120</a>				<span class="macro">tracing::error!</span>(target: LOG_TARGET, <span class="question-mark">?</span>e, <span class="string">"Error while sending finalized head."</span>);
@@ -460,8 +460,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#310 id=310 data-nosnippet>310</a>		<span class="prelude-val">Ok</span>(best_heads_stream) =&gt; best_heads_stream.fuse(),
 <a href=#311 id=311 data-nosnippet>311</a>		<span class="prelude-val">Err</span>(err) =&gt; {
 <a href=#312 id=312 data-nosnippet>312</a>			<span class="macro">tracing::error!</span>(target: LOG_TARGET, error = <span class="question-mark">?</span>err, <span class="string">"Unable to retrieve best heads stream."</span>);
-<a href=#313 id=313 data-nosnippet>313</a>			<span class="kw">return
-<a href=#314 id=314 data-nosnippet>314</a>		</span>},
+<a href=#313 id=313 data-nosnippet>313</a>			<span class="kw">return</span>;
+<a href=#314 id=314 data-nosnippet>314</a>		},
 <a href=#315 id=315 data-nosnippet>315</a>	};
 <a href=#316 id=316 data-nosnippet>316</a>
 <a href=#317 id=317 data-nosnippet>317</a>	<span class="macro">pin_mut!</span>(new_best_heads);
@@ -526,7 +526,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#376 id=376 data-nosnippet>376</a>	<span class="comment">// HACK
 <a href=#377 id=377 data-nosnippet>377</a>	//
 <a href=#378 id=378 data-nosnippet>378</a>	// Remove after https://github.com/paritytech/substrate/pull/8052 or similar is merged
-<a href=#379 id=379 data-nosnippet>379</a>	</span><span class="kw">if </span>notification.origin != BlockOrigin::Own {
+<a href=#379 id=379 data-nosnippet>379</a>	</span><span class="kw">if </span>notification.<span class="macro">origin !</span>= BlockOrigin::Own {
 <a href=#380 id=380 data-nosnippet>380</a>		announce_block(notification.hash, <span class="prelude-val">None</span>);
 <a href=#381 id=381 data-nosnippet>381</a>	}
 <a href=#382 id=382 data-nosnippet>382</a>
@@ -537,13 +537,13 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#387 id=387 data-nosnippet>387</a>	};
 <a href=#388 id=388 data-nosnippet>388</a>
 <a href=#389 id=389 data-nosnippet>389</a>	<span class="kw">let </span>unset_hash = <span class="kw">if </span>notification.header.number() &lt; unset_best_header.number() {
-<a href=#390 id=390 data-nosnippet>390</a>		<span class="kw">return
-<a href=#391 id=391 data-nosnippet>391</a>	</span>} <span class="kw">else if </span>notification.header.number() == unset_best_header.number() {
+<a href=#390 id=390 data-nosnippet>390</a>		<span class="kw">return</span>;
+<a href=#391 id=391 data-nosnippet>391</a>	} <span class="kw">else if </span>notification.header.number() == unset_best_header.number() {
 <a href=#392 id=392 data-nosnippet>392</a>		<span class="kw">let </span>unset_hash = unset_best_header.hash();
 <a href=#393 id=393 data-nosnippet>393</a>
-<a href=#394 id=394 data-nosnippet>394</a>		<span class="kw">if </span>unset_hash != notification.hash {
-<a href=#395 id=395 data-nosnippet>395</a>			<span class="kw">return
-<a href=#396 id=396 data-nosnippet>396</a>		</span>} <span class="kw">else </span>{
+<a href=#394 id=394 data-nosnippet>394</a>		<span class="kw">if </span><span class="macro">unset_hash !</span>= notification.hash {
+<a href=#395 id=395 data-nosnippet>395</a>			<span class="kw">return</span>;
+<a href=#396 id=396 data-nosnippet>396</a>		} <span class="kw">else </span>{
 <a href=#397 id=397 data-nosnippet>397</a>			unset_hash
 <a href=#398 id=398 data-nosnippet>398</a>		}
 <a href=#399 id=399 data-nosnippet>399</a>	} <span class="kw">else </span>{
@@ -591,8 +591,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#441 id=441 data-nosnippet>441</a>				error = <span class="question-mark">?</span>err,
 <a href=#442 id=442 data-nosnippet>442</a>				<span class="string">"Could not decode Parachain header while following best heads."</span>,
 <a href=#443 id=443 data-nosnippet>443</a>			);
-<a href=#444 id=444 data-nosnippet>444</a>			<span class="kw">return
-<a href=#445 id=445 data-nosnippet>445</a>		</span>},
+<a href=#444 id=444 data-nosnippet>444</a>			<span class="kw">return</span>;
+<a href=#445 id=445 data-nosnippet>445</a>		},
 <a href=#446 id=446 data-nosnippet>446</a>	};
 <a href=#447 id=447 data-nosnippet>447</a>
 <a href=#448 id=448 data-nosnippet>448</a>	<span class="kw">let </span>hash = parachain_head.hash();
@@ -675,8 +675,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#525 id=525 data-nosnippet>525</a>			<span class="string">"Skipping importing block as new best block, because there already exists a \
 <a href=#526 id=526 data-nosnippet>526</a>			 best block with an higher number"</span>,
 <a href=#527 id=527 data-nosnippet>527</a>		);
-<a href=#528 id=528 data-nosnippet>528</a>		<span class="kw">return
-<a href=#529 id=529 data-nosnippet>529</a>	</span>}
+<a href=#528 id=528 data-nosnippet>528</a>		<span class="kw">return</span>;
+<a href=#529 id=529 data-nosnippet>529</a>	}
 <a href=#530 id=530 data-nosnippet>530</a>
 <a href=#531 id=531 data-nosnippet>531</a>	<span class="comment">// Make it the new best block
 <a href=#532 id=532 data-nosnippet>532</a>	</span><span class="kw">let </span><span class="kw-2">mut </span>block_import_params = BlockImportParams::new(BlockOrigin::ConsensusBroadcast, header);
@@ -691,7 +691,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#541 id=541 data-nosnippet>541</a>			<span class="string">"Failed to set new best block."</span>,
 <a href=#542 id=542 data-nosnippet>542</a>		);
 <a href=#543 id=543 data-nosnippet>543</a>	}
-<a href=#544 id=544 data-nosnippet>544</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#544 id=544 data-nosnippet>544</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

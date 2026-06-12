@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/node/metrics/src/runtime/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/node/metrics/src/runtime/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="polkadot_node_metrics" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="polkadot_node_metrics" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">polkadot_node_metrics/runtime/</div>mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">polkadot_node_metrics/runtime/</div>mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Polkadot.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Polkadot is free software: you can redistribute it and/or modify
@@ -229,7 +229,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#79 id=79 data-nosnippet>79</a>			hashmap
 <a href=#80 id=80 data-nosnippet>80</a>				.entry(counter.name.to_owned())
 <a href=#81 id=81 data-nosnippet>81</a>				.or_insert(register(Counter::new(counter.name, counter.description)<span class="question-mark">?</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>)<span class="question-mark">?</span>);
-<a href=#82 id=82 data-nosnippet>82</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(())
+<a href=#82 id=82 data-nosnippet>82</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(());
 <a href=#83 id=83 data-nosnippet>83</a>		})
 <a href=#84 id=84 data-nosnippet>84</a>	}
 <a href=#85 id=85 data-nosnippet>85</a>
@@ -242,7 +242,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#92 id=92 data-nosnippet>92</a>				)<span class="question-mark">?</span>,
 <a href=#93 id=93 data-nosnippet>93</a>				<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>,
 <a href=#94 id=94 data-nosnippet>94</a>			)<span class="question-mark">?</span>);
-<a href=#95 id=95 data-nosnippet>95</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(())
+<a href=#95 id=95 data-nosnippet>95</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(());
 <a href=#96 id=96 data-nosnippet>96</a>		})
 <a href=#97 id=97 data-nosnippet>97</a>	}
 <a href=#98 id=98 data-nosnippet>98</a>
@@ -309,8 +309,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#159 id=159 data-nosnippet>159</a>			.unwrap_or(<span class="kw-2">&amp;</span>String::default())
 <a href=#160 id=160 data-nosnippet>160</a>			.ne(<span class="string">"metrics"</span>)
 <a href=#161 id=161 data-nosnippet>161</a>		{
-<a href=#162 id=162 data-nosnippet>162</a>			<span class="kw">return
-<a href=#163 id=163 data-nosnippet>163</a>		</span>}
+<a href=#162 id=162 data-nosnippet>162</a>			<span class="kw">return</span>;
+<a href=#163 id=163 data-nosnippet>163</a>		}
 <a href=#164 id=164 data-nosnippet>164</a>
 <a href=#165 id=165 data-nosnippet>165</a>		<span class="kw">if let </span><span class="prelude-val">Some</span>(update_op_bs58) = event.values.string_values.get(<span class="string">"params"</span>) {
 <a href=#166 id=166 data-nosnippet>166</a>			<span class="comment">// Deserialize the metric update struct.
@@ -334,46 +334,50 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#184 id=184 data-nosnippet>184</a>	<span class="comment">// Parse end execute the update operation.
 <a href=#185 id=185 data-nosnippet>185</a>	</span><span class="kw">fn </span>parse_metric_update(<span class="kw-2">&amp;</span><span class="self">self</span>, update: RuntimeMetricUpdate) {
 <a href=#186 id=186 data-nosnippet>186</a>		<span class="kw">match </span>update.op {
-<a href=#187 id=187 data-nosnippet>187</a>			RuntimeMetricOp::IncrementCounterVec(value, <span class="kw-2">ref </span>labels) =&gt;
-<a href=#188 id=188 data-nosnippet>188</a>				<span class="self">self</span>.inc_counter_vec_by(update.metric_name(), value, labels),
-<a href=#189 id=189 data-nosnippet>189</a>			RuntimeMetricOp::IncrementCounter(value) =&gt;
-<a href=#190 id=190 data-nosnippet>190</a>				<span class="self">self</span>.inc_counter_by(update.metric_name(), value),
-<a href=#191 id=191 data-nosnippet>191</a>			RuntimeMetricOp::ObserveHistogram(value) =&gt;
-<a href=#192 id=192 data-nosnippet>192</a>				<span class="self">self</span>.observe_histogram(update.metric_name(), value),
-<a href=#193 id=193 data-nosnippet>193</a>		}
-<a href=#194 id=194 data-nosnippet>194</a>	}
-<a href=#195 id=195 data-nosnippet>195</a>
-<a href=#196 id=196 data-nosnippet>196</a>	<span class="comment">// Returns the `bs58` encoded metric update operation.
-<a href=#197 id=197 data-nosnippet>197</a>	</span><span class="kw">fn </span>parse_event_params(event_params: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt; {
-<a href=#198 id=198 data-nosnippet>198</a>		<span class="comment">// Shave " }" suffix.
-<a href=#199 id=199 data-nosnippet>199</a>		</span><span class="kw">let </span>new_len = event_params.len().saturating_sub(<span class="number">2</span>);
-<a href=#200 id=200 data-nosnippet>200</a>		<span class="kw">let </span>event_params = <span class="kw-2">&amp;</span>event_params[..new_len];
-<a href=#201 id=201 data-nosnippet>201</a>
-<a href=#202 id=202 data-nosnippet>202</a>		<span class="comment">// Shave " { update_op: " prefix.
-<a href=#203 id=203 data-nosnippet>203</a>		</span><span class="kw">const </span>SKIP_CHARS: <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str = <span class="string">" { update_op: "</span>;
-<a href=#204 id=204 data-nosnippet>204</a>		<span class="kw">if </span>SKIP_CHARS.len() &lt; event_params.len() {
-<a href=#205 id=205 data-nosnippet>205</a>			<span class="kw">if </span>SKIP_CHARS.eq_ignore_ascii_case(<span class="kw-2">&amp;</span>event_params[..SKIP_CHARS.len()]) {
-<a href=#206 id=206 data-nosnippet>206</a>				<span class="kw">return </span>bs58::decode(<span class="kw-2">&amp;</span>event_params[SKIP_CHARS.len()..].as_bytes()).into_vec().ok()
-<a href=#207 id=207 data-nosnippet>207</a>			}
-<a href=#208 id=208 data-nosnippet>208</a>		}
-<a href=#209 id=209 data-nosnippet>209</a>
-<a href=#210 id=210 data-nosnippet>210</a>		<span class="comment">// No event was parsed
-<a href=#211 id=211 data-nosnippet>211</a>		</span><span class="prelude-val">None
-<a href=#212 id=212 data-nosnippet>212</a>	</span>}
-<a href=#213 id=213 data-nosnippet>213</a>}
-<a href=#214 id=214 data-nosnippet>214</a>
-<a href=#215 id=215 data-nosnippet>215</a><span class="doccomment">/// Returns the custom profiling closure that we'll apply to the `LoggerBuilder`.
-<a href=#216 id=216 data-nosnippet>216</a></span><span class="kw">pub fn </span>logger_hook() -&gt; <span class="kw">impl </span>FnOnce(<span class="kw-2">&amp;mut </span>sc_cli::LoggerBuilder, <span class="kw-2">&amp;</span>sc_service::Configuration) -&gt; () {
-<a href=#217 id=217 data-nosnippet>217</a>	|logger_builder, config| {
-<a href=#218 id=218 data-nosnippet>218</a>		<span class="kw">if </span>config.prometheus_registry().is_none() {
-<a href=#219 id=219 data-nosnippet>219</a>			<span class="kw">return
-<a href=#220 id=220 data-nosnippet>220</a>		</span>}
-<a href=#221 id=221 data-nosnippet>221</a>		<span class="kw">let </span>registry = config.prometheus_registry().cloned().unwrap();
-<a href=#222 id=222 data-nosnippet>222</a>		<span class="kw">let </span>metrics_provider = RuntimeMetricsProvider::new(registry);
-<a href=#223 id=223 data-nosnippet>223</a>		parachain::register_metrics(<span class="kw-2">&amp;</span>metrics_provider);
-<a href=#224 id=224 data-nosnippet>224</a>		logger_builder.with_custom_profiling(Box::new(metrics_provider));
-<a href=#225 id=225 data-nosnippet>225</a>	}
-<a href=#226 id=226 data-nosnippet>226</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#187 id=187 data-nosnippet>187</a>			RuntimeMetricOp::IncrementCounterVec(value, <span class="kw-2">ref </span>labels) =&gt; {
+<a href=#188 id=188 data-nosnippet>188</a>				<span class="self">self</span>.inc_counter_vec_by(update.metric_name(), value, labels)
+<a href=#189 id=189 data-nosnippet>189</a>			},
+<a href=#190 id=190 data-nosnippet>190</a>			RuntimeMetricOp::IncrementCounter(value) =&gt; {
+<a href=#191 id=191 data-nosnippet>191</a>				<span class="self">self</span>.inc_counter_by(update.metric_name(), value)
+<a href=#192 id=192 data-nosnippet>192</a>			},
+<a href=#193 id=193 data-nosnippet>193</a>			RuntimeMetricOp::ObserveHistogram(value) =&gt; {
+<a href=#194 id=194 data-nosnippet>194</a>				<span class="self">self</span>.observe_histogram(update.metric_name(), value)
+<a href=#195 id=195 data-nosnippet>195</a>			},
+<a href=#196 id=196 data-nosnippet>196</a>		}
+<a href=#197 id=197 data-nosnippet>197</a>	}
+<a href=#198 id=198 data-nosnippet>198</a>
+<a href=#199 id=199 data-nosnippet>199</a>	<span class="comment">// Returns the `bs58` encoded metric update operation.
+<a href=#200 id=200 data-nosnippet>200</a>	</span><span class="kw">fn </span>parse_event_params(event_params: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt; {
+<a href=#201 id=201 data-nosnippet>201</a>		<span class="comment">// Shave " }" suffix.
+<a href=#202 id=202 data-nosnippet>202</a>		</span><span class="kw">let </span>new_len = event_params.len().saturating_sub(<span class="number">2</span>);
+<a href=#203 id=203 data-nosnippet>203</a>		<span class="kw">let </span>event_params = <span class="kw-2">&amp;</span>event_params[..new_len];
+<a href=#204 id=204 data-nosnippet>204</a>
+<a href=#205 id=205 data-nosnippet>205</a>		<span class="comment">// Shave " { update_op: " prefix.
+<a href=#206 id=206 data-nosnippet>206</a>		</span><span class="kw">const </span>SKIP_CHARS: <span class="kw-2">&amp;</span><span class="lifetime">'static </span>str = <span class="string">" { update_op: "</span>;
+<a href=#207 id=207 data-nosnippet>207</a>		<span class="kw">if </span>SKIP_CHARS.len() &lt; event_params.len() {
+<a href=#208 id=208 data-nosnippet>208</a>			<span class="kw">if </span>SKIP_CHARS.eq_ignore_ascii_case(<span class="kw-2">&amp;</span>event_params[..SKIP_CHARS.len()]) {
+<a href=#209 id=209 data-nosnippet>209</a>				<span class="kw">return </span>bs58::decode(<span class="kw-2">&amp;</span>event_params[SKIP_CHARS.len()..].as_bytes()).into_vec().ok();
+<a href=#210 id=210 data-nosnippet>210</a>			}
+<a href=#211 id=211 data-nosnippet>211</a>		}
+<a href=#212 id=212 data-nosnippet>212</a>
+<a href=#213 id=213 data-nosnippet>213</a>		<span class="comment">// No event was parsed
+<a href=#214 id=214 data-nosnippet>214</a>		</span><span class="prelude-val">None
+<a href=#215 id=215 data-nosnippet>215</a>	</span>}
+<a href=#216 id=216 data-nosnippet>216</a>}
+<a href=#217 id=217 data-nosnippet>217</a>
+<a href=#218 id=218 data-nosnippet>218</a><span class="doccomment">/// Returns the custom profiling closure that we'll apply to the `LoggerBuilder`.
+<a href=#219 id=219 data-nosnippet>219</a></span><span class="kw">pub fn </span>logger_hook() -&gt; <span class="kw">impl </span>FnOnce(<span class="kw-2">&amp;mut </span>sc_cli::LoggerBuilder, <span class="kw-2">&amp;</span>sc_service::Configuration) -&gt; () {
+<a href=#220 id=220 data-nosnippet>220</a>	|logger_builder, config| {
+<a href=#221 id=221 data-nosnippet>221</a>		<span class="kw">if </span>config.prometheus_registry().is_none() {
+<a href=#222 id=222 data-nosnippet>222</a>			<span class="kw">return</span>;
+<a href=#223 id=223 data-nosnippet>223</a>		}
+<a href=#224 id=224 data-nosnippet>224</a>		<span class="kw">let </span>registry = config.prometheus_registry().cloned().unwrap();
+<a href=#225 id=225 data-nosnippet>225</a>		<span class="kw">let </span>metrics_provider = RuntimeMetricsProvider::new(registry);
+<a href=#226 id=226 data-nosnippet>226</a>		parachain::register_metrics(<span class="kw-2">&amp;</span>metrics_provider);
+<a href=#227 id=227 data-nosnippet>227</a>		logger_builder.with_custom_profiling(Box::new(metrics_provider));
+<a href=#228 id=228 data-nosnippet>228</a>	}
+<a href=#229 id=229 data-nosnippet>229</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

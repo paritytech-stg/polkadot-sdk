@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/relays/messages/src/message_lane_loop.rs`."><title>message_lane_loop.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/relays/messages/src/message_lane_loop.rs`."><title>message_lane_loop.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="messages_relay" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="messages_relay" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">messages_relay/</div>message_lane_loop.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">messages_relay/</div>message_lane_loop.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Parity Bridges Common.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Parity Bridges Common is free software: you can redistribute it and/or modify
@@ -543,7 +543,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#393 id=393 data-nosnippet>393</a>						}
 <a href=#394 id=394 data-nosnippet>394</a>					},
 <a href=#395 id=395 data-nosnippet>395</a>					<span class="kw-2">&amp;mut </span>source_go_offline_future,
-<a href=#396 id=396 data-nosnippet>396</a>					async_std::task::sleep,
+<a href=#396 id=396 data-nosnippet>396</a>					tokio::time::sleep,
 <a href=#397 id=397 data-nosnippet>397</a>					|| <span class="macro">format!</span>(<span class="string">"Error retrieving state from {} node"</span>, P::SOURCE_NAME),
 <a href=#398 id=398 data-nosnippet>398</a>				).fail_if_connection_error(FailedClient::Source)<span class="question-mark">?</span>;
 <a href=#399 id=399 data-nosnippet>399</a>			},
@@ -574,7 +574,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#424 id=424 data-nosnippet>424</a>						}
 <a href=#425 id=425 data-nosnippet>425</a>					},
 <a href=#426 id=426 data-nosnippet>426</a>					<span class="kw-2">&amp;mut </span>target_go_offline_future,
-<a href=#427 id=427 data-nosnippet>427</a>					async_std::task::sleep,
+<a href=#427 id=427 data-nosnippet>427</a>					tokio::time::sleep,
 <a href=#428 id=428 data-nosnippet>428</a>					|| <span class="macro">format!</span>(<span class="string">"Error retrieving state from {} node"</span>, P::TARGET_NAME),
 <a href=#429 id=429 data-nosnippet>429</a>				).fail_if_connection_error(FailedClient::Target)<span class="question-mark">?</span>;
 <a href=#430 id=430 data-nosnippet>430</a>			},
@@ -855,7 +855,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#705 id=705 data-nosnippet>705</a>			<span class="kw">let </span><span class="kw-2">mut </span>data = <span class="self">self</span>.data.lock();
 <a href=#706 id=706 data-nosnippet>706</a>			(<span class="self">self</span>.tick)(<span class="kw-2">&amp;mut </span>data);
 <a href=#707 id=707 data-nosnippet>707</a>			<span class="kw">if </span>data.is_source_fails {
-<a href=#708 id=708 data-nosnippet>708</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError)
+<a href=#708 id=708 data-nosnippet>708</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError);
 <a href=#709 id=709 data-nosnippet>709</a>			}
 <a href=#710 id=710 data-nosnippet>710</a>			(<span class="self">self</span>.post_tick)(<span class="kw-2">&amp;mut </span>data);
 <a href=#711 id=711 data-nosnippet>711</a>			<span class="prelude-val">Ok</span>(data.source_state.clone())
@@ -868,7 +868,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#718 id=718 data-nosnippet>718</a>			<span class="kw">let </span><span class="kw-2">mut </span>data = <span class="self">self</span>.data.lock();
 <a href=#719 id=719 data-nosnippet>719</a>			(<span class="self">self</span>.tick)(<span class="kw-2">&amp;mut </span>data);
 <a href=#720 id=720 data-nosnippet>720</a>			<span class="kw">if </span>data.is_source_fails {
-<a href=#721 id=721 data-nosnippet>721</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError)
+<a href=#721 id=721 data-nosnippet>721</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError);
 <a href=#722 id=722 data-nosnippet>722</a>			}
 <a href=#723 id=723 data-nosnippet>723</a>			(<span class="self">self</span>.post_tick)(<span class="kw-2">&amp;mut </span>data);
 <a href=#724 id=724 data-nosnippet>724</a>			<span class="prelude-val">Ok</span>((id, data.source_latest_generated_nonce))
@@ -1000,7 +1000,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#850 id=850 data-nosnippet>850</a>			<span class="kw">let </span><span class="kw-2">mut </span>data = <span class="self">self</span>.data.lock();
 <a href=#851 id=851 data-nosnippet>851</a>			(<span class="self">self</span>.tick)(<span class="kw-2">&amp;mut </span>data);
 <a href=#852 id=852 data-nosnippet>852</a>			<span class="kw">if </span>data.is_target_fails {
-<a href=#853 id=853 data-nosnippet>853</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError)
+<a href=#853 id=853 data-nosnippet>853</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError);
 <a href=#854 id=854 data-nosnippet>854</a>			}
 <a href=#855 id=855 data-nosnippet>855</a>			(<span class="self">self</span>.post_tick)(<span class="kw-2">&amp;mut </span>data);
 <a href=#856 id=856 data-nosnippet>856</a>			<span class="prelude-val">Ok</span>(data.target_state.clone())
@@ -1013,7 +1013,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#863 id=863 data-nosnippet>863</a>			<span class="kw">let </span><span class="kw-2">mut </span>data = <span class="self">self</span>.data.lock();
 <a href=#864 id=864 data-nosnippet>864</a>			(<span class="self">self</span>.tick)(<span class="kw-2">&amp;mut </span>data);
 <a href=#865 id=865 data-nosnippet>865</a>			<span class="kw">if </span>data.is_target_fails {
-<a href=#866 id=866 data-nosnippet>866</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError)
+<a href=#866 id=866 data-nosnippet>866</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError);
 <a href=#867 id=867 data-nosnippet>867</a>			}
 <a href=#868 id=868 data-nosnippet>868</a>			(<span class="self">self</span>.post_tick)(<span class="kw-2">&amp;mut </span>data);
 <a href=#869 id=869 data-nosnippet>869</a>			<span class="prelude-val">Ok</span>((id, data.target_latest_received_nonce))
@@ -1041,7 +1041,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#891 id=891 data-nosnippet>891</a>			<span class="kw">let </span><span class="kw-2">mut </span>data = <span class="self">self</span>.data.lock();
 <a href=#892 id=892 data-nosnippet>892</a>			(<span class="self">self</span>.tick)(<span class="kw-2">&amp;mut </span>data);
 <a href=#893 id=893 data-nosnippet>893</a>			<span class="kw">if </span>data.is_target_fails {
-<a href=#894 id=894 data-nosnippet>894</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError)
+<a href=#894 id=894 data-nosnippet>894</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError);
 <a href=#895 id=895 data-nosnippet>895</a>			}
 <a href=#896 id=896 data-nosnippet>896</a>			(<span class="self">self</span>.post_tick)(<span class="kw-2">&amp;mut </span>data);
 <a href=#897 id=897 data-nosnippet>897</a>			<span class="prelude-val">Ok</span>((id, data.target_latest_confirmed_received_nonce))
@@ -1064,7 +1064,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#914 id=914 data-nosnippet>914</a>			<span class="kw">let </span><span class="kw-2">mut </span>data = <span class="self">self</span>.data.lock();
 <a href=#915 id=915 data-nosnippet>915</a>			(<span class="self">self</span>.tick)(<span class="kw-2">&amp;mut </span>data);
 <a href=#916 id=916 data-nosnippet>916</a>			<span class="kw">if </span>data.is_target_fails {
-<a href=#917 id=917 data-nosnippet>917</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError)
+<a href=#917 id=917 data-nosnippet>917</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(TestError);
 <a href=#918 id=918 data-nosnippet>918</a>			}
 <a href=#919 id=919 data-nosnippet>919</a>			data.receive_messages(maybe_batch_tx, proof);
 <a href=#920 id=920 data-nosnippet>920</a>			(<span class="self">self</span>.post_tick)(<span class="kw-2">&amp;mut </span>data);
@@ -1099,7 +1099,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#949 id=949 data-nosnippet>949</a>		target_post_tick: Arc&lt;<span class="kw">dyn </span>Fn(<span class="kw-2">&amp;mut </span>TestClientData) + Send + Sync&gt;,
 <a href=#950 id=950 data-nosnippet>950</a>		exit_signal: <span class="kw">impl </span>Future&lt;Output = ()&gt; + <span class="lifetime">'static </span>+ Send,
 <a href=#951 id=951 data-nosnippet>951</a>	) -&gt; TestClientData {
-<a href=#952 id=952 data-nosnippet>952</a>		async_std::task::block_on(<span class="kw">async </span>{
+<a href=#952 id=952 data-nosnippet>952</a>		tokio::runtime::Runtime::new().unwrap().block_on(<span class="kw">async </span>{
 <a href=#953 id=953 data-nosnippet>953</a>			<span class="kw">let </span>source_client = TestSourceClient {
 <a href=#954 id=954 data-nosnippet>954</a>				data: data.clone(),
 <a href=#955 id=955 data-nosnippet>955</a>				tick: source_tick,
@@ -1218,7 +1218,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1068 id=1068 data-nosnippet>1068</a>				data.source_state.best_finalized_self = data.source_state.best_self;
 <a href=#1069 id=1069 data-nosnippet>1069</a>				<span class="comment">// syncing target headers -&gt; source chain
 <a href=#1070 id=1070 data-nosnippet>1070</a>				</span><span class="kw">if let </span><span class="prelude-val">Some</span>(last_requirement) = data.target_to_source_header_requirements.last() {
-<a href=#1071 id=1071 data-nosnippet>1071</a>					<span class="kw">if </span><span class="kw-2">*</span>last_requirement !=
+<a href=#1071 id=1071 data-nosnippet>1071</a>					<span class="kw">if </span><span class="kw-2">*</span><span class="macro">last_requirement !</span>=
 <a href=#1072 id=1072 data-nosnippet>1072</a>						data.source_state.best_finalized_peer_at_best_self.unwrap()
 <a href=#1073 id=1073 data-nosnippet>1073</a>					{
 <a href=#1074 id=1074 data-nosnippet>1074</a>						data.source_state.best_finalized_peer_at_best_self =
@@ -1241,7 +1241,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1091 id=1091 data-nosnippet>1091</a>				data.target_state.best_finalized_self = data.target_state.best_self;
 <a href=#1092 id=1092 data-nosnippet>1092</a>				<span class="comment">// syncing source headers -&gt; target chain
 <a href=#1093 id=1093 data-nosnippet>1093</a>				</span><span class="kw">if let </span><span class="prelude-val">Some</span>(last_requirement) = data.source_to_target_header_requirements.last() {
-<a href=#1094 id=1094 data-nosnippet>1094</a>					<span class="kw">if </span><span class="kw-2">*</span>last_requirement !=
+<a href=#1094 id=1094 data-nosnippet>1094</a>					<span class="kw">if </span><span class="kw-2">*</span><span class="macro">last_requirement !</span>=
 <a href=#1095 id=1095 data-nosnippet>1095</a>						data.target_state.best_finalized_peer_at_best_self.unwrap()
 <a href=#1096 id=1096 data-nosnippet>1096</a>					{
 <a href=#1097 id=1097 data-nosnippet>1097</a>						data.target_state.best_finalized_peer_at_best_self =
@@ -1305,7 +1305,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1155 id=1155 data-nosnippet>1155</a>				}
 <a href=#1156 id=1156 data-nosnippet>1156</a>				<span class="comment">// syncing target headers -&gt; source chain
 <a href=#1157 id=1157 data-nosnippet>1157</a>				</span><span class="kw">if let </span><span class="prelude-val">Some</span>(last_requirement) = data.target_to_source_header_requirements.last() {
-<a href=#1158 id=1158 data-nosnippet>1158</a>					<span class="kw">if </span><span class="kw-2">*</span>last_requirement !=
+<a href=#1158 id=1158 data-nosnippet>1158</a>					<span class="kw">if </span><span class="kw-2">*</span><span class="macro">last_requirement !</span>=
 <a href=#1159 id=1159 data-nosnippet>1159</a>						data.source_state.best_finalized_peer_at_best_self.unwrap()
 <a href=#1160 id=1160 data-nosnippet>1160</a>					{
 <a href=#1161 id=1161 data-nosnippet>1161</a>						data.source_state.best_finalized_peer_at_best_self =
@@ -1329,7 +1329,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1179 id=1179 data-nosnippet>1179</a>				}
 <a href=#1180 id=1180 data-nosnippet>1180</a>				<span class="comment">// syncing source headers -&gt; target chain
 <a href=#1181 id=1181 data-nosnippet>1181</a>				</span><span class="kw">if let </span><span class="prelude-val">Some</span>(last_requirement) = data.source_to_target_header_requirements.last() {
-<a href=#1182 id=1182 data-nosnippet>1182</a>					<span class="kw">if </span><span class="kw-2">*</span>last_requirement !=
+<a href=#1182 id=1182 data-nosnippet>1182</a>					<span class="kw">if </span><span class="kw-2">*</span><span class="macro">last_requirement !</span>=
 <a href=#1183 id=1183 data-nosnippet>1183</a>						data.target_state.best_finalized_peer_at_best_self.unwrap()
 <a href=#1184 id=1184 data-nosnippet>1184</a>					{
 <a href=#1185 id=1185 data-nosnippet>1185</a>						data.target_state.best_finalized_peer_at_best_self =
@@ -1461,7 +1461,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1311 id=1311 data-nosnippet>1311</a>		)))
 <a href=#1312 id=1312 data-nosnippet>1312</a>		.is_ok());
 <a href=#1313 id=1313 data-nosnippet>1313</a>	}
-<a href=#1314 id=1314 data-nosnippet>1314</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#1314 id=1314 data-nosnippet>1314</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

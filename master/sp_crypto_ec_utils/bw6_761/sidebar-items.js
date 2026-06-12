@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["g1","g2","host_calls"],"struct":["HostHooks"],"type":["BW6_761","Config"]};
+window.SIDEBAR_ITEMS = {"mod":["host_calls"],"struct":["HostHooks"],"type":["BW6_761","Config","G1Affine","G1Config","G1Prepared","G1Projective","G2Affine","G2Config","G2Prepared","G2Projective","ScalarField","TargetField"]};

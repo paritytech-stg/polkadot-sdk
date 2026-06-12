@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["Call"],"mod":["migration","pallet"],"struct":["AllowedRelayParentsTracker","Pallet","RelayParentInfo"],"trait":["Config"],"type":["ActiveValidatorIndices","ActiveValidatorKeys","CurrentSessionIndex","Module"]};
+window.SIDEBAR_ITEMS = {"enum":["Call"],"mod":["migration","pallet"],"struct":["AllowedSchedulingParentsTracker","Pallet","SchedulingParentInfo"],"trait":["Config"],"type":["ActiveValidatorIndices","ActiveValidatorKeys","CurrentSessionIndex","Module"]};

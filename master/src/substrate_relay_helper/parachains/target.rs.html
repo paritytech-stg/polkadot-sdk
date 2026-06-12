@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/relays/lib-substrate-relay/src/parachains/target.rs`."><title>target.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/relays/lib-substrate-relay/src/parachains/target.rs`."><title>target.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="substrate_relay_helper" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="substrate_relay_helper" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">substrate_relay_helper/parachains/</div>target.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">substrate_relay_helper/parachains/</div>target.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Parity Bridges Common.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Parity Bridges Common is free software: you can redistribute it and/or modify
@@ -347,40 +347,42 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#197 id=197 data-nosnippet>197</a>		<span class="kw">let </span>storage_value: <span class="prelude-ty">Option</span>&lt;ParaStoredHeaderData&gt; =
 <a href=#198 id=198 data-nosnippet>198</a>			<span class="self">self</span>.target_client.storage_value(at_block.hash(), storage_key).<span class="kw">await</span><span class="question-mark">?</span>;
 <a href=#199 id=199 data-nosnippet>199</a>		<span class="kw">let </span>para_head_number = <span class="kw">match </span>storage_value {
-<a href=#200 id=200 data-nosnippet>200</a>			<span class="prelude-val">Some</span>(para_head_data) =&gt;
-<a href=#201 id=201 data-nosnippet>201</a>				para_head_data.decode_parachain_head_data::&lt;P::SourceParachain&gt;()<span class="question-mark">?</span>.number,
-<a href=#202 id=202 data-nosnippet>202</a>			<span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
-<a href=#203 id=203 data-nosnippet>203</a>		};
-<a href=#204 id=204 data-nosnippet>204</a>
-<a href=#205 id=205 data-nosnippet>205</a>		<span class="kw">let </span>para_head_id = HeaderId(para_head_number, para_info.best_head_hash.head_hash);
-<a href=#206 id=206 data-nosnippet>206</a>		<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>((relay_header_id, para_head_id)))
-<a href=#207 id=207 data-nosnippet>207</a>	}
-<a href=#208 id=208 data-nosnippet>208</a>
-<a href=#209 id=209 data-nosnippet>209</a>	<span class="kw">async fn </span>submit_parachain_head_proof(
-<a href=#210 id=210 data-nosnippet>210</a>		<span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#211 id=211 data-nosnippet>211</a>		at_relay_block: HeaderIdOf&lt;P::SourceRelayChain&gt;,
-<a href=#212 id=212 data-nosnippet>212</a>		updated_head_hash: ParaHash,
-<a href=#213 id=213 data-nosnippet>213</a>		proof: ParaHeadsProof,
-<a href=#214 id=214 data-nosnippet>214</a>		is_free_execution_expected: bool,
-<a href=#215 id=215 data-nosnippet>215</a>	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::TransactionTracker, <span class="self">Self</span>::Error&gt; {
-<a href=#216 id=216 data-nosnippet>216</a>		<span class="kw">let </span>transaction_params = <span class="self">self</span>.transaction_params.clone();
-<a href=#217 id=217 data-nosnippet>217</a>		<span class="kw">let </span>call = P::SubmitParachainHeadsCallBuilder::build_submit_parachain_heads_call(
-<a href=#218 id=218 data-nosnippet>218</a>			at_relay_block,
-<a href=#219 id=219 data-nosnippet>219</a>			<span class="macro">vec!</span>[(ParaId(P::SourceParachain::PARACHAIN_ID), updated_head_hash)],
-<a href=#220 id=220 data-nosnippet>220</a>			proof,
-<a href=#221 id=221 data-nosnippet>221</a>			is_free_execution_expected,
-<a href=#222 id=222 data-nosnippet>222</a>		);
-<a href=#223 id=223 data-nosnippet>223</a>		<span class="self">self</span>.target_client
-<a href=#224 id=224 data-nosnippet>224</a>			.submit_and_watch_signed_extrinsic(
-<a href=#225 id=225 data-nosnippet>225</a>				<span class="kw-2">&amp;</span>transaction_params.signer,
-<a href=#226 id=226 data-nosnippet>226</a>				<span class="kw">move </span>|best_block_id, transaction_nonce| {
-<a href=#227 id=227 data-nosnippet>227</a>					<span class="prelude-val">Ok</span>(UnsignedTransaction::new(call.into(), transaction_nonce)
-<a href=#228 id=228 data-nosnippet>228</a>						.era(TransactionEra::new(best_block_id, transaction_params.mortality)))
-<a href=#229 id=229 data-nosnippet>229</a>				},
-<a href=#230 id=230 data-nosnippet>230</a>			)
-<a href=#231 id=231 data-nosnippet>231</a>			.<span class="kw">await
-<a href=#232 id=232 data-nosnippet>232</a>	</span>}
-<a href=#233 id=233 data-nosnippet>233</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#200 id=200 data-nosnippet>200</a>			<span class="prelude-val">Some</span>(para_head_data) =&gt; {
+<a href=#201 id=201 data-nosnippet>201</a>				para_head_data.decode_parachain_head_data::&lt;P::SourceParachain&gt;()<span class="question-mark">?</span>.number
+<a href=#202 id=202 data-nosnippet>202</a>			},
+<a href=#203 id=203 data-nosnippet>203</a>			<span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
+<a href=#204 id=204 data-nosnippet>204</a>		};
+<a href=#205 id=205 data-nosnippet>205</a>
+<a href=#206 id=206 data-nosnippet>206</a>		<span class="kw">let </span>para_head_id = HeaderId(para_head_number, para_info.best_head_hash.head_hash);
+<a href=#207 id=207 data-nosnippet>207</a>		<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>((relay_header_id, para_head_id)))
+<a href=#208 id=208 data-nosnippet>208</a>	}
+<a href=#209 id=209 data-nosnippet>209</a>
+<a href=#210 id=210 data-nosnippet>210</a>	<span class="kw">async fn </span>submit_parachain_head_proof(
+<a href=#211 id=211 data-nosnippet>211</a>		<span class="kw-2">&amp;</span><span class="self">self</span>,
+<a href=#212 id=212 data-nosnippet>212</a>		at_relay_block: HeaderIdOf&lt;P::SourceRelayChain&gt;,
+<a href=#213 id=213 data-nosnippet>213</a>		updated_head_hash: ParaHash,
+<a href=#214 id=214 data-nosnippet>214</a>		proof: ParaHeadsProof,
+<a href=#215 id=215 data-nosnippet>215</a>		is_free_execution_expected: bool,
+<a href=#216 id=216 data-nosnippet>216</a>	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::TransactionTracker, <span class="self">Self</span>::Error&gt; {
+<a href=#217 id=217 data-nosnippet>217</a>		<span class="kw">let </span>transaction_params = <span class="self">self</span>.transaction_params.clone();
+<a href=#218 id=218 data-nosnippet>218</a>		<span class="kw">let </span>call = P::SubmitParachainHeadsCallBuilder::build_submit_parachain_heads_call(
+<a href=#219 id=219 data-nosnippet>219</a>			at_relay_block,
+<a href=#220 id=220 data-nosnippet>220</a>			<span class="macro">vec!</span>[(ParaId(P::SourceParachain::PARACHAIN_ID), updated_head_hash)],
+<a href=#221 id=221 data-nosnippet>221</a>			proof,
+<a href=#222 id=222 data-nosnippet>222</a>			is_free_execution_expected,
+<a href=#223 id=223 data-nosnippet>223</a>		);
+<a href=#224 id=224 data-nosnippet>224</a>		<span class="self">self</span>.target_client
+<a href=#225 id=225 data-nosnippet>225</a>			.submit_and_watch_signed_extrinsic(
+<a href=#226 id=226 data-nosnippet>226</a>				<span class="kw-2">&amp;</span>transaction_params.signer,
+<a href=#227 id=227 data-nosnippet>227</a>				<span class="kw">move </span>|best_block_id, transaction_nonce| {
+<a href=#228 id=228 data-nosnippet>228</a>					<span class="prelude-val">Ok</span>(UnsignedTransaction::new(call.into(), transaction_nonce)
+<a href=#229 id=229 data-nosnippet>229</a>						.era(TransactionEra::new(best_block_id, transaction_params.mortality)))
+<a href=#230 id=230 data-nosnippet>230</a>				},
+<a href=#231 id=231 data-nosnippet>231</a>			)
+<a href=#232 id=232 data-nosnippet>232</a>			.<span class="kw">await
+<a href=#233 id=233 data-nosnippet>233</a>	</span>}
+<a href=#234 id=234 data-nosnippet>234</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

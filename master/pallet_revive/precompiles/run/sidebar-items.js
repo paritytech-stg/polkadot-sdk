@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["precompile"],"struct":["CallSetup","Contract","H256","U256","VmBinaryModule"]};
+window.SIDEBAR_ITEMS = {"fn":["precompile"],"struct":["H256","U256"]};

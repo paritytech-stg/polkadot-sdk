@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="The `polkadot-omni-node` and its related binaries."><title>polkadot_sdk_docs::reference_docs::omni_node - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="The `polkadot-omni-node` and its related binaries."><title>polkadot_sdk_docs::reference_docs::omni_node - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="polkadot_sdk_docs" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="icon" href="https://polkadot.com/favicon.ico"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="polkadot_sdk_docs" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button><a class="logo-container" href="../../../polkadot_sdk_docs/index.html"><img src="https://raw.githubusercontent.com/paritytech/polkadot-sdk/master/docs/images/Polkadot_Logo_Horizontal_Pink_White.png" alt=""></a></nav><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../../polkadot_sdk_docs/index.html"><img src="https://raw.githubusercontent.com/paritytech/polkadot-sdk/master/docs/images/Polkadot_Logo_Horizontal_Pink_White.png" alt="logo"></a><h2><a href="../../../polkadot_sdk_docs/index.html">polkadot_<wbr>sdk_<wbr>docs</a><span class="version">0.0.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module omni_<wbr>node</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#omni-node" title="(Omni) Node">(Omni) Node</a><ul><li><a href="#node--runtime-interdependence" title="Node &#60;&#62; Runtime Interdependence">Node &lt;&gt; Runtime Interdependence</a></li><li><a href="#types-of-nodes" title="Types of Nodes">Types of Nodes</a></li><li><a href="#omnitools-user-journey" title="OmniTools: User Journey">OmniTools: User Journey</a></li><li><a href="#appendix" title="Appendix">Appendix</a></li></ul></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In polkadot_<wbr>sdk_<wbr>docs::<wbr>reference_<wbr>docs</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">polkadot_sdk_docs</a>::<wbr><a href="../index.html">reference_docs</a></div><h1>Module <span>omni_node</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/polkadot_sdk_docs/reference_docs/omni_node.rs.html#1-201">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The <a href="https://crates.io/crates/polkadot-omni-node"><code>polkadot-omni-node</code></a> and its related binaries.</p>
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Module omni_node</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><a class="logo-container" href="../../../polkadot_sdk_docs/index.html"><img src="https://raw.githubusercontent.com/paritytech/polkadot-sdk/master/docs/images/Polkadot_Logo_Horizontal_Pink_White.png" alt="logo"></a><h2><a href="../../../polkadot_sdk_docs/index.html">polkadot_<wbr>sdk_<wbr>docs</a><span class="version">0.0.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module omni_<wbr>node</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#omni-node" title="(Omni) Node">(Omni) Node</a><ul><li><a href="#node--runtime-interdependence" title="Node &#60;&#62; Runtime Interdependence">Node &lt;&gt; Runtime Interdependence</a></li><li><a href="#types-of-nodes" title="Types of Nodes">Types of Nodes</a></li><li><a href="#omnitools-user-journey" title="OmniTools: User Journey">OmniTools: User Journey</a></li><li><a href="#appendix" title="Appendix">Appendix</a></li></ul></li></ul></section><div id="rustdoc-modnav"><h2><a href="../index.html">In polkadot_<wbr>sdk_<wbr>docs::<wbr>reference_<wbr>docs</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../index.html">polkadot_sdk_docs</a>::<wbr><a href="../index.html">reference_docs</a></div><h1>Module <span>omni_<wbr>node</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../../src/polkadot_sdk_docs/reference_docs/omni_node.rs.html#1-201">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The <a href="https://crates.io/crates/polkadot-omni-node"><code>polkadot-omni-node</code></a> and its related binaries.</p>
 <h2 id="omni-node"><a class="doc-anchor" href="#omni-node">§</a>(Omni) Node</h2>
 <p>This reference doc elaborates on what a Polkadot-SDK/Substrate node software is, and what
 various ways exist to run one.</p>
@@ -160,7 +160,7 @@ examples of this source.</p>
 <blockquote>
 <p>Note: A typical node also contains a lot of other tools (exposed as subcommands) that are
 useful for operating a blockchain, such as the ones noted in
-<a href="../../../polkadot_omni_node_lib/cli/struct.Cli.html#structfield.subcommand" title="field polkadot_omni_node_lib::cli::Cli::subcommand"><code>polkadot_omni_node_lib::cli::Cli::subcommand</code></a>.</p>
+[<code>polkadot_omni_node_lib::cli::Cli::subcommand</code>].</p>
 </blockquote>
 <h3 id="node--runtime-interdependence"><a class="doc-anchor" href="#node--runtime-interdependence">§</a>Node &lt;&gt; Runtime Interdependence</h3>
 <p>While in principle the node can be mostly independent of the runtime, for various reasons, such
@@ -184,7 +184,7 @@ twofold :</p>
 <li>provide a cleaner abstraction for creating a custom node.</li>
 </ol>
 <p>While a single omni-node running <em>all possible runtimes</em> is not feasible, the
-<a href="https://crates.io/crates/polkadot-omni-node"><code>polkadot-omni-node</code></a> is an attempt at creating the former, and the <a href="../../../polkadot_omni_node_lib/index.html" title="mod polkadot_omni_node_lib"><code>polkadot_omni_node_lib</code></a>
+<a href="https://crates.io/crates/polkadot-omni-node"><code>polkadot-omni-node</code></a> is an attempt at creating the former, and the [<code>polkadot_omni_node_lib</code>]
 is the latter.</p>
 <blockquote>
 <p>Note: The OmniNodes are mainly focused on the development needs of <strong>Polkadot
@@ -200,8 +200,8 @@ capable of meeting the needs of most Polkadot parachains.</p>
 <p>It can act as the collator of a parachain in production, with all the related auxillary
 functionalities that a normal collator node has: RPC server, archiving state, etc. Moreover, it
 can also run the wasm blob of the parachain locally for testing and development.</p>
-<h4 id="polkadot_omni_node_lib"><a class="doc-anchor" href="#polkadot_omni_node_lib">§</a><a href="../../../polkadot_omni_node_lib/index.html" title="mod polkadot_omni_node_lib"><code>polkadot_omni_node_lib</code></a></h4>
-<p><a href="../../../polkadot_omni_node_lib/index.html" title="mod polkadot_omni_node_lib"><code>polkadot_omni_node_lib</code></a> is the library version of the above, which can be used to create a
+<h4 id="polkadot_omni_node_lib"><a class="doc-anchor" href="#polkadot_omni_node_lib">§</a>[<code>polkadot_omni_node_lib</code>]</h4>
+<p>[<code>polkadot_omni_node_lib</code>] is the library version of the above, which can be used to create a
 fresh parachain node, with a some limited configuration options using a lean API.</p>
 <h4 id="old-school-nodes"><a class="doc-anchor" href="#old-school-nodes">§</a>Old School Nodes</h4>
 <p>The existing node architecture, as seen in the <a href="../../polkadot_sdk/templates/index.html" title="mod polkadot_sdk_docs::polkadot_sdk::templates"><code>templates</code></a>, is still available for those who
@@ -213,10 +213,10 @@ deploy a parachain into 3 categories:</p>
 <li><strong>Use the <a href="https://crates.io/crates/polkadot-omni-node"><code>polkadot-omni-node</code></a></strong>: This is the easiest way to get started, and is the most
 likely to be the best choice for most users.
 <ul>
-<li>can run almost any runtime with <a href="../../../polkadot_omni_node_lib/cli/struct.Cli.html#structfield.dev_block_time" title="field polkadot_omni_node_lib::cli::Cli::dev_block_time"><code>--dev-block-time</code></a></li>
+<li>can run almost any runtime with <a href="polkadot_omni_node_lib::cli::Cli::dev_block_time"><code>--dev-block-time</code></a></li>
 </ul>
 </li>
-<li><strong>Use the <a href="../../../polkadot_omni_node_lib/index.html" title="mod polkadot_omni_node_lib"><code>polkadot_omni_node_lib</code></a></strong>: This is the best choice for those who want to have
+<li><strong>Use the [<code>polkadot_omni_node_lib</code>]</strong>: This is the best choice for those who want to have
 slightly more control over the node software, such as embedding a custom chain-spec.</li>
 <li><strong>Use the old school nodes</strong>: This is the best choice for those who want to have full control
 over the node software, such as changing the consensus engine, altering the transaction pool,
@@ -248,7 +248,7 @@ or for production. References:
 </li>
 <li>For local development, the following options are available:
 <ul>
-<li><code>polkadot-omni-node</code> (notably, with <a href="../../../polkadot_omni_node_lib/cli/struct.Cli.html#structfield.dev_block_time" title="field polkadot_omni_node_lib::cli::Cli::dev_block_time"><code>--dev-block-time</code></a>). References:
+<li><code>polkadot-omni-node</code> (notably, with <a href="polkadot_omni_node_lib::cli::Cli::dev_block_time"><code>--dev-block-time</code></a>). References:
 <ul>
 <li><a href="../../guides/your_first_node/index.html" title="mod polkadot_sdk_docs::guides::your_first_node"><code>crate::guides::your_first_node</code></a></li>
 </ul>
@@ -261,7 +261,7 @@ or for production. References:
 </ul>
 </li>
 <li>For production <code>polkadot-omni-node</code> can be used out of the box.</li>
-<li>For further customization <a href="../../../polkadot_omni_node_lib/index.html" title="mod polkadot_omni_node_lib"><code>polkadot_omni_node_lib</code></a> can be used.</li>
+<li>For further customization [<code>polkadot_omni_node_lib</code>] can be used.</li>
 </ul>
 <h3 id="appendix"><a class="doc-anchor" href="#appendix">§</a>Appendix</h3>
 <p>This section describes how the interdependence between the node and the runtime is related to
@@ -275,7 +275,7 @@ the runtime also typically needs to expose a custom runtime-api to enable the pa
 consensus engine to work, and that particular runtime-api is implemented by a pallet
 corresponding to that consensus engine.</p>
 <p>For example, taking a snippet from <a href="../../../solochain_template_runtime/index.html" title="mod solochain_template_runtime"><code>solochain_template_runtime</code></a>, the runtime has to provide
-this additional runtime-api (compared to <a href="../../../minimal_template_runtime/index.html" title="mod minimal_template_runtime"><code>minimal_template_runtime</code></a>), if the node software is
+this additional runtime-api (compared to [<code>minimal_template_runtime</code>]), if the node software is
 configured to use the Aura consensus engine:</p>
 <div class="example-wrap"><pre class="language-text"><code>impl sp_consensus_aura::AuraApi&lt;Block, AuraId&gt; for Runtime {
     fn slot_duration() -&gt; sp_consensus_aura::SlotDuration {
@@ -294,14 +294,14 @@ configured to use the Aura consensus engine:</p>
 <ul>
 <li>[<code>sc_consensus_manual_seal</code>]: Useful for testing, where any node can produce a block at any
 time. This is often combined with a fixed interval at which a block is produced.</li>
-<li><a href="../../../sc_consensus_aura/index.html" title="mod sc_consensus_aura"><code>sc_consensus_aura</code></a>/<a href="../../../pallet_aura/index.html" title="mod pallet_aura"><code>pallet_aura</code></a>: A simple round-robin block authoring mechanism.</li>
-<li><a href="../../../sc_consensus_babe/index.html" title="mod sc_consensus_babe"><code>sc_consensus_babe</code></a>/<a href="../../../pallet_babe/index.html" title="mod pallet_babe"><code>pallet_babe</code></a>: A more advanced block authoring mechanism, capable of
+<li>[<code>sc_consensus_aura</code>]/<a href="../../../pallet_aura/index.html" title="mod pallet_aura"><code>pallet_aura</code></a>: A simple round-robin block authoring mechanism.</li>
+<li>[<code>sc_consensus_babe</code>]/<a href="../../../pallet_babe/index.html" title="mod pallet_babe"><code>pallet_babe</code></a>: A more advanced block authoring mechanism, capable of
 anonymizing the next block author.</li>
 <li>[<code>sc_consensus_pow</code>]: Proof of Work block authoring.</li>
 </ul>
 <p>For finality, there is one main option shipped with polkadot-sdk:</p>
 <ul>
-<li><a href="../../../sc_consensus_grandpa/index.html" title="mod sc_consensus_grandpa"><code>sc_consensus_grandpa</code></a>/<a href="../../../pallet_grandpa/index.html" title="mod pallet_grandpa"><code>pallet_grandpa</code></a>: A finality gadget that uses a voting mechanism to
+<li>[<code>sc_consensus_grandpa</code>]/<a href="../../../pallet_grandpa/index.html" title="mod pallet_grandpa"><code>pallet_grandpa</code></a>: A finality gadget that uses a voting mechanism to
 decide when a block</li>
 </ul>
 <p><strong>The most important lesson here is that the node and the runtime must have matching consensus
@@ -312,9 +312,9 @@ consensus system used in the runtime, and be aware if it is matching that of the
 not. For the time being, <a href="https://crates.io/crates/polkadot-omni-node"><code>polkadot-omni-node</code></a> only supports:</p>
 <ul>
 <li>Parachain-based Aura consensus, with 6s async-backing block-time, and before full elastic
-scaling). <a href="../../../polkadot_omni_node_lib/cli/struct.Cli.html#structfield.experimental_use_slot_based" title="field polkadot_omni_node_lib::cli::Cli::experimental_use_slot_based"><code>polkadot_omni_node_lib::cli::Cli::experimental_use_slot_based</code></a> for fixed factor
+scaling). [<code>polkadot_omni_node_lib::cli::Cli::experimental_use_slot_based</code>] for fixed factor
 scaling (a step</li>
-<li>Ability to run any runtime with <a href="../../../polkadot_omni_node_lib/cli/struct.Cli.html#structfield.dev_block_time" title="field polkadot_omni_node_lib::cli::Cli::dev_block_time"><code>--dev-block-time</code></a> flag. This uses
+<li>Ability to run any runtime with <a href="polkadot_omni_node_lib::cli::Cli::dev_block_time"><code>--dev-block-time</code></a> flag. This uses
 [<code>sc_consensus_manual_seal</code>] under the hood, and has no restrictions on the runtime’s
 consensus.</li>
 </ul>

@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/modules/messages/src/outbound_lane.rs`."><title>outbound_lane.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/modules/messages/src/outbound_lane.rs`."><title>outbound_lane.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_bridge_messages" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_bridge_messages" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_bridge_messages/</div>outbound_lane.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_bridge_messages/</div>outbound_lane.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Parity Bridges Common.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Parity Bridges Common is free software: you can redistribute it and/or modify
@@ -292,10 +292,10 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#142 id=142 data-nosnippet>142</a>			end: latest_delivered_nonce,
 <a href=#143 id=143 data-nosnippet>143</a>		};
 <a href=#144 id=144 data-nosnippet>144</a>		<span class="kw">if </span>confirmed_messages.total_messages() == <span class="number">0 </span>{
-<a href=#145 id=145 data-nosnippet>145</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
+<a href=#145 id=145 data-nosnippet>145</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
 <a href=#146 id=146 data-nosnippet>146</a>		}
 <a href=#147 id=147 data-nosnippet>147</a>		<span class="kw">if </span>confirmed_messages.end &gt; data.latest_generated_nonce {
-<a href=#148 id=148 data-nosnippet>148</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ReceptionConfirmationError::FailedToConfirmFutureMessages)
+<a href=#148 id=148 data-nosnippet>148</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ReceptionConfirmationError::FailedToConfirmFutureMessages);
 <a href=#149 id=149 data-nosnippet>149</a>		}
 <a href=#150 id=150 data-nosnippet>150</a>		<span class="kw">if </span>confirmed_messages.total_messages() &gt; max_allowed_messages {
 <a href=#151 id=151 data-nosnippet>151</a>			<span class="comment">// that the relayer has declared correct number of messages that the proof contains (it
@@ -309,7 +309,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#159 id=159 data-nosnippet>159</a>				max_allowed=%max_allowed_messages,
 <a href=#160 id=160 data-nosnippet>160</a>				<span class="string">"Messages delivery proof contains too many messages to confirm"
 <a href=#161 id=161 data-nosnippet>161</a>			</span>);
-<a href=#162 id=162 data-nosnippet>162</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ReceptionConfirmationError::TryingToConfirmMoreMessagesThanExpected)
+<a href=#162 id=162 data-nosnippet>162</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ReceptionConfirmationError::TryingToConfirmMoreMessagesThanExpected);
 <a href=#163 id=163 data-nosnippet>163</a>		}
 <a href=#164 id=164 data-nosnippet>164</a>
 <a href=#165 id=165 data-nosnippet>165</a>		ensure_unrewarded_relayers_are_correct(confirmed_messages.end, relayers)<span class="question-mark">?</span>;
@@ -353,18 +353,18 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#203 id=203 data-nosnippet>203</a>		<span class="comment">// unrewarded relayer entry must have at least 1 unconfirmed message
 <a href=#204 id=204 data-nosnippet>204</a>		// (guaranteed by the `InboundLane::receive_message()`)
 <a href=#205 id=205 data-nosnippet>205</a>		</span><span class="kw">if </span>entry.messages.end &lt; entry.messages.begin {
-<a href=#206 id=206 data-nosnippet>206</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ReceptionConfirmationError::EmptyUnrewardedRelayerEntry)
+<a href=#206 id=206 data-nosnippet>206</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ReceptionConfirmationError::EmptyUnrewardedRelayerEntry);
 <a href=#207 id=207 data-nosnippet>207</a>		}
 <a href=#208 id=208 data-nosnippet>208</a>		<span class="comment">// every entry must confirm range of messages that follows previous entry range
 <a href=#209 id=209 data-nosnippet>209</a>		// (guaranteed by the `InboundLane::receive_message()`)
-<a href=#210 id=210 data-nosnippet>210</a>		</span><span class="kw">if </span>expected_entry_begin != <span class="prelude-val">Some</span>(entry.messages.begin) {
-<a href=#211 id=211 data-nosnippet>211</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ReceptionConfirmationError::NonConsecutiveUnrewardedRelayerEntries)
+<a href=#210 id=210 data-nosnippet>210</a>		</span><span class="kw">if </span><span class="macro">expected_entry_begin !</span>= <span class="prelude-val">Some</span>(entry.messages.begin) {
+<a href=#211 id=211 data-nosnippet>211</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ReceptionConfirmationError::NonConsecutiveUnrewardedRelayerEntries);
 <a href=#212 id=212 data-nosnippet>212</a>		}
 <a href=#213 id=213 data-nosnippet>213</a>		expected_entry_begin = entry.messages.end.checked_add(<span class="number">1</span>);
 <a href=#214 id=214 data-nosnippet>214</a>		<span class="comment">// entry can't confirm messages larger than `inbound_lane_data.latest_received_nonce()`
 <a href=#215 id=215 data-nosnippet>215</a>		// (guaranteed by the `InboundLane::receive_message()`)
 <a href=#216 id=216 data-nosnippet>216</a>		</span><span class="kw">if </span>entry.messages.end &gt; latest_received_nonce {
-<a href=#217 id=217 data-nosnippet>217</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ReceptionConfirmationError::FailedToConfirmFutureMessages)
+<a href=#217 id=217 data-nosnippet>217</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(ReceptionConfirmationError::FailedToConfirmFutureMessages);
 <a href=#218 id=218 data-nosnippet>218</a>		}
 <a href=#219 id=219 data-nosnippet>219</a>	}
 <a href=#220 id=220 data-nosnippet>220</a>
@@ -574,7 +574,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#424 id=424 data-nosnippet>424</a>			);
 <a href=#425 id=425 data-nosnippet>425</a>		});
 <a href=#426 id=426 data-nosnippet>426</a>	}
-<a href=#427 id=427 data-nosnippet>427</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#427 id=427 data-nosnippet>427</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

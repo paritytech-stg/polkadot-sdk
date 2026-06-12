@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["migration","pallet"],"struct":["TestWeightInfo"],"trait":["WeightInfo"],"type":["BalanceOf"]};
+window.SIDEBAR_ITEMS = {"mod":["pallet"],"struct":["TestWeightInfo"],"trait":["WeightInfo"],"type":["BalanceOf"]};

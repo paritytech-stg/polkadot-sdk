@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["AccountType"],"struct":["AccountInfo","ContractInfo","DeletionQueueManager"]};
+window.SIDEBAR_ITEMS = {"enum":["AccountType"],"struct":["AccountInfo","ContractInfo","DeletionQueueItem","DeletionQueueManager"]};

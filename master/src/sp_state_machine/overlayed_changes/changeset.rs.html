@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/primitives/state-machine/src/overlayed_changes/changeset.rs`."><title>changeset.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/primitives/state-machine/src/overlayed_changes/changeset.rs`."><title>changeset.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="sp_state_machine" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="sp_state_machine" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">sp_state_machine/overlayed_changes/</div>changeset.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">sp_state_machine/overlayed_changes/</div>changeset.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -298,8 +298,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#148 id=148 data-nosnippet>148</a>		<span class="kw">if let </span>StorageEntry::Append { data, materialized_length, current_length, .. } = <span class="self">self </span>{
 <a href=#149 id=149 data-nosnippet>149</a>			<span class="kw">let </span>current_length = <span class="kw-2">*</span>current_length;
 <a href=#150 id=150 data-nosnippet>150</a>			<span class="kw">if </span>materialized_length.map_or(<span class="bool-val">false</span>, |m| m == current_length) {
-<a href=#151 id=151 data-nosnippet>151</a>				<span class="kw">return
-<a href=#152 id=152 data-nosnippet>152</a>			</span>}
+<a href=#151 id=151 data-nosnippet>151</a>				<span class="kw">return</span>;
+<a href=#152 id=152 data-nosnippet>152</a>			}
 <a href=#153 id=153 data-nosnippet>153</a>			StorageAppend::new(data).replace_length(<span class="kw-2">*</span>materialized_length, current_length);
 <a href=#154 id=154 data-nosnippet>154</a>			<span class="kw-2">*</span>materialized_length = <span class="prelude-val">Some</span>(current_length);
 <a href=#155 id=155 data-nosnippet>155</a>		}
@@ -746,7 +746,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#596 id=596 data-nosnippet>596</a>	/// Calling this while already inside the runtime will return an error.
 <a href=#597 id=597 data-nosnippet>597</a>	</span><span class="kw">pub fn </span>enter_runtime(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), AlreadyInRuntime&gt; {
 <a href=#598 id=598 data-nosnippet>598</a>		<span class="kw">if let </span>ExecutionMode::Runtime = <span class="self">self</span>.execution_mode {
-<a href=#599 id=599 data-nosnippet>599</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(AlreadyInRuntime)
+<a href=#599 id=599 data-nosnippet>599</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(AlreadyInRuntime);
 <a href=#600 id=600 data-nosnippet>600</a>		}
 <a href=#601 id=601 data-nosnippet>601</a>		<span class="self">self</span>.execution_mode = ExecutionMode::Runtime;
 <a href=#602 id=602 data-nosnippet>602</a>		<span class="self">self</span>.num_client_transactions = <span class="self">self</span>.transaction_depth();
@@ -759,7 +759,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#609 id=609 data-nosnippet>609</a>	/// Calling this while already outside the runtime will return an error.
 <a href=#610 id=610 data-nosnippet>610</a>	</span><span class="kw">pub fn </span>exit_runtime_offchain(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), NotInRuntime&gt; {
 <a href=#611 id=611 data-nosnippet>611</a>		<span class="kw">if let </span>ExecutionMode::Client = <span class="self">self</span>.execution_mode {
-<a href=#612 id=612 data-nosnippet>612</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(NotInRuntime)
+<a href=#612 id=612 data-nosnippet>612</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(NotInRuntime);
 <a href=#613 id=613 data-nosnippet>613</a>		}
 <a href=#614 id=614 data-nosnippet>614</a>		<span class="self">self</span>.execution_mode = ExecutionMode::Client;
 <a href=#615 id=615 data-nosnippet>615</a>		<span class="kw">if </span><span class="self">self</span>.has_open_runtime_transactions() {
@@ -807,7 +807,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#657 id=657 data-nosnippet>657</a>		</span><span class="kw">if </span><span class="macro">matches!</span>(<span class="self">self</span>.execution_mode, ExecutionMode::Runtime) &amp;&amp;
 <a href=#658 id=658 data-nosnippet>658</a>			!<span class="self">self</span>.has_open_runtime_transactions()
 <a href=#659 id=659 data-nosnippet>659</a>		{
-<a href=#660 id=660 data-nosnippet>660</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(NoOpenTransaction)
+<a href=#660 id=660 data-nosnippet>660</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(NoOpenTransaction);
 <a href=#661 id=661 data-nosnippet>661</a>		}
 <a href=#662 id=662 data-nosnippet>662</a>
 <a href=#663 id=663 data-nosnippet>663</a>		<span class="kw">for </span>key <span class="kw">in </span><span class="self">self</span>.dirty_keys.pop().ok_or(NoOpenTransaction)<span class="question-mark">? </span>{
@@ -878,7 +878,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#728 id=728 data-nosnippet>728</a>		</span><span class="kw">if </span><span class="macro">matches!</span>(<span class="self">self</span>.execution_mode, ExecutionMode::Runtime) &amp;&amp;
 <a href=#729 id=729 data-nosnippet>729</a>			!<span class="self">self</span>.has_open_runtime_transactions()
 <a href=#730 id=730 data-nosnippet>730</a>		{
-<a href=#731 id=731 data-nosnippet>731</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(NoOpenTransaction)
+<a href=#731 id=731 data-nosnippet>731</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(NoOpenTransaction);
 <a href=#732 id=732 data-nosnippet>732</a>		}
 <a href=#733 id=733 data-nosnippet>733</a>
 <a href=#734 id=734 data-nosnippet>734</a>		<span class="kw">for </span>key <span class="kw">in </span><span class="self">self</span>.dirty_keys.pop().ok_or(NoOpenTransaction)<span class="question-mark">? </span>{
@@ -990,7 +990,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#840 id=840 data-nosnippet>840</a>	/// Calling this while already outside the runtime will return an error.
 <a href=#841 id=841 data-nosnippet>841</a>	</span><span class="kw">pub fn </span>exit_runtime(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), NotInRuntime&gt; {
 <a href=#842 id=842 data-nosnippet>842</a>		<span class="kw">if </span><span class="macro">matches!</span>(<span class="self">self</span>.execution_mode, ExecutionMode::Client) {
-<a href=#843 id=843 data-nosnippet>843</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(NotInRuntime)
+<a href=#843 id=843 data-nosnippet>843</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(NotInRuntime);
 <a href=#844 id=844 data-nosnippet>844</a>		}
 <a href=#845 id=845 data-nosnippet>845</a>
 <a href=#846 id=846 data-nosnippet>846</a>		<span class="self">self</span>.execution_mode = ExecutionMode::Client;
@@ -1572,7 +1572,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#1422 id=1422 data-nosnippet>1422</a>		<span class="kw">let </span>encoded = changeset.get(<span class="kw-2">&amp;</span>key).unwrap().value().unwrap();
 <a href=#1423 id=1423 data-nosnippet>1423</a>		<span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span>initial_data, encoded);
 <a href=#1424 id=1424 data-nosnippet>1424</a>	}
-<a href=#1425 id=1425 data-nosnippet>1425</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#1425 id=1425 data-nosnippet>1425</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

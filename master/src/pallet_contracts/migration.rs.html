@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/contracts/src/migration.rs`."><title>migration.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/contracts/src/migration.rs`."><title>migration.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_contracts" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_contracts" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_contracts/</div>migration.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_contracts/</div>migration.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -401,8 +401,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#251 id=251 data-nosnippet>251</a>			);
 <a href=#252 id=252 data-nosnippet>252</a>			T::Migrations::post_upgrade_step(in_progress_version, state)<span class="question-mark">?</span>;
 <a href=#253 id=253 data-nosnippet>253</a>			<span class="kw">if </span><span class="macro">matches!</span>(status, MigrateResult::Completed) {
-<a href=#254 id=254 data-nosnippet>254</a>				<span class="kw">break
-<a href=#255 id=255 data-nosnippet>255</a>			</span>}
+<a href=#254 id=254 data-nosnippet>254</a>				<span class="kw">break</span>;
+<a href=#255 id=255 data-nosnippet>255</a>			}
 <a href=#256 id=256 data-nosnippet>256</a>		}
 <a href=#257 id=257 data-nosnippet>257</a>
 <a href=#258 id=258 data-nosnippet>258</a>		<span class="kw">let </span>name = &lt;Pallet&lt;T&gt;&gt;::name();
@@ -423,7 +423,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#273 id=273 data-nosnippet>273</a>				<span class="string">"{name}: No Migration performed storage_version = latest_version = {:?}"</span>,
 <a href=#274 id=274 data-nosnippet>274</a>				<span class="kw-2">&amp;</span>on_chain_version
 <a href=#275 id=275 data-nosnippet>275</a>			);
-<a href=#276 id=276 data-nosnippet>276</a>			<span class="kw">return </span>T::WeightInfo::on_runtime_upgrade_noop()
+<a href=#276 id=276 data-nosnippet>276</a>			<span class="kw">return </span>T::WeightInfo::on_runtime_upgrade_noop();
 <a href=#277 id=277 data-nosnippet>277</a>		}
 <a href=#278 id=278 data-nosnippet>278</a>
 <a href=#279 id=279 data-nosnippet>279</a>		<span class="comment">// In case a migration is already in progress we create the next migration
@@ -435,7 +435,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#285 id=285 data-nosnippet>285</a>				<span class="kw-2">&amp;</span>on_chain_version
 <a href=#286 id=286 data-nosnippet>286</a>			);
 <a href=#287 id=287 data-nosnippet>287</a>
-<a href=#288 id=288 data-nosnippet>288</a>			<span class="kw">return </span>T::WeightInfo::on_runtime_upgrade_in_progress()
+<a href=#288 id=288 data-nosnippet>288</a>			<span class="kw">return </span>T::WeightInfo::on_runtime_upgrade_in_progress();
 <a href=#289 id=289 data-nosnippet>289</a>		}
 <a href=#290 id=290 data-nosnippet>290</a>
 <a href=#291 id=291 data-nosnippet>291</a>		<span class="macro">log::info!</span>(
@@ -463,7 +463,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#313 id=313 data-nosnippet>313</a>		<span class="kw">let </span>in_code_version = &lt;Pallet&lt;T&gt;&gt;::in_code_storage_version();
 <a href=#314 id=314 data-nosnippet>314</a>
 <a href=#315 id=315 data-nosnippet>315</a>		<span class="kw">if </span>on_chain_version == in_code_version {
-<a href=#316 id=316 data-nosnippet>316</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(Default::default())
+<a href=#316 id=316 data-nosnippet>316</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(Default::default());
 <a href=#317 id=317 data-nosnippet>317</a>		}
 <a href=#318 id=318 data-nosnippet>318</a>
 <a href=#319 id=319 data-nosnippet>319</a>		<span class="macro">log::debug!</span>(
@@ -483,7 +483,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#333 id=333 data-nosnippet>333</a>	<span class="attr">#[cfg(feature = <span class="string">"try-runtime"</span>)]
 <a href=#334 id=334 data-nosnippet>334</a>	</span><span class="kw">fn </span>post_upgrade(_state: Vec&lt;u8&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), TryRuntimeError&gt; {
 <a href=#335 id=335 data-nosnippet>335</a>		<span class="kw">if </span>!TEST_ALL_STEPS {
-<a href=#336 id=336 data-nosnippet>336</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(())
+<a href=#336 id=336 data-nosnippet>336</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>(());
 <a href=#337 id=337 data-nosnippet>337</a>		}
 <a href=#338 id=338 data-nosnippet>338</a>
 <a href=#339 id=339 data-nosnippet>339</a>		<span class="macro">log::info!</span>(target: LOG_TARGET, <span class="string">"=== POST UPGRADE CHECKS ==="</span>);
@@ -541,13 +541,13 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#391 id=391 data-nosnippet>391</a>		<span class="kw">let </span>name = &lt;Pallet&lt;T&gt;&gt;::name();
 <a href=#392 id=392 data-nosnippet>392</a>
 <a href=#393 id=393 data-nosnippet>393</a>		<span class="kw">if </span>meter.try_consume(T::WeightInfo::migrate()).is_err() {
-<a href=#394 id=394 data-nosnippet>394</a>			<span class="kw">return </span>MigrateResult::NoMigrationPerformed
+<a href=#394 id=394 data-nosnippet>394</a>			<span class="kw">return </span>MigrateResult::NoMigrationPerformed;
 <a href=#395 id=395 data-nosnippet>395</a>		}
 <a href=#396 id=396 data-nosnippet>396</a>
 <a href=#397 id=397 data-nosnippet>397</a>		MigrationInProgress::&lt;T&gt;::mutate_exists(|progress| {
 <a href=#398 id=398 data-nosnippet>398</a>			<span class="kw">let </span><span class="prelude-val">Some</span>(cursor_before) = progress.as_mut() <span class="kw">else </span>{
 <a href=#399 id=399 data-nosnippet>399</a>				meter.consume(T::WeightInfo::migration_noop());
-<a href=#400 id=400 data-nosnippet>400</a>				<span class="kw">return </span>MigrateResult::NoMigrationInProgress
+<a href=#400 id=400 data-nosnippet>400</a>				<span class="kw">return </span>MigrateResult::NoMigrationInProgress;
 <a href=#401 id=401 data-nosnippet>401</a>			};
 <a href=#402 id=402 data-nosnippet>402</a>
 <a href=#403 id=403 data-nosnippet>403</a>			<span class="comment">// if a migration is running it is always upgrading to the next version
@@ -715,7 +715,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#565 id=565 data-nosnippet>565</a>			Weight::from_all(<span class="number">1</span>)
 <a href=#566 id=566 data-nosnippet>566</a>		}
 <a href=#567 id=567 data-nosnippet>567</a>		<span class="kw">fn </span>step(<span class="kw-2">&amp;mut </span><span class="self">self</span>, meter: <span class="kw-2">&amp;mut </span>WeightMeter) -&gt; IsFinished {
-<a href=#568 id=568 data-nosnippet>568</a>			<span class="macro">assert!</span>(<span class="self">self</span>.count != N);
+<a href=#568 id=568 data-nosnippet>568</a>			<span class="macro">assert!</span>(<span class="self">self</span>.<span class="macro">count !</span>= N);
 <a href=#569 id=569 data-nosnippet>569</a>			<span class="self">self</span>.count += <span class="number">1</span>;
 <a href=#570 id=570 data-nosnippet>570</a>			meter.consume(Weight::from_all(<span class="number">1</span>));
 <a href=#571 id=571 data-nosnippet>571</a>			<span class="kw">if </span><span class="self">self</span>.count == N {
@@ -805,7 +805,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#655 id=655 data-nosnippet>655</a>				<span class="macro">assert_eq!</span>(StorageVersion::get::&lt;Pallet&lt;Test&gt;&gt;(), LATEST_MIGRATION_VERSION);
 <a href=#656 id=656 data-nosnippet>656</a>			});
 <a href=#657 id=657 data-nosnippet>657</a>	}
-<a href=#658 id=658 data-nosnippet>658</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#658 id=658 data-nosnippet>658</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

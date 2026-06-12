@@ -1,1 +1,0 @@
-searchState.loadedDescShard("snowbridge_outbound_queue_v2_runtime_api", 0, "Ethereum Outbound Queue V2 Runtime API\nGenerate a merkle proof for a committed message identified …")

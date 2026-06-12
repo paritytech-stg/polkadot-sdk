@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/support/procedural/src/pallet/parse/helper.rs`."><title>helper.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/support/procedural/src/pallet/parse/helper.rs`."><title>helper.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="frame_support_procedural" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../../static.files/storage-4e99c027.js"></script><script defer src="../../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="frame_support_procedural" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../../static.files/src-script-813739b1.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">frame_support_procedural/pallet/parse/</div>helper.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">frame_support_procedural/pallet/parse/</div>helper.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -210,7 +210,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#60 id=60 data-nosnippet>60</a>	<span class="kw">let </span><span class="prelude-val">Some</span>(index) = attrs.iter().position(|attr| {
 <a href=#61 id=61 data-nosnippet>61</a>		attr.path().segments.first().map_or(<span class="bool-val">false</span>, |segment| segment.ident == <span class="string">"pallet"</span>)
 <a href=#62 id=62 data-nosnippet>62</a>	}) <span class="kw">else </span>{
-<a href=#63 id=63 data-nosnippet>63</a>		<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
+<a href=#63 id=63 data-nosnippet>63</a>		<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
 <a href=#64 id=64 data-nosnippet>64</a>	};
 <a href=#65 id=65 data-nosnippet>65</a>
 <a href=#66 id=66 data-nosnippet>66</a>	<span class="kw">let </span>pallet_attr = attrs.remove(index);
@@ -312,7 +312,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#162 id=162 data-nosnippet>162</a>		<span class="macro">syn::parenthesized!</span>(content <span class="kw">in </span>input);
 <a href=#163 id=163 data-nosnippet>163</a>		<span class="kw">if </span>!content.is_empty() {
 <a href=#164 id=164 data-nosnippet>164</a>			<span class="kw">let </span>msg = <span class="string">"unexpected tokens, expected nothing inside parenthesis as `()`"</span>;
-<a href=#165 id=165 data-nosnippet>165</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(content.span(), msg))
+<a href=#165 id=165 data-nosnippet>165</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(content.span(), msg));
 <a href=#166 id=166 data-nosnippet>166</a>		}
 <a href=#167 id=167 data-nosnippet>167</a>		<span class="prelude-val">Ok</span>(<span class="self">Self</span>)
 <a href=#168 id=168 data-nosnippet>168</a>	}
@@ -323,9 +323,9 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#173 id=173 data-nosnippet>173</a><span class="kw">impl </span>syn::parse::Parse <span class="kw">for </span>StaticLifetime {
 <a href=#174 id=174 data-nosnippet>174</a>	<span class="kw">fn </span>parse(input: syn::parse::ParseStream) -&gt; syn::Result&lt;<span class="self">Self</span>&gt; {
 <a href=#175 id=175 data-nosnippet>175</a>		<span class="kw">let </span>lifetime = input.parse::&lt;syn::Lifetime&gt;()<span class="question-mark">?</span>;
-<a href=#176 id=176 data-nosnippet>176</a>		<span class="kw">if </span>lifetime.ident != <span class="string">"static" </span>{
+<a href=#176 id=176 data-nosnippet>176</a>		<span class="kw">if </span>lifetime.<span class="macro">ident !</span>= <span class="string">"static" </span>{
 <a href=#177 id=177 data-nosnippet>177</a>			<span class="kw">let </span>msg = <span class="string">"unexpected tokens, expected `static`"</span>;
-<a href=#178 id=178 data-nosnippet>178</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(lifetime.ident.span(), msg))
+<a href=#178 id=178 data-nosnippet>178</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(lifetime.ident.span(), msg));
 <a href=#179 id=179 data-nosnippet>179</a>		}
 <a href=#180 id=180 data-nosnippet>180</a>		<span class="prelude-val">Ok</span>(<span class="self">Self</span>)
 <a href=#181 id=181 data-nosnippet>181</a>	}
@@ -336,7 +336,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#186 id=186 data-nosnippet>186</a>/// `span` is used in case generics is empty (empty generics has span == call_site).
 <a href=#187 id=187 data-nosnippet>187</a>///
 <a href=#188 id=188 data-nosnippet>188</a>/// return the instance if found.
-<a href=#189 id=189 data-nosnippet>189</a></span><span class="kw">pub fn </span>check_config_def_gen(gen: <span class="kw-2">&amp;</span>syn::Generics, span: proc_macro2::Span) -&gt; syn::Result&lt;()&gt; {
+<a href=#189 id=189 data-nosnippet>189</a></span><span class="kw">pub fn </span>check_config_def_gen(<span class="kw">gen</span>: <span class="kw-2">&amp;</span>syn::Generics, span: proc_macro2::Span) -&gt; syn::Result&lt;()&gt; {
 <a href=#190 id=190 data-nosnippet>190</a>	<span class="kw">let </span>expected = <span class="string">"expected `I: 'static = ()`"</span>;
 <a href=#191 id=191 data-nosnippet>191</a>	<span class="kw">pub struct </span>CheckTraitDefGenerics;
 <a href=#192 id=192 data-nosnippet>192</a>	<span class="kw">impl </span>syn::parse::Parse <span class="kw">for </span>CheckTraitDefGenerics {
@@ -351,7 +351,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#201 id=201 data-nosnippet>201</a>		}
 <a href=#202 id=202 data-nosnippet>202</a>	}
 <a href=#203 id=203 data-nosnippet>203</a>
-<a href=#204 id=204 data-nosnippet>204</a>	syn::parse2::&lt;CheckTraitDefGenerics&gt;(gen.params.to_token_stream()).map_err(|e| {
+<a href=#204 id=204 data-nosnippet>204</a>	syn::parse2::&lt;CheckTraitDefGenerics&gt;(<span class="kw">gen</span>.params.to_token_stream()).map_err(|e| {
 <a href=#205 id=205 data-nosnippet>205</a>		<span class="kw">let </span>msg = <span class="macro">format!</span>(<span class="string">"Invalid generics: {}"</span>, expected);
 <a href=#206 id=206 data-nosnippet>206</a>		<span class="kw">let </span><span class="kw-2">mut </span>err = syn::Error::new(span, msg);
 <a href=#207 id=207 data-nosnippet>207</a>		err.combine(e);
@@ -369,7 +369,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#219 id=219 data-nosnippet>219</a>///
 <a href=#220 id=220 data-nosnippet>220</a>/// return the instance if found.
 <a href=#221 id=221 data-nosnippet>221</a></span><span class="kw">pub fn </span>check_type_def_gen_no_bounds(
-<a href=#222 id=222 data-nosnippet>222</a>	gen: <span class="kw-2">&amp;</span>syn::Generics,
+<a href=#222 id=222 data-nosnippet>222</a>	<span class="kw">gen</span>: <span class="kw-2">&amp;</span>syn::Generics,
 <a href=#223 id=223 data-nosnippet>223</a>	span: proc_macro2::Span,
 <a href=#224 id=224 data-nosnippet>224</a>) -&gt; syn::Result&lt;InstanceUsage&gt; {
 <a href=#225 id=225 data-nosnippet>225</a>	<span class="kw">let </span>expected = <span class="string">"expected `T` or `T, I = ()`"</span>;
@@ -391,7 +391,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#241 id=241 data-nosnippet>241</a>		}
 <a href=#242 id=242 data-nosnippet>242</a>	}
 <a href=#243 id=243 data-nosnippet>243</a>
-<a href=#244 id=244 data-nosnippet>244</a>	<span class="kw">let </span>i = syn::parse2::&lt;Checker&gt;(gen.params.to_token_stream())
+<a href=#244 id=244 data-nosnippet>244</a>	<span class="kw">let </span>i = syn::parse2::&lt;Checker&gt;(<span class="kw">gen</span>.params.to_token_stream())
 <a href=#245 id=245 data-nosnippet>245</a>		.map_err(|e| {
 <a href=#246 id=246 data-nosnippet>246</a>			<span class="kw">let </span>msg = <span class="macro">format!</span>(<span class="string">"Invalid type def generics: {}"</span>, expected);
 <a href=#247 id=247 data-nosnippet>247</a>			<span class="kw">let </span><span class="kw-2">mut </span>err = syn::Error::new(span, msg);
@@ -414,7 +414,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#264 id=264 data-nosnippet>264</a>///
 <a href=#265 id=265 data-nosnippet>265</a>/// return some instance usage if there is some generic, or none otherwise.
 <a href=#266 id=266 data-nosnippet>266</a></span><span class="kw">pub fn </span>check_type_def_optional_gen(
-<a href=#267 id=267 data-nosnippet>267</a>	gen: <span class="kw-2">&amp;</span>syn::Generics,
+<a href=#267 id=267 data-nosnippet>267</a>	<span class="kw">gen</span>: <span class="kw-2">&amp;</span>syn::Generics,
 <a href=#268 id=268 data-nosnippet>268</a>	span: proc_macro2::Span,
 <a href=#269 id=269 data-nosnippet>269</a>) -&gt; syn::Result&lt;<span class="prelude-ty">Option</span>&lt;InstanceUsage&gt;&gt; {
 <a href=#270 id=270 data-nosnippet>270</a>	<span class="kw">let </span>expected = <span class="string">"expected `` or `T` or `T: Config` or `T, I = ()` or \
@@ -423,7 +423,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#273 id=273 data-nosnippet>273</a>	<span class="kw">impl </span>syn::parse::Parse <span class="kw">for </span>Checker {
 <a href=#274 id=274 data-nosnippet>274</a>		<span class="kw">fn </span>parse(input: syn::parse::ParseStream) -&gt; syn::Result&lt;<span class="self">Self</span>&gt; {
 <a href=#275 id=275 data-nosnippet>275</a>			<span class="kw">if </span>input.is_empty() {
-<a href=#276 id=276 data-nosnippet>276</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">None</span>))
+<a href=#276 id=276 data-nosnippet>276</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">None</span>));
 <a href=#277 id=277 data-nosnippet>277</a>			}
 <a href=#278 id=278 data-nosnippet>278</a>
 <a href=#279 id=279 data-nosnippet>279</a>			<span class="kw">let </span><span class="kw-2">mut </span>instance_usage = InstanceUsage { span: input.span(), has_instance: <span class="bool-val">false </span>};
@@ -431,7 +431,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#281 id=281 data-nosnippet>281</a>			input.parse::&lt;keyword::T&gt;()<span class="question-mark">?</span>;
 <a href=#282 id=282 data-nosnippet>282</a>
 <a href=#283 id=283 data-nosnippet>283</a>			<span class="kw">if </span>input.is_empty() {
-<a href=#284 id=284 data-nosnippet>284</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">Some</span>(instance_usage)))
+<a href=#284 id=284 data-nosnippet>284</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">Some</span>(instance_usage)));
 <a href=#285 id=285 data-nosnippet>285</a>			}
 <a href=#286 id=286 data-nosnippet>286</a>
 <a href=#287 id=287 data-nosnippet>287</a>			<span class="kw">let </span>lookahead = input.lookahead1();
@@ -448,7 +448,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#298 id=298 data-nosnippet>298</a>				input.parse::&lt;keyword::Config&gt;()<span class="question-mark">?</span>;
 <a href=#299 id=299 data-nosnippet>299</a>
 <a href=#300 id=300 data-nosnippet>300</a>				<span class="kw">if </span>input.is_empty() {
-<a href=#301 id=301 data-nosnippet>301</a>					<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">Some</span>(instance_usage)))
+<a href=#301 id=301 data-nosnippet>301</a>					<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">Some</span>(instance_usage)));
 <a href=#302 id=302 data-nosnippet>302</a>				}
 <a href=#303 id=303 data-nosnippet>303</a>
 <a href=#304 id=304 data-nosnippet>304</a>				instance_usage.has_instance = <span class="bool-val">true</span>;
@@ -469,7 +469,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#319 id=319 data-nosnippet>319</a>		}
 <a href=#320 id=320 data-nosnippet>320</a>	}
 <a href=#321 id=321 data-nosnippet>321</a>
-<a href=#322 id=322 data-nosnippet>322</a>	<span class="kw">let </span>i = syn::parse2::&lt;Checker&gt;(gen.params.to_token_stream())
+<a href=#322 id=322 data-nosnippet>322</a>	<span class="kw">let </span>i = syn::parse2::&lt;Checker&gt;(<span class="kw">gen</span>.params.to_token_stream())
 <a href=#323 id=323 data-nosnippet>323</a>		.map_err(|e| {
 <a href=#324 id=324 data-nosnippet>324</a>			<span class="kw">let </span>msg = <span class="macro">format!</span>(<span class="string">"Invalid type def generics: {}"</span>, expected);
 <a href=#325 id=325 data-nosnippet>325</a>			<span class="kw">let </span><span class="kw-2">mut </span>err = syn::Error::new(span, msg);
@@ -531,7 +531,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#381 id=381 data-nosnippet>381</a>/// `span` is used in case generics is empty (empty generics has span == call_site).
 <a href=#382 id=382 data-nosnippet>382</a>///
 <a href=#383 id=383 data-nosnippet>383</a>/// return whether it contains instance.
-<a href=#384 id=384 data-nosnippet>384</a></span><span class="kw">pub fn </span>check_impl_gen(gen: <span class="kw-2">&amp;</span>syn::Generics, span: proc_macro2::Span) -&gt; syn::Result&lt;InstanceUsage&gt; {
+<a href=#384 id=384 data-nosnippet>384</a></span><span class="kw">pub fn </span>check_impl_gen(<span class="kw">gen</span>: <span class="kw-2">&amp;</span>syn::Generics, span: proc_macro2::Span) -&gt; syn::Result&lt;InstanceUsage&gt; {
 <a href=#385 id=385 data-nosnippet>385</a>	<span class="kw">let </span>expected = <span class="string">"expected `impl&lt;T: Config&gt;` or `impl&lt;T: Config&lt;I&gt;, I: 'static&gt;`"</span>;
 <a href=#386 id=386 data-nosnippet>386</a>	<span class="kw">pub struct </span>Checker(InstanceUsage);
 <a href=#387 id=387 data-nosnippet>387</a>	<span class="kw">impl </span>syn::parse::Parse <span class="kw">for </span>Checker {
@@ -556,7 +556,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#406 id=406 data-nosnippet>406</a>		}
 <a href=#407 id=407 data-nosnippet>407</a>	}
 <a href=#408 id=408 data-nosnippet>408</a>
-<a href=#409 id=409 data-nosnippet>409</a>	<span class="kw">let </span>i = syn::parse2::&lt;Checker&gt;(gen.params.to_token_stream())
+<a href=#409 id=409 data-nosnippet>409</a>	<span class="kw">let </span>i = syn::parse2::&lt;Checker&gt;(<span class="kw">gen</span>.params.to_token_stream())
 <a href=#410 id=410 data-nosnippet>410</a>		.map_err(|e| {
 <a href=#411 id=411 data-nosnippet>411</a>			<span class="kw">let </span><span class="kw-2">mut </span>err = syn::Error::new(span, <span class="macro">format!</span>(<span class="string">"Invalid generics: {}"</span>, expected));
 <a href=#412 id=412 data-nosnippet>412</a>			err.combine(e);
@@ -577,7 +577,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#427 id=427 data-nosnippet>427</a>///
 <a href=#428 id=428 data-nosnippet>428</a>/// return the instance if found.
 <a href=#429 id=429 data-nosnippet>429</a></span><span class="kw">pub fn </span>check_type_def_gen(
-<a href=#430 id=430 data-nosnippet>430</a>	gen: <span class="kw-2">&amp;</span>syn::Generics,
+<a href=#430 id=430 data-nosnippet>430</a>	<span class="kw">gen</span>: <span class="kw-2">&amp;</span>syn::Generics,
 <a href=#431 id=431 data-nosnippet>431</a>	span: proc_macro2::Span,
 <a href=#432 id=432 data-nosnippet>432</a>) -&gt; syn::Result&lt;InstanceUsage&gt; {
 <a href=#433 id=433 data-nosnippet>433</a>	<span class="kw">let </span>expected = <span class="string">"expected `T` or `T: Config` or `T, I = ()` or \
@@ -590,7 +590,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#440 id=440 data-nosnippet>440</a>			input.parse::&lt;keyword::T&gt;()<span class="question-mark">?</span>;
 <a href=#441 id=441 data-nosnippet>441</a>
 <a href=#442 id=442 data-nosnippet>442</a>			<span class="kw">if </span>input.is_empty() {
-<a href=#443 id=443 data-nosnippet>443</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(instance_usage))
+<a href=#443 id=443 data-nosnippet>443</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(instance_usage));
 <a href=#444 id=444 data-nosnippet>444</a>			}
 <a href=#445 id=445 data-nosnippet>445</a>
 <a href=#446 id=446 data-nosnippet>446</a>			<span class="kw">let </span>lookahead = input.lookahead1();
@@ -607,7 +607,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#457 id=457 data-nosnippet>457</a>				input.parse::&lt;keyword::Config&gt;()<span class="question-mark">?</span>;
 <a href=#458 id=458 data-nosnippet>458</a>
 <a href=#459 id=459 data-nosnippet>459</a>				<span class="kw">if </span>input.is_empty() {
-<a href=#460 id=460 data-nosnippet>460</a>					<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(instance_usage))
+<a href=#460 id=460 data-nosnippet>460</a>					<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(instance_usage));
 <a href=#461 id=461 data-nosnippet>461</a>				}
 <a href=#462 id=462 data-nosnippet>462</a>
 <a href=#463 id=463 data-nosnippet>463</a>				instance_usage.has_instance = <span class="bool-val">true</span>;
@@ -628,7 +628,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#478 id=478 data-nosnippet>478</a>		}
 <a href=#479 id=479 data-nosnippet>479</a>	}
 <a href=#480 id=480 data-nosnippet>480</a>
-<a href=#481 id=481 data-nosnippet>481</a>	<span class="kw">let </span><span class="kw-2">mut </span>i = syn::parse2::&lt;Checker&gt;(gen.params.to_token_stream())
+<a href=#481 id=481 data-nosnippet>481</a>	<span class="kw">let </span><span class="kw-2">mut </span>i = syn::parse2::&lt;Checker&gt;(<span class="kw">gen</span>.params.to_token_stream())
 <a href=#482 id=482 data-nosnippet>482</a>		.map_err(|e| {
 <a href=#483 id=483 data-nosnippet>483</a>			<span class="kw">let </span>msg = <span class="macro">format!</span>(<span class="string">"Invalid type def generics: {}"</span>, expected);
 <a href=#484 id=484 data-nosnippet>484</a>			<span class="kw">let </span><span class="kw-2">mut </span>err = syn::Error::new(span, msg);
@@ -667,10 +667,10 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#517 id=517 data-nosnippet>517</a>					input.parse::&lt;keyword::I&gt;()<span class="question-mark">?</span>;
 <a href=#518 id=518 data-nosnippet>518</a>				}
 <a href=#519 id=519 data-nosnippet>519</a>				input.parse::&lt;<span class="macro">syn::Token!</span>[&gt;]&gt;()<span class="question-mark">?</span>;
-<a href=#520 id=520 data-nosnippet>520</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">Some</span>(instance_usage)))
+<a href=#520 id=520 data-nosnippet>520</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">Some</span>(instance_usage)));
 <a href=#521 id=521 data-nosnippet>521</a>			} <span class="kw">else </span>{
 <a href=#522 id=522 data-nosnippet>522</a>				input.parse::&lt;keyword::BuildGenesisConfig&gt;()<span class="question-mark">?</span>;
-<a href=#523 id=523 data-nosnippet>523</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">None</span>))
+<a href=#523 id=523 data-nosnippet>523</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">None</span>));
 <a href=#524 id=524 data-nosnippet>524</a>			}
 <a href=#525 id=525 data-nosnippet>525</a>		}
 <a href=#526 id=526 data-nosnippet>526</a>	}
@@ -696,7 +696,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#546 id=546 data-nosnippet>546</a>///
 <a href=#547 id=547 data-nosnippet>547</a>/// return the instance if found.
 <a href=#548 id=548 data-nosnippet>548</a></span><span class="kw">pub fn </span>check_type_value_gen(
-<a href=#549 id=549 data-nosnippet>549</a>	gen: <span class="kw-2">&amp;</span>syn::Generics,
+<a href=#549 id=549 data-nosnippet>549</a>	<span class="kw">gen</span>: <span class="kw-2">&amp;</span>syn::Generics,
 <a href=#550 id=550 data-nosnippet>550</a>	span: proc_macro2::Span,
 <a href=#551 id=551 data-nosnippet>551</a>) -&gt; syn::Result&lt;<span class="prelude-ty">Option</span>&lt;InstanceUsage&gt;&gt; {
 <a href=#552 id=552 data-nosnippet>552</a>	<span class="kw">let </span>expected = <span class="string">"expected `` or `T: Config` or `T: Config&lt;I&gt;, I: 'static`"</span>;
@@ -704,7 +704,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#554 id=554 data-nosnippet>554</a>	<span class="kw">impl </span>syn::parse::Parse <span class="kw">for </span>Checker {
 <a href=#555 id=555 data-nosnippet>555</a>		<span class="kw">fn </span>parse(input: syn::parse::ParseStream) -&gt; syn::Result&lt;<span class="self">Self</span>&gt; {
 <a href=#556 id=556 data-nosnippet>556</a>			<span class="kw">if </span>input.is_empty() {
-<a href=#557 id=557 data-nosnippet>557</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">None</span>))
+<a href=#557 id=557 data-nosnippet>557</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">None</span>));
 <a href=#558 id=558 data-nosnippet>558</a>			}
 <a href=#559 id=559 data-nosnippet>559</a>
 <a href=#560 id=560 data-nosnippet>560</a>			input.parse::&lt;keyword::T&gt;()<span class="question-mark">?</span>;
@@ -714,7 +714,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#564 id=564 data-nosnippet>564</a>			<span class="kw">let </span><span class="kw-2">mut </span>instance_usage = InstanceUsage { span: input.span(), has_instance: <span class="bool-val">false </span>};
 <a href=#565 id=565 data-nosnippet>565</a>
 <a href=#566 id=566 data-nosnippet>566</a>			<span class="kw">if </span>input.is_empty() {
-<a href=#567 id=567 data-nosnippet>567</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">Some</span>(instance_usage)))
+<a href=#567 id=567 data-nosnippet>567</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="self">Self</span>(<span class="prelude-val">Some</span>(instance_usage)));
 <a href=#568 id=568 data-nosnippet>568</a>			}
 <a href=#569 id=569 data-nosnippet>569</a>
 <a href=#570 id=570 data-nosnippet>570</a>			instance_usage.has_instance = <span class="bool-val">true</span>;
@@ -730,7 +730,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#580 id=580 data-nosnippet>580</a>		}
 <a href=#581 id=581 data-nosnippet>581</a>	}
 <a href=#582 id=582 data-nosnippet>582</a>
-<a href=#583 id=583 data-nosnippet>583</a>	<span class="kw">let </span>i = syn::parse2::&lt;Checker&gt;(gen.params.to_token_stream())
+<a href=#583 id=583 data-nosnippet>583</a>	<span class="kw">let </span>i = syn::parse2::&lt;Checker&gt;(<span class="kw">gen</span>.params.to_token_stream())
 <a href=#584 id=584 data-nosnippet>584</a>		.map_err(|e| {
 <a href=#585 id=585 data-nosnippet>585</a>			<span class="kw">let </span>msg = <span class="macro">format!</span>(<span class="string">"Invalid type def generics: {}"</span>, expected);
 <a href=#586 id=586 data-nosnippet>586</a>			<span class="kw">let </span><span class="kw-2">mut </span>err = syn::Error::new(span, msg);
@@ -759,7 +759,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#609 id=609 data-nosnippet>609</a>	<span class="kw">let </span>syn::ReturnType::Type(<span class="kw">_</span>, type_) = <span class="kw-2">&amp;</span>sig.output <span class="kw">else </span>{
 <a href=#610 id=610 data-nosnippet>610</a>		<span class="kw">let </span>msg = <span class="string">"Invalid pallet::call, require return type \
 <a href=#611 id=611 data-nosnippet>611</a>			DispatchResultWithPostInfo"</span>;
-<a href=#612 id=612 data-nosnippet>612</a>		<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(sig.span(), msg))
+<a href=#612 id=612 data-nosnippet>612</a>		<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(sig.span(), msg));
 <a href=#613 id=613 data-nosnippet>613</a>	};
 <a href=#614 id=614 data-nosnippet>614</a>
 <a href=#615 id=615 data-nosnippet>615</a>	<span class="kw">pub struct </span>Checker(CallReturnType);
@@ -792,7 +792,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#642 id=642 data-nosnippet>642</a>		[ #( #bytes ),* ]
 <a href=#643 id=643 data-nosnippet>643</a>	)
 <a href=#644 id=644 data-nosnippet>644</a>	.into()
-<a href=#645 id=645 data-nosnippet>645</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#645 id=645 data-nosnippet>645</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

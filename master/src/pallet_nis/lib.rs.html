@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/nis/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/nis/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_nis" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_nis" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_nis/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_nis/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -846,7 +846,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#696 id=696 data-nosnippet>696</a>			<span class="comment">// Multiply the proportion it is by the total issued.
 <a href=#697 id=697 data-nosnippet>697</a>			</span><span class="kw">let </span>our_account = <span class="self">Self</span>::account_id();
 <a href=#698 id=698 data-nosnippet>698</a>			<span class="kw">let </span>effective_issuance = <span class="self">Self</span>::issuance_with(<span class="kw-2">&amp;</span>our_account, <span class="kw-2">&amp;</span>summary).effective;
-<a href=#699 id=699 data-nosnippet>699</a>			<span class="comment">//			let amount = proportion.mul_ceil(effective_issuance);
+<a href=#699 id=699 data-nosnippet>699</a>			<span class="comment">// 			let amount = proportion.mul_ceil(effective_issuance);
 <a href=#700 id=700 data-nosnippet>700</a>			</span><span class="kw">let </span>amount = proportion * effective_issuance;
 <a href=#701 id=701 data-nosnippet>701</a>
 <a href=#702 id=702 data-nosnippet>702</a>			receipt.proportion.saturating_reduce(proportion);
@@ -1154,8 +1154,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1004 id=1004 data-nosnippet>1004</a>		) {
 <a href=#1005 id=1005 data-nosnippet>1005</a>			<span class="kw">let </span><span class="kw-2">mut </span>summary: SummaryRecordOf&lt;T&gt; = Summary::&lt;T&gt;::get();
 <a href=#1006 id=1006 data-nosnippet>1006</a>			<span class="kw">if </span>summary.proportion_owed &gt;= target {
-<a href=#1007 id=1007 data-nosnippet>1007</a>				<span class="kw">return
-<a href=#1008 id=1008 data-nosnippet>1008</a>			</span>}
+<a href=#1007 id=1007 data-nosnippet>1007</a>				<span class="kw">return</span>;
+<a href=#1008 id=1008 data-nosnippet>1008</a>			}
 <a href=#1009 id=1009 data-nosnippet>1009</a>
 <a href=#1010 id=1010 data-nosnippet>1010</a>			<span class="kw">let </span>now = frame_system::Pallet::&lt;T&gt;::block_number();
 <a href=#1011 id=1011 data-nosnippet>1011</a>			<span class="kw">let </span>our_account = <span class="self">Self</span>::account_id();
@@ -1169,15 +1169,15 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1019 id=1019 data-nosnippet>1019</a>			totals.bounded_resize(queue_count <span class="kw">as </span>usize, (<span class="number">0</span>, Zero::zero()));
 <a href=#1020 id=1020 data-nosnippet>1020</a>			<span class="kw">for </span>duration <span class="kw">in </span>(<span class="number">1</span>..=queue_count).rev() {
 <a href=#1021 id=1021 data-nosnippet>1021</a>				<span class="kw">if </span>totals[duration <span class="kw">as </span>usize - <span class="number">1</span>].<span class="number">0</span>.is_zero() {
-<a href=#1022 id=1022 data-nosnippet>1022</a>					<span class="kw">continue
-<a href=#1023 id=1023 data-nosnippet>1023</a>				</span>}
+<a href=#1022 id=1022 data-nosnippet>1022</a>					<span class="kw">continue</span>;
+<a href=#1023 id=1023 data-nosnippet>1023</a>				}
 <a href=#1024 id=1024 data-nosnippet>1024</a>				<span class="kw">if </span>remaining.is_zero() || queues_hit &gt;= max_queues
 <a href=#1025 id=1025 data-nosnippet>1025</a>					|| !weight.check_accrue(T::WeightInfo::process_queue())
 <a href=#1026 id=1026 data-nosnippet>1026</a>					<span class="comment">// No point trying to process a queue if we can't process a single bid.
 <a href=#1027 id=1027 data-nosnippet>1027</a>					</span>|| !weight.can_accrue(T::WeightInfo::process_bid())
 <a href=#1028 id=1028 data-nosnippet>1028</a>				{
-<a href=#1029 id=1029 data-nosnippet>1029</a>					<span class="kw">break
-<a href=#1030 id=1030 data-nosnippet>1030</a>				</span>}
+<a href=#1029 id=1029 data-nosnippet>1029</a>					<span class="kw">break</span>;
+<a href=#1030 id=1030 data-nosnippet>1030</a>				}
 <a href=#1031 id=1031 data-nosnippet>1031</a>
 <a href=#1032 id=1032 data-nosnippet>1032</a>				<span class="kw">let </span>b = <span class="self">Self</span>::process_queue(
 <a href=#1033 id=1033 data-nosnippet>1033</a>					duration,
@@ -1285,7 +1285,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1135 id=1135 data-nosnippet>1135</a>			result
 <a href=#1136 id=1136 data-nosnippet>1136</a>		}
 <a href=#1137 id=1137 data-nosnippet>1137</a>	}
-<a href=#1138 id=1138 data-nosnippet>1138</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#1138 id=1138 data-nosnippet>1138</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

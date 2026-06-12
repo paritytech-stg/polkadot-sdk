@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/client/executor/runtime-test/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/client/executor/runtime-test/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sc_runtime_test" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sc_runtime_test" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">sc_runtime_test/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">sc_runtime_test/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
@@ -520,53 +520,58 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#370 id=370 data-nosnippet>370</a>		<span class="comment">// Mainly a test that the macro is working when we have a return statement here.
 <a href=#371 id=371 data-nosnippet>371</a>		</span><span class="kw">return </span><span class="number">1234</span>;
 <a href=#372 id=372 data-nosnippet>372</a>	}
-<a href=#373 id=373 data-nosnippet>373</a>}
-<a href=#374 id=374 data-nosnippet>374</a>
-<a href=#375 id=375 data-nosnippet>375</a><span class="comment">// Tests that check output validity. We explicitly return the ptr and len, so we avoid using the
-<a href=#376 id=376 data-nosnippet>376</a>// `wasm_export_functions` macro.
-<a href=#377 id=377 data-nosnippet>377</a></span><span class="kw">mod </span>output_validity {
-<a href=#378 id=378 data-nosnippet>378</a>	<span class="attr">#[cfg(not(feature = <span class="string">"std"</span>))]
-<a href=#379 id=379 data-nosnippet>379</a>	</span><span class="kw">use </span><span class="kw">super</span>::WASM_PAGE_SIZE;
-<a href=#380 id=380 data-nosnippet>380</a>
-<a href=#381 id=381 data-nosnippet>381</a>	<span class="attr">#[cfg(not(feature = <span class="string">"std"</span>))]
-<a href=#382 id=382 data-nosnippet>382</a>	</span><span class="kw">use </span>sp_runtime_interface::pack_ptr_and_len;
-<a href=#383 id=383 data-nosnippet>383</a>
-<a href=#384 id=384 data-nosnippet>384</a>	<span class="comment">// Returns a huge len. It should result in an error, and not an allocation.
-<a href=#385 id=385 data-nosnippet>385</a>	</span><span class="attr">#[no_mangle]
-<a href=#386 id=386 data-nosnippet>386</a>	#[cfg(not(feature = <span class="string">"std"</span>))]
-<a href=#387 id=387 data-nosnippet>387</a>	</span><span class="kw">pub extern </span><span class="string">"C" </span><span class="kw">fn </span>test_return_huge_len(_params: <span class="kw-2">*const </span>u8, _len: usize) -&gt; u64 {
-<a href=#388 id=388 data-nosnippet>388</a>		pack_ptr_and_len(<span class="number">0</span>, u32::MAX)
-<a href=#389 id=389 data-nosnippet>389</a>	}
-<a href=#390 id=390 data-nosnippet>390</a>
-<a href=#391 id=391 data-nosnippet>391</a>	<span class="comment">// Returns an offset right before the edge of the wasm memory boundary. It should succeed.
-<a href=#392 id=392 data-nosnippet>392</a>	</span><span class="attr">#[no_mangle]
-<a href=#393 id=393 data-nosnippet>393</a>	#[cfg(not(feature = <span class="string">"std"</span>))]
-<a href=#394 id=394 data-nosnippet>394</a>	</span><span class="kw">pub extern </span><span class="string">"C" </span><span class="kw">fn </span>test_return_max_memory_offset(_params: <span class="kw-2">*const </span>u8, _len: usize) -&gt; u64 {
-<a href=#395 id=395 data-nosnippet>395</a>		<span class="kw">let </span>output_ptr = (core::arch::wasm32::memory_size(<span class="number">0</span>) * WASM_PAGE_SIZE) <span class="kw">as </span>u32 - <span class="number">1</span>;
-<a href=#396 id=396 data-nosnippet>396</a>		<span class="kw">let </span>ptr = output_ptr <span class="kw">as </span><span class="kw-2">*mut </span>u8;
-<a href=#397 id=397 data-nosnippet>397</a>		<span class="kw">unsafe </span>{
-<a href=#398 id=398 data-nosnippet>398</a>			ptr.write(u8::MAX);
-<a href=#399 id=399 data-nosnippet>399</a>		}
-<a href=#400 id=400 data-nosnippet>400</a>		pack_ptr_and_len(output_ptr, <span class="number">1</span>)
-<a href=#401 id=401 data-nosnippet>401</a>	}
-<a href=#402 id=402 data-nosnippet>402</a>
-<a href=#403 id=403 data-nosnippet>403</a>	<span class="comment">// Returns an offset right after the edge of the wasm memory boundary. It should fail.
-<a href=#404 id=404 data-nosnippet>404</a>	</span><span class="attr">#[no_mangle]
-<a href=#405 id=405 data-nosnippet>405</a>	#[cfg(not(feature = <span class="string">"std"</span>))]
-<a href=#406 id=406 data-nosnippet>406</a>	</span><span class="kw">pub extern </span><span class="string">"C" </span><span class="kw">fn </span>test_return_max_memory_offset_plus_one(
-<a href=#407 id=407 data-nosnippet>407</a>		_params: <span class="kw-2">*const </span>u8,
-<a href=#408 id=408 data-nosnippet>408</a>		_len: usize,
-<a href=#409 id=409 data-nosnippet>409</a>	) -&gt; u64 {
-<a href=#410 id=410 data-nosnippet>410</a>		pack_ptr_and_len((core::arch::wasm32::memory_size(<span class="number">0</span>) * WASM_PAGE_SIZE) <span class="kw">as </span>u32, <span class="number">1</span>)
-<a href=#411 id=411 data-nosnippet>411</a>	}
-<a href=#412 id=412 data-nosnippet>412</a>
-<a href=#413 id=413 data-nosnippet>413</a>	<span class="comment">// Returns an output that overflows the u32 range. It should result in an error.
-<a href=#414 id=414 data-nosnippet>414</a>	</span><span class="attr">#[no_mangle]
-<a href=#415 id=415 data-nosnippet>415</a>	#[cfg(not(feature = <span class="string">"std"</span>))]
-<a href=#416 id=416 data-nosnippet>416</a>	</span><span class="kw">pub extern </span><span class="string">"C" </span><span class="kw">fn </span>test_return_overflow(_params: <span class="kw-2">*const </span>u8, _len: usize) -&gt; u64 {
-<a href=#417 id=417 data-nosnippet>417</a>		pack_ptr_and_len(u32::MAX, <span class="number">1</span>)
-<a href=#418 id=418 data-nosnippet>418</a>	}
-<a href=#419 id=419 data-nosnippet>419</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#373 id=373 data-nosnippet>373</a>
+<a href=#374 id=374 data-nosnippet>374</a>	<span class="kw">fn </span>test_virtualization(test_fixture: Vec&lt;u8&gt;) {
+<a href=#375 id=375 data-nosnippet>375</a>		sp_virtualization::run_tests(test_fixture.as_ref());
+<a href=#376 id=376 data-nosnippet>376</a>	}
+<a href=#377 id=377 data-nosnippet>377</a>}
+<a href=#378 id=378 data-nosnippet>378</a>
+<a href=#379 id=379 data-nosnippet>379</a><span class="comment">// Tests that check output validity. We explicitly return the ptr and len, so we avoid using the
+<a href=#380 id=380 data-nosnippet>380</a>// `wasm_export_functions` macro.
+<a href=#381 id=381 data-nosnippet>381</a></span><span class="kw">mod </span>output_validity {
+<a href=#382 id=382 data-nosnippet>382</a>	<span class="attr">#[cfg(not(feature = <span class="string">"std"</span>))]
+<a href=#383 id=383 data-nosnippet>383</a>	</span><span class="kw">use </span><span class="kw">super</span>::WASM_PAGE_SIZE;
+<a href=#384 id=384 data-nosnippet>384</a>
+<a href=#385 id=385 data-nosnippet>385</a>	<span class="attr">#[cfg(not(feature = <span class="string">"std"</span>))]
+<a href=#386 id=386 data-nosnippet>386</a>	</span><span class="kw">use </span>sp_runtime_interface::pack_ptr_and_len;
+<a href=#387 id=387 data-nosnippet>387</a>
+<a href=#388 id=388 data-nosnippet>388</a>	<span class="comment">// Returns a huge len. It should result in an error, and not an allocation.
+<a href=#389 id=389 data-nosnippet>389</a>	</span><span class="attr">#[no_mangle]
+<a href=#390 id=390 data-nosnippet>390</a>	#[cfg(not(feature = <span class="string">"std"</span>))]
+<a href=#391 id=391 data-nosnippet>391</a>	</span><span class="kw">pub extern </span><span class="string">"C" </span><span class="kw">fn </span>test_return_huge_len(_params: <span class="kw-2">*const </span>u8, _len: usize) -&gt; u64 {
+<a href=#392 id=392 data-nosnippet>392</a>		pack_ptr_and_len(<span class="number">0</span>, u32::MAX)
+<a href=#393 id=393 data-nosnippet>393</a>	}
+<a href=#394 id=394 data-nosnippet>394</a>
+<a href=#395 id=395 data-nosnippet>395</a>	<span class="comment">// Returns an offset right before the edge of the wasm memory boundary. It should succeed.
+<a href=#396 id=396 data-nosnippet>396</a>	</span><span class="attr">#[no_mangle]
+<a href=#397 id=397 data-nosnippet>397</a>	#[cfg(not(feature = <span class="string">"std"</span>))]
+<a href=#398 id=398 data-nosnippet>398</a>	</span><span class="kw">pub extern </span><span class="string">"C" </span><span class="kw">fn </span>test_return_max_memory_offset(_params: <span class="kw-2">*const </span>u8, _len: usize) -&gt; u64 {
+<a href=#399 id=399 data-nosnippet>399</a>		<span class="kw">let </span>output_ptr = (core::arch::wasm32::memory_size(<span class="number">0</span>) * WASM_PAGE_SIZE) <span class="kw">as </span>u32 - <span class="number">1</span>;
+<a href=#400 id=400 data-nosnippet>400</a>		<span class="kw">let </span>ptr = output_ptr <span class="kw">as </span><span class="kw-2">*mut </span>u8;
+<a href=#401 id=401 data-nosnippet>401</a>		<span class="kw">unsafe </span>{
+<a href=#402 id=402 data-nosnippet>402</a>			ptr.write(u8::MAX);
+<a href=#403 id=403 data-nosnippet>403</a>		}
+<a href=#404 id=404 data-nosnippet>404</a>		pack_ptr_and_len(output_ptr, <span class="number">1</span>)
+<a href=#405 id=405 data-nosnippet>405</a>	}
+<a href=#406 id=406 data-nosnippet>406</a>
+<a href=#407 id=407 data-nosnippet>407</a>	<span class="comment">// Returns an offset right after the edge of the wasm memory boundary. It should fail.
+<a href=#408 id=408 data-nosnippet>408</a>	</span><span class="attr">#[no_mangle]
+<a href=#409 id=409 data-nosnippet>409</a>	#[cfg(not(feature = <span class="string">"std"</span>))]
+<a href=#410 id=410 data-nosnippet>410</a>	</span><span class="kw">pub extern </span><span class="string">"C" </span><span class="kw">fn </span>test_return_max_memory_offset_plus_one(
+<a href=#411 id=411 data-nosnippet>411</a>		_params: <span class="kw-2">*const </span>u8,
+<a href=#412 id=412 data-nosnippet>412</a>		_len: usize,
+<a href=#413 id=413 data-nosnippet>413</a>	) -&gt; u64 {
+<a href=#414 id=414 data-nosnippet>414</a>		pack_ptr_and_len((core::arch::wasm32::memory_size(<span class="number">0</span>) * WASM_PAGE_SIZE) <span class="kw">as </span>u32, <span class="number">1</span>)
+<a href=#415 id=415 data-nosnippet>415</a>	}
+<a href=#416 id=416 data-nosnippet>416</a>
+<a href=#417 id=417 data-nosnippet>417</a>	<span class="comment">// Returns an output that overflows the u32 range. It should result in an error.
+<a href=#418 id=418 data-nosnippet>418</a>	</span><span class="attr">#[no_mangle]
+<a href=#419 id=419 data-nosnippet>419</a>	#[cfg(not(feature = <span class="string">"std"</span>))]
+<a href=#420 id=420 data-nosnippet>420</a>	</span><span class="kw">pub extern </span><span class="string">"C" </span><span class="kw">fn </span>test_return_overflow(_params: <span class="kw-2">*const </span>u8, _len: usize) -&gt; u64 {
+<a href=#421 id=421 data-nosnippet>421</a>		pack_ptr_and_len(u32::MAX, <span class="number">1</span>)
+<a href=#422 id=422 data-nosnippet>422</a>	}
+<a href=#423 id=423 data-nosnippet>423</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

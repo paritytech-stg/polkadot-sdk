@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["VerificationError"],"mod":["v1","v2"],"struct":["EthereumLocationsConverterFor","EventFixture","EventProof","Log","Proof"],"trait":["Verifier"],"type":["CallIndex"]};
+window.SIDEBAR_ITEMS = {"enum":["VerificationError"],"mod":["receipt","v1","v2"],"struct":["EthereumLocationsConverterFor","EventFixture","EventProof","Log","Proof"],"trait":["Verifier"],"type":["CallIndex"]};

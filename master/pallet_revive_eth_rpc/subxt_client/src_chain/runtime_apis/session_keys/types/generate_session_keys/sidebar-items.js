@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["output"],"type":["Seed"]};
+window.SIDEBAR_ITEMS = {"mod":["output"],"type":["Owner","Seed"]};

@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/client/transaction-pool/src/graph/ready.rs`."><title>ready.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/client/transaction-pool/src/graph/ready.rs`."><title>ready.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="sc_transaction_pool" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="sc_transaction_pool" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">sc_transaction_pool/graph/</div>ready.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">sc_transaction_pool/graph/</div>ready.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
@@ -580,7 +580,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#430 id=430 data-nosnippet>430</a>
 <a href=#431 id=431 data-nosnippet>431</a>			<span class="comment">// early exit if we are not replacing anything.
 <a href=#432 id=432 data-nosnippet>432</a>			</span><span class="kw">if </span>replace_hashes.is_empty() {
-<a href=#433 id=433 data-nosnippet>433</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>((<span class="macro">vec!</span>[], <span class="macro">vec!</span>[]))
+<a href=#433 id=433 data-nosnippet>433</a>				<span class="kw">return </span><span class="prelude-val">Ok</span>((<span class="macro">vec!</span>[], <span class="macro">vec!</span>[]));
 <a href=#434 id=434 data-nosnippet>434</a>			}
 <a href=#435 id=435 data-nosnippet>435</a>
 <a href=#436 id=436 data-nosnippet>436</a>			<span class="comment">// now check if collective priority is lower than the replacement transaction.
@@ -596,7 +596,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#446 id=446 data-nosnippet>446</a>
 <a href=#447 id=447 data-nosnippet>447</a>			<span class="comment">// bail - the transaction has too low priority to replace the old ones
 <a href=#448 id=448 data-nosnippet>448</a>			</span><span class="kw">if </span>old_priority &gt;= tx.priority {
-<a href=#449 id=449 data-nosnippet>449</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(error::Error::TooLowPriority { old: old_priority, new: tx.priority })
+<a href=#449 id=449 data-nosnippet>449</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(error::Error::TooLowPriority { old: old_priority, new: tx.priority });
 <a href=#450 id=450 data-nosnippet>450</a>			}
 <a href=#451 id=451 data-nosnippet>451</a>
 <a href=#452 id=452 data-nosnippet>452</a>			<span class="comment">// construct a list of unlocked transactions
@@ -697,8 +697,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#547 id=547 data-nosnippet>547</a>					<span class="question-mark">?</span>tx_hash,
 <a href=#548 id=548 data-nosnippet>548</a>					<span class="string">"Skipping invalid child transaction while iterating."
 <a href=#549 id=549 data-nosnippet>549</a>				</span>);
-<a href=#550 id=550 data-nosnippet>550</a>				<span class="kw">continue
-<a href=#551 id=551 data-nosnippet>551</a>			</span>}
+<a href=#550 id=550 data-nosnippet>550</a>				<span class="kw">continue</span>;
+<a href=#551 id=551 data-nosnippet>551</a>			}
 <a href=#552 id=552 data-nosnippet>552</a>
 <a href=#553 id=553 data-nosnippet>553</a>			<span class="kw">let </span>ready = <span class="kw">match </span><span class="self">self</span>.all.get(tx_hash).cloned() {
 <a href=#554 id=554 data-nosnippet>554</a>				<span class="prelude-val">Some</span>(ready) =&gt; ready,
@@ -723,7 +723,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#573 id=573 data-nosnippet>573</a>				}
 <a href=#574 id=574 data-nosnippet>574</a>			}
 <a href=#575 id=575 data-nosnippet>575</a>
-<a href=#576 id=576 data-nosnippet>576</a>			<span class="kw">return </span><span class="prelude-val">Some</span>(best.transaction)
+<a href=#576 id=576 data-nosnippet>576</a>			<span class="kw">return </span><span class="prelude-val">Some</span>(best.transaction);
 <a href=#577 id=577 data-nosnippet>577</a>		}
 <a href=#578 id=578 data-nosnippet>578</a>	}
 <a href=#579 id=579 data-nosnippet>579</a>}
@@ -974,7 +974,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#824 id=824 data-nosnippet>824</a>		<span class="macro">assert!</span>(!tx1_unlocks.contains(<span class="kw-2">&amp;</span>tx3.hash));
 <a href=#825 id=825 data-nosnippet>825</a>		<span class="macro">assert!</span>(tx1_unlocks.contains(<span class="kw-2">&amp;</span>tx4.hash));
 <a href=#826 id=826 data-nosnippet>826</a>	}
-<a href=#827 id=827 data-nosnippet>827</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#827 id=827 data-nosnippet>827</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

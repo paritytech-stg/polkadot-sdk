@@ -1,1 +1,0 @@
-searchState.loadedDescShard("pallet_paged_list_fuzzer", 0, "Running\nAppends and drains random number of elements in random …\nReturns the argument unchanged.\nGet a mutable reference to the inner from the outer.\nGet a reference to the inner from the outer.\nCalls <code>U::from(self)</code>.")

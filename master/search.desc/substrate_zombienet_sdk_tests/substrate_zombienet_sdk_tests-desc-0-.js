@@ -1,1 +1,0 @@
-searchState.loadedDescShard("substrate_zombienet_sdk_tests", 0, "")

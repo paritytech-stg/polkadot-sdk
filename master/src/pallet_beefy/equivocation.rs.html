@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/beefy/src/equivocation.rs`."><title>equivocation.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/beefy/src/equivocation.rs`."><title>equivocation.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_beefy" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_beefy" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_beefy/</div>equivocation.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_beefy/</div>equivocation.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -305,252 +305,262 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#155 id=155 data-nosnippet>155</a>	<span class="doccomment">/// Returns the authority id of the equivocator.
 <a href=#156 id=156 data-nosnippet>156</a>	</span><span class="kw">fn </span>offender_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T::BeefyId {
 <a href=#157 id=157 data-nosnippet>157</a>		<span class="kw">match </span><span class="self">self </span>{
-<a href=#158 id=158 data-nosnippet>158</a>			EquivocationEvidenceFor::DoubleVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt;
-<a href=#159 id=159 data-nosnippet>159</a>				equivocation_proof.offender_id(),
-<a href=#160 id=160 data-nosnippet>160</a>			EquivocationEvidenceFor::ForkVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt;
-<a href=#161 id=161 data-nosnippet>161</a>				<span class="kw-2">&amp;</span>equivocation_proof.vote.id,
-<a href=#162 id=162 data-nosnippet>162</a>			EquivocationEvidenceFor::FutureBlockVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt;
-<a href=#163 id=163 data-nosnippet>163</a>				<span class="kw-2">&amp;</span>equivocation_proof.vote.id,
-<a href=#164 id=164 data-nosnippet>164</a>		}
-<a href=#165 id=165 data-nosnippet>165</a>	}
-<a href=#166 id=166 data-nosnippet>166</a>
-<a href=#167 id=167 data-nosnippet>167</a>	<span class="doccomment">/// Returns the round number at which the equivocation occurred.
-<a href=#168 id=168 data-nosnippet>168</a>	</span><span class="kw">fn </span>round_number(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>BlockNumberFor&lt;T&gt; {
-<a href=#169 id=169 data-nosnippet>169</a>		<span class="kw">match </span><span class="self">self </span>{
-<a href=#170 id=170 data-nosnippet>170</a>			EquivocationEvidenceFor::DoubleVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt;
-<a href=#171 id=171 data-nosnippet>171</a>				equivocation_proof.round_number(),
-<a href=#172 id=172 data-nosnippet>172</a>			EquivocationEvidenceFor::ForkVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt;
-<a href=#173 id=173 data-nosnippet>173</a>				<span class="kw-2">&amp;</span>equivocation_proof.vote.commitment.block_number,
-<a href=#174 id=174 data-nosnippet>174</a>			EquivocationEvidenceFor::FutureBlockVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt;
-<a href=#175 id=175 data-nosnippet>175</a>				<span class="kw-2">&amp;</span>equivocation_proof.vote.commitment.block_number,
-<a href=#176 id=176 data-nosnippet>176</a>		}
-<a href=#177 id=177 data-nosnippet>177</a>	}
-<a href=#178 id=178 data-nosnippet>178</a>
-<a href=#179 id=179 data-nosnippet>179</a>	<span class="doccomment">/// Returns the set id at which the equivocation occurred.
-<a href=#180 id=180 data-nosnippet>180</a>	</span><span class="kw">fn </span>set_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; ValidatorSetId {
-<a href=#181 id=181 data-nosnippet>181</a>		<span class="kw">match </span><span class="self">self </span>{
-<a href=#182 id=182 data-nosnippet>182</a>			EquivocationEvidenceFor::DoubleVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt;
-<a href=#183 id=183 data-nosnippet>183</a>				equivocation_proof.set_id(),
-<a href=#184 id=184 data-nosnippet>184</a>			EquivocationEvidenceFor::ForkVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt;
-<a href=#185 id=185 data-nosnippet>185</a>				equivocation_proof.vote.commitment.validator_set_id,
-<a href=#186 id=186 data-nosnippet>186</a>			EquivocationEvidenceFor::FutureBlockVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt;
-<a href=#187 id=187 data-nosnippet>187</a>				equivocation_proof.vote.commitment.validator_set_id,
-<a href=#188 id=188 data-nosnippet>188</a>		}
-<a href=#189 id=189 data-nosnippet>189</a>	}
-<a href=#190 id=190 data-nosnippet>190</a>
-<a href=#191 id=191 data-nosnippet>191</a>	<span class="doccomment">/// Returns the set id at which the equivocation occurred.
-<a href=#192 id=192 data-nosnippet>192</a>	</span><span class="kw">fn </span>key_owner_proof(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T::KeyOwnerProof {
-<a href=#193 id=193 data-nosnippet>193</a>		<span class="kw">match </span><span class="self">self </span>{
-<a href=#194 id=194 data-nosnippet>194</a>			EquivocationEvidenceFor::DoubleVotingProof(<span class="kw">_</span>, key_owner_proof) =&gt; key_owner_proof,
-<a href=#195 id=195 data-nosnippet>195</a>			EquivocationEvidenceFor::ForkVotingProof(<span class="kw">_</span>, key_owner_proof) =&gt; key_owner_proof,
-<a href=#196 id=196 data-nosnippet>196</a>			EquivocationEvidenceFor::FutureBlockVotingProof(<span class="kw">_</span>, key_owner_proof) =&gt; key_owner_proof,
+<a href=#158 id=158 data-nosnippet>158</a>			EquivocationEvidenceFor::DoubleVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#159 id=159 data-nosnippet>159</a>				equivocation_proof.offender_id()
+<a href=#160 id=160 data-nosnippet>160</a>			},
+<a href=#161 id=161 data-nosnippet>161</a>			EquivocationEvidenceFor::ForkVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#162 id=162 data-nosnippet>162</a>				<span class="kw-2">&amp;</span>equivocation_proof.vote.id
+<a href=#163 id=163 data-nosnippet>163</a>			},
+<a href=#164 id=164 data-nosnippet>164</a>			EquivocationEvidenceFor::FutureBlockVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#165 id=165 data-nosnippet>165</a>				<span class="kw-2">&amp;</span>equivocation_proof.vote.id
+<a href=#166 id=166 data-nosnippet>166</a>			},
+<a href=#167 id=167 data-nosnippet>167</a>		}
+<a href=#168 id=168 data-nosnippet>168</a>	}
+<a href=#169 id=169 data-nosnippet>169</a>
+<a href=#170 id=170 data-nosnippet>170</a>	<span class="doccomment">/// Returns the round number at which the equivocation occurred.
+<a href=#171 id=171 data-nosnippet>171</a>	</span><span class="kw">fn </span>round_number(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>BlockNumberFor&lt;T&gt; {
+<a href=#172 id=172 data-nosnippet>172</a>		<span class="kw">match </span><span class="self">self </span>{
+<a href=#173 id=173 data-nosnippet>173</a>			EquivocationEvidenceFor::DoubleVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#174 id=174 data-nosnippet>174</a>				equivocation_proof.round_number()
+<a href=#175 id=175 data-nosnippet>175</a>			},
+<a href=#176 id=176 data-nosnippet>176</a>			EquivocationEvidenceFor::ForkVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#177 id=177 data-nosnippet>177</a>				<span class="kw-2">&amp;</span>equivocation_proof.vote.commitment.block_number
+<a href=#178 id=178 data-nosnippet>178</a>			},
+<a href=#179 id=179 data-nosnippet>179</a>			EquivocationEvidenceFor::FutureBlockVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#180 id=180 data-nosnippet>180</a>				<span class="kw-2">&amp;</span>equivocation_proof.vote.commitment.block_number
+<a href=#181 id=181 data-nosnippet>181</a>			},
+<a href=#182 id=182 data-nosnippet>182</a>		}
+<a href=#183 id=183 data-nosnippet>183</a>	}
+<a href=#184 id=184 data-nosnippet>184</a>
+<a href=#185 id=185 data-nosnippet>185</a>	<span class="doccomment">/// Returns the set id at which the equivocation occurred.
+<a href=#186 id=186 data-nosnippet>186</a>	</span><span class="kw">fn </span>set_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; ValidatorSetId {
+<a href=#187 id=187 data-nosnippet>187</a>		<span class="kw">match </span><span class="self">self </span>{
+<a href=#188 id=188 data-nosnippet>188</a>			EquivocationEvidenceFor::DoubleVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#189 id=189 data-nosnippet>189</a>				equivocation_proof.set_id()
+<a href=#190 id=190 data-nosnippet>190</a>			},
+<a href=#191 id=191 data-nosnippet>191</a>			EquivocationEvidenceFor::ForkVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#192 id=192 data-nosnippet>192</a>				equivocation_proof.vote.commitment.validator_set_id
+<a href=#193 id=193 data-nosnippet>193</a>			},
+<a href=#194 id=194 data-nosnippet>194</a>			EquivocationEvidenceFor::FutureBlockVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#195 id=195 data-nosnippet>195</a>				equivocation_proof.vote.commitment.validator_set_id
+<a href=#196 id=196 data-nosnippet>196</a>			},
 <a href=#197 id=197 data-nosnippet>197</a>		}
 <a href=#198 id=198 data-nosnippet>198</a>	}
 <a href=#199 id=199 data-nosnippet>199</a>
-<a href=#200 id=200 data-nosnippet>200</a>	<span class="kw">fn </span>checked_offender&lt;P&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;P::IdentificationTuple&gt;
-<a href=#201 id=201 data-nosnippet>201</a>	<span class="kw">where
-<a href=#202 id=202 data-nosnippet>202</a>		</span>P: KeyOwnerProofSystem&lt;(KeyTypeId, T::BeefyId), Proof = T::KeyOwnerProof&gt;,
-<a href=#203 id=203 data-nosnippet>203</a>	{
-<a href=#204 id=204 data-nosnippet>204</a>		<span class="kw">let </span>key = (BEEFY_KEY_TYPE, <span class="self">self</span>.offender_id().clone());
-<a href=#205 id=205 data-nosnippet>205</a>		P::check_proof(key, <span class="self">self</span>.key_owner_proof().clone())
-<a href=#206 id=206 data-nosnippet>206</a>	}
-<a href=#207 id=207 data-nosnippet>207</a>
-<a href=#208 id=208 data-nosnippet>208</a>	<span class="kw">fn </span>check_equivocation_proof(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&lt;T&gt;&gt; {
-<a href=#209 id=209 data-nosnippet>209</a>		<span class="kw">match </span><span class="self">self </span>{
-<a href=#210 id=210 data-nosnippet>210</a>			EquivocationEvidenceFor::DoubleVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
-<a href=#211 id=211 data-nosnippet>211</a>				<span class="comment">// Validate equivocation proof (check votes are different and signatures are valid).
-<a href=#212 id=212 data-nosnippet>212</a>				</span><span class="kw">if </span>!sp_consensus_beefy::check_double_voting_proof(<span class="kw-2">&amp;</span>equivocation_proof) {
-<a href=#213 id=213 data-nosnippet>213</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidDoubleVotingProof);
-<a href=#214 id=214 data-nosnippet>214</a>				}
-<a href=#215 id=215 data-nosnippet>215</a>
-<a href=#216 id=216 data-nosnippet>216</a>				<span class="prelude-val">Ok</span>(())
-<a href=#217 id=217 data-nosnippet>217</a>			},
-<a href=#218 id=218 data-nosnippet>218</a>			EquivocationEvidenceFor::ForkVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
-<a href=#219 id=219 data-nosnippet>219</a>				<span class="kw">let </span>ForkVotingProof { vote, ancestry_proof, header } = equivocation_proof;
-<a href=#220 id=220 data-nosnippet>220</a>
-<a href=#221 id=221 data-nosnippet>221</a>				<span class="kw">if </span>!&lt;T::AncestryHelper <span class="kw">as </span>AncestryHelper&lt;HeaderFor&lt;T&gt;&gt;&gt;::is_proof_optimal(
-<a href=#222 id=222 data-nosnippet>222</a>					<span class="kw-2">&amp;</span>ancestry_proof,
-<a href=#223 id=223 data-nosnippet>223</a>				) {
-<a href=#224 id=224 data-nosnippet>224</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidForkVotingProof);
-<a href=#225 id=225 data-nosnippet>225</a>				}
-<a href=#226 id=226 data-nosnippet>226</a>
-<a href=#227 id=227 data-nosnippet>227</a>				<span class="kw">let </span>maybe_validation_context = &lt;T::AncestryHelper <span class="kw">as </span>AncestryHelper&lt;
-<a href=#228 id=228 data-nosnippet>228</a>					HeaderFor&lt;T&gt;,
-<a href=#229 id=229 data-nosnippet>229</a>				&gt;&gt;::extract_validation_context(header);
-<a href=#230 id=230 data-nosnippet>230</a>				<span class="kw">let </span>validation_context = <span class="kw">match </span>maybe_validation_context {
-<a href=#231 id=231 data-nosnippet>231</a>					<span class="prelude-val">Some</span>(validation_context) =&gt; validation_context,
-<a href=#232 id=232 data-nosnippet>232</a>					<span class="prelude-val">None </span>=&gt; {
-<a href=#233 id=233 data-nosnippet>233</a>						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidForkVotingProof);
-<a href=#234 id=234 data-nosnippet>234</a>					},
-<a href=#235 id=235 data-nosnippet>235</a>				};
-<a href=#236 id=236 data-nosnippet>236</a>
-<a href=#237 id=237 data-nosnippet>237</a>				<span class="kw">let </span>is_non_canonical =
-<a href=#238 id=238 data-nosnippet>238</a>					&lt;T::AncestryHelper <span class="kw">as </span>AncestryHelper&lt;HeaderFor&lt;T&gt;&gt;&gt;::is_non_canonical(
-<a href=#239 id=239 data-nosnippet>239</a>						<span class="kw-2">&amp;</span>vote.commitment,
-<a href=#240 id=240 data-nosnippet>240</a>						ancestry_proof,
-<a href=#241 id=241 data-nosnippet>241</a>						validation_context,
-<a href=#242 id=242 data-nosnippet>242</a>					);
-<a href=#243 id=243 data-nosnippet>243</a>				<span class="kw">if </span>!is_non_canonical {
-<a href=#244 id=244 data-nosnippet>244</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidForkVotingProof);
-<a href=#245 id=245 data-nosnippet>245</a>				}
-<a href=#246 id=246 data-nosnippet>246</a>
-<a href=#247 id=247 data-nosnippet>247</a>				<span class="kw">let </span>is_signature_valid =
-<a href=#248 id=248 data-nosnippet>248</a>					check_commitment_signature(<span class="kw-2">&amp;</span>vote.commitment, <span class="kw-2">&amp;</span>vote.id, <span class="kw-2">&amp;</span>vote.signature);
-<a href=#249 id=249 data-nosnippet>249</a>				<span class="kw">if </span>!is_signature_valid {
-<a href=#250 id=250 data-nosnippet>250</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidForkVotingProof);
-<a href=#251 id=251 data-nosnippet>251</a>				}
-<a href=#252 id=252 data-nosnippet>252</a>
-<a href=#253 id=253 data-nosnippet>253</a>				<span class="prelude-val">Ok</span>(())
-<a href=#254 id=254 data-nosnippet>254</a>			},
-<a href=#255 id=255 data-nosnippet>255</a>			EquivocationEvidenceFor::FutureBlockVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
-<a href=#256 id=256 data-nosnippet>256</a>				<span class="kw">let </span>FutureBlockVotingProof { vote } = equivocation_proof;
-<a href=#257 id=257 data-nosnippet>257</a>				<span class="comment">// Check if the commitment actually targets a future block
-<a href=#258 id=258 data-nosnippet>258</a>				</span><span class="kw">if </span>vote.commitment.block_number &lt; frame_system::Pallet::&lt;T&gt;::block_number() {
-<a href=#259 id=259 data-nosnippet>259</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidFutureBlockVotingProof);
+<a href=#200 id=200 data-nosnippet>200</a>	<span class="doccomment">/// Returns the set id at which the equivocation occurred.
+<a href=#201 id=201 data-nosnippet>201</a>	</span><span class="kw">fn </span>key_owner_proof(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T::KeyOwnerProof {
+<a href=#202 id=202 data-nosnippet>202</a>		<span class="kw">match </span><span class="self">self </span>{
+<a href=#203 id=203 data-nosnippet>203</a>			EquivocationEvidenceFor::DoubleVotingProof(<span class="kw">_</span>, key_owner_proof) =&gt; key_owner_proof,
+<a href=#204 id=204 data-nosnippet>204</a>			EquivocationEvidenceFor::ForkVotingProof(<span class="kw">_</span>, key_owner_proof) =&gt; key_owner_proof,
+<a href=#205 id=205 data-nosnippet>205</a>			EquivocationEvidenceFor::FutureBlockVotingProof(<span class="kw">_</span>, key_owner_proof) =&gt; key_owner_proof,
+<a href=#206 id=206 data-nosnippet>206</a>		}
+<a href=#207 id=207 data-nosnippet>207</a>	}
+<a href=#208 id=208 data-nosnippet>208</a>
+<a href=#209 id=209 data-nosnippet>209</a>	<span class="kw">fn </span>checked_offender&lt;P&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;P::IdentificationTuple&gt;
+<a href=#210 id=210 data-nosnippet>210</a>	<span class="kw">where
+<a href=#211 id=211 data-nosnippet>211</a>		</span>P: KeyOwnerProofSystem&lt;(KeyTypeId, T::BeefyId), Proof = T::KeyOwnerProof&gt;,
+<a href=#212 id=212 data-nosnippet>212</a>	{
+<a href=#213 id=213 data-nosnippet>213</a>		<span class="kw">let </span>key = (BEEFY_KEY_TYPE, <span class="self">self</span>.offender_id().clone());
+<a href=#214 id=214 data-nosnippet>214</a>		P::check_proof(key, <span class="self">self</span>.key_owner_proof().clone())
+<a href=#215 id=215 data-nosnippet>215</a>	}
+<a href=#216 id=216 data-nosnippet>216</a>
+<a href=#217 id=217 data-nosnippet>217</a>	<span class="kw">fn </span>check_equivocation_proof(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&lt;T&gt;&gt; {
+<a href=#218 id=218 data-nosnippet>218</a>		<span class="kw">match </span><span class="self">self </span>{
+<a href=#219 id=219 data-nosnippet>219</a>			EquivocationEvidenceFor::DoubleVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#220 id=220 data-nosnippet>220</a>				<span class="comment">// Validate equivocation proof (check votes are different and signatures are valid).
+<a href=#221 id=221 data-nosnippet>221</a>				</span><span class="kw">if </span>!sp_consensus_beefy::check_double_voting_proof(<span class="kw-2">&amp;</span>equivocation_proof) {
+<a href=#222 id=222 data-nosnippet>222</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidDoubleVotingProof);
+<a href=#223 id=223 data-nosnippet>223</a>				}
+<a href=#224 id=224 data-nosnippet>224</a>
+<a href=#225 id=225 data-nosnippet>225</a>				<span class="prelude-val">Ok</span>(())
+<a href=#226 id=226 data-nosnippet>226</a>			},
+<a href=#227 id=227 data-nosnippet>227</a>			EquivocationEvidenceFor::ForkVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#228 id=228 data-nosnippet>228</a>				<span class="kw">let </span>ForkVotingProof { vote, ancestry_proof, header } = equivocation_proof;
+<a href=#229 id=229 data-nosnippet>229</a>
+<a href=#230 id=230 data-nosnippet>230</a>				<span class="kw">if </span>!&lt;T::AncestryHelper <span class="kw">as </span>AncestryHelper&lt;HeaderFor&lt;T&gt;&gt;&gt;::is_proof_optimal(
+<a href=#231 id=231 data-nosnippet>231</a>					<span class="kw-2">&amp;</span>ancestry_proof,
+<a href=#232 id=232 data-nosnippet>232</a>				) {
+<a href=#233 id=233 data-nosnippet>233</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidForkVotingProof);
+<a href=#234 id=234 data-nosnippet>234</a>				}
+<a href=#235 id=235 data-nosnippet>235</a>
+<a href=#236 id=236 data-nosnippet>236</a>				<span class="kw">let </span>maybe_validation_context = &lt;T::AncestryHelper <span class="kw">as </span>AncestryHelper&lt;
+<a href=#237 id=237 data-nosnippet>237</a>					HeaderFor&lt;T&gt;,
+<a href=#238 id=238 data-nosnippet>238</a>				&gt;&gt;::extract_validation_context(header);
+<a href=#239 id=239 data-nosnippet>239</a>				<span class="kw">let </span>validation_context = <span class="kw">match </span>maybe_validation_context {
+<a href=#240 id=240 data-nosnippet>240</a>					<span class="prelude-val">Some</span>(validation_context) =&gt; validation_context,
+<a href=#241 id=241 data-nosnippet>241</a>					<span class="prelude-val">None </span>=&gt; {
+<a href=#242 id=242 data-nosnippet>242</a>						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidForkVotingProof);
+<a href=#243 id=243 data-nosnippet>243</a>					},
+<a href=#244 id=244 data-nosnippet>244</a>				};
+<a href=#245 id=245 data-nosnippet>245</a>
+<a href=#246 id=246 data-nosnippet>246</a>				<span class="kw">let </span>is_non_canonical =
+<a href=#247 id=247 data-nosnippet>247</a>					&lt;T::AncestryHelper <span class="kw">as </span>AncestryHelper&lt;HeaderFor&lt;T&gt;&gt;&gt;::is_non_canonical(
+<a href=#248 id=248 data-nosnippet>248</a>						<span class="kw-2">&amp;</span>vote.commitment,
+<a href=#249 id=249 data-nosnippet>249</a>						ancestry_proof,
+<a href=#250 id=250 data-nosnippet>250</a>						validation_context,
+<a href=#251 id=251 data-nosnippet>251</a>					);
+<a href=#252 id=252 data-nosnippet>252</a>				<span class="kw">if </span>!is_non_canonical {
+<a href=#253 id=253 data-nosnippet>253</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidForkVotingProof);
+<a href=#254 id=254 data-nosnippet>254</a>				}
+<a href=#255 id=255 data-nosnippet>255</a>
+<a href=#256 id=256 data-nosnippet>256</a>				<span class="kw">let </span>is_signature_valid =
+<a href=#257 id=257 data-nosnippet>257</a>					check_commitment_signature(<span class="kw-2">&amp;</span>vote.commitment, <span class="kw-2">&amp;</span>vote.id, <span class="kw-2">&amp;</span>vote.signature);
+<a href=#258 id=258 data-nosnippet>258</a>				<span class="kw">if </span>!is_signature_valid {
+<a href=#259 id=259 data-nosnippet>259</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidForkVotingProof);
 <a href=#260 id=260 data-nosnippet>260</a>				}
 <a href=#261 id=261 data-nosnippet>261</a>
-<a href=#262 id=262 data-nosnippet>262</a>				<span class="kw">let </span>is_signature_valid =
-<a href=#263 id=263 data-nosnippet>263</a>					check_commitment_signature(<span class="kw-2">&amp;</span>vote.commitment, <span class="kw-2">&amp;</span>vote.id, <span class="kw-2">&amp;</span>vote.signature);
-<a href=#264 id=264 data-nosnippet>264</a>				<span class="kw">if </span>!is_signature_valid {
-<a href=#265 id=265 data-nosnippet>265</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidForkVotingProof);
-<a href=#266 id=266 data-nosnippet>266</a>				}
-<a href=#267 id=267 data-nosnippet>267</a>
-<a href=#268 id=268 data-nosnippet>268</a>				<span class="prelude-val">Ok</span>(())
-<a href=#269 id=269 data-nosnippet>269</a>			},
-<a href=#270 id=270 data-nosnippet>270</a>		}
-<a href=#271 id=271 data-nosnippet>271</a>	}
-<a href=#272 id=272 data-nosnippet>272</a>
-<a href=#273 id=273 data-nosnippet>273</a>	<span class="kw">fn </span>slash_fraction(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Perbill&gt; {
-<a href=#274 id=274 data-nosnippet>274</a>		<span class="kw">match </span><span class="self">self </span>{
-<a href=#275 id=275 data-nosnippet>275</a>			EquivocationEvidenceFor::DoubleVotingProof(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="prelude-val">None</span>,
-<a href=#276 id=276 data-nosnippet>276</a>			EquivocationEvidenceFor::ForkVotingProof(<span class="kw">_</span>, <span class="kw">_</span>) |
-<a href=#277 id=277 data-nosnippet>277</a>			EquivocationEvidenceFor::FutureBlockVotingProof(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(Perbill::from_percent(<span class="number">50</span>)),
-<a href=#278 id=278 data-nosnippet>278</a>		}
-<a href=#279 id=279 data-nosnippet>279</a>	}
-<a href=#280 id=280 data-nosnippet>280</a>}
+<a href=#262 id=262 data-nosnippet>262</a>				<span class="prelude-val">Ok</span>(())
+<a href=#263 id=263 data-nosnippet>263</a>			},
+<a href=#264 id=264 data-nosnippet>264</a>			EquivocationEvidenceFor::FutureBlockVotingProof(equivocation_proof, <span class="kw">_</span>) =&gt; {
+<a href=#265 id=265 data-nosnippet>265</a>				<span class="kw">let </span>FutureBlockVotingProof { vote } = equivocation_proof;
+<a href=#266 id=266 data-nosnippet>266</a>				<span class="comment">// Check if the commitment actually targets a future block
+<a href=#267 id=267 data-nosnippet>267</a>				</span><span class="kw">if </span>vote.commitment.block_number &lt; frame_system::Pallet::&lt;T&gt;::block_number() {
+<a href=#268 id=268 data-nosnippet>268</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidFutureBlockVotingProof);
+<a href=#269 id=269 data-nosnippet>269</a>				}
+<a href=#270 id=270 data-nosnippet>270</a>
+<a href=#271 id=271 data-nosnippet>271</a>				<span class="kw">let </span>is_signature_valid =
+<a href=#272 id=272 data-nosnippet>272</a>					check_commitment_signature(<span class="kw-2">&amp;</span>vote.commitment, <span class="kw-2">&amp;</span>vote.id, <span class="kw-2">&amp;</span>vote.signature);
+<a href=#273 id=273 data-nosnippet>273</a>				<span class="kw">if </span>!is_signature_valid {
+<a href=#274 id=274 data-nosnippet>274</a>					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidForkVotingProof);
+<a href=#275 id=275 data-nosnippet>275</a>				}
+<a href=#276 id=276 data-nosnippet>276</a>
+<a href=#277 id=277 data-nosnippet>277</a>				<span class="prelude-val">Ok</span>(())
+<a href=#278 id=278 data-nosnippet>278</a>			},
+<a href=#279 id=279 data-nosnippet>279</a>		}
+<a href=#280 id=280 data-nosnippet>280</a>	}
 <a href=#281 id=281 data-nosnippet>281</a>
-<a href=#282 id=282 data-nosnippet>282</a><span class="kw">impl</span>&lt;T, R, P, L&gt; OffenceReportSystem&lt;<span class="prelude-ty">Option</span>&lt;T::AccountId&gt;, EquivocationEvidenceFor&lt;T&gt;&gt;
-<a href=#283 id=283 data-nosnippet>283</a>	<span class="kw">for </span>EquivocationReportSystem&lt;T, R, P, L&gt;
-<a href=#284 id=284 data-nosnippet>284</a><span class="kw">where
-<a href=#285 id=285 data-nosnippet>285</a>	</span>T: Config + pallet_authorship::Config + frame_system::offchain::CreateBare&lt;Call&lt;T&gt;&gt;,
-<a href=#286 id=286 data-nosnippet>286</a>	R: ReportOffence&lt;
-<a href=#287 id=287 data-nosnippet>287</a>		T::AccountId,
-<a href=#288 id=288 data-nosnippet>288</a>		P::IdentificationTuple,
-<a href=#289 id=289 data-nosnippet>289</a>		EquivocationOffence&lt;P::IdentificationTuple, BlockNumberFor&lt;T&gt;&gt;,
-<a href=#290 id=290 data-nosnippet>290</a>	&gt;,
-<a href=#291 id=291 data-nosnippet>291</a>	P: KeyOwnerProofSystem&lt;(KeyTypeId, T::BeefyId), Proof = T::KeyOwnerProof&gt;,
-<a href=#292 id=292 data-nosnippet>292</a>	P::IdentificationTuple: Clone,
-<a href=#293 id=293 data-nosnippet>293</a>	L: Get&lt;u64&gt;,
-<a href=#294 id=294 data-nosnippet>294</a>{
-<a href=#295 id=295 data-nosnippet>295</a>	<span class="kw">type </span>Longevity = L;
-<a href=#296 id=296 data-nosnippet>296</a>
-<a href=#297 id=297 data-nosnippet>297</a>	<span class="kw">fn </span>publish_evidence(evidence: EquivocationEvidenceFor&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), ()&gt; {
-<a href=#298 id=298 data-nosnippet>298</a>		<span class="kw">use </span>frame_system::offchain::SubmitTransaction;
-<a href=#299 id=299 data-nosnippet>299</a>
-<a href=#300 id=300 data-nosnippet>300</a>		<span class="kw">let </span>call: Call&lt;T&gt; = evidence.into();
-<a href=#301 id=301 data-nosnippet>301</a>		<span class="kw">let </span>xt = T::create_bare(call.into());
-<a href=#302 id=302 data-nosnippet>302</a>		<span class="kw">let </span>res = SubmitTransaction::&lt;T, Call&lt;T&gt;&gt;::submit_transaction(xt);
-<a href=#303 id=303 data-nosnippet>303</a>		<span class="kw">match </span>res {
-<a href=#304 id=304 data-nosnippet>304</a>			<span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; <span class="macro">info!</span>(target: LOG_TARGET, <span class="string">"Submitted equivocation report."</span>),
-<a href=#305 id=305 data-nosnippet>305</a>			<span class="prelude-val">Err</span>(e) =&gt; <span class="macro">error!</span>(target: LOG_TARGET, <span class="string">"Error submitting equivocation report: {:?}"</span>, e),
-<a href=#306 id=306 data-nosnippet>306</a>		}
-<a href=#307 id=307 data-nosnippet>307</a>		res
-<a href=#308 id=308 data-nosnippet>308</a>	}
-<a href=#309 id=309 data-nosnippet>309</a>
-<a href=#310 id=310 data-nosnippet>310</a>	<span class="kw">fn </span>check_evidence(
-<a href=#311 id=311 data-nosnippet>311</a>		evidence: EquivocationEvidenceFor&lt;T&gt;,
-<a href=#312 id=312 data-nosnippet>312</a>	) -&gt; <span class="prelude-ty">Result</span>&lt;(), TransactionValidityError&gt; {
-<a href=#313 id=313 data-nosnippet>313</a>		<span class="kw">let </span>offender = evidence.checked_offender::&lt;P&gt;().ok_or(InvalidTransaction::BadProof)<span class="question-mark">?</span>;
-<a href=#314 id=314 data-nosnippet>314</a>
-<a href=#315 id=315 data-nosnippet>315</a>		<span class="comment">// Check if the offence has already been reported, and if so then we can discard the report.
-<a href=#316 id=316 data-nosnippet>316</a>		</span><span class="kw">let </span>time_slot = TimeSlot { set_id: evidence.set_id(), round: <span class="kw-2">*</span>evidence.round_number() };
-<a href=#317 id=317 data-nosnippet>317</a>		<span class="kw">if </span>R::is_known_offence(<span class="kw-2">&amp;</span>[offender], <span class="kw-2">&amp;</span>time_slot) {
-<a href=#318 id=318 data-nosnippet>318</a>			<span class="prelude-val">Err</span>(InvalidTransaction::Stale.into())
-<a href=#319 id=319 data-nosnippet>319</a>		} <span class="kw">else </span>{
-<a href=#320 id=320 data-nosnippet>320</a>			<span class="prelude-val">Ok</span>(())
-<a href=#321 id=321 data-nosnippet>321</a>		}
-<a href=#322 id=322 data-nosnippet>322</a>	}
+<a href=#282 id=282 data-nosnippet>282</a>	<span class="kw">fn </span>slash_fraction(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Perbill&gt; {
+<a href=#283 id=283 data-nosnippet>283</a>		<span class="kw">match </span><span class="self">self </span>{
+<a href=#284 id=284 data-nosnippet>284</a>			EquivocationEvidenceFor::DoubleVotingProof(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="prelude-val">None</span>,
+<a href=#285 id=285 data-nosnippet>285</a>			EquivocationEvidenceFor::ForkVotingProof(<span class="kw">_</span>, <span class="kw">_</span>) |
+<a href=#286 id=286 data-nosnippet>286</a>			EquivocationEvidenceFor::FutureBlockVotingProof(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(Perbill::from_percent(<span class="number">50</span>)),
+<a href=#287 id=287 data-nosnippet>287</a>		}
+<a href=#288 id=288 data-nosnippet>288</a>	}
+<a href=#289 id=289 data-nosnippet>289</a>}
+<a href=#290 id=290 data-nosnippet>290</a>
+<a href=#291 id=291 data-nosnippet>291</a><span class="kw">impl</span>&lt;T, R, P, L&gt; OffenceReportSystem&lt;<span class="prelude-ty">Option</span>&lt;T::AccountId&gt;, EquivocationEvidenceFor&lt;T&gt;&gt;
+<a href=#292 id=292 data-nosnippet>292</a>	<span class="kw">for </span>EquivocationReportSystem&lt;T, R, P, L&gt;
+<a href=#293 id=293 data-nosnippet>293</a><span class="kw">where
+<a href=#294 id=294 data-nosnippet>294</a>	</span>T: Config + pallet_authorship::Config + frame_system::offchain::CreateBare&lt;Call&lt;T&gt;&gt;,
+<a href=#295 id=295 data-nosnippet>295</a>	R: ReportOffence&lt;
+<a href=#296 id=296 data-nosnippet>296</a>		T::AccountId,
+<a href=#297 id=297 data-nosnippet>297</a>		P::IdentificationTuple,
+<a href=#298 id=298 data-nosnippet>298</a>		EquivocationOffence&lt;P::IdentificationTuple, BlockNumberFor&lt;T&gt;&gt;,
+<a href=#299 id=299 data-nosnippet>299</a>	&gt;,
+<a href=#300 id=300 data-nosnippet>300</a>	P: KeyOwnerProofSystem&lt;(KeyTypeId, T::BeefyId), Proof = T::KeyOwnerProof&gt;,
+<a href=#301 id=301 data-nosnippet>301</a>	P::IdentificationTuple: Clone,
+<a href=#302 id=302 data-nosnippet>302</a>	L: Get&lt;u64&gt;,
+<a href=#303 id=303 data-nosnippet>303</a>{
+<a href=#304 id=304 data-nosnippet>304</a>	<span class="kw">type </span>Longevity = L;
+<a href=#305 id=305 data-nosnippet>305</a>
+<a href=#306 id=306 data-nosnippet>306</a>	<span class="kw">fn </span>publish_evidence(evidence: EquivocationEvidenceFor&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), ()&gt; {
+<a href=#307 id=307 data-nosnippet>307</a>		<span class="kw">use </span>frame_system::offchain::SubmitTransaction;
+<a href=#308 id=308 data-nosnippet>308</a>
+<a href=#309 id=309 data-nosnippet>309</a>		<span class="kw">let </span>call: Call&lt;T&gt; = evidence.into();
+<a href=#310 id=310 data-nosnippet>310</a>		<span class="kw">let </span>xt = T::create_bare(call.into());
+<a href=#311 id=311 data-nosnippet>311</a>		<span class="kw">let </span>res = SubmitTransaction::&lt;T, Call&lt;T&gt;&gt;::submit_transaction(xt);
+<a href=#312 id=312 data-nosnippet>312</a>		<span class="kw">match </span>res {
+<a href=#313 id=313 data-nosnippet>313</a>			<span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; <span class="macro">info!</span>(target: LOG_TARGET, <span class="string">"Submitted equivocation report."</span>),
+<a href=#314 id=314 data-nosnippet>314</a>			<span class="prelude-val">Err</span>(e) =&gt; <span class="macro">error!</span>(target: LOG_TARGET, <span class="string">"Error submitting equivocation report: {:?}"</span>, e),
+<a href=#315 id=315 data-nosnippet>315</a>		}
+<a href=#316 id=316 data-nosnippet>316</a>		res
+<a href=#317 id=317 data-nosnippet>317</a>	}
+<a href=#318 id=318 data-nosnippet>318</a>
+<a href=#319 id=319 data-nosnippet>319</a>	<span class="kw">fn </span>check_evidence(
+<a href=#320 id=320 data-nosnippet>320</a>		evidence: EquivocationEvidenceFor&lt;T&gt;,
+<a href=#321 id=321 data-nosnippet>321</a>	) -&gt; <span class="prelude-ty">Result</span>&lt;(), TransactionValidityError&gt; {
+<a href=#322 id=322 data-nosnippet>322</a>		<span class="kw">let </span>offender = evidence.checked_offender::&lt;P&gt;().ok_or(InvalidTransaction::BadProof)<span class="question-mark">?</span>;
 <a href=#323 id=323 data-nosnippet>323</a>
-<a href=#324 id=324 data-nosnippet>324</a>	<span class="kw">fn </span>process_evidence(
-<a href=#325 id=325 data-nosnippet>325</a>		reporter: <span class="prelude-ty">Option</span>&lt;T::AccountId&gt;,
-<a href=#326 id=326 data-nosnippet>326</a>		evidence: EquivocationEvidenceFor&lt;T&gt;,
-<a href=#327 id=327 data-nosnippet>327</a>	) -&gt; <span class="prelude-ty">Result</span>&lt;(), DispatchError&gt; {
-<a href=#328 id=328 data-nosnippet>328</a>		<span class="kw">let </span>maybe_slash_fraction = evidence.slash_fraction();
-<a href=#329 id=329 data-nosnippet>329</a>		<span class="kw">let </span>reporter = reporter.or_else(|| pallet_authorship::Pallet::&lt;T&gt;::author());
-<a href=#330 id=330 data-nosnippet>330</a>
-<a href=#331 id=331 data-nosnippet>331</a>		<span class="comment">// We check the equivocation within the context of its set id (and associated session).
-<a href=#332 id=332 data-nosnippet>332</a>		</span><span class="kw">let </span>set_id = evidence.set_id();
-<a href=#333 id=333 data-nosnippet>333</a>		<span class="kw">let </span>round = <span class="kw-2">*</span>evidence.round_number();
-<a href=#334 id=334 data-nosnippet>334</a>		<span class="kw">let </span>set_id_session_index = <span class="kw">crate</span>::SetIdSession::&lt;T&gt;::get(set_id)
-<a href=#335 id=335 data-nosnippet>335</a>			.ok_or(Error::&lt;T&gt;::InvalidEquivocationProofSessionMember)<span class="question-mark">?</span>;
-<a href=#336 id=336 data-nosnippet>336</a>
-<a href=#337 id=337 data-nosnippet>337</a>		<span class="comment">// Check that the session id for the membership proof is within the bounds
-<a href=#338 id=338 data-nosnippet>338</a>		// of the set id reported in the equivocation.
-<a href=#339 id=339 data-nosnippet>339</a>		</span><span class="kw">let </span>key_owner_proof = evidence.key_owner_proof();
-<a href=#340 id=340 data-nosnippet>340</a>		<span class="kw">let </span>validator_count = key_owner_proof.validator_count();
-<a href=#341 id=341 data-nosnippet>341</a>		<span class="kw">let </span>session_index = key_owner_proof.session();
-<a href=#342 id=342 data-nosnippet>342</a>		<span class="kw">if </span>session_index != set_id_session_index {
-<a href=#343 id=343 data-nosnippet>343</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidEquivocationProofSession.into())
-<a href=#344 id=344 data-nosnippet>344</a>		}
+<a href=#324 id=324 data-nosnippet>324</a>		<span class="comment">// Check if the offence has already been reported, and if so then we can discard the report.
+<a href=#325 id=325 data-nosnippet>325</a>		</span><span class="kw">let </span>time_slot = TimeSlot { set_id: evidence.set_id(), round: <span class="kw-2">*</span>evidence.round_number() };
+<a href=#326 id=326 data-nosnippet>326</a>		<span class="kw">if </span>R::is_known_offence(<span class="kw-2">&amp;</span>[offender], <span class="kw-2">&amp;</span>time_slot) {
+<a href=#327 id=327 data-nosnippet>327</a>			<span class="prelude-val">Err</span>(InvalidTransaction::Stale.into())
+<a href=#328 id=328 data-nosnippet>328</a>		} <span class="kw">else </span>{
+<a href=#329 id=329 data-nosnippet>329</a>			<span class="prelude-val">Ok</span>(())
+<a href=#330 id=330 data-nosnippet>330</a>		}
+<a href=#331 id=331 data-nosnippet>331</a>	}
+<a href=#332 id=332 data-nosnippet>332</a>
+<a href=#333 id=333 data-nosnippet>333</a>	<span class="kw">fn </span>process_evidence(
+<a href=#334 id=334 data-nosnippet>334</a>		reporter: <span class="prelude-ty">Option</span>&lt;T::AccountId&gt;,
+<a href=#335 id=335 data-nosnippet>335</a>		evidence: EquivocationEvidenceFor&lt;T&gt;,
+<a href=#336 id=336 data-nosnippet>336</a>	) -&gt; <span class="prelude-ty">Result</span>&lt;(), DispatchError&gt; {
+<a href=#337 id=337 data-nosnippet>337</a>		<span class="kw">let </span>maybe_slash_fraction = evidence.slash_fraction();
+<a href=#338 id=338 data-nosnippet>338</a>		<span class="kw">let </span>reporter = reporter.or_else(|| pallet_authorship::Pallet::&lt;T&gt;::author());
+<a href=#339 id=339 data-nosnippet>339</a>
+<a href=#340 id=340 data-nosnippet>340</a>		<span class="comment">// We check the equivocation within the context of its set id (and associated session).
+<a href=#341 id=341 data-nosnippet>341</a>		</span><span class="kw">let </span>set_id = evidence.set_id();
+<a href=#342 id=342 data-nosnippet>342</a>		<span class="kw">let </span>round = <span class="kw-2">*</span>evidence.round_number();
+<a href=#343 id=343 data-nosnippet>343</a>		<span class="kw">let </span>set_id_session_index = <span class="kw">crate</span>::SetIdSession::&lt;T&gt;::get(set_id)
+<a href=#344 id=344 data-nosnippet>344</a>			.ok_or(Error::&lt;T&gt;::InvalidEquivocationProofSessionMember)<span class="question-mark">?</span>;
 <a href=#345 id=345 data-nosnippet>345</a>
-<a href=#346 id=346 data-nosnippet>346</a>		<span class="comment">// Validate the key ownership proof extracting the id of the offender.
-<a href=#347 id=347 data-nosnippet>347</a>		</span><span class="kw">let </span>offender =
-<a href=#348 id=348 data-nosnippet>348</a>			evidence.checked_offender::&lt;P&gt;().ok_or(Error::&lt;T&gt;::InvalidKeyOwnershipProof)<span class="question-mark">?</span>;
-<a href=#349 id=349 data-nosnippet>349</a>
-<a href=#350 id=350 data-nosnippet>350</a>		evidence.check_equivocation_proof()<span class="question-mark">?</span>;
-<a href=#351 id=351 data-nosnippet>351</a>
-<a href=#352 id=352 data-nosnippet>352</a>		<span class="kw">let </span>offence = EquivocationOffence {
-<a href=#353 id=353 data-nosnippet>353</a>			time_slot: TimeSlot { set_id, round },
-<a href=#354 id=354 data-nosnippet>354</a>			session_index,
-<a href=#355 id=355 data-nosnippet>355</a>			validator_set_count: validator_count,
-<a href=#356 id=356 data-nosnippet>356</a>			offender,
-<a href=#357 id=357 data-nosnippet>357</a>			maybe_slash_fraction,
-<a href=#358 id=358 data-nosnippet>358</a>		};
-<a href=#359 id=359 data-nosnippet>359</a>		R::report_offence(reporter.into_iter().collect(), offence)
-<a href=#360 id=360 data-nosnippet>360</a>			.map_err(|<span class="kw">_</span>| Error::&lt;T&gt;::DuplicateOffenceReport.into())
-<a href=#361 id=361 data-nosnippet>361</a>	}
-<a href=#362 id=362 data-nosnippet>362</a>}
-<a href=#363 id=363 data-nosnippet>363</a>
-<a href=#364 id=364 data-nosnippet>364</a><span class="doccomment">/// Methods for the `ValidateUnsigned` implementation:
-<a href=#365 id=365 data-nosnippet>365</a>/// It restricts calls to `report_equivocation_unsigned` to local calls (i.e. extrinsics generated
-<a href=#366 id=366 data-nosnippet>366</a>/// on this node) or that already in a block. This guarantees that only block authors can include
-<a href=#367 id=367 data-nosnippet>367</a>/// unsigned equivocation reports.
-<a href=#368 id=368 data-nosnippet>368</a></span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
-<a href=#369 id=369 data-nosnippet>369</a>	<span class="kw">pub fn </span>validate_unsigned(source: TransactionSource, call: <span class="kw-2">&amp;</span>Call&lt;T&gt;) -&gt; TransactionValidity {
-<a href=#370 id=370 data-nosnippet>370</a>		<span class="comment">// discard equivocation report not coming from the local node
-<a href=#371 id=371 data-nosnippet>371</a>		</span><span class="kw">match </span>source {
-<a href=#372 id=372 data-nosnippet>372</a>			TransactionSource::Local | TransactionSource::InBlock =&gt; { <span class="comment">/* allowed */ </span>},
-<a href=#373 id=373 data-nosnippet>373</a>			<span class="kw">_ </span>=&gt; {
-<a href=#374 id=374 data-nosnippet>374</a>				<span class="macro">log::warn!</span>(
-<a href=#375 id=375 data-nosnippet>375</a>					target: LOG_TARGET,
-<a href=#376 id=376 data-nosnippet>376</a>					<span class="string">"rejecting unsigned report equivocation transaction because it is not local/in-block."
-<a href=#377 id=377 data-nosnippet>377</a>				</span>);
-<a href=#378 id=378 data-nosnippet>378</a>				<span class="kw">return </span>InvalidTransaction::Call.into()
-<a href=#379 id=379 data-nosnippet>379</a>			},
-<a href=#380 id=380 data-nosnippet>380</a>		}
-<a href=#381 id=381 data-nosnippet>381</a>
-<a href=#382 id=382 data-nosnippet>382</a>		<span class="kw">let </span>evidence = call.to_equivocation_evidence_for().ok_or(InvalidTransaction::Call)<span class="question-mark">?</span>;
-<a href=#383 id=383 data-nosnippet>383</a>		<span class="kw">let </span>tag = (evidence.offender_id().clone(), evidence.set_id(), <span class="kw-2">*</span>evidence.round_number());
-<a href=#384 id=384 data-nosnippet>384</a>		T::EquivocationReportSystem::check_evidence(evidence)<span class="question-mark">?</span>;
-<a href=#385 id=385 data-nosnippet>385</a>
-<a href=#386 id=386 data-nosnippet>386</a>		<span class="kw">let </span>longevity =
-<a href=#387 id=387 data-nosnippet>387</a>			&lt;T::EquivocationReportSystem <span class="kw">as </span>OffenceReportSystem&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt;::Longevity::get();
-<a href=#388 id=388 data-nosnippet>388</a>		ValidTransaction::with_tag_prefix(<span class="string">"BeefyEquivocation"</span>)
-<a href=#389 id=389 data-nosnippet>389</a>			<span class="comment">// We assign the maximum priority for any equivocation report.
-<a href=#390 id=390 data-nosnippet>390</a>			</span>.priority(TransactionPriority::MAX)
-<a href=#391 id=391 data-nosnippet>391</a>			<span class="comment">// Only one equivocation report for the same offender at the same slot.
-<a href=#392 id=392 data-nosnippet>392</a>			</span>.and_provides(tag)
-<a href=#393 id=393 data-nosnippet>393</a>			.longevity(longevity)
-<a href=#394 id=394 data-nosnippet>394</a>			<span class="comment">// We don't propagate this. This can never be included on a remote node.
-<a href=#395 id=395 data-nosnippet>395</a>			</span>.propagate(<span class="bool-val">false</span>)
-<a href=#396 id=396 data-nosnippet>396</a>			.build()
-<a href=#397 id=397 data-nosnippet>397</a>	}
-<a href=#398 id=398 data-nosnippet>398</a>
-<a href=#399 id=399 data-nosnippet>399</a>	<span class="kw">pub fn </span>pre_dispatch(call: <span class="kw-2">&amp;</span>Call&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), TransactionValidityError&gt; {
-<a href=#400 id=400 data-nosnippet>400</a>		<span class="kw">let </span>evidence = call.to_equivocation_evidence_for().ok_or(InvalidTransaction::Call)<span class="question-mark">?</span>;
-<a href=#401 id=401 data-nosnippet>401</a>		T::EquivocationReportSystem::check_evidence(evidence)
-<a href=#402 id=402 data-nosnippet>402</a>	}
-<a href=#403 id=403 data-nosnippet>403</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#346 id=346 data-nosnippet>346</a>		<span class="comment">// Check that the session id for the membership proof is within the bounds
+<a href=#347 id=347 data-nosnippet>347</a>		// of the set id reported in the equivocation.
+<a href=#348 id=348 data-nosnippet>348</a>		</span><span class="kw">let </span>key_owner_proof = evidence.key_owner_proof();
+<a href=#349 id=349 data-nosnippet>349</a>		<span class="kw">let </span>validator_count = key_owner_proof.validator_count();
+<a href=#350 id=350 data-nosnippet>350</a>		<span class="kw">let </span>session_index = key_owner_proof.session();
+<a href=#351 id=351 data-nosnippet>351</a>		<span class="kw">if </span><span class="macro">session_index !</span>= set_id_session_index {
+<a href=#352 id=352 data-nosnippet>352</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::InvalidEquivocationProofSession.into());
+<a href=#353 id=353 data-nosnippet>353</a>		}
+<a href=#354 id=354 data-nosnippet>354</a>
+<a href=#355 id=355 data-nosnippet>355</a>		<span class="comment">// Validate the key ownership proof extracting the id of the offender.
+<a href=#356 id=356 data-nosnippet>356</a>		</span><span class="kw">let </span>offender =
+<a href=#357 id=357 data-nosnippet>357</a>			evidence.checked_offender::&lt;P&gt;().ok_or(Error::&lt;T&gt;::InvalidKeyOwnershipProof)<span class="question-mark">?</span>;
+<a href=#358 id=358 data-nosnippet>358</a>
+<a href=#359 id=359 data-nosnippet>359</a>		evidence.check_equivocation_proof()<span class="question-mark">?</span>;
+<a href=#360 id=360 data-nosnippet>360</a>
+<a href=#361 id=361 data-nosnippet>361</a>		<span class="kw">let </span>offence = EquivocationOffence {
+<a href=#362 id=362 data-nosnippet>362</a>			time_slot: TimeSlot { set_id, round },
+<a href=#363 id=363 data-nosnippet>363</a>			session_index,
+<a href=#364 id=364 data-nosnippet>364</a>			validator_set_count: validator_count,
+<a href=#365 id=365 data-nosnippet>365</a>			offender,
+<a href=#366 id=366 data-nosnippet>366</a>			maybe_slash_fraction,
+<a href=#367 id=367 data-nosnippet>367</a>		};
+<a href=#368 id=368 data-nosnippet>368</a>		R::report_offence(reporter.into_iter().collect(), offence)
+<a href=#369 id=369 data-nosnippet>369</a>			.map_err(|<span class="kw">_</span>| Error::&lt;T&gt;::DuplicateOffenceReport.into())
+<a href=#370 id=370 data-nosnippet>370</a>	}
+<a href=#371 id=371 data-nosnippet>371</a>}
+<a href=#372 id=372 data-nosnippet>372</a>
+<a href=#373 id=373 data-nosnippet>373</a><span class="doccomment">/// Methods for the `ValidateUnsigned` implementation:
+<a href=#374 id=374 data-nosnippet>374</a>/// It restricts calls to `report_equivocation_unsigned` to local calls (i.e. extrinsics generated
+<a href=#375 id=375 data-nosnippet>375</a>/// on this node) or that already in a block. This guarantees that only block authors can include
+<a href=#376 id=376 data-nosnippet>376</a>/// unsigned equivocation reports.
+<a href=#377 id=377 data-nosnippet>377</a></span><span class="kw">impl</span>&lt;T: Config&gt; Pallet&lt;T&gt; {
+<a href=#378 id=378 data-nosnippet>378</a>	<span class="kw">pub fn </span>validate_unsigned(source: TransactionSource, call: <span class="kw-2">&amp;</span>Call&lt;T&gt;) -&gt; TransactionValidity {
+<a href=#379 id=379 data-nosnippet>379</a>		<span class="comment">// discard equivocation report not coming from the local node
+<a href=#380 id=380 data-nosnippet>380</a>		</span><span class="kw">match </span>source {
+<a href=#381 id=381 data-nosnippet>381</a>			TransactionSource::Local | TransactionSource::InBlock =&gt; { <span class="comment">/* allowed */ </span>},
+<a href=#382 id=382 data-nosnippet>382</a>			<span class="kw">_ </span>=&gt; {
+<a href=#383 id=383 data-nosnippet>383</a>				<span class="macro">log::warn!</span>(
+<a href=#384 id=384 data-nosnippet>384</a>					target: LOG_TARGET,
+<a href=#385 id=385 data-nosnippet>385</a>					<span class="string">"rejecting unsigned report equivocation transaction because it is not local/in-block."
+<a href=#386 id=386 data-nosnippet>386</a>				</span>);
+<a href=#387 id=387 data-nosnippet>387</a>				<span class="kw">return </span>InvalidTransaction::Call.into();
+<a href=#388 id=388 data-nosnippet>388</a>			},
+<a href=#389 id=389 data-nosnippet>389</a>		}
+<a href=#390 id=390 data-nosnippet>390</a>
+<a href=#391 id=391 data-nosnippet>391</a>		<span class="kw">let </span>evidence = call.to_equivocation_evidence_for().ok_or(InvalidTransaction::Call)<span class="question-mark">?</span>;
+<a href=#392 id=392 data-nosnippet>392</a>		<span class="kw">let </span>tag = (evidence.offender_id().clone(), evidence.set_id(), <span class="kw-2">*</span>evidence.round_number());
+<a href=#393 id=393 data-nosnippet>393</a>		T::EquivocationReportSystem::check_evidence(evidence)<span class="question-mark">?</span>;
+<a href=#394 id=394 data-nosnippet>394</a>
+<a href=#395 id=395 data-nosnippet>395</a>		<span class="kw">let </span>longevity =
+<a href=#396 id=396 data-nosnippet>396</a>			&lt;T::EquivocationReportSystem <span class="kw">as </span>OffenceReportSystem&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt;::Longevity::get();
+<a href=#397 id=397 data-nosnippet>397</a>		ValidTransaction::with_tag_prefix(<span class="string">"BeefyEquivocation"</span>)
+<a href=#398 id=398 data-nosnippet>398</a>			<span class="comment">// We assign the maximum priority for any equivocation report.
+<a href=#399 id=399 data-nosnippet>399</a>			</span>.priority(TransactionPriority::MAX)
+<a href=#400 id=400 data-nosnippet>400</a>			<span class="comment">// Only one equivocation report for the same offender at the same slot.
+<a href=#401 id=401 data-nosnippet>401</a>			</span>.and_provides(tag)
+<a href=#402 id=402 data-nosnippet>402</a>			.longevity(longevity)
+<a href=#403 id=403 data-nosnippet>403</a>			<span class="comment">// We don't propagate this. This can never be included on a remote node.
+<a href=#404 id=404 data-nosnippet>404</a>			</span>.propagate(<span class="bool-val">false</span>)
+<a href=#405 id=405 data-nosnippet>405</a>			.build()
+<a href=#406 id=406 data-nosnippet>406</a>	}
+<a href=#407 id=407 data-nosnippet>407</a>
+<a href=#408 id=408 data-nosnippet>408</a>	<span class="kw">pub fn </span>pre_dispatch(call: <span class="kw-2">&amp;</span>Call&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), TransactionValidityError&gt; {
+<a href=#409 id=409 data-nosnippet>409</a>		<span class="kw">let </span>evidence = call.to_equivocation_evidence_for().ok_or(InvalidTransaction::Call)<span class="question-mark">?</span>;
+<a href=#410 id=410 data-nosnippet>410</a>		T::EquivocationReportSystem::check_evidence(evidence)
+<a href=#411 id=411 data-nosnippet>411</a>	}
+<a href=#412 id=412 data-nosnippet>412</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

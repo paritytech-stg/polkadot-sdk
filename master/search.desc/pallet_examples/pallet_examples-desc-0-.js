@@ -1,1 +1,0 @@
-searchState.loadedDescShard("pallet_examples", 0, "FRAME Pallet Examples")

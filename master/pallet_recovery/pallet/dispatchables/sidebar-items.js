@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["as_recovered","cancel_recovered","claim_recovery","close_recovery","create_recovery","initiate_recovery","poke_deposit","remove_recovery","set_recovered","vouch_recovery"]};
+window.SIDEBAR_ITEMS = {"fn":["approve_attempt","cancel_attempt","control_inherited_account","finish_attempt","initiate_attempt","revoke_inheritor","set_friend_groups","slash_attempt"]};

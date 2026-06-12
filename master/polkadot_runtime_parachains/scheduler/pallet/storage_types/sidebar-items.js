@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":["ClaimQueue","SessionStartBlock","ValidatorGroups"]};
+window.SIDEBAR_ITEMS = {"struct":["CoreDescriptors","CoreSchedules","SessionStartBlock","ValidatorGroups"]};

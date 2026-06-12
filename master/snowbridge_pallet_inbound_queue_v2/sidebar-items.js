@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"constant":["LOG_TARGET"],"mod":["pallet","weights"],"type":["AccountIdOf","Nonce"]};
+window.SIDEBAR_ITEMS = {"constant":["LOG_TARGET"],"mod":["pallet","weights"],"trait":["InboundQueueV2Api"],"type":["AccountIdOf","Nonce"]};

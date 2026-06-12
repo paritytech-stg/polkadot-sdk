@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/staking/reward-fn/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/staking/reward-fn/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_staking_reward_fn" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_staking_reward_fn" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_staking_reward_fn/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_staking_reward_fn/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -204,12 +204,12 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#54 id=54 data-nosnippet>54</a></span><span class="kw">pub fn </span>compute_inflation&lt;P: PerThing&gt;(stake: P, ideal_stake: P, falloff: P) -&gt; P {
 <a href=#55 id=55 data-nosnippet>55</a>	<span class="kw">if </span>stake &lt; ideal_stake {
 <a href=#56 id=56 data-nosnippet>56</a>		<span class="comment">// ideal_stake is more than 0 because it is strictly more than stake
-<a href=#57 id=57 data-nosnippet>57</a>		</span><span class="kw">return </span>stake / ideal_stake
+<a href=#57 id=57 data-nosnippet>57</a>		</span><span class="kw">return </span>stake / ideal_stake;
 <a href=#58 id=58 data-nosnippet>58</a>	}
 <a href=#59 id=59 data-nosnippet>59</a>
 <a href=#60 id=60 data-nosnippet>60</a>	<span class="kw">if </span>falloff &lt; P::from_percent(<span class="number">1</span>.into()) {
 <a href=#61 id=61 data-nosnippet>61</a>		<span class="macro">log::error!</span>(<span class="string">"Invalid inflation computation: falloff less than 1% is not supported"</span>);
-<a href=#62 id=62 data-nosnippet>62</a>		<span class="kw">return </span>PerThing::zero()
+<a href=#62 id=62 data-nosnippet>62</a>		<span class="kw">return </span>PerThing::zero();
 <a href=#63 id=63 data-nosnippet>63</a>	}
 <a href=#64 id=64 data-nosnippet>64</a>
 <a href=#65 id=65 data-nosnippet>65</a>	<span class="kw">let </span>accuracy = {
@@ -280,8 +280,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#130 id=130 data-nosnippet>130</a>		last_taylor_term = compute_taylor_term(k, <span class="kw-2">&amp;</span>last_taylor_term, p);
 <a href=#131 id=131 data-nosnippet>131</a>
 <a href=#132 id=132 data-nosnippet>132</a>		<span class="kw">if </span>last_taylor_term.is_zero() {
-<a href=#133 id=133 data-nosnippet>133</a>			<span class="kw">break
-<a href=#134 id=134 data-nosnippet>134</a>		</span>}
+<a href=#133 id=133 data-nosnippet>133</a>			<span class="kw">break</span>;
+<a href=#134 id=134 data-nosnippet>134</a>		}
 <a href=#135 id=135 data-nosnippet>135</a>
 <a href=#136 id=136 data-nosnippet>136</a>		<span class="kw">let </span>last_taylor_term_positive = k % <span class="number">2 </span>== <span class="number">0</span>;
 <a href=#137 id=137 data-nosnippet>137</a>
@@ -303,7 +303,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#153 id=153 data-nosnippet>153</a>	}
 <a href=#154 id=154 data-nosnippet>154</a>
 <a href=#155 id=155 data-nosnippet>155</a>	<span class="kw">if </span>!taylor_sum_positive {
-<a href=#156 id=156 data-nosnippet>156</a>		<span class="kw">return </span>BigUint::zero()
+<a href=#156 id=156 data-nosnippet>156</a>		<span class="kw">return </span>BigUint::zero();
 <a href=#157 id=157 data-nosnippet>157</a>	}
 <a href=#158 id=158 data-nosnippet>158</a>
 <a href=#159 id=159 data-nosnippet>159</a>	taylor_sum.lstrip();
@@ -345,15 +345,15 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#195 id=195 data-nosnippet>195</a>
 <a href=#196 id=196 data-nosnippet>196</a>	<span class="kw">if </span>b.len() == <span class="number">0 </span>{
 <a href=#197 id=197 data-nosnippet>197</a>		<span class="macro">log::error!</span>(<span class="string">"Computation error: Invalid division"</span>);
-<a href=#198 id=198 data-nosnippet>198</a>		<span class="kw">return </span>BigUint::zero()
+<a href=#198 id=198 data-nosnippet>198</a>		<span class="kw">return </span>BigUint::zero();
 <a href=#199 id=199 data-nosnippet>199</a>	}
 <a href=#200 id=200 data-nosnippet>200</a>
 <a href=#201 id=201 data-nosnippet>201</a>	<span class="kw">if </span>b.len() == <span class="number">1 </span>{
-<a href=#202 id=202 data-nosnippet>202</a>		<span class="kw">return </span>a.div_unit(b.checked_get(<span class="number">0</span>).unwrap_or(<span class="number">1</span>))
+<a href=#202 id=202 data-nosnippet>202</a>		<span class="kw">return </span>a.div_unit(b.checked_get(<span class="number">0</span>).unwrap_or(<span class="number">1</span>));
 <a href=#203 id=203 data-nosnippet>203</a>	}
 <a href=#204 id=204 data-nosnippet>204</a>
 <a href=#205 id=205 data-nosnippet>205</a>	<span class="kw">if </span>b.len() &gt; a.len() {
-<a href=#206 id=206 data-nosnippet>206</a>		<span class="kw">return </span>BigUint::zero()
+<a href=#206 id=206 data-nosnippet>206</a>		<span class="kw">return </span>BigUint::zero();
 <a href=#207 id=207 data-nosnippet>207</a>	}
 <a href=#208 id=208 data-nosnippet>208</a>
 <a href=#209 id=209 data-nosnippet>209</a>	<span class="kw">if </span>b.len() == a.len() {
@@ -367,11 +367,12 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#217 id=217 data-nosnippet>217</a>			.map(|res| res.<span class="number">0</span>)
 <a href=#218 id=218 data-nosnippet>218</a>			.unwrap_or_else(BigUint::zero)
 <a href=#219 id=219 data-nosnippet>219</a>			.div_unit(<span class="number">100_000</span>)
-<a href=#220 id=220 data-nosnippet>220</a>			.div_unit(<span class="number">100_000</span>)
+<a href=#220 id=220 data-nosnippet>220</a>			.div_unit(<span class="number">100_000</span>);
 <a href=#221 id=221 data-nosnippet>221</a>	}
 <a href=#222 id=222 data-nosnippet>222</a>
 <a href=#223 id=223 data-nosnippet>223</a>	a.div(b, <span class="bool-val">false</span>).map(|res| res.<span class="number">0</span>).unwrap_or_else(BigUint::zero)
-<a href=#224 id=224 data-nosnippet>224</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#224 id=224 data-nosnippet>224</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

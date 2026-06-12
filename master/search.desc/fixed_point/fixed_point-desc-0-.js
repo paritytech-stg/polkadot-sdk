@@ -1,1 +1,0 @@
-searchState.loadedDescShard("fixed_point", 0, "Running")

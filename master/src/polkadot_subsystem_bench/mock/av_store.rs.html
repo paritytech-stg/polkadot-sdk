@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/node/subsystem-bench/src/lib/mock/av_store.rs`."><title>av_store.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/node/subsystem-bench/src/lib/mock/av_store.rs`."><title>av_store.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="polkadot_subsystem_bench" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="polkadot_subsystem_bench" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">polkadot_subsystem_bench/mock/</div>av_store.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">polkadot_subsystem_bench/mock/</div>av_store.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Polkadot.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Polkadot is free software: you can redistribute it and/or modify
@@ -354,70 +354,72 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#204 id=204 data-nosnippet>204</a>			<span class="kw">let </span>msg = ctx.recv().<span class="kw">await</span>.expect(<span class="string">"Overseer never fails us"</span>);
 <a href=#205 id=205 data-nosnippet>205</a>
 <a href=#206 id=206 data-nosnippet>206</a>			<span class="kw">match </span>msg {
-<a href=#207 id=207 data-nosnippet>207</a>				orchestra::FromOrchestra::Signal(signal) =&gt;
+<a href=#207 id=207 data-nosnippet>207</a>				orchestra::FromOrchestra::Signal(signal) =&gt; {
 <a href=#208 id=208 data-nosnippet>208</a>					<span class="kw">if </span>signal == OverseerSignal::Conclude {
-<a href=#209 id=209 data-nosnippet>209</a>						<span class="kw">return
-<a href=#210 id=210 data-nosnippet>210</a>					</span>},
-<a href=#211 id=211 data-nosnippet>211</a>				orchestra::FromOrchestra::Communication { msg } =&gt; <span class="kw">match </span>msg {
-<a href=#212 id=212 data-nosnippet>212</a>					AvailabilityStoreMessage::QueryAvailableData(candidate_hash, tx) =&gt; {
-<a href=#213 id=213 data-nosnippet>213</a>						<span class="macro">gum::debug!</span>(target: LOG_TARGET, candidate_hash = <span class="question-mark">?</span>candidate_hash, <span class="string">"Responding to QueryAvailableData"</span>);
-<a href=#214 id=214 data-nosnippet>214</a>
-<a href=#215 id=215 data-nosnippet>215</a>						<span class="comment">// We never have the full available data.
-<a href=#216 id=216 data-nosnippet>216</a>						</span><span class="kw">let _ </span>= tx.send(<span class="prelude-val">None</span>);
-<a href=#217 id=217 data-nosnippet>217</a>					},
-<a href=#218 id=218 data-nosnippet>218</a>					AvailabilityStoreMessage::QueryAllChunks(candidate_hash, tx) =&gt; {
-<a href=#219 id=219 data-nosnippet>219</a>						<span class="comment">// We always have our own chunk.
-<a href=#220 id=220 data-nosnippet>220</a>						</span><span class="macro">gum::debug!</span>(target: LOG_TARGET, candidate_hash = <span class="question-mark">?</span>candidate_hash, <span class="string">"Responding to QueryAllChunks"</span>);
-<a href=#221 id=221 data-nosnippet>221</a>						<span class="self">self</span>.respond_to_query_all_request(
-<a href=#222 id=222 data-nosnippet>222</a>							candidate_hash,
-<a href=#223 id=223 data-nosnippet>223</a>							|index| index == <span class="number">0</span>.into(),
-<a href=#224 id=224 data-nosnippet>224</a>							tx,
-<a href=#225 id=225 data-nosnippet>225</a>						)
-<a href=#226 id=226 data-nosnippet>226</a>						.<span class="kw">await</span>;
-<a href=#227 id=227 data-nosnippet>227</a>					},
-<a href=#228 id=228 data-nosnippet>228</a>					AvailabilityStoreMessage::QueryChunkSize(candidate_hash, tx) =&gt; {
-<a href=#229 id=229 data-nosnippet>229</a>						<span class="macro">gum::debug!</span>(target: LOG_TARGET, candidate_hash = <span class="question-mark">?</span>candidate_hash, <span class="string">"Responding to QueryChunkSize"</span>);
-<a href=#230 id=230 data-nosnippet>230</a>
-<a href=#231 id=231 data-nosnippet>231</a>						<span class="kw">let </span>candidate_index = <span class="self">self
-<a href=#232 id=232 data-nosnippet>232</a>							</span>.state
-<a href=#233 id=233 data-nosnippet>233</a>							.candidate_hashes
-<a href=#234 id=234 data-nosnippet>234</a>							.get(<span class="kw-2">&amp;</span>candidate_hash)
-<a href=#235 id=235 data-nosnippet>235</a>							.expect(<span class="string">"candidate was generated previously; qed"</span>);
-<a href=#236 id=236 data-nosnippet>236</a>						<span class="macro">gum::debug!</span>(target: LOG_TARGET, <span class="question-mark">?</span>candidate_hash, candidate_index, <span class="string">"Candidate mapped to index"</span>);
-<a href=#237 id=237 data-nosnippet>237</a>
-<a href=#238 id=238 data-nosnippet>238</a>						<span class="kw">let </span>chunk_size = <span class="self">self
-<a href=#239 id=239 data-nosnippet>239</a>							</span>.state
-<a href=#240 id=240 data-nosnippet>240</a>							.chunks
-<a href=#241 id=241 data-nosnippet>241</a>							.get(<span class="kw-2">*</span>candidate_index)
-<a href=#242 id=242 data-nosnippet>242</a>							.unwrap()
-<a href=#243 id=243 data-nosnippet>243</a>							.first()
-<a href=#244 id=244 data-nosnippet>244</a>							.unwrap()
-<a href=#245 id=245 data-nosnippet>245</a>							.encoded_size();
-<a href=#246 id=246 data-nosnippet>246</a>						<span class="kw">let _ </span>= tx.send(<span class="prelude-val">Some</span>(chunk_size));
-<a href=#247 id=247 data-nosnippet>247</a>					},
-<a href=#248 id=248 data-nosnippet>248</a>					AvailabilityStoreMessage::StoreChunk {
-<a href=#249 id=249 data-nosnippet>249</a>						candidate_hash,
-<a href=#250 id=250 data-nosnippet>250</a>						chunk,
-<a href=#251 id=251 data-nosnippet>251</a>						tx,
-<a href=#252 id=252 data-nosnippet>252</a>						validator_index,
-<a href=#253 id=253 data-nosnippet>253</a>					} =&gt; {
-<a href=#254 id=254 data-nosnippet>254</a>						<span class="macro">gum::debug!</span>(
-<a href=#255 id=255 data-nosnippet>255</a>							target: LOG_TARGET,
-<a href=#256 id=256 data-nosnippet>256</a>							chunk_index = <span class="question-mark">?</span>chunk.index,
-<a href=#257 id=257 data-nosnippet>257</a>							validator_index = <span class="question-mark">?</span>validator_index,
-<a href=#258 id=258 data-nosnippet>258</a>							candidate_hash = <span class="question-mark">?</span>candidate_hash,
-<a href=#259 id=259 data-nosnippet>259</a>							<span class="string">"Responding to StoreChunk"
-<a href=#260 id=260 data-nosnippet>260</a>						</span>);
-<a href=#261 id=261 data-nosnippet>261</a>						<span class="kw">let _ </span>= tx.send(<span class="prelude-val">Ok</span>(()));
-<a href=#262 id=262 data-nosnippet>262</a>					},
-<a href=#263 id=263 data-nosnippet>263</a>					<span class="kw">_ </span>=&gt; {
-<a href=#264 id=264 data-nosnippet>264</a>						<span class="macro">unimplemented!</span>(<span class="string">"Unexpected av-store message"</span>)
-<a href=#265 id=265 data-nosnippet>265</a>					},
-<a href=#266 id=266 data-nosnippet>266</a>				},
-<a href=#267 id=267 data-nosnippet>267</a>			}
-<a href=#268 id=268 data-nosnippet>268</a>		}
-<a href=#269 id=269 data-nosnippet>269</a>	}
-<a href=#270 id=270 data-nosnippet>270</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#209 id=209 data-nosnippet>209</a>						<span class="kw">return</span>;
+<a href=#210 id=210 data-nosnippet>210</a>					}
+<a href=#211 id=211 data-nosnippet>211</a>				},
+<a href=#212 id=212 data-nosnippet>212</a>				orchestra::FromOrchestra::Communication { msg } =&gt; <span class="kw">match </span>msg {
+<a href=#213 id=213 data-nosnippet>213</a>					AvailabilityStoreMessage::QueryAvailableData(candidate_hash, tx) =&gt; {
+<a href=#214 id=214 data-nosnippet>214</a>						<span class="macro">gum::debug!</span>(target: LOG_TARGET, candidate_hash = <span class="question-mark">?</span>candidate_hash, <span class="string">"Responding to QueryAvailableData"</span>);
+<a href=#215 id=215 data-nosnippet>215</a>
+<a href=#216 id=216 data-nosnippet>216</a>						<span class="comment">// We never have the full available data.
+<a href=#217 id=217 data-nosnippet>217</a>						</span><span class="kw">let _ </span>= tx.send(<span class="prelude-val">None</span>);
+<a href=#218 id=218 data-nosnippet>218</a>					},
+<a href=#219 id=219 data-nosnippet>219</a>					AvailabilityStoreMessage::QueryAllChunks(candidate_hash, tx) =&gt; {
+<a href=#220 id=220 data-nosnippet>220</a>						<span class="comment">// We always have our own chunk.
+<a href=#221 id=221 data-nosnippet>221</a>						</span><span class="macro">gum::debug!</span>(target: LOG_TARGET, candidate_hash = <span class="question-mark">?</span>candidate_hash, <span class="string">"Responding to QueryAllChunks"</span>);
+<a href=#222 id=222 data-nosnippet>222</a>						<span class="self">self</span>.respond_to_query_all_request(
+<a href=#223 id=223 data-nosnippet>223</a>							candidate_hash,
+<a href=#224 id=224 data-nosnippet>224</a>							|index| index == <span class="number">0</span>.into(),
+<a href=#225 id=225 data-nosnippet>225</a>							tx,
+<a href=#226 id=226 data-nosnippet>226</a>						)
+<a href=#227 id=227 data-nosnippet>227</a>						.<span class="kw">await</span>;
+<a href=#228 id=228 data-nosnippet>228</a>					},
+<a href=#229 id=229 data-nosnippet>229</a>					AvailabilityStoreMessage::QueryChunkSize(candidate_hash, tx) =&gt; {
+<a href=#230 id=230 data-nosnippet>230</a>						<span class="macro">gum::debug!</span>(target: LOG_TARGET, candidate_hash = <span class="question-mark">?</span>candidate_hash, <span class="string">"Responding to QueryChunkSize"</span>);
+<a href=#231 id=231 data-nosnippet>231</a>
+<a href=#232 id=232 data-nosnippet>232</a>						<span class="kw">let </span>candidate_index = <span class="self">self
+<a href=#233 id=233 data-nosnippet>233</a>							</span>.state
+<a href=#234 id=234 data-nosnippet>234</a>							.candidate_hashes
+<a href=#235 id=235 data-nosnippet>235</a>							.get(<span class="kw-2">&amp;</span>candidate_hash)
+<a href=#236 id=236 data-nosnippet>236</a>							.expect(<span class="string">"candidate was generated previously; qed"</span>);
+<a href=#237 id=237 data-nosnippet>237</a>						<span class="macro">gum::debug!</span>(target: LOG_TARGET, <span class="question-mark">?</span>candidate_hash, candidate_index, <span class="string">"Candidate mapped to index"</span>);
+<a href=#238 id=238 data-nosnippet>238</a>
+<a href=#239 id=239 data-nosnippet>239</a>						<span class="kw">let </span>chunk_size = <span class="self">self
+<a href=#240 id=240 data-nosnippet>240</a>							</span>.state
+<a href=#241 id=241 data-nosnippet>241</a>							.chunks
+<a href=#242 id=242 data-nosnippet>242</a>							.get(<span class="kw-2">*</span>candidate_index)
+<a href=#243 id=243 data-nosnippet>243</a>							.unwrap()
+<a href=#244 id=244 data-nosnippet>244</a>							.first()
+<a href=#245 id=245 data-nosnippet>245</a>							.unwrap()
+<a href=#246 id=246 data-nosnippet>246</a>							.encoded_size();
+<a href=#247 id=247 data-nosnippet>247</a>						<span class="kw">let _ </span>= tx.send(<span class="prelude-val">Some</span>(chunk_size));
+<a href=#248 id=248 data-nosnippet>248</a>					},
+<a href=#249 id=249 data-nosnippet>249</a>					AvailabilityStoreMessage::StoreChunk {
+<a href=#250 id=250 data-nosnippet>250</a>						candidate_hash,
+<a href=#251 id=251 data-nosnippet>251</a>						chunk,
+<a href=#252 id=252 data-nosnippet>252</a>						tx,
+<a href=#253 id=253 data-nosnippet>253</a>						validator_index,
+<a href=#254 id=254 data-nosnippet>254</a>					} =&gt; {
+<a href=#255 id=255 data-nosnippet>255</a>						<span class="macro">gum::debug!</span>(
+<a href=#256 id=256 data-nosnippet>256</a>							target: LOG_TARGET,
+<a href=#257 id=257 data-nosnippet>257</a>							chunk_index = <span class="question-mark">?</span>chunk.index,
+<a href=#258 id=258 data-nosnippet>258</a>							validator_index = <span class="question-mark">?</span>validator_index,
+<a href=#259 id=259 data-nosnippet>259</a>							candidate_hash = <span class="question-mark">?</span>candidate_hash,
+<a href=#260 id=260 data-nosnippet>260</a>							<span class="string">"Responding to StoreChunk"
+<a href=#261 id=261 data-nosnippet>261</a>						</span>);
+<a href=#262 id=262 data-nosnippet>262</a>						<span class="kw">let _ </span>= tx.send(<span class="prelude-val">Ok</span>(()));
+<a href=#263 id=263 data-nosnippet>263</a>					},
+<a href=#264 id=264 data-nosnippet>264</a>					<span class="kw">_ </span>=&gt; {
+<a href=#265 id=265 data-nosnippet>265</a>						<span class="macro">unimplemented!</span>(<span class="string">"Unexpected av-store message"</span>)
+<a href=#266 id=266 data-nosnippet>266</a>					},
+<a href=#267 id=267 data-nosnippet>267</a>				},
+<a href=#268 id=268 data-nosnippet>268</a>			}
+<a href=#269 id=269 data-nosnippet>269</a>		}
+<a href=#270 id=270 data-nosnippet>270</a>	}
+<a href=#271 id=271 data-nosnippet>271</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

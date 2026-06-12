@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Generate types that implement `alloy-sol-types` traits, which can be used for type-safe ABI and EIP-712 serialization to interface with Ethereum smart contracts."><title>sol in yet_another_parachain_runtime::pallet_revive::precompiles::alloy::sol_types - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Generate types that implement `alloy-sol-types` traits, which can be used for type-safe ABI and EIP-712 serialization to interface with Ethereum smart contracts."><title>sol in yet_another_parachain_runtime::pallet_revive::precompiles::alloy::sol_types - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../../" data-static-root-path="../../../../../static.files/" data-current-crate="yet_another_parachain_runtime" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../../../static.files/storage-4e99c027.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../../" data-static-root-path="../../../../../static.files/" data-current-crate="yet_another_parachain_runtime" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../../../static.files/storage-e2aeef58.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc macro"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../../../yet_another_parachain_runtime/index.html">yet_<wbr>another_<wbr>parachain_<wbr>runtime</a><span class="version">0.6.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">sol</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#examples" title="Examples">Examples</a><ul><li><a href="#solidity" title="Solidity">Solidity</a></li><li><a href="#json-abi" title="JSON ABI">JSON ABI</a></li></ul></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In yet_<wbr>another_<wbr>parachain_<wbr>runtime::<wbr>pallet_<wbr>revive::<wbr>precompiles::<wbr>alloy::<wbr>sol_<wbr>types</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../../../index.html">yet_another_parachain_runtime</a>::<wbr><a href="../../../index.html">pallet_revive</a>::<wbr><a href="../../index.html">precompiles</a>::<wbr><a href="../index.html">alloy</a>::<wbr><a href="index.html">sol_types</a></div><h1>Macro <span class="macro">sol</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><pre class="rust item-decl"><code>sol!() { <span class="comment">/* proc-macro */</span> }</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Generate types that implement <a href="https://docs.rs/alloy-sol-types"><code>alloy-sol-types</code></a> traits, which can be used
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc macro"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">sol</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../../../../yet_another_parachain_runtime/index.html">yet_<wbr>another_<wbr>parachain_<wbr>runtime</a><span class="version">0.6.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">sol</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#examples" title="Examples">Examples</a><ul><li><a href="#solidity" title="Solidity">Solidity</a></li><li><a href="#json-abi" title="JSON ABI">JSON ABI</a></li></ul></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In yet_<wbr>another_<wbr>parachain_<wbr>runtime::<wbr>pallet_<wbr>revive::<wbr>precompiles::<wbr>alloy::<wbr>sol_<wbr>types</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../../../../index.html">yet_another_parachain_runtime</a>::<wbr><a href="../../../index.html">pallet_revive</a>::<wbr><a href="../../index.html">precompiles</a>::<wbr><a href="../index.html">alloy</a>::<wbr><a href="index.html">sol_types</a></div><h1>Macro <span class="macro">sol</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><pre class="rust item-decl"><code>sol!() { <span class="comment">/* proc-macro */</span> }</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Generate types that implement <a href="https://docs.rs/alloy-sol-types"><code>alloy-sol-types</code></a> traits, which can be used
 for type-safe <a href="https://docs.soliditylang.org/en/latest/abi-spec.html">ABI</a> and <a href="https://eips.ethereum.org/EIPS/eip-712">EIP-712</a> serialization to interface with Ethereum
 smart contracts.</p>
 <p>Note that you will likely want to use this macro through a re-export in another crate,
@@ -217,8 +217,7 @@ literals are also supported, such as <code>concat!</code> and <code>env!</code>.
 <li>
 <p><code>rpc [ = &lt;bool = false&gt;]</code> (contracts and alike only): generates a structs with methods to
 construct <code>eth_call</code>s to an on-chain contract through Ethereum JSON RPC, similar to the
-default behavior of <a href="https://docs.rs/ethers/latest/ethers/contract/macro.abigen.html"><code>abigen</code></a>. This makes use of the <a href="https://github.com/alloy-rs/alloy"><code>alloy-contract</code></a>
-crate.</p>
+default behavior of <a href="https://docs.rs/ethers/latest/ethers/contract/macro.abigen.html"><code>abigen</code></a>. This makes use of the <a href="https://github.com/alloy-rs/alloy"><code>alloy-contract</code></a> crate.</p>
 <p>Generates the following items inside of the <code>{contract_name}</code> module:</p>
 <ul>
 <li><code>struct {contract_name}Instance&lt;P: Provider&gt; { ... }</code>
@@ -261,7 +260,7 @@ the required dependency <a href="https://docs.rs/alloy-sol-types"><code>alloy-so
 </li>
 <li>
 <p><code>alloy_contract = &lt;path = ::alloy_contract&gt;</code> (inner attribute only): specifies the path to the
-optional dependency [<code>alloy-contract</code>]. This is only used by the <code>rpc</code> attribute.</p>
+optional dependency <a href="https://github.com/alloy-rs/alloy"><code>alloy-contract</code></a>. This is only used by the <code>rpc</code> attribute.</p>
 </li>
 <li>
 <p><code>all_derives [ = &lt;bool = false&gt;]</code>: adds all possible standard library <code>#[derive(...)]</code>
@@ -351,8 +350,7 @@ additionally annotated with <code>#[repr(u8)]</code>, and as such can have a max
            <span class="string">"0000000000000000000000000000000000000000000000000000000000000001"
        </span>}
    );
-}</code></pre></div>
-<h4 id="udvt-and-type-aliases"><a class="doc-anchor" href="#udvt-and-type-aliases">§</a>UDVT and type aliases</h4>
+}</code></pre></div><h4 id="udvt-and-type-aliases"><a class="doc-anchor" href="#udvt-and-type-aliases">§</a>UDVT and type aliases</h4>
 <p>User defined value types (UDVT) generate a tuple struct with the type as
 its only field, and type aliases simply expand to the corresponding Rust
 type.</p>
@@ -379,8 +377,7 @@ type.</p>
    <span class="kw">let _ </span>= B32::abi_encode(<span class="kw-2">&amp;</span>[<span class="number">0</span>; <span class="number">32</span>]);
    <span class="kw">let _ </span>= SolArrayOf::&lt;<span class="macro">sol!</span>(bool)&gt;::abi_encode(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="bool-val">true</span>, <span class="bool-val">false</span>]);
    <span class="kw">let _ </span>= SolTuple::abi_encode(<span class="kw-2">&amp;</span>(Address::ZERO, <span class="macro">vec!</span>[<span class="number">0</span>; <span class="number">32</span>], <span class="string">"hello"</span>.to_string()));
-}</code></pre></div>
-<h4 id="state-variables"><a class="doc-anchor" href="#state-variables">§</a>State variables</h4>
+}</code></pre></div><h4 id="state-variables"><a class="doc-anchor" href="#state-variables">§</a>State variables</h4>
 <p>Public and external state variables will generate a getter function just like in Solidity.</p>
 <p>See the <a href="#functions-and-errors">functions</a> and <a href="#contractsinterfaces">contracts</a>
 sections for more information.</p>
@@ -486,8 +483,7 @@ with their respective signatures.</p>
 <span class="kw">fn </span>assert_error_signature&lt;T: SolError&gt;(expected: <span class="kw-2">&amp;</span>str) {
    <span class="macro">assert_eq!</span>(T::SIGNATURE, expected);
    <span class="macro">assert_eq!</span>(T::SELECTOR, keccak256(expected)[..<span class="number">4</span>]);
-}</code></pre></div>
-<h4 id="events"><a class="doc-anchor" href="#events">§</a>Events</h4>
+}</code></pre></div><h4 id="events"><a class="doc-anchor" href="#events">§</a>Events</h4>
 <p>Events generate a struct that implements <code>SolEvent</code>.</p>
 <p>Note that events have special encoding rules in Solidity. For example,
 <code>string indexed</code> will be encoded in the topics as its <code>bytes32</code> Keccak-256
@@ -586,8 +582,7 @@ and not <code>string</code>.</p>
 <span class="kw">fn </span>assert_event_signature&lt;T: SolEvent&gt;(expected: <span class="kw-2">&amp;</span>str) {
    <span class="macro">assert_eq!</span>(T::SIGNATURE, expected);
    <span class="macro">assert_eq!</span>(T::SIGNATURE_HASH, keccak256(expected));
-}</code></pre></div>
-<h4 id="contractsinterfaces"><a class="doc-anchor" href="#contractsinterfaces">§</a>Contracts/interfaces</h4>
+}</code></pre></div><h4 id="contractsinterfaces"><a class="doc-anchor" href="#contractsinterfaces">§</a>Contracts/interfaces</h4>
 <p>Contracts generate a module with the same name, which contains all the items.
 This module will also contain 3 container enums which implement <code>SolInterface</code>, one for each:</p>
 <ul>
@@ -652,8 +647,7 @@ calls, you must enable the <code>#[sol(rpc)]</code> attribute.</li>
    <span class="kw">let </span>decoded = ERC20::ERC20Calls::abi_decode(<span class="kw-2">&amp;</span>data).unwrap();
    <span class="macro">assert_eq!</span>(decoded, ERC20::ERC20Calls::transfer(expected));
    <span class="macro">assert_eq!</span>(decoded.abi_encode(), data);
-}</code></pre></div>
-<h3 id="json-abi"><a class="doc-anchor" href="#json-abi">§</a>JSON ABI</h3>
+}</code></pre></div><h3 id="json-abi"><a class="doc-anchor" href="#json-abi">§</a>JSON ABI</h3>
 <p>Contracts can also be generated from ABI JSON strings and files, similar to
 the <a href="https://docs.rs/ethers/latest/ethers/contract/macro.abigen.html">ethers-rs <code>abigen!</code> macro</a>.</p>
 <p>JSON objects containing the <code>abi</code>, <code>evm</code>, <code>bytecode</code>, <code>deployedBytecode</code>,
@@ -711,8 +705,7 @@ variants and visibility modifiers on functions.</p>
 </span><span class="attr">#[test]
 </span><span class="kw">fn </span>abigen() {
    <span class="macro">assert_eq!</span>(MyJsonContract1::fooCall::SIGNATURE, MyJsonContract2::fooCall::SIGNATURE);
-}</code></pre></div>
-</div></details></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+}</code></pre></div></div></details></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

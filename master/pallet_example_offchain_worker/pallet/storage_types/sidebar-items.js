@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":["NextUnsignedAt","Prices"]};
+window.SIDEBAR_ITEMS = {"struct":["NextAuthorizedAt","Prices"]};

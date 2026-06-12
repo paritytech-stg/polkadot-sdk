@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/transaction-payment/asset-tx-payment/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/transaction-payment/asset-tx-payment/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_asset_tx_payment" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_asset_tx_payment" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_asset_tx_payment/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_asset_tx_payment/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// SPDX-License-Identifier: Apache-2.0
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Licensed under the Apache License, Version 2.0 (the "License");
@@ -172,9 +172,9 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#22 id=22 data-nosnippet>22</a>
 <a href=#23 id=23 data-nosnippet>23</a>//! It does this by extending transactions to include an optional `AssetId` that specifies the asset
 <a href=#24 id=24 data-nosnippet>24</a>//! to be used for payment (defaulting to the native token on `None`). It expects an
-<a href=#25 id=25 data-nosnippet>25</a>//! [`OnChargeAssetTransaction`] implementation analogously to [`pallet-transaction-payment`]. The
+<a href=#25 id=25 data-nosnippet>25</a>//! [`OnChargeAssetTransaction`] implementation analogously to `pallet-transaction-payment`. The
 <a href=#26 id=26 data-nosnippet>26</a>//! included [`FungiblesAdapter`] (implementing [`OnChargeAssetTransaction`]) determines the fee
-<a href=#27 id=27 data-nosnippet>27</a>//! amount by converting the fee calculated by [`pallet-transaction-payment`] into the desired
+<a href=#27 id=27 data-nosnippet>27</a>//! amount by converting the fee calculated by `pallet-transaction-payment` into the desired
 <a href=#28 id=28 data-nosnippet>28</a>//! asset.
 <a href=#29 id=29 data-nosnippet>29</a>//!
 <a href=#30 id=30 data-nosnippet>30</a>//! ## Integration
@@ -482,7 +482,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#332 id=332 data-nosnippet>332</a>	&gt; {
 <a href=#333 id=333 data-nosnippet>333</a>		<span class="kw">use </span>pallet_transaction_payment::ChargeTransactionPayment;
 <a href=#334 id=334 data-nosnippet>334</a>		<span class="kw">let </span><span class="prelude-val">Some</span>(who) = origin.as_system_origin_signer() <span class="kw">else </span>{
-<a href=#335 id=335 data-nosnippet>335</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>((ValidTransaction::default(), Val::NoCharge, origin))
+<a href=#335 id=335 data-nosnippet>335</a>			<span class="kw">return </span><span class="prelude-val">Ok</span>((ValidTransaction::default(), Val::NoCharge, origin));
 <a href=#336 id=336 data-nosnippet>336</a>		};
 <a href=#337 id=337 data-nosnippet>337</a>		<span class="comment">// Non-mutating call of `compute_fee` to calculate the fee used in the transaction priority.
 <a href=#338 id=338 data-nosnippet>338</a>		</span><span class="kw">let </span>fee = pallet_transaction_payment::Pallet::&lt;T&gt;::compute_fee(len <span class="kw">as </span>u32, info, <span class="self">self</span>.tip);
@@ -525,72 +525,74 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#375 id=375 data-nosnippet>375</a>		result: <span class="kw-2">&amp;</span>DispatchResult,
 <a href=#376 id=376 data-nosnippet>376</a>	) -&gt; <span class="prelude-ty">Result</span>&lt;Weight, TransactionValidityError&gt; {
 <a href=#377 id=377 data-nosnippet>377</a>		<span class="kw">let </span>(tip, who, initial_payment, asset_id, extension_weight) = <span class="kw">match </span>pre {
-<a href=#378 id=378 data-nosnippet>378</a>			Pre::Charge { tip, who, initial_payment, asset_id, weight } =&gt;
-<a href=#379 id=379 data-nosnippet>379</a>				(tip, who, initial_payment, asset_id, weight),
-<a href=#380 id=380 data-nosnippet>380</a>			Pre::NoCharge { refund } =&gt; {
-<a href=#381 id=381 data-nosnippet>381</a>				<span class="comment">// No-op: Refund everything
-<a href=#382 id=382 data-nosnippet>382</a>				</span><span class="kw">return </span><span class="prelude-val">Ok</span>(refund)
-<a href=#383 id=383 data-nosnippet>383</a>			},
-<a href=#384 id=384 data-nosnippet>384</a>		};
-<a href=#385 id=385 data-nosnippet>385</a>
-<a href=#386 id=386 data-nosnippet>386</a>		<span class="kw">match </span>initial_payment {
-<a href=#387 id=387 data-nosnippet>387</a>			InitialPayment::Native(liquidity_info) =&gt; {
-<a href=#388 id=388 data-nosnippet>388</a>				<span class="comment">// Take into account the weight used by this extension before calculating the
-<a href=#389 id=389 data-nosnippet>389</a>				// refund.
-<a href=#390 id=390 data-nosnippet>390</a>				</span><span class="kw">let </span>actual_ext_weight = &lt;T <span class="kw">as </span>Config&gt;::WeightInfo::charge_asset_tx_payment_native();
-<a href=#391 id=391 data-nosnippet>391</a>				<span class="kw">let </span>unspent_weight = extension_weight.saturating_sub(actual_ext_weight);
-<a href=#392 id=392 data-nosnippet>392</a>				<span class="kw">let </span><span class="kw-2">mut </span>actual_post_info = <span class="kw-2">*</span>post_info;
-<a href=#393 id=393 data-nosnippet>393</a>				actual_post_info.refund(unspent_weight);
-<a href=#394 id=394 data-nosnippet>394</a>				pallet_transaction_payment::ChargeTransactionPayment::&lt;T&gt;::post_dispatch_details(
-<a href=#395 id=395 data-nosnippet>395</a>					pallet_transaction_payment::Pre::Charge { tip, who, liquidity_info },
-<a href=#396 id=396 data-nosnippet>396</a>					info,
-<a href=#397 id=397 data-nosnippet>397</a>					<span class="kw-2">&amp;</span>actual_post_info,
-<a href=#398 id=398 data-nosnippet>398</a>					len,
-<a href=#399 id=399 data-nosnippet>399</a>					result,
-<a href=#400 id=400 data-nosnippet>400</a>				)<span class="question-mark">?</span>;
-<a href=#401 id=401 data-nosnippet>401</a>				<span class="prelude-val">Ok</span>(unspent_weight)
-<a href=#402 id=402 data-nosnippet>402</a>			},
-<a href=#403 id=403 data-nosnippet>403</a>			InitialPayment::Asset(already_withdrawn) =&gt; {
-<a href=#404 id=404 data-nosnippet>404</a>				<span class="kw">let </span>actual_ext_weight = &lt;T <span class="kw">as </span>Config&gt;::WeightInfo::charge_asset_tx_payment_asset();
-<a href=#405 id=405 data-nosnippet>405</a>				<span class="kw">let </span>unspent_weight = extension_weight.saturating_sub(actual_ext_weight);
-<a href=#406 id=406 data-nosnippet>406</a>				<span class="kw">let </span><span class="kw-2">mut </span>actual_post_info = <span class="kw-2">*</span>post_info;
-<a href=#407 id=407 data-nosnippet>407</a>				actual_post_info.refund(unspent_weight);
-<a href=#408 id=408 data-nosnippet>408</a>				<span class="kw">let </span>actual_fee = pallet_transaction_payment::Pallet::&lt;T&gt;::compute_actual_fee(
-<a href=#409 id=409 data-nosnippet>409</a>					len <span class="kw">as </span>u32,
-<a href=#410 id=410 data-nosnippet>410</a>					info,
-<a href=#411 id=411 data-nosnippet>411</a>					<span class="kw-2">&amp;</span>actual_post_info,
-<a href=#412 id=412 data-nosnippet>412</a>					tip,
-<a href=#413 id=413 data-nosnippet>413</a>				);
-<a href=#414 id=414 data-nosnippet>414</a>
-<a href=#415 id=415 data-nosnippet>415</a>				<span class="kw">let </span>(converted_fee, converted_tip) =
-<a href=#416 id=416 data-nosnippet>416</a>					T::OnChargeAssetTransaction::correct_and_deposit_fee(
-<a href=#417 id=417 data-nosnippet>417</a>						<span class="kw-2">&amp;</span>who,
-<a href=#418 id=418 data-nosnippet>418</a>						info,
-<a href=#419 id=419 data-nosnippet>419</a>						<span class="kw-2">&amp;</span>actual_post_info,
-<a href=#420 id=420 data-nosnippet>420</a>						actual_fee.into(),
-<a href=#421 id=421 data-nosnippet>421</a>						tip.into(),
-<a href=#422 id=422 data-nosnippet>422</a>						already_withdrawn.into(),
-<a href=#423 id=423 data-nosnippet>423</a>					)<span class="question-mark">?</span>;
-<a href=#424 id=424 data-nosnippet>424</a>				Pallet::&lt;T&gt;::deposit_event(Event::&lt;T&gt;::AssetTxFeePaid {
-<a href=#425 id=425 data-nosnippet>425</a>					who,
-<a href=#426 id=426 data-nosnippet>426</a>					actual_fee: converted_fee,
-<a href=#427 id=427 data-nosnippet>427</a>					tip: converted_tip,
-<a href=#428 id=428 data-nosnippet>428</a>					asset_id,
-<a href=#429 id=429 data-nosnippet>429</a>				});
-<a href=#430 id=430 data-nosnippet>430</a>				<span class="prelude-val">Ok</span>(unspent_weight)
-<a href=#431 id=431 data-nosnippet>431</a>			},
-<a href=#432 id=432 data-nosnippet>432</a>			InitialPayment::Nothing =&gt; {
-<a href=#433 id=433 data-nosnippet>433</a>				<span class="comment">// `actual_fee` should be zero here for any signed extrinsic. It would be
-<a href=#434 id=434 data-nosnippet>434</a>				// non-zero here in case of unsigned extrinsics as they don't pay fees but
-<a href=#435 id=435 data-nosnippet>435</a>				// `compute_actual_fee` is not aware of them. In both cases it's fine to just
-<a href=#436 id=436 data-nosnippet>436</a>				// move ahead without adjusting the fee, though, so we do nothing.
-<a href=#437 id=437 data-nosnippet>437</a>				</span><span class="macro">debug_assert!</span>(tip.is_zero(), <span class="string">"tip should be zero if initial fee was zero."</span>);
-<a href=#438 id=438 data-nosnippet>438</a>				<span class="prelude-val">Ok</span>(extension_weight
-<a href=#439 id=439 data-nosnippet>439</a>					.saturating_sub(&lt;T <span class="kw">as </span>Config&gt;::WeightInfo::charge_asset_tx_payment_zero()))
-<a href=#440 id=440 data-nosnippet>440</a>			},
-<a href=#441 id=441 data-nosnippet>441</a>		}
-<a href=#442 id=442 data-nosnippet>442</a>	}
-<a href=#443 id=443 data-nosnippet>443</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#378 id=378 data-nosnippet>378</a>			Pre::Charge { tip, who, initial_payment, asset_id, weight } =&gt; {
+<a href=#379 id=379 data-nosnippet>379</a>				(tip, who, initial_payment, asset_id, weight)
+<a href=#380 id=380 data-nosnippet>380</a>			},
+<a href=#381 id=381 data-nosnippet>381</a>			Pre::NoCharge { refund } =&gt; {
+<a href=#382 id=382 data-nosnippet>382</a>				<span class="comment">// No-op: Refund everything
+<a href=#383 id=383 data-nosnippet>383</a>				</span><span class="kw">return </span><span class="prelude-val">Ok</span>(refund);
+<a href=#384 id=384 data-nosnippet>384</a>			},
+<a href=#385 id=385 data-nosnippet>385</a>		};
+<a href=#386 id=386 data-nosnippet>386</a>
+<a href=#387 id=387 data-nosnippet>387</a>		<span class="kw">match </span>initial_payment {
+<a href=#388 id=388 data-nosnippet>388</a>			InitialPayment::Native(liquidity_info) =&gt; {
+<a href=#389 id=389 data-nosnippet>389</a>				<span class="comment">// Take into account the weight used by this extension before calculating the
+<a href=#390 id=390 data-nosnippet>390</a>				// refund.
+<a href=#391 id=391 data-nosnippet>391</a>				</span><span class="kw">let </span>actual_ext_weight = &lt;T <span class="kw">as </span>Config&gt;::WeightInfo::charge_asset_tx_payment_native();
+<a href=#392 id=392 data-nosnippet>392</a>				<span class="kw">let </span>unspent_weight = extension_weight.saturating_sub(actual_ext_weight);
+<a href=#393 id=393 data-nosnippet>393</a>				<span class="kw">let </span><span class="kw-2">mut </span>actual_post_info = <span class="kw-2">*</span>post_info;
+<a href=#394 id=394 data-nosnippet>394</a>				actual_post_info.refund(unspent_weight);
+<a href=#395 id=395 data-nosnippet>395</a>				pallet_transaction_payment::ChargeTransactionPayment::&lt;T&gt;::post_dispatch_details(
+<a href=#396 id=396 data-nosnippet>396</a>					pallet_transaction_payment::Pre::Charge { tip, who, liquidity_info },
+<a href=#397 id=397 data-nosnippet>397</a>					info,
+<a href=#398 id=398 data-nosnippet>398</a>					<span class="kw-2">&amp;</span>actual_post_info,
+<a href=#399 id=399 data-nosnippet>399</a>					len,
+<a href=#400 id=400 data-nosnippet>400</a>					result,
+<a href=#401 id=401 data-nosnippet>401</a>				)<span class="question-mark">?</span>;
+<a href=#402 id=402 data-nosnippet>402</a>				<span class="prelude-val">Ok</span>(unspent_weight)
+<a href=#403 id=403 data-nosnippet>403</a>			},
+<a href=#404 id=404 data-nosnippet>404</a>			InitialPayment::Asset(already_withdrawn) =&gt; {
+<a href=#405 id=405 data-nosnippet>405</a>				<span class="kw">let </span>actual_ext_weight = &lt;T <span class="kw">as </span>Config&gt;::WeightInfo::charge_asset_tx_payment_asset();
+<a href=#406 id=406 data-nosnippet>406</a>				<span class="kw">let </span>unspent_weight = extension_weight.saturating_sub(actual_ext_weight);
+<a href=#407 id=407 data-nosnippet>407</a>				<span class="kw">let </span><span class="kw-2">mut </span>actual_post_info = <span class="kw-2">*</span>post_info;
+<a href=#408 id=408 data-nosnippet>408</a>				actual_post_info.refund(unspent_weight);
+<a href=#409 id=409 data-nosnippet>409</a>				<span class="kw">let </span>actual_fee = pallet_transaction_payment::Pallet::&lt;T&gt;::compute_actual_fee(
+<a href=#410 id=410 data-nosnippet>410</a>					len <span class="kw">as </span>u32,
+<a href=#411 id=411 data-nosnippet>411</a>					info,
+<a href=#412 id=412 data-nosnippet>412</a>					<span class="kw-2">&amp;</span>actual_post_info,
+<a href=#413 id=413 data-nosnippet>413</a>					tip,
+<a href=#414 id=414 data-nosnippet>414</a>				);
+<a href=#415 id=415 data-nosnippet>415</a>
+<a href=#416 id=416 data-nosnippet>416</a>				<span class="kw">let </span>(converted_fee, converted_tip) =
+<a href=#417 id=417 data-nosnippet>417</a>					T::OnChargeAssetTransaction::correct_and_deposit_fee(
+<a href=#418 id=418 data-nosnippet>418</a>						<span class="kw-2">&amp;</span>who,
+<a href=#419 id=419 data-nosnippet>419</a>						info,
+<a href=#420 id=420 data-nosnippet>420</a>						<span class="kw-2">&amp;</span>actual_post_info,
+<a href=#421 id=421 data-nosnippet>421</a>						actual_fee.into(),
+<a href=#422 id=422 data-nosnippet>422</a>						tip.into(),
+<a href=#423 id=423 data-nosnippet>423</a>						already_withdrawn.into(),
+<a href=#424 id=424 data-nosnippet>424</a>					)<span class="question-mark">?</span>;
+<a href=#425 id=425 data-nosnippet>425</a>				Pallet::&lt;T&gt;::deposit_event(Event::&lt;T&gt;::AssetTxFeePaid {
+<a href=#426 id=426 data-nosnippet>426</a>					who,
+<a href=#427 id=427 data-nosnippet>427</a>					actual_fee: converted_fee,
+<a href=#428 id=428 data-nosnippet>428</a>					tip: converted_tip,
+<a href=#429 id=429 data-nosnippet>429</a>					asset_id,
+<a href=#430 id=430 data-nosnippet>430</a>				});
+<a href=#431 id=431 data-nosnippet>431</a>				<span class="prelude-val">Ok</span>(unspent_weight)
+<a href=#432 id=432 data-nosnippet>432</a>			},
+<a href=#433 id=433 data-nosnippet>433</a>			InitialPayment::Nothing =&gt; {
+<a href=#434 id=434 data-nosnippet>434</a>				<span class="comment">// `actual_fee` should be zero here for any signed extrinsic. It would be
+<a href=#435 id=435 data-nosnippet>435</a>				// non-zero here in case of unsigned extrinsics as they don't pay fees but
+<a href=#436 id=436 data-nosnippet>436</a>				// `compute_actual_fee` is not aware of them. In both cases it's fine to just
+<a href=#437 id=437 data-nosnippet>437</a>				// move ahead without adjusting the fee, though, so we do nothing.
+<a href=#438 id=438 data-nosnippet>438</a>				</span><span class="macro">debug_assert!</span>(tip.is_zero(), <span class="string">"tip should be zero if initial fee was zero."</span>);
+<a href=#439 id=439 data-nosnippet>439</a>				<span class="prelude-val">Ok</span>(extension_weight
+<a href=#440 id=440 data-nosnippet>440</a>					.saturating_sub(&lt;T <span class="kw">as </span>Config&gt;::WeightInfo::charge_asset_tx_payment_zero()))
+<a href=#441 id=441 data-nosnippet>441</a>			},
+<a href=#442 id=442 data-nosnippet>442</a>		}
+<a href=#443 id=443 data-nosnippet>443</a>	}
+<a href=#444 id=444 data-nosnippet>444</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

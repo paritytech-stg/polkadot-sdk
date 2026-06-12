@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["host_calls"],"struct":["HostHooks"],"type":["BandersnatchConfig","EdwardsAffine","EdwardsConfig","EdwardsProjective","SWAffine","SWConfig","SWProjective"]};
+window.SIDEBAR_ITEMS = {"mod":["host_calls"],"struct":["HostHooks"],"type":["BandersnatchConfig","EdwardsAffine","EdwardsConfig","EdwardsProjective","SWAffine","SWConfig","SWProjective","ScalarField"]};

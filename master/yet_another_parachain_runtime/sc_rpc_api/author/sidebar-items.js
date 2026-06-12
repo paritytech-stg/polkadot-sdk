@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"trait":["AuthorApiClient","AuthorApiServer"]};
+window.SIDEBAR_ITEMS = {"struct":["GeneratedSessionKeys"],"trait":["AuthorApiClient","AuthorApiServer"]};

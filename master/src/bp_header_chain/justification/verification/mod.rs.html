@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/primitives/header-chain/src/justification/verification/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/primitives/header-chain/src/justification/verification/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="bp_header_chain" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../../static.files/storage-4e99c027.js"></script><script defer src="../../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="bp_header_chain" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../../static.files/src-script-813739b1.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">bp_header_chain/justification/verification/</div>mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">bp_header_chain/justification/verification/</div>mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Parity Bridges Common.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Parity Bridges Common is free software: you can redistribute it and/or modify
@@ -245,15 +245,15 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#95 id=95 data-nosnippet>95</a>		precommit_target_number: <span class="kw-2">&amp;</span>Header::Number,
 <a href=#96 id=96 data-nosnippet>96</a>	) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;Header::Hash&gt;&gt; {
 <a href=#97 id=97 data-nosnippet>97</a>		<span class="kw">if </span>precommit_target_number &lt; <span class="kw-2">&amp;</span><span class="self">self</span>.base.number() {
-<a href=#98 id=98 data-nosnippet>98</a>			<span class="kw">return </span><span class="prelude-val">None
-<a href=#99 id=99 data-nosnippet>99</a>		</span>}
+<a href=#98 id=98 data-nosnippet>98</a>			<span class="kw">return </span><span class="prelude-val">None</span>;
+<a href=#99 id=99 data-nosnippet>99</a>		}
 <a href=#100 id=100 data-nosnippet>100</a>
 <a href=#101 id=101 data-nosnippet>101</a>		<span class="kw">let </span><span class="kw-2">mut </span>route = <span class="macro">vec!</span>[];
 <a href=#102 id=102 data-nosnippet>102</a>		<span class="kw">let </span><span class="kw-2">mut </span>current_hash = <span class="kw-2">*</span>precommit_target_hash;
 <a href=#103 id=103 data-nosnippet>103</a>		<span class="kw">loop </span>{
 <a href=#104 id=104 data-nosnippet>104</a>			<span class="kw">if </span>current_hash == <span class="self">self</span>.base.hash() {
-<a href=#105 id=105 data-nosnippet>105</a>				<span class="kw">break
-<a href=#106 id=106 data-nosnippet>106</a>			</span>}
+<a href=#105 id=105 data-nosnippet>105</a>				<span class="kw">break</span>;
+<a href=#106 id=106 data-nosnippet>106</a>			}
 <a href=#107 id=107 data-nosnippet>107</a>
 <a href=#108 id=108 data-nosnippet>108</a>			current_hash = <span class="kw">match </span><span class="self">self</span>.parent_hash_of(<span class="kw-2">&amp;</span>current_hash) {
 <a href=#109 id=109 data-nosnippet>109</a>				<span class="prelude-val">Some</span>(parent_hash) =&gt; {
@@ -261,7 +261,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#111 id=111 data-nosnippet>111</a>					<span class="kw">if </span>is_visited_before {
 <a href=#112 id=112 data-nosnippet>112</a>						<span class="comment">// If the current header has been visited in a previous call, it is a
 <a href=#113 id=113 data-nosnippet>113</a>						// descendent of `base` (we assume that the previous call was successful).
-<a href=#114 id=114 data-nosnippet>114</a>						</span><span class="kw">return </span><span class="prelude-val">Some</span>(route)
+<a href=#114 id=114 data-nosnippet>114</a>						</span><span class="kw">return </span><span class="prelude-val">Some</span>(route);
 <a href=#115 id=115 data-nosnippet>115</a>					}
 <a href=#116 id=116 data-nosnippet>116</a>					route.push(current_hash);
 <a href=#117 id=117 data-nosnippet>117</a>
@@ -395,7 +395,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#245 id=245 data-nosnippet>245</a>		</span><span class="kw">if </span>(justification.commit.target_hash, justification.commit.target_number) !=
 <a href=#246 id=246 data-nosnippet>246</a>			finalized_target
 <a href=#247 id=247 data-nosnippet>247</a>		{
-<a href=#248 id=248 data-nosnippet>248</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidJustificationTarget)
+<a href=#248 id=248 data-nosnippet>248</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidJustificationTarget);
 <a href=#249 id=249 data-nosnippet>249</a>		}
 <a href=#250 id=250 data-nosnippet>250</a>
 <a href=#251 id=251 data-nosnippet>251</a>		<span class="kw">let </span>threshold = context.voter_set.threshold().get();
@@ -412,8 +412,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#262 id=262 data-nosnippet>262</a>				<span class="kw">let </span>action =
 <a href=#263 id=263 data-nosnippet>263</a>					<span class="self">self</span>.process_redundant_vote(precommit_idx).map_err(Error::Precommit)<span class="question-mark">?</span>;
 <a href=#264 id=264 data-nosnippet>264</a>				<span class="kw">if </span><span class="macro">matches!</span>(action, IterationFlow::Skip) {
-<a href=#265 id=265 data-nosnippet>265</a>					<span class="kw">continue
-<a href=#266 id=266 data-nosnippet>266</a>				</span>}
+<a href=#265 id=265 data-nosnippet>265</a>					<span class="kw">continue</span>;
+<a href=#266 id=266 data-nosnippet>266</a>				}
 <a href=#267 id=267 data-nosnippet>267</a>			}
 <a href=#268 id=268 data-nosnippet>268</a>
 <a href=#269 id=269 data-nosnippet>269</a>			<span class="comment">// authority must be in the set
@@ -425,15 +425,15 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#275 id=275 data-nosnippet>275</a>						</span>.process_known_authority_vote(precommit_idx, signed)
 <a href=#276 id=276 data-nosnippet>276</a>						.map_err(Error::Precommit)<span class="question-mark">?</span>;
 <a href=#277 id=277 data-nosnippet>277</a>					<span class="kw">if </span><span class="macro">matches!</span>(action, IterationFlow::Skip) {
-<a href=#278 id=278 data-nosnippet>278</a>						<span class="kw">continue
-<a href=#279 id=279 data-nosnippet>279</a>					</span>}
+<a href=#278 id=278 data-nosnippet>278</a>						<span class="kw">continue</span>;
+<a href=#279 id=279 data-nosnippet>279</a>					}
 <a href=#280 id=280 data-nosnippet>280</a>
 <a href=#281 id=281 data-nosnippet>281</a>					authority_info
 <a href=#282 id=282 data-nosnippet>282</a>				},
 <a href=#283 id=283 data-nosnippet>283</a>				<span class="prelude-val">None </span>=&gt; {
 <a href=#284 id=284 data-nosnippet>284</a>					<span class="self">self</span>.process_unknown_authority_vote(precommit_idx).map_err(Error::Precommit)<span class="question-mark">?</span>;
-<a href=#285 id=285 data-nosnippet>285</a>					<span class="kw">continue
-<a href=#286 id=286 data-nosnippet>286</a>				</span>},
+<a href=#285 id=285 data-nosnippet>285</a>					<span class="kw">continue</span>;
+<a href=#286 id=286 data-nosnippet>286</a>				},
 <a href=#287 id=287 data-nosnippet>287</a>			};
 <a href=#288 id=288 data-nosnippet>288</a>
 <a href=#289 id=289 data-nosnippet>289</a>			<span class="comment">// all precommits must be descendants of the target block
@@ -444,8 +444,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#294 id=294 data-nosnippet>294</a>					</span>.process_unrelated_ancestry_vote(precommit_idx)
 <a href=#295 id=295 data-nosnippet>295</a>					.map_err(Error::Precommit)<span class="question-mark">?</span>;
 <a href=#296 id=296 data-nosnippet>296</a>				<span class="kw">if </span><span class="macro">matches!</span>(action, IterationFlow::Skip) {
-<a href=#297 id=297 data-nosnippet>297</a>					<span class="kw">continue
-<a href=#298 id=298 data-nosnippet>298</a>				</span>}
+<a href=#297 id=297 data-nosnippet>297</a>					<span class="kw">continue</span>;
+<a href=#298 id=298 data-nosnippet>298</a>				}
 <a href=#299 id=299 data-nosnippet>299</a>			}
 <a href=#300 id=300 data-nosnippet>300</a>
 <a href=#301 id=301 data-nosnippet>301</a>			<span class="comment">// verify authority signature
@@ -460,8 +460,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#310 id=310 data-nosnippet>310</a>			.is_valid()
 <a href=#311 id=311 data-nosnippet>311</a>			{
 <a href=#312 id=312 data-nosnippet>312</a>				<span class="self">self</span>.process_invalid_signature_vote(precommit_idx).map_err(Error::Precommit)<span class="question-mark">?</span>;
-<a href=#313 id=313 data-nosnippet>313</a>				<span class="kw">continue
-<a href=#314 id=314 data-nosnippet>314</a>			</span>}
+<a href=#313 id=313 data-nosnippet>313</a>				<span class="kw">continue</span>;
+<a href=#314 id=314 data-nosnippet>314</a>			}
 <a href=#315 id=315 data-nosnippet>315</a>
 <a href=#316 id=316 data-nosnippet>316</a>			<span class="comment">// now we can count the vote since we know that it is valid
 <a href=#317 id=317 data-nosnippet>317</a>			</span><span class="self">self</span>.process_valid_vote(signed);
@@ -474,7 +474,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#324 id=324 data-nosnippet>324</a>		<span class="comment">// check that the cumulative weight of validators that voted for the justification target
 <a href=#325 id=325 data-nosnippet>325</a>		// (or one of its descendants) is larger than the required threshold.
 <a href=#326 id=326 data-nosnippet>326</a>		</span><span class="kw">if </span>cumulative_weight &lt; threshold {
-<a href=#327 id=327 data-nosnippet>327</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::TooLowCumulativeWeight)
+<a href=#327 id=327 data-nosnippet>327</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::TooLowCumulativeWeight);
 <a href=#328 id=328 data-nosnippet>328</a>		}
 <a href=#329 id=329 data-nosnippet>329</a>
 <a href=#330 id=330 data-nosnippet>330</a>		<span class="comment">// check that there are no extra headers in the justification
@@ -484,7 +484,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#334 id=334 data-nosnippet>334</a>
 <a href=#335 id=335 data-nosnippet>335</a>		<span class="prelude-val">Ok</span>(())
 <a href=#336 id=336 data-nosnippet>336</a>	}
-<a href=#337 id=337 data-nosnippet>337</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#337 id=337 data-nosnippet>337</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

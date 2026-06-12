@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/xcm/xcm-simulator/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/xcm/xcm-simulator/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="xcm_simulator" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="xcm_simulator" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">xcm_simulator/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">xcm_simulator/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Polkadot.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Polkadot is free software: you can redistribute it and/or modify
@@ -271,7 +271,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#121 id=121 data-nosnippet>121</a>	) =&gt; {
 <a href=#122 id=122 data-nosnippet>122</a>		<span class="kw">pub struct </span><span class="macro-nonterminal">$name</span>;
 <a href=#123 id=123 data-nosnippet>123</a>
-<a href=#124 id=124 data-nosnippet>124</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::__impl_ext!</span>(<span class="macro-nonterminal">$name</span>, <span class="macro-nonterminal">$new_ext</span>);
+<a href=#124 id=124 data-nosnippet>124</a>		<span class="macro-nonterminal">$crate::__impl_ext</span>!(<span class="macro-nonterminal">$name</span>, <span class="macro-nonterminal">$new_ext</span>);
 <a href=#125 id=125 data-nosnippet>125</a>
 <a href=#126 id=126 data-nosnippet>126</a>		<span class="kw">impl </span><span class="macro-nonterminal">$crate::ProcessMessage </span><span class="kw">for </span><span class="macro-nonterminal">$name </span>{
 <a href=#127 id=127 data-nosnippet>127</a>			<span class="kw">type </span>Origin = <span class="macro-nonterminal">$crate::ParaId</span>;
@@ -282,7 +282,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#132 id=132 data-nosnippet>132</a>				meter: <span class="kw-2">&amp;mut </span><span class="macro-nonterminal">$crate::WeightMeter</span>,
 <a href=#133 id=133 data-nosnippet>133</a>				id: <span class="kw-2">&amp;mut </span>[u8; <span class="number">32</span>],
 <a href=#134 id=134 data-nosnippet>134</a>			) -&gt; <span class="prelude-ty">Result</span>&lt;bool, <span class="macro-nonterminal">$crate::ProcessMessageError</span>&gt; {
-<a href=#135 id=135 data-nosnippet>135</a>				<span class="kw">use </span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::{<span class="macro-nonterminal">Weight</span>, AggregateMessageOrigin, UmpQueueId, ServiceQueues, EnqueueMessage};
+<a href=#135 id=135 data-nosnippet>135</a>				<span class="kw">use </span><span class="macro-nonterminal">$crate</span>::{Weight, AggregateMessageOrigin, UmpQueueId, ServiceQueues, EnqueueMessage};
 <a href=#136 id=136 data-nosnippet>136</a>				<span class="kw">use </span><span class="macro-nonterminal">$mq </span><span class="kw">as </span>message_queue;
 <a href=#137 id=137 data-nosnippet>137</a>				<span class="kw">use </span><span class="macro-nonterminal">$runtime_event </span><span class="kw">as </span>runtime_event;
 <a href=#138 id=138 data-nosnippet>138</a>
@@ -338,7 +338,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#188 id=188 data-nosnippet>188</a>	) =&gt; {
 <a href=#189 id=189 data-nosnippet>189</a>		<span class="kw">pub struct </span><span class="macro-nonterminal">$name</span>;
 <a href=#190 id=190 data-nosnippet>190</a>
-<a href=#191 id=191 data-nosnippet>191</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::__impl_ext!</span>(<span class="macro-nonterminal">$name</span>, <span class="macro-nonterminal">$new_ext</span>);
+<a href=#191 id=191 data-nosnippet>191</a>		<span class="macro-nonterminal">$crate::__impl_ext</span>!(<span class="macro-nonterminal">$name</span>, <span class="macro-nonterminal">$new_ext</span>);
 <a href=#192 id=192 data-nosnippet>192</a>
 <a href=#193 id=193 data-nosnippet>193</a>		<span class="kw">impl </span><span class="macro-nonterminal">$crate::XcmpMessageHandlerT </span><span class="kw">for </span><span class="macro-nonterminal">$name </span>{
 <a href=#194 id=194 data-nosnippet>194</a>			<span class="kw">fn </span>handle_xcmp_messages&lt;
@@ -348,7 +348,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#198 id=198 data-nosnippet>198</a>				iter: I,
 <a href=#199 id=199 data-nosnippet>199</a>				max_weight: <span class="macro-nonterminal">$crate::Weight</span>,
 <a href=#200 id=200 data-nosnippet>200</a>			) -&gt; <span class="macro-nonterminal">$crate::Weight </span>{
-<a href=#201 id=201 data-nosnippet>201</a>				<span class="kw">use </span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::{<span class="macro-nonterminal">TestExt</span>, XcmpMessageHandlerT};
+<a href=#201 id=201 data-nosnippet>201</a>				<span class="kw">use </span><span class="macro-nonterminal">$crate</span>::{TestExt, XcmpMessageHandlerT};
 <a href=#202 id=202 data-nosnippet>202</a>
 <a href=#203 id=203 data-nosnippet>203</a>				<span class="macro-nonterminal">$name::execute_with</span>(|| {
 <a href=#204 id=204 data-nosnippet>204</a>					&lt;<span class="macro-nonterminal">$xcmp_message_handler</span>&gt;::handle_xcmp_messages(iter, max_weight)
@@ -361,7 +361,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#211 id=211 data-nosnippet>211</a>				iter: <span class="kw">impl </span>Iterator&lt;Item = (<span class="macro-nonterminal">$crate::RelayBlockNumber</span>, Vec&lt;u8&gt;)&gt;,
 <a href=#212 id=212 data-nosnippet>212</a>				max_weight: <span class="macro-nonterminal">$crate::Weight</span>,
 <a href=#213 id=213 data-nosnippet>213</a>			) -&gt; <span class="macro-nonterminal">$crate::Weight </span>{
-<a href=#214 id=214 data-nosnippet>214</a>				<span class="kw">use </span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::{<span class="macro-nonterminal">DmpMessageHandlerT</span>, TestExt};
+<a href=#214 id=214 data-nosnippet>214</a>				<span class="kw">use </span><span class="macro-nonterminal">$crate</span>::{DmpMessageHandlerT, TestExt};
 <a href=#215 id=215 data-nosnippet>215</a>
 <a href=#216 id=216 data-nosnippet>216</a>				<span class="macro-nonterminal">$name::execute_with</span>(|| {
 <a href=#217 id=217 data-nosnippet>217</a>					&lt;<span class="macro-nonterminal">$dmp_message_handler</span>&gt;::handle_dmp_messages(iter, max_weight)
@@ -376,8 +376,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#226 id=226 data-nosnippet>226</a></span><span class="macro">macro_rules!</span> __impl_ext {
 <a href=#227 id=227 data-nosnippet>227</a>	<span class="comment">// entry point: generate ext name
 <a href=#228 id=228 data-nosnippet>228</a>	</span>(<span class="macro-nonterminal">$name</span>:ident, <span class="macro-nonterminal">$new_ext</span>:expr) =&gt; {
-<a href=#229 id=229 data-nosnippet>229</a>		<span class="macro-nonterminal">$</span><span class="macro">crate::paste::paste!</span> {
-<a href=#230 id=230 data-nosnippet>230</a>			<span class="macro-nonterminal">$</span><span class="macro">crate::__impl_ext!</span>(@<span class="kw">impl </span><span class="macro-nonterminal">$name</span>, <span class="macro-nonterminal">$new_ext</span>, [&lt;EXT_ <span class="macro-nonterminal">$name</span>:upper&gt;]);
+<a href=#229 id=229 data-nosnippet>229</a>		<span class="macro-nonterminal">$crate::paste::paste</span>! {
+<a href=#230 id=230 data-nosnippet>230</a>			<span class="macro-nonterminal">$crate::__impl_ext</span>!(@<span class="kw">impl </span><span class="macro-nonterminal">$name</span>, <span class="macro-nonterminal">$new_ext</span>, [&lt;EXT_ <span class="macro-nonterminal">$name</span>:upper&gt;]);
 <a href=#231 id=231 data-nosnippet>231</a>		}
 <a href=#232 id=232 data-nosnippet>232</a>	};
 <a href=#233 id=233 data-nosnippet>233</a>	<span class="comment">// impl
@@ -451,7 +451,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#301 id=301 data-nosnippet>301</a>
 <a href=#302 id=302 data-nosnippet>302</a>		<span class="kw">impl </span><span class="macro-nonterminal">$name </span>{
 <a href=#303 id=303 data-nosnippet>303</a>			<span class="kw">pub fn </span>reset() {
-<a href=#304 id=304 data-nosnippet>304</a>				<span class="kw">use </span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::{<span class="macro-nonterminal">TestExt</span>, VecDeque};
+<a href=#304 id=304 data-nosnippet>304</a>				<span class="kw">use </span><span class="macro-nonterminal">$crate</span>::{TestExt, VecDeque};
 <a href=#305 id=305 data-nosnippet>305</a>				<span class="comment">// Reset relay chain message bus.
 <a href=#306 id=306 data-nosnippet>306</a>				</span><span class="macro-nonterminal">$crate::RELAY_MESSAGE_BUS</span>.with(|b| b.replace(VecDeque::new()));
 <a href=#307 id=307 data-nosnippet>307</a>				<span class="comment">// Reset parachain message bus.
@@ -463,7 +463,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#313 id=313 data-nosnippet>313</a>
 <a href=#314 id=314 data-nosnippet>314</a>		<span class="doccomment">/// Check if any messages exist in either message bus.
 <a href=#315 id=315 data-nosnippet>315</a>		</span><span class="kw">fn </span>exists_messages_in_any_bus() -&gt; bool {
-<a href=#316 id=316 data-nosnippet>316</a>			<span class="kw">use </span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::{<span class="macro-nonterminal">RELAY_MESSAGE_BUS</span>, PARA_MESSAGE_BUS};
+<a href=#316 id=316 data-nosnippet>316</a>			<span class="kw">use </span><span class="macro-nonterminal">$crate</span>::{RELAY_MESSAGE_BUS, PARA_MESSAGE_BUS};
 <a href=#317 id=317 data-nosnippet>317</a>			<span class="kw">let </span>no_relay_messages_left = RELAY_MESSAGE_BUS.with(|b| b.borrow().is_empty());
 <a href=#318 id=318 data-nosnippet>318</a>			<span class="kw">let </span>no_parachain_messages_left = PARA_MESSAGE_BUS.with(|b| b.borrow().is_empty());
 <a href=#319 id=319 data-nosnippet>319</a>			!(no_relay_messages_left &amp;&amp; no_parachain_messages_left)
@@ -471,7 +471,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#321 id=321 data-nosnippet>321</a>
 <a href=#322 id=322 data-nosnippet>322</a>		<span class="doccomment">/// Process all messages originating from parachains.
 <a href=#323 id=323 data-nosnippet>323</a>		</span><span class="kw">fn </span>process_para_messages() -&gt; <span class="macro-nonterminal">$crate::XcmResult </span>{
-<a href=#324 id=324 data-nosnippet>324</a>			<span class="kw">use </span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::{<span class="macro-nonterminal">ProcessMessage</span>, XcmpMessageHandlerT};
+<a href=#324 id=324 data-nosnippet>324</a>			<span class="kw">use </span><span class="macro-nonterminal">$crate</span>::{ProcessMessage, XcmpMessageHandlerT};
 <a href=#325 id=325 data-nosnippet>325</a>
 <a href=#326 id=326 data-nosnippet>326</a>			<span class="kw">while let </span><span class="prelude-val">Some</span>((para_id, destination, message)) = <span class="macro-nonterminal">$crate::PARA_MESSAGE_BUS</span>.with(
 <a href=#327 id=327 data-nosnippet>327</a>				|b| b.borrow_mut().pop_front()) {
@@ -787,7 +787,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#637 id=637 data-nosnippet>637</a>			tracker.insert_and_assert_unique(<span class="string">"ChainA"</span>, id2);
 <a href=#638 id=638 data-nosnippet>638</a>		}
 <a href=#639 id=639 data-nosnippet>639</a>	}
-<a href=#640 id=640 data-nosnippet>640</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#640 id=640 data-nosnippet>640</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

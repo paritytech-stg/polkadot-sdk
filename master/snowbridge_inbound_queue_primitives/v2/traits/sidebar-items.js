@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["ConvertMessageError"],"trait":["ConvertMessage"]};
+window.SIDEBAR_ITEMS = {"enum":["ConvertMessageError","MessageProcessorError"],"trait":["ConvertMessage","MessageProcessor"]};

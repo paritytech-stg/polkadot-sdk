@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["get_penpal_chain_spec"]};
+window.SIDEBAR_ITEMS = {"fn":["get_penpal_chain_spec","staging_penpal_local_config","testnet_genesis_patch"]};

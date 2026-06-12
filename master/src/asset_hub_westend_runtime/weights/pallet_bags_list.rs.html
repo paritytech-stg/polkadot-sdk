@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `cumulus/parachains/runtimes/assets/asset-hub-westend/src/weights/pallet_bags_list.rs`."><title>pallet_bags_list.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `cumulus/parachains/runtimes/assets/asset-hub-westend/src/weights/pallet_bags_list.rs`."><title>pallet_bags_list.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="asset_hub_westend_runtime" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="asset_hub_westend_runtime" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">asset_hub_westend_runtime/weights/</div>pallet_bags_list.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">asset_hub_westend_runtime/weights/</div>pallet_bags_list.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// SPDX-License-Identifier: Apache-2.0
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Licensed under the Apache License, Version 2.0 (the "License");
@@ -166,9 +166,9 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#16 id=16 data-nosnippet>16</a></span><span class="doccomment">//! Autogenerated weights for `pallet_bags_list`
 <a href=#17 id=17 data-nosnippet>17</a>//!
 <a href=#18 id=18 data-nosnippet>18</a>//! THIS FILE WAS AUTO-GENERATED USING THE SUBSTRATE BENCHMARK CLI VERSION 32.0.0
-<a href=#19 id=19 data-nosnippet>19</a>//! DATE: 2025-09-12, STEPS: `50`, REPEAT: `20`, LOW RANGE: `[]`, HIGH RANGE: `[]`
+<a href=#19 id=19 data-nosnippet>19</a>//! DATE: 2026-04-02, STEPS: `50`, REPEAT: `20`, LOW RANGE: `[]`, HIGH RANGE: `[]`
 <a href=#20 id=20 data-nosnippet>20</a>//! WORST CASE MAP SIZE: `1000000`
-<a href=#21 id=21 data-nosnippet>21</a>//! HOSTNAME: `157b7e44410a`, CPU: `Intel(R) Xeon(R) CPU @ 2.60GHz`
+<a href=#21 id=21 data-nosnippet>21</a>//! HOSTNAME: `fbbc55bc678e`, CPU: `Intel(R) Xeon(R) CPU @ 2.60GHz`
 <a href=#22 id=22 data-nosnippet>22</a>//! WASM-EXECUTION: `Compiled`, CHAIN: `None`, DB CACHE: 1024
 <a href=#23 id=23 data-nosnippet>23</a>
 <a href=#24 id=24 data-nosnippet>24</a></span><span class="comment">// Executed Command:
@@ -202,99 +202,112 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#52 id=52 data-nosnippet>52</a><span class="kw">impl</span>&lt;T: frame_system::Config&gt; pallet_bags_list::WeightInfo <span class="kw">for </span>WeightInfo&lt;T&gt; {
 <a href=#53 id=53 data-nosnippet>53</a>	<span class="doccomment">/// Storage: `VoterList::Lock` (r:1 w:0)
 <a href=#54 id=54 data-nosnippet>54</a>	/// Proof: `VoterList::Lock` (`max_values`: Some(1), `max_size`: Some(0), added: 495, mode: `MaxEncodedLen`)
-<a href=#55 id=55 data-nosnippet>55</a>	/// Storage: `VoterList::PendingRebag` (r:1 w:0)
-<a href=#56 id=56 data-nosnippet>56</a>	/// Proof: `VoterList::PendingRebag` (`max_values`: None, `max_size`: Some(48), added: 2523, mode: `MaxEncodedLen`)
+<a href=#55 id=55 data-nosnippet>55</a>	/// Storage: `VoterList::PendingRebag` (r:1 w:1)
+<a href=#56 id=56 data-nosnippet>56</a>	/// Proof: `VoterList::PendingRebag` (`max_values`: None, `max_size`: Some(40), added: 2515, mode: `MaxEncodedLen`)
 <a href=#57 id=57 data-nosnippet>57</a>	/// Storage: `VoterList::ListNodes` (r:4 w:4)
 <a href=#58 id=58 data-nosnippet>58</a>	/// Proof: `VoterList::ListNodes` (`max_values`: None, `max_size`: Some(154), added: 2629, mode: `MaxEncodedLen`)
 <a href=#59 id=59 data-nosnippet>59</a>	/// Storage: `Staking::Bonded` (r:1 w:0)
 <a href=#60 id=60 data-nosnippet>60</a>	/// Proof: `Staking::Bonded` (`max_values`: None, `max_size`: Some(72), added: 2547, mode: `MaxEncodedLen`)
 <a href=#61 id=61 data-nosnippet>61</a>	/// Storage: `Staking::Ledger` (r:1 w:0)
 <a href=#62 id=62 data-nosnippet>62</a>	/// Proof: `Staking::Ledger` (`max_values`: None, `max_size`: Some(753), added: 3228, mode: `MaxEncodedLen`)
-<a href=#63 id=63 data-nosnippet>63</a>	/// Storage: `VoterList::ListBags` (r:1 w:1)
-<a href=#64 id=64 data-nosnippet>64</a>	/// Proof: `VoterList::ListBags` (`max_values`: None, `max_size`: Some(82), added: 2557, mode: `MaxEncodedLen`)
-<a href=#65 id=65 data-nosnippet>65</a>	</span><span class="kw">fn </span>rebag_non_terminal() -&gt; Weight {
-<a href=#66 id=66 data-nosnippet>66</a>		<span class="comment">// Proof Size summary in bytes:
-<a href=#67 id=67 data-nosnippet>67</a>		//  Measured:  `5012`
-<a href=#68 id=68 data-nosnippet>68</a>		//  Estimated: `11506`
-<a href=#69 id=69 data-nosnippet>69</a>		// Minimum execution time: 154_457_000 picoseconds.
-<a href=#70 id=70 data-nosnippet>70</a>		</span>Weight::from_parts(<span class="number">161_546_000</span>, <span class="number">0</span>)
-<a href=#71 id=71 data-nosnippet>71</a>			.saturating_add(Weight::from_parts(<span class="number">0</span>, <span class="number">11506</span>))
-<a href=#72 id=72 data-nosnippet>72</a>			.saturating_add(T::DbWeight::get().reads(<span class="number">9</span>))
-<a href=#73 id=73 data-nosnippet>73</a>			.saturating_add(T::DbWeight::get().writes(<span class="number">5</span>))
-<a href=#74 id=74 data-nosnippet>74</a>	}
-<a href=#75 id=75 data-nosnippet>75</a>	<span class="doccomment">/// Storage: `VoterList::Lock` (r:1 w:0)
-<a href=#76 id=76 data-nosnippet>76</a>	/// Proof: `VoterList::Lock` (`max_values`: Some(1), `max_size`: Some(0), added: 495, mode: `MaxEncodedLen`)
-<a href=#77 id=77 data-nosnippet>77</a>	/// Storage: `VoterList::PendingRebag` (r:1 w:0)
-<a href=#78 id=78 data-nosnippet>78</a>	/// Proof: `VoterList::PendingRebag` (`max_values`: None, `max_size`: Some(48), added: 2523, mode: `MaxEncodedLen`)
-<a href=#79 id=79 data-nosnippet>79</a>	/// Storage: `VoterList::ListNodes` (r:3 w:3)
-<a href=#80 id=80 data-nosnippet>80</a>	/// Proof: `VoterList::ListNodes` (`max_values`: None, `max_size`: Some(154), added: 2629, mode: `MaxEncodedLen`)
-<a href=#81 id=81 data-nosnippet>81</a>	/// Storage: `Staking::Bonded` (r:1 w:0)
-<a href=#82 id=82 data-nosnippet>82</a>	/// Proof: `Staking::Bonded` (`max_values`: None, `max_size`: Some(72), added: 2547, mode: `MaxEncodedLen`)
-<a href=#83 id=83 data-nosnippet>83</a>	/// Storage: `Staking::Ledger` (r:1 w:0)
-<a href=#84 id=84 data-nosnippet>84</a>	/// Proof: `Staking::Ledger` (`max_values`: None, `max_size`: Some(753), added: 3228, mode: `MaxEncodedLen`)
-<a href=#85 id=85 data-nosnippet>85</a>	/// Storage: `VoterList::ListBags` (r:2 w:2)
-<a href=#86 id=86 data-nosnippet>86</a>	/// Proof: `VoterList::ListBags` (`max_values`: None, `max_size`: Some(82), added: 2557, mode: `MaxEncodedLen`)
-<a href=#87 id=87 data-nosnippet>87</a>	</span><span class="kw">fn </span>rebag_terminal() -&gt; Weight {
-<a href=#88 id=88 data-nosnippet>88</a>		<span class="comment">// Proof Size summary in bytes:
-<a href=#89 id=89 data-nosnippet>89</a>		//  Measured:  `4915`
-<a href=#90 id=90 data-nosnippet>90</a>		//  Estimated: `8877`
-<a href=#91 id=91 data-nosnippet>91</a>		// Minimum execution time: 155_177_000 picoseconds.
-<a href=#92 id=92 data-nosnippet>92</a>		</span>Weight::from_parts(<span class="number">159_976_000</span>, <span class="number">0</span>)
-<a href=#93 id=93 data-nosnippet>93</a>			.saturating_add(Weight::from_parts(<span class="number">0</span>, <span class="number">8877</span>))
-<a href=#94 id=94 data-nosnippet>94</a>			.saturating_add(T::DbWeight::get().reads(<span class="number">9</span>))
-<a href=#95 id=95 data-nosnippet>95</a>			.saturating_add(T::DbWeight::get().writes(<span class="number">5</span>))
-<a href=#96 id=96 data-nosnippet>96</a>	}
-<a href=#97 id=97 data-nosnippet>97</a>	<span class="doccomment">/// Storage: `VoterList::Lock` (r:1 w:0)
-<a href=#98 id=98 data-nosnippet>98</a>	/// Proof: `VoterList::Lock` (`max_values`: Some(1), `max_size`: Some(0), added: 495, mode: `MaxEncodedLen`)
-<a href=#99 id=99 data-nosnippet>99</a>	/// Storage: `VoterList::ListNodes` (r:4 w:4)
-<a href=#100 id=100 data-nosnippet>100</a>	/// Proof: `VoterList::ListNodes` (`max_values`: None, `max_size`: Some(154), added: 2629, mode: `MaxEncodedLen`)
-<a href=#101 id=101 data-nosnippet>101</a>	/// Storage: `Staking::Bonded` (r:2 w:0)
-<a href=#102 id=102 data-nosnippet>102</a>	/// Proof: `Staking::Bonded` (`max_values`: None, `max_size`: Some(72), added: 2547, mode: `MaxEncodedLen`)
-<a href=#103 id=103 data-nosnippet>103</a>	/// Storage: `Staking::Ledger` (r:2 w:0)
-<a href=#104 id=104 data-nosnippet>104</a>	/// Proof: `Staking::Ledger` (`max_values`: None, `max_size`: Some(753), added: 3228, mode: `MaxEncodedLen`)
-<a href=#105 id=105 data-nosnippet>105</a>	/// Storage: `VoterList::CounterForListNodes` (r:1 w:1)
-<a href=#106 id=106 data-nosnippet>106</a>	/// Proof: `VoterList::CounterForListNodes` (`max_values`: Some(1), `max_size`: Some(4), added: 499, mode: `MaxEncodedLen`)
-<a href=#107 id=107 data-nosnippet>107</a>	/// Storage: `VoterList::ListBags` (r:1 w:1)
-<a href=#108 id=108 data-nosnippet>108</a>	/// Proof: `VoterList::ListBags` (`max_values`: None, `max_size`: Some(82), added: 2557, mode: `MaxEncodedLen`)
-<a href=#109 id=109 data-nosnippet>109</a>	</span><span class="kw">fn </span>put_in_front_of() -&gt; Weight {
-<a href=#110 id=110 data-nosnippet>110</a>		<span class="comment">// Proof Size summary in bytes:
-<a href=#111 id=111 data-nosnippet>111</a>		//  Measured:  `7365`
-<a href=#112 id=112 data-nosnippet>112</a>		//  Estimated: `11506`
-<a href=#113 id=113 data-nosnippet>113</a>		// Minimum execution time: 190_977_000 picoseconds.
-<a href=#114 id=114 data-nosnippet>114</a>		</span>Weight::from_parts(<span class="number">206_642_000</span>, <span class="number">0</span>)
-<a href=#115 id=115 data-nosnippet>115</a>			.saturating_add(Weight::from_parts(<span class="number">0</span>, <span class="number">11506</span>))
-<a href=#116 id=116 data-nosnippet>116</a>			.saturating_add(T::DbWeight::get().reads(<span class="number">11</span>))
-<a href=#117 id=117 data-nosnippet>117</a>			.saturating_add(T::DbWeight::get().writes(<span class="number">6</span>))
-<a href=#118 id=118 data-nosnippet>118</a>	}
-<a href=#119 id=119 data-nosnippet>119</a>	<span class="doccomment">/// Storage: `VoterList::CounterForListNodes` (r:1 w:1)
-<a href=#120 id=120 data-nosnippet>120</a>	/// Proof: `VoterList::CounterForListNodes` (`max_values`: Some(1), `max_size`: Some(4), added: 499, mode: `MaxEncodedLen`)
-<a href=#121 id=121 data-nosnippet>121</a>	/// Storage: `VoterList::CounterForPendingRebag` (r:1 w:1)
-<a href=#122 id=122 data-nosnippet>122</a>	/// Proof: `VoterList::CounterForPendingRebag` (`max_values`: Some(1), `max_size`: Some(4), added: 499, mode: `MaxEncodedLen`)
-<a href=#123 id=123 data-nosnippet>123</a>	/// Storage: `VoterList::Lock` (r:1 w:0)
-<a href=#124 id=124 data-nosnippet>124</a>	/// Proof: `VoterList::Lock` (`max_values`: Some(1), `max_size`: Some(0), added: 495, mode: `MaxEncodedLen`)
-<a href=#125 id=125 data-nosnippet>125</a>	/// Storage: `VoterList::NextNodeAutoRebagged` (r:1 w:1)
-<a href=#126 id=126 data-nosnippet>126</a>	/// Proof: `VoterList::NextNodeAutoRebagged` (`max_values`: Some(1), `max_size`: Some(32), added: 527, mode: `MaxEncodedLen`)
-<a href=#127 id=127 data-nosnippet>127</a>	/// Storage: `VoterList::PendingRebag` (r:12 w:3)
-<a href=#128 id=128 data-nosnippet>128</a>	/// Proof: `VoterList::PendingRebag` (`max_values`: None, `max_size`: Some(48), added: 2523, mode: `MaxEncodedLen`)
-<a href=#129 id=129 data-nosnippet>129</a>	/// Storage: `VoterList::ListBags` (r:199 w:3)
-<a href=#130 id=130 data-nosnippet>130</a>	/// Proof: `VoterList::ListBags` (`max_values`: None, `max_size`: Some(82), added: 2557, mode: `MaxEncodedLen`)
-<a href=#131 id=131 data-nosnippet>131</a>	/// Storage: `VoterList::ListNodes` (r:11 w:10)
-<a href=#132 id=132 data-nosnippet>132</a>	/// Proof: `VoterList::ListNodes` (`max_values`: None, `max_size`: Some(154), added: 2629, mode: `MaxEncodedLen`)
-<a href=#133 id=133 data-nosnippet>133</a>	/// Storage: `Staking::Bonded` (r:10 w:0)
-<a href=#134 id=134 data-nosnippet>134</a>	/// Proof: `Staking::Bonded` (`max_values`: None, `max_size`: Some(72), added: 2547, mode: `MaxEncodedLen`)
-<a href=#135 id=135 data-nosnippet>135</a>	/// Storage: `Staking::Ledger` (r:9 w:0)
-<a href=#136 id=136 data-nosnippet>136</a>	/// Proof: `Staking::Ledger` (`max_values`: None, `max_size`: Some(753), added: 3228, mode: `MaxEncodedLen`)
-<a href=#137 id=137 data-nosnippet>137</a>	</span><span class="kw">fn </span>on_idle() -&gt; Weight {
-<a href=#138 id=138 data-nosnippet>138</a>		<span class="comment">// Proof Size summary in bytes:
-<a href=#139 id=139 data-nosnippet>139</a>		//  Measured:  `23853`
-<a href=#140 id=140 data-nosnippet>140</a>		//  Estimated: `509833`
-<a href=#141 id=141 data-nosnippet>141</a>		// Minimum execution time: 1_173_907_000 picoseconds.
-<a href=#142 id=142 data-nosnippet>142</a>		</span>Weight::from_parts(<span class="number">1_196_347_000</span>, <span class="number">0</span>)
-<a href=#143 id=143 data-nosnippet>143</a>			.saturating_add(Weight::from_parts(<span class="number">0</span>, <span class="number">509833</span>))
-<a href=#144 id=144 data-nosnippet>144</a>			.saturating_add(T::DbWeight::get().reads(<span class="number">245</span>))
-<a href=#145 id=145 data-nosnippet>145</a>			.saturating_add(T::DbWeight::get().writes(<span class="number">19</span>))
-<a href=#146 id=146 data-nosnippet>146</a>	}
-<a href=#147 id=147 data-nosnippet>147</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#63 id=63 data-nosnippet>63</a>	/// Storage: `Staking::Nominators` (r:1 w:0)
+<a href=#64 id=64 data-nosnippet>64</a>	/// Proof: `Staking::Nominators` (`max_values`: None, `max_size`: Some(558), added: 3033, mode: `MaxEncodedLen`)
+<a href=#65 id=65 data-nosnippet>65</a>	/// Storage: `Staking::Validators` (r:1 w:0)
+<a href=#66 id=66 data-nosnippet>66</a>	/// Proof: `Staking::Validators` (`max_values`: None, `max_size`: Some(45), added: 2520, mode: `MaxEncodedLen`)
+<a href=#67 id=67 data-nosnippet>67</a>	/// Storage: `VoterList::ListBags` (r:1 w:1)
+<a href=#68 id=68 data-nosnippet>68</a>	/// Proof: `VoterList::ListBags` (`max_values`: None, `max_size`: Some(82), added: 2557, mode: `MaxEncodedLen`)
+<a href=#69 id=69 data-nosnippet>69</a>	</span><span class="kw">fn </span>rebag_non_terminal() -&gt; Weight {
+<a href=#70 id=70 data-nosnippet>70</a>		<span class="comment">// Proof Size summary in bytes:
+<a href=#71 id=71 data-nosnippet>71</a>		//  Measured:  `7723`
+<a href=#72 id=72 data-nosnippet>72</a>		//  Estimated: `11506`
+<a href=#73 id=73 data-nosnippet>73</a>		// Minimum execution time: 211_700_000 picoseconds.
+<a href=#74 id=74 data-nosnippet>74</a>		</span>Weight::from_parts(<span class="number">229_389_000</span>, <span class="number">0</span>)
+<a href=#75 id=75 data-nosnippet>75</a>			.saturating_add(Weight::from_parts(<span class="number">0</span>, <span class="number">11506</span>))
+<a href=#76 id=76 data-nosnippet>76</a>			.saturating_add(T::DbWeight::get().reads(<span class="number">11</span>))
+<a href=#77 id=77 data-nosnippet>77</a>			.saturating_add(T::DbWeight::get().writes(<span class="number">6</span>))
+<a href=#78 id=78 data-nosnippet>78</a>	}
+<a href=#79 id=79 data-nosnippet>79</a>	<span class="doccomment">/// Storage: `VoterList::Lock` (r:1 w:0)
+<a href=#80 id=80 data-nosnippet>80</a>	/// Proof: `VoterList::Lock` (`max_values`: Some(1), `max_size`: Some(0), added: 495, mode: `MaxEncodedLen`)
+<a href=#81 id=81 data-nosnippet>81</a>	/// Storage: `VoterList::PendingRebag` (r:1 w:1)
+<a href=#82 id=82 data-nosnippet>82</a>	/// Proof: `VoterList::PendingRebag` (`max_values`: None, `max_size`: Some(40), added: 2515, mode: `MaxEncodedLen`)
+<a href=#83 id=83 data-nosnippet>83</a>	/// Storage: `VoterList::ListNodes` (r:3 w:3)
+<a href=#84 id=84 data-nosnippet>84</a>	/// Proof: `VoterList::ListNodes` (`max_values`: None, `max_size`: Some(154), added: 2629, mode: `MaxEncodedLen`)
+<a href=#85 id=85 data-nosnippet>85</a>	/// Storage: `Staking::Bonded` (r:1 w:0)
+<a href=#86 id=86 data-nosnippet>86</a>	/// Proof: `Staking::Bonded` (`max_values`: None, `max_size`: Some(72), added: 2547, mode: `MaxEncodedLen`)
+<a href=#87 id=87 data-nosnippet>87</a>	/// Storage: `Staking::Ledger` (r:1 w:0)
+<a href=#88 id=88 data-nosnippet>88</a>	/// Proof: `Staking::Ledger` (`max_values`: None, `max_size`: Some(753), added: 3228, mode: `MaxEncodedLen`)
+<a href=#89 id=89 data-nosnippet>89</a>	/// Storage: `Staking::Nominators` (r:1 w:0)
+<a href=#90 id=90 data-nosnippet>90</a>	/// Proof: `Staking::Nominators` (`max_values`: None, `max_size`: Some(558), added: 3033, mode: `MaxEncodedLen`)
+<a href=#91 id=91 data-nosnippet>91</a>	/// Storage: `Staking::Validators` (r:1 w:0)
+<a href=#92 id=92 data-nosnippet>92</a>	/// Proof: `Staking::Validators` (`max_values`: None, `max_size`: Some(45), added: 2520, mode: `MaxEncodedLen`)
+<a href=#93 id=93 data-nosnippet>93</a>	/// Storage: `VoterList::ListBags` (r:2 w:2)
+<a href=#94 id=94 data-nosnippet>94</a>	/// Proof: `VoterList::ListBags` (`max_values`: None, `max_size`: Some(82), added: 2557, mode: `MaxEncodedLen`)
+<a href=#95 id=95 data-nosnippet>95</a>	</span><span class="kw">fn </span>rebag_terminal() -&gt; Weight {
+<a href=#96 id=96 data-nosnippet>96</a>		<span class="comment">// Proof Size summary in bytes:
+<a href=#97 id=97 data-nosnippet>97</a>		//  Measured:  `7627`
+<a href=#98 id=98 data-nosnippet>98</a>		//  Estimated: `8877`
+<a href=#99 id=99 data-nosnippet>99</a>		// Minimum execution time: 213_366_000 picoseconds.
+<a href=#100 id=100 data-nosnippet>100</a>		</span>Weight::from_parts(<span class="number">228_988_000</span>, <span class="number">0</span>)
+<a href=#101 id=101 data-nosnippet>101</a>			.saturating_add(Weight::from_parts(<span class="number">0</span>, <span class="number">8877</span>))
+<a href=#102 id=102 data-nosnippet>102</a>			.saturating_add(T::DbWeight::get().reads(<span class="number">11</span>))
+<a href=#103 id=103 data-nosnippet>103</a>			.saturating_add(T::DbWeight::get().writes(<span class="number">6</span>))
+<a href=#104 id=104 data-nosnippet>104</a>	}
+<a href=#105 id=105 data-nosnippet>105</a>	<span class="doccomment">/// Storage: `VoterList::Lock` (r:1 w:0)
+<a href=#106 id=106 data-nosnippet>106</a>	/// Proof: `VoterList::Lock` (`max_values`: Some(1), `max_size`: Some(0), added: 495, mode: `MaxEncodedLen`)
+<a href=#107 id=107 data-nosnippet>107</a>	/// Storage: `VoterList::ListNodes` (r:4 w:4)
+<a href=#108 id=108 data-nosnippet>108</a>	/// Proof: `VoterList::ListNodes` (`max_values`: None, `max_size`: Some(154), added: 2629, mode: `MaxEncodedLen`)
+<a href=#109 id=109 data-nosnippet>109</a>	/// Storage: `Staking::Bonded` (r:2 w:0)
+<a href=#110 id=110 data-nosnippet>110</a>	/// Proof: `Staking::Bonded` (`max_values`: None, `max_size`: Some(72), added: 2547, mode: `MaxEncodedLen`)
+<a href=#111 id=111 data-nosnippet>111</a>	/// Storage: `Staking::Ledger` (r:2 w:0)
+<a href=#112 id=112 data-nosnippet>112</a>	/// Proof: `Staking::Ledger` (`max_values`: None, `max_size`: Some(753), added: 3228, mode: `MaxEncodedLen`)
+<a href=#113 id=113 data-nosnippet>113</a>	/// Storage: `Staking::Nominators` (r:2 w:0)
+<a href=#114 id=114 data-nosnippet>114</a>	/// Proof: `Staking::Nominators` (`max_values`: None, `max_size`: Some(558), added: 3033, mode: `MaxEncodedLen`)
+<a href=#115 id=115 data-nosnippet>115</a>	/// Storage: `Staking::Validators` (r:2 w:0)
+<a href=#116 id=116 data-nosnippet>116</a>	/// Proof: `Staking::Validators` (`max_values`: None, `max_size`: Some(45), added: 2520, mode: `MaxEncodedLen`)
+<a href=#117 id=117 data-nosnippet>117</a>	/// Storage: `VoterList::CounterForListNodes` (r:1 w:1)
+<a href=#118 id=118 data-nosnippet>118</a>	/// Proof: `VoterList::CounterForListNodes` (`max_values`: Some(1), `max_size`: Some(4), added: 499, mode: `MaxEncodedLen`)
+<a href=#119 id=119 data-nosnippet>119</a>	/// Storage: `VoterList::ListBags` (r:1 w:1)
+<a href=#120 id=120 data-nosnippet>120</a>	/// Proof: `VoterList::ListBags` (`max_values`: None, `max_size`: Some(82), added: 2557, mode: `MaxEncodedLen`)
+<a href=#121 id=121 data-nosnippet>121</a>	</span><span class="kw">fn </span>put_in_front_of() -&gt; Weight {
+<a href=#122 id=122 data-nosnippet>122</a>		<span class="comment">// Proof Size summary in bytes:
+<a href=#123 id=123 data-nosnippet>123</a>		//  Measured:  `12142`
+<a href=#124 id=124 data-nosnippet>124</a>		//  Estimated: `11506`
+<a href=#125 id=125 data-nosnippet>125</a>		// Minimum execution time: 272_353_000 picoseconds.
+<a href=#126 id=126 data-nosnippet>126</a>		</span>Weight::from_parts(<span class="number">293_615_000</span>, <span class="number">0</span>)
+<a href=#127 id=127 data-nosnippet>127</a>			.saturating_add(Weight::from_parts(<span class="number">0</span>, <span class="number">11506</span>))
+<a href=#128 id=128 data-nosnippet>128</a>			.saturating_add(T::DbWeight::get().reads(<span class="number">15</span>))
+<a href=#129 id=129 data-nosnippet>129</a>			.saturating_add(T::DbWeight::get().writes(<span class="number">6</span>))
+<a href=#130 id=130 data-nosnippet>130</a>	}
+<a href=#131 id=131 data-nosnippet>131</a>	<span class="doccomment">/// Storage: `VoterList::Lock` (r:1 w:0)
+<a href=#132 id=132 data-nosnippet>132</a>	/// Proof: `VoterList::Lock` (`max_values`: Some(1), `max_size`: Some(0), added: 495, mode: `MaxEncodedLen`)
+<a href=#133 id=133 data-nosnippet>133</a>	/// Storage: `VoterList::PendingRebag` (r:1 w:1)
+<a href=#134 id=134 data-nosnippet>134</a>	/// Proof: `VoterList::PendingRebag` (`max_values`: None, `max_size`: Some(40), added: 2515, mode: `MaxEncodedLen`)
+<a href=#135 id=135 data-nosnippet>135</a>	/// Storage: `VoterList::CounterForPendingRebag` (r:1 w:1)
+<a href=#136 id=136 data-nosnippet>136</a>	/// Proof: `VoterList::CounterForPendingRebag` (`max_values`: Some(1), `max_size`: Some(4), added: 499, mode: `MaxEncodedLen`)
+<a href=#137 id=137 data-nosnippet>137</a>	/// Storage: `VoterList::ListNodes` (r:4 w:4)
+<a href=#138 id=138 data-nosnippet>138</a>	/// Proof: `VoterList::ListNodes` (`max_values`: None, `max_size`: Some(154), added: 2629, mode: `MaxEncodedLen`)
+<a href=#139 id=139 data-nosnippet>139</a>	/// Storage: `Staking::Bonded` (r:1 w:0)
+<a href=#140 id=140 data-nosnippet>140</a>	/// Proof: `Staking::Bonded` (`max_values`: None, `max_size`: Some(72), added: 2547, mode: `MaxEncodedLen`)
+<a href=#141 id=141 data-nosnippet>141</a>	/// Storage: `Staking::Ledger` (r:1 w:0)
+<a href=#142 id=142 data-nosnippet>142</a>	/// Proof: `Staking::Ledger` (`max_values`: None, `max_size`: Some(753), added: 3228, mode: `MaxEncodedLen`)
+<a href=#143 id=143 data-nosnippet>143</a>	/// Storage: `Staking::Nominators` (r:1 w:0)
+<a href=#144 id=144 data-nosnippet>144</a>	/// Proof: `Staking::Nominators` (`max_values`: None, `max_size`: Some(558), added: 3033, mode: `MaxEncodedLen`)
+<a href=#145 id=145 data-nosnippet>145</a>	/// Storage: `Staking::Validators` (r:1 w:0)
+<a href=#146 id=146 data-nosnippet>146</a>	/// Proof: `Staking::Validators` (`max_values`: None, `max_size`: Some(45), added: 2520, mode: `MaxEncodedLen`)
+<a href=#147 id=147 data-nosnippet>147</a>	/// Storage: `VoterList::ListBags` (r:1 w:1)
+<a href=#148 id=148 data-nosnippet>148</a>	/// Proof: `VoterList::ListBags` (`max_values`: None, `max_size`: Some(82), added: 2557, mode: `MaxEncodedLen`)
+<a href=#149 id=149 data-nosnippet>149</a>	</span><span class="kw">fn </span>on_idle_rebag() -&gt; Weight {
+<a href=#150 id=150 data-nosnippet>150</a>		<span class="comment">// Proof Size summary in bytes:
+<a href=#151 id=151 data-nosnippet>151</a>		//  Measured:  `8193`
+<a href=#152 id=152 data-nosnippet>152</a>		//  Estimated: `11506`
+<a href=#153 id=153 data-nosnippet>153</a>		// Minimum execution time: 214_841_000 picoseconds.
+<a href=#154 id=154 data-nosnippet>154</a>		</span>Weight::from_parts(<span class="number">235_538_000</span>, <span class="number">0</span>)
+<a href=#155 id=155 data-nosnippet>155</a>			.saturating_add(Weight::from_parts(<span class="number">0</span>, <span class="number">11506</span>))
+<a href=#156 id=156 data-nosnippet>156</a>			.saturating_add(T::DbWeight::get().reads(<span class="number">12</span>))
+<a href=#157 id=157 data-nosnippet>157</a>			.saturating_add(T::DbWeight::get().writes(<span class="number">7</span>))
+<a href=#158 id=158 data-nosnippet>158</a>	}
+<a href=#159 id=159 data-nosnippet>159</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

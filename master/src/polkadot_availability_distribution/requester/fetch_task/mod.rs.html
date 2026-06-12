@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/node/network/availability-distribution/src/requester/fetch_task/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `polkadot/node/network/availability-distribution/src/requester/fetch_task/mod.rs`."><title>mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="polkadot_availability_distribution" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../../static.files/storage-4e99c027.js"></script><script defer src="../../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="polkadot_availability_distribution" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../../static.files/src-script-813739b1.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">polkadot_availability_distribution/requester/fetch_task/</div>mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">polkadot_availability_distribution/requester/fetch_task/</div>mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Polkadot.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Polkadot is free software: you can redistribute it and/or modify
@@ -307,7 +307,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#157 id=157 data-nosnippet>157</a>
 <a href=#158 id=158 data-nosnippet>158</a>		<span class="comment">// Don't run tasks for our backing group:
 <a href=#159 id=159 data-nosnippet>159</a>		</span><span class="kw">if </span>session_info.our_group == <span class="prelude-val">Some</span>(core.group_responsible) {
-<a href=#160 id=160 data-nosnippet>160</a>			<span class="kw">return </span>FetchTaskConfig { live_in, prepared_running: <span class="prelude-val">None </span>}
+<a href=#160 id=160 data-nosnippet>160</a>			<span class="kw">return </span>FetchTaskConfig { live_in, prepared_running: <span class="prelude-val">None </span>};
 <a href=#161 id=161 data-nosnippet>161</a>		}
 <a href=#162 id=162 data-nosnippet>162</a>
 <a href=#163 id=163 data-nosnippet>163</a>		<span class="kw">let </span>prepared_running = RunningTask {
@@ -434,12 +434,12 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#284 id=284 data-nosnippet>284</a>						<span class="string">"Node seems to be shutting down, canceling fetch task"
 <a href=#285 id=285 data-nosnippet>285</a>					</span>);
 <a href=#286 id=286 data-nosnippet>286</a>					<span class="self">self</span>.metrics.on_fetch(FAILED);
-<a href=#287 id=287 data-nosnippet>287</a>					<span class="kw">return
-<a href=#288 id=288 data-nosnippet>288</a>				</span>},
+<a href=#287 id=287 data-nosnippet>287</a>					<span class="kw">return</span>;
+<a href=#288 id=288 data-nosnippet>288</a>				},
 <a href=#289 id=289 data-nosnippet>289</a>				<span class="prelude-val">Err</span>(TaskError::PeerError) =&gt; {
 <a href=#290 id=290 data-nosnippet>290</a>					bad_validators.push(validator);
-<a href=#291 id=291 data-nosnippet>291</a>					<span class="kw">continue
-<a href=#292 id=292 data-nosnippet>292</a>				</span>},
+<a href=#291 id=291 data-nosnippet>291</a>					<span class="kw">continue</span>;
+<a href=#292 id=292 data-nosnippet>292</a>				},
 <a href=#293 id=293 data-nosnippet>293</a>			};
 <a href=#294 id=294 data-nosnippet>294</a>
 <a href=#295 id=295 data-nosnippet>295</a>			<span class="kw">let </span>chunk = <span class="kw">match </span>resp {
@@ -456,21 +456,21 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#306 id=306 data-nosnippet>306</a>						<span class="string">"Validator did not have our chunk"
 <a href=#307 id=307 data-nosnippet>307</a>					</span>);
 <a href=#308 id=308 data-nosnippet>308</a>					bad_validators.push(validator);
-<a href=#309 id=309 data-nosnippet>309</a>					<span class="kw">continue
-<a href=#310 id=310 data-nosnippet>310</a>				</span>},
+<a href=#309 id=309 data-nosnippet>309</a>					<span class="kw">continue</span>;
+<a href=#310 id=310 data-nosnippet>310</a>				},
 <a href=#311 id=311 data-nosnippet>311</a>			};
 <a href=#312 id=312 data-nosnippet>312</a>
 <a href=#313 id=313 data-nosnippet>313</a>			<span class="comment">// Data genuine?
 <a href=#314 id=314 data-nosnippet>314</a>			</span><span class="kw">if </span>!<span class="self">self</span>.validate_chunk(<span class="kw-2">&amp;</span>validator, <span class="kw-2">&amp;</span>chunk, <span class="self">self</span>.chunk_index) {
 <a href=#315 id=315 data-nosnippet>315</a>				bad_validators.push(validator);
-<a href=#316 id=316 data-nosnippet>316</a>				<span class="kw">continue
-<a href=#317 id=317 data-nosnippet>317</a>			</span>}
+<a href=#316 id=316 data-nosnippet>316</a>				<span class="kw">continue</span>;
+<a href=#317 id=317 data-nosnippet>317</a>			}
 <a href=#318 id=318 data-nosnippet>318</a>
 <a href=#319 id=319 data-nosnippet>319</a>			<span class="comment">// Ok, let's store it and be happy:
 <a href=#320 id=320 data-nosnippet>320</a>			</span><span class="self">self</span>.store_chunk(chunk).<span class="kw">await</span>;
 <a href=#321 id=321 data-nosnippet>321</a>			succeeded = <span class="bool-val">true</span>;
-<a href=#322 id=322 data-nosnippet>322</a>			<span class="kw">break
-<a href=#323 id=323 data-nosnippet>323</a>		</span>}
+<a href=#322 id=322 data-nosnippet>322</a>			<span class="kw">break</span>;
+<a href=#323 id=323 data-nosnippet>323</a>		}
 <a href=#324 id=324 data-nosnippet>324</a>		<span class="kw">if </span>succeeded {
 <a href=#325 id=325 data-nosnippet>325</a>			<span class="self">self</span>.metrics.on_fetch(SUCCEEDED);
 <a href=#326 id=326 data-nosnippet>326</a>			<span class="self">self</span>.conclude(bad_validators).<span class="kw">await</span>;
@@ -519,7 +519,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#369 id=369 data-nosnippet>369</a>
 <a href=#370 id=370 data-nosnippet>370</a>		<span class="kw">match </span>response_recv.<span class="kw">await </span>{
 <a href=#371 id=371 data-nosnippet>371</a>			<span class="prelude-val">Ok</span>((bytes, protocol)) =&gt; <span class="kw">match </span>protocol {
-<a href=#372 id=372 data-nosnippet>372</a>				<span class="kw">_ if </span>protocol == <span class="self">self</span>.req_v2_protocol_name =&gt;
+<a href=#372 id=372 data-nosnippet>372</a>				<span class="kw">_ if </span>protocol == <span class="self">self</span>.req_v2_protocol_name =&gt; {
 <a href=#373 id=373 data-nosnippet>373</a>					<span class="kw">match </span>v2::ChunkFetchingResponse::decode(<span class="kw-2">&amp;mut &amp;</span>bytes[..]) {
 <a href=#374 id=374 data-nosnippet>374</a>						<span class="prelude-val">Ok</span>(chunk_response) =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-ty">Option</span>::&lt;ErasureChunk&gt;::from(chunk_response)),
 <a href=#375 id=375 data-nosnippet>375</a>						<span class="prelude-val">Err</span>(e) =&gt; {
@@ -536,178 +536,181 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../../
 <a href=#386 id=386 data-nosnippet>386</a>							</span>);
 <a href=#387 id=387 data-nosnippet>387</a>							<span class="prelude-val">Err</span>(TaskError::PeerError)
 <a href=#388 id=388 data-nosnippet>388</a>						},
-<a href=#389 id=389 data-nosnippet>389</a>					},
-<a href=#390 id=390 data-nosnippet>390</a>				<span class="kw">_ if </span>protocol == <span class="self">self</span>.req_v1_protocol_name =&gt;
-<a href=#391 id=391 data-nosnippet>391</a>					<span class="kw">match </span>v1::ChunkFetchingResponse::decode(<span class="kw-2">&amp;mut &amp;</span>bytes[..]) {
-<a href=#392 id=392 data-nosnippet>392</a>						<span class="prelude-val">Ok</span>(chunk_response) =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-ty">Option</span>::&lt;ChunkResponse&gt;::from(chunk_response)
-<a href=#393 id=393 data-nosnippet>393</a>							.map(|c| c.recombine_into_chunk(<span class="kw-2">&amp;</span><span class="self">self</span>.request.into()))),
-<a href=#394 id=394 data-nosnippet>394</a>						<span class="prelude-val">Err</span>(e) =&gt; {
-<a href=#395 id=395 data-nosnippet>395</a>							<span class="macro">gum::warn!</span>(
-<a href=#396 id=396 data-nosnippet>396</a>								target: LOG_TARGET,
-<a href=#397 id=397 data-nosnippet>397</a>								origin = <span class="question-mark">?</span>validator,
-<a href=#398 id=398 data-nosnippet>398</a>								relay_parent = <span class="question-mark">?</span><span class="self">self</span>.relay_parent,
-<a href=#399 id=399 data-nosnippet>399</a>								group_index = <span class="question-mark">?</span><span class="self">self</span>.group_index,
-<a href=#400 id=400 data-nosnippet>400</a>								session_index = <span class="question-mark">?</span><span class="self">self</span>.session_index,
-<a href=#401 id=401 data-nosnippet>401</a>								chunk_index = <span class="question-mark">?</span><span class="self">self</span>.request.index,
-<a href=#402 id=402 data-nosnippet>402</a>								candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
-<a href=#403 id=403 data-nosnippet>403</a>								err = <span class="question-mark">?</span>e,
-<a href=#404 id=404 data-nosnippet>404</a>								<span class="string">"Peer sent us invalid erasure chunk data"
-<a href=#405 id=405 data-nosnippet>405</a>							</span>);
-<a href=#406 id=406 data-nosnippet>406</a>							<span class="prelude-val">Err</span>(TaskError::PeerError)
-<a href=#407 id=407 data-nosnippet>407</a>						},
-<a href=#408 id=408 data-nosnippet>408</a>					},
-<a href=#409 id=409 data-nosnippet>409</a>				<span class="kw">_ </span>=&gt; {
-<a href=#410 id=410 data-nosnippet>410</a>					<span class="macro">gum::warn!</span>(
-<a href=#411 id=411 data-nosnippet>411</a>						target: LOG_TARGET,
-<a href=#412 id=412 data-nosnippet>412</a>						origin = <span class="question-mark">?</span>validator,
-<a href=#413 id=413 data-nosnippet>413</a>						relay_parent = <span class="question-mark">?</span><span class="self">self</span>.relay_parent,
-<a href=#414 id=414 data-nosnippet>414</a>						group_index = <span class="question-mark">?</span><span class="self">self</span>.group_index,
-<a href=#415 id=415 data-nosnippet>415</a>						session_index = <span class="question-mark">?</span><span class="self">self</span>.session_index,
-<a href=#416 id=416 data-nosnippet>416</a>						chunk_index = <span class="question-mark">?</span><span class="self">self</span>.request.index,
-<a href=#417 id=417 data-nosnippet>417</a>						candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
-<a href=#418 id=418 data-nosnippet>418</a>						<span class="string">"Peer sent us invalid erasure chunk data - unknown protocol"
-<a href=#419 id=419 data-nosnippet>419</a>					</span>);
-<a href=#420 id=420 data-nosnippet>420</a>					<span class="prelude-val">Err</span>(TaskError::PeerError)
-<a href=#421 id=421 data-nosnippet>421</a>				},
-<a href=#422 id=422 data-nosnippet>422</a>			},
-<a href=#423 id=423 data-nosnippet>423</a>			<span class="prelude-val">Err</span>(RequestError::InvalidResponse(err)) =&gt; {
-<a href=#424 id=424 data-nosnippet>424</a>				<span class="macro">gum::warn!</span>(
-<a href=#425 id=425 data-nosnippet>425</a>					target: LOG_TARGET,
-<a href=#426 id=426 data-nosnippet>426</a>					origin = <span class="question-mark">?</span>validator,
-<a href=#427 id=427 data-nosnippet>427</a>					relay_parent = <span class="question-mark">?</span><span class="self">self</span>.relay_parent,
-<a href=#428 id=428 data-nosnippet>428</a>					group_index = <span class="question-mark">?</span><span class="self">self</span>.group_index,
-<a href=#429 id=429 data-nosnippet>429</a>					session_index = <span class="question-mark">?</span><span class="self">self</span>.session_index,
-<a href=#430 id=430 data-nosnippet>430</a>					chunk_index = <span class="question-mark">?</span><span class="self">self</span>.request.index,
-<a href=#431 id=431 data-nosnippet>431</a>					candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
-<a href=#432 id=432 data-nosnippet>432</a>					err = <span class="question-mark">?</span>err,
-<a href=#433 id=433 data-nosnippet>433</a>					<span class="string">"Peer sent us invalid erasure chunk data"
-<a href=#434 id=434 data-nosnippet>434</a>				</span>);
-<a href=#435 id=435 data-nosnippet>435</a>				<span class="prelude-val">Err</span>(TaskError::PeerError)
-<a href=#436 id=436 data-nosnippet>436</a>			},
-<a href=#437 id=437 data-nosnippet>437</a>			<span class="prelude-val">Err</span>(RequestError::NetworkError(err)) =&gt; {
-<a href=#438 id=438 data-nosnippet>438</a>				<span class="macro">gum::warn_if_frequent!</span>(
-<a href=#439 id=439 data-nosnippet>439</a>					freq: network_error_freq,
-<a href=#440 id=440 data-nosnippet>440</a>					max_rate: gum::Times::PerHour(<span class="number">100</span>),
-<a href=#441 id=441 data-nosnippet>441</a>					target: LOG_TARGET,
-<a href=#442 id=442 data-nosnippet>442</a>					origin = <span class="question-mark">?</span>validator,
-<a href=#443 id=443 data-nosnippet>443</a>					relay_parent = <span class="question-mark">?</span><span class="self">self</span>.relay_parent,
-<a href=#444 id=444 data-nosnippet>444</a>					group_index = <span class="question-mark">?</span><span class="self">self</span>.group_index,
-<a href=#445 id=445 data-nosnippet>445</a>					session_index = <span class="question-mark">?</span><span class="self">self</span>.session_index,
-<a href=#446 id=446 data-nosnippet>446</a>					chunk_index = <span class="question-mark">?</span><span class="self">self</span>.request.index,
-<a href=#447 id=447 data-nosnippet>447</a>					candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
-<a href=#448 id=448 data-nosnippet>448</a>					err = <span class="question-mark">?</span>err,
-<a href=#449 id=449 data-nosnippet>449</a>					<span class="string">"Some network error occurred when fetching erasure chunk"
-<a href=#450 id=450 data-nosnippet>450</a>				</span>);
-<a href=#451 id=451 data-nosnippet>451</a>				<span class="prelude-val">Err</span>(TaskError::PeerError)
-<a href=#452 id=452 data-nosnippet>452</a>			},
-<a href=#453 id=453 data-nosnippet>453</a>			<span class="prelude-val">Err</span>(RequestError::Canceled(oneshot::Canceled)) =&gt; {
-<a href=#454 id=454 data-nosnippet>454</a>				<span class="macro">gum::warn_if_frequent!</span>(
-<a href=#455 id=455 data-nosnippet>455</a>					freq: canceled_freq,
-<a href=#456 id=456 data-nosnippet>456</a>					max_rate: gum::Times::PerHour(<span class="number">100</span>),
-<a href=#457 id=457 data-nosnippet>457</a>					target: LOG_TARGET,
-<a href=#458 id=458 data-nosnippet>458</a>					origin = <span class="question-mark">?</span>validator,
-<a href=#459 id=459 data-nosnippet>459</a>					relay_parent = <span class="question-mark">?</span><span class="self">self</span>.relay_parent,
-<a href=#460 id=460 data-nosnippet>460</a>					group_index = <span class="question-mark">?</span><span class="self">self</span>.group_index,
-<a href=#461 id=461 data-nosnippet>461</a>					session_index = <span class="question-mark">?</span><span class="self">self</span>.session_index,
-<a href=#462 id=462 data-nosnippet>462</a>					chunk_index = <span class="question-mark">?</span><span class="self">self</span>.request.index,
-<a href=#463 id=463 data-nosnippet>463</a>					candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
-<a href=#464 id=464 data-nosnippet>464</a>					<span class="string">"Erasure chunk request got canceled"
-<a href=#465 id=465 data-nosnippet>465</a>				</span>);
-<a href=#466 id=466 data-nosnippet>466</a>				<span class="prelude-val">Err</span>(TaskError::PeerError)
-<a href=#467 id=467 data-nosnippet>467</a>			},
-<a href=#468 id=468 data-nosnippet>468</a>		}
-<a href=#469 id=469 data-nosnippet>469</a>	}
-<a href=#470 id=470 data-nosnippet>470</a>
-<a href=#471 id=471 data-nosnippet>471</a>	<span class="kw">fn </span>validate_chunk(
-<a href=#472 id=472 data-nosnippet>472</a>		<span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#473 id=473 data-nosnippet>473</a>		validator: <span class="kw-2">&amp;</span>AuthorityDiscoveryId,
-<a href=#474 id=474 data-nosnippet>474</a>		chunk: <span class="kw-2">&amp;</span>ErasureChunk,
-<a href=#475 id=475 data-nosnippet>475</a>		expected_chunk_index: ChunkIndex,
-<a href=#476 id=476 data-nosnippet>476</a>	) -&gt; bool {
-<a href=#477 id=477 data-nosnippet>477</a>		<span class="kw">if </span>chunk.index != expected_chunk_index {
-<a href=#478 id=478 data-nosnippet>478</a>			<span class="macro">gum::warn!</span>(
-<a href=#479 id=479 data-nosnippet>479</a>				target: LOG_TARGET,
-<a href=#480 id=480 data-nosnippet>480</a>				candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
-<a href=#481 id=481 data-nosnippet>481</a>				origin = <span class="question-mark">?</span>validator,
-<a href=#482 id=482 data-nosnippet>482</a>				chunk_index = <span class="question-mark">?</span>chunk.index,
-<a href=#483 id=483 data-nosnippet>483</a>				expected_chunk_index = <span class="question-mark">?</span>expected_chunk_index,
-<a href=#484 id=484 data-nosnippet>484</a>				<span class="string">"Validator sent the wrong chunk"</span>,
-<a href=#485 id=485 data-nosnippet>485</a>			);
-<a href=#486 id=486 data-nosnippet>486</a>			<span class="kw">return </span><span class="bool-val">false
-<a href=#487 id=487 data-nosnippet>487</a>		</span>}
-<a href=#488 id=488 data-nosnippet>488</a>		<span class="kw">let </span>anticipated_hash =
-<a href=#489 id=489 data-nosnippet>489</a>			<span class="kw">match </span>branch_hash(<span class="kw-2">&amp;</span><span class="self">self</span>.erasure_root, chunk.proof(), chunk.index.<span class="number">0 </span><span class="kw">as </span>usize) {
-<a href=#490 id=490 data-nosnippet>490</a>				<span class="prelude-val">Ok</span>(hash) =&gt; hash,
-<a href=#491 id=491 data-nosnippet>491</a>				<span class="prelude-val">Err</span>(e) =&gt; {
-<a href=#492 id=492 data-nosnippet>492</a>					<span class="macro">gum::warn!</span>(
-<a href=#493 id=493 data-nosnippet>493</a>						target: LOG_TARGET,
-<a href=#494 id=494 data-nosnippet>494</a>						candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
-<a href=#495 id=495 data-nosnippet>495</a>						origin = <span class="question-mark">?</span>validator,
-<a href=#496 id=496 data-nosnippet>496</a>						error = <span class="question-mark">?</span>e,
-<a href=#497 id=497 data-nosnippet>497</a>						<span class="string">"Failed to calculate chunk merkle proof"</span>,
-<a href=#498 id=498 data-nosnippet>498</a>					);
-<a href=#499 id=499 data-nosnippet>499</a>					<span class="kw">return </span><span class="bool-val">false
-<a href=#500 id=500 data-nosnippet>500</a>				</span>},
-<a href=#501 id=501 data-nosnippet>501</a>			};
-<a href=#502 id=502 data-nosnippet>502</a>		<span class="kw">let </span>erasure_chunk_hash = BlakeTwo256::hash(<span class="kw-2">&amp;</span>chunk.chunk);
-<a href=#503 id=503 data-nosnippet>503</a>		<span class="kw">if </span>anticipated_hash != erasure_chunk_hash {
-<a href=#504 id=504 data-nosnippet>504</a>			<span class="macro">gum::warn!</span>(target: LOG_TARGET, origin = <span class="question-mark">?</span>validator,  <span class="string">"Received chunk does not match merkle tree"</span>);
-<a href=#505 id=505 data-nosnippet>505</a>			<span class="kw">return </span><span class="bool-val">false
-<a href=#506 id=506 data-nosnippet>506</a>		</span>}
-<a href=#507 id=507 data-nosnippet>507</a>		<span class="bool-val">true
-<a href=#508 id=508 data-nosnippet>508</a>	</span>}
-<a href=#509 id=509 data-nosnippet>509</a>
-<a href=#510 id=510 data-nosnippet>510</a>	<span class="doccomment">/// Store given chunk and log any error.
-<a href=#511 id=511 data-nosnippet>511</a>	</span><span class="kw">async fn </span>store_chunk(<span class="kw-2">&amp;mut </span><span class="self">self</span>, chunk: ErasureChunk) {
-<a href=#512 id=512 data-nosnippet>512</a>		<span class="kw">let </span>(tx, rx) = oneshot::channel();
-<a href=#513 id=513 data-nosnippet>513</a>		<span class="kw">let </span>r = <span class="self">self
-<a href=#514 id=514 data-nosnippet>514</a>			</span>.sender
-<a href=#515 id=515 data-nosnippet>515</a>			.send(FromFetchTask::Message(
-<a href=#516 id=516 data-nosnippet>516</a>				AvailabilityStoreMessage::StoreChunk {
-<a href=#517 id=517 data-nosnippet>517</a>					candidate_hash: <span class="self">self</span>.request.candidate_hash,
-<a href=#518 id=518 data-nosnippet>518</a>					chunk,
-<a href=#519 id=519 data-nosnippet>519</a>					validator_index: <span class="self">self</span>.request.index,
-<a href=#520 id=520 data-nosnippet>520</a>					tx,
-<a href=#521 id=521 data-nosnippet>521</a>				}
-<a href=#522 id=522 data-nosnippet>522</a>				.into(),
-<a href=#523 id=523 data-nosnippet>523</a>			))
-<a href=#524 id=524 data-nosnippet>524</a>			.<span class="kw">await</span>;
-<a href=#525 id=525 data-nosnippet>525</a>		<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = r {
-<a href=#526 id=526 data-nosnippet>526</a>			<span class="macro">gum::error!</span>(target: LOG_TARGET, err= <span class="question-mark">?</span>err, <span class="string">"Storing erasure chunk failed, system shutting down?"</span>);
-<a href=#527 id=527 data-nosnippet>527</a>		}
-<a href=#528 id=528 data-nosnippet>528</a>
-<a href=#529 id=529 data-nosnippet>529</a>		<span class="kw">if let </span><span class="prelude-val">Err</span>(oneshot::Canceled) = rx.<span class="kw">await </span>{
-<a href=#530 id=530 data-nosnippet>530</a>			<span class="macro">gum::error!</span>(target: LOG_TARGET, <span class="string">"Storing erasure chunk failed"</span>);
-<a href=#531 id=531 data-nosnippet>531</a>		}
-<a href=#532 id=532 data-nosnippet>532</a>	}
-<a href=#533 id=533 data-nosnippet>533</a>
-<a href=#534 id=534 data-nosnippet>534</a>	<span class="doccomment">/// Tell subsystem we are done.
-<a href=#535 id=535 data-nosnippet>535</a>	</span><span class="kw">async fn </span>conclude(<span class="kw-2">&amp;mut </span><span class="self">self</span>, bad_validators: Vec&lt;AuthorityDiscoveryId&gt;) {
-<a href=#536 id=536 data-nosnippet>536</a>		<span class="kw">let </span>payload = <span class="kw">if </span>bad_validators.is_empty() {
-<a href=#537 id=537 data-nosnippet>537</a>			<span class="prelude-val">None
-<a href=#538 id=538 data-nosnippet>538</a>		</span>} <span class="kw">else </span>{
-<a href=#539 id=539 data-nosnippet>539</a>			<span class="prelude-val">Some</span>(BadValidators {
-<a href=#540 id=540 data-nosnippet>540</a>				session_index: <span class="self">self</span>.session_index,
-<a href=#541 id=541 data-nosnippet>541</a>				group_index: <span class="self">self</span>.group_index,
-<a href=#542 id=542 data-nosnippet>542</a>				bad_validators,
-<a href=#543 id=543 data-nosnippet>543</a>			})
-<a href=#544 id=544 data-nosnippet>544</a>		};
-<a href=#545 id=545 data-nosnippet>545</a>		<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = <span class="self">self</span>.sender.send(FromFetchTask::Concluded(payload)).<span class="kw">await </span>{
-<a href=#546 id=546 data-nosnippet>546</a>			<span class="macro">gum::warn!</span>(
-<a href=#547 id=547 data-nosnippet>547</a>				target: LOG_TARGET,
-<a href=#548 id=548 data-nosnippet>548</a>				err= <span class="question-mark">?</span>err,
-<a href=#549 id=549 data-nosnippet>549</a>				<span class="string">"Sending concluded message for task failed"
-<a href=#550 id=550 data-nosnippet>550</a>			</span>);
-<a href=#551 id=551 data-nosnippet>551</a>		}
-<a href=#552 id=552 data-nosnippet>552</a>	}
-<a href=#553 id=553 data-nosnippet>553</a>
-<a href=#554 id=554 data-nosnippet>554</a>	<span class="kw">async fn </span>conclude_fail(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-<a href=#555 id=555 data-nosnippet>555</a>		<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = <span class="self">self</span>.sender.send(FromFetchTask::Failed(<span class="self">self</span>.request.candidate_hash)).<span class="kw">await
-<a href=#556 id=556 data-nosnippet>556</a>		</span>{
-<a href=#557 id=557 data-nosnippet>557</a>			<span class="macro">gum::warn!</span>(target: LOG_TARGET, <span class="question-mark">?</span>err, <span class="string">"Sending `Failed` message for task failed"</span>);
-<a href=#558 id=558 data-nosnippet>558</a>		}
-<a href=#559 id=559 data-nosnippet>559</a>	}
-<a href=#560 id=560 data-nosnippet>560</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#389 id=389 data-nosnippet>389</a>					}
+<a href=#390 id=390 data-nosnippet>390</a>				},
+<a href=#391 id=391 data-nosnippet>391</a>				<span class="kw">_ if </span>protocol == <span class="self">self</span>.req_v1_protocol_name =&gt; {
+<a href=#392 id=392 data-nosnippet>392</a>					<span class="kw">match </span>v1::ChunkFetchingResponse::decode(<span class="kw-2">&amp;mut &amp;</span>bytes[..]) {
+<a href=#393 id=393 data-nosnippet>393</a>						<span class="prelude-val">Ok</span>(chunk_response) =&gt; <span class="prelude-val">Ok</span>(<span class="prelude-ty">Option</span>::&lt;ChunkResponse&gt;::from(chunk_response)
+<a href=#394 id=394 data-nosnippet>394</a>							.map(|c| c.recombine_into_chunk(<span class="kw-2">&amp;</span><span class="self">self</span>.request.into()))),
+<a href=#395 id=395 data-nosnippet>395</a>						<span class="prelude-val">Err</span>(e) =&gt; {
+<a href=#396 id=396 data-nosnippet>396</a>							<span class="macro">gum::warn!</span>(
+<a href=#397 id=397 data-nosnippet>397</a>								target: LOG_TARGET,
+<a href=#398 id=398 data-nosnippet>398</a>								origin = <span class="question-mark">?</span>validator,
+<a href=#399 id=399 data-nosnippet>399</a>								relay_parent = <span class="question-mark">?</span><span class="self">self</span>.relay_parent,
+<a href=#400 id=400 data-nosnippet>400</a>								group_index = <span class="question-mark">?</span><span class="self">self</span>.group_index,
+<a href=#401 id=401 data-nosnippet>401</a>								session_index = <span class="question-mark">?</span><span class="self">self</span>.session_index,
+<a href=#402 id=402 data-nosnippet>402</a>								chunk_index = <span class="question-mark">?</span><span class="self">self</span>.request.index,
+<a href=#403 id=403 data-nosnippet>403</a>								candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
+<a href=#404 id=404 data-nosnippet>404</a>								err = <span class="question-mark">?</span>e,
+<a href=#405 id=405 data-nosnippet>405</a>								<span class="string">"Peer sent us invalid erasure chunk data"
+<a href=#406 id=406 data-nosnippet>406</a>							</span>);
+<a href=#407 id=407 data-nosnippet>407</a>							<span class="prelude-val">Err</span>(TaskError::PeerError)
+<a href=#408 id=408 data-nosnippet>408</a>						},
+<a href=#409 id=409 data-nosnippet>409</a>					}
+<a href=#410 id=410 data-nosnippet>410</a>				},
+<a href=#411 id=411 data-nosnippet>411</a>				<span class="kw">_ </span>=&gt; {
+<a href=#412 id=412 data-nosnippet>412</a>					<span class="macro">gum::warn!</span>(
+<a href=#413 id=413 data-nosnippet>413</a>						target: LOG_TARGET,
+<a href=#414 id=414 data-nosnippet>414</a>						origin = <span class="question-mark">?</span>validator,
+<a href=#415 id=415 data-nosnippet>415</a>						relay_parent = <span class="question-mark">?</span><span class="self">self</span>.relay_parent,
+<a href=#416 id=416 data-nosnippet>416</a>						group_index = <span class="question-mark">?</span><span class="self">self</span>.group_index,
+<a href=#417 id=417 data-nosnippet>417</a>						session_index = <span class="question-mark">?</span><span class="self">self</span>.session_index,
+<a href=#418 id=418 data-nosnippet>418</a>						chunk_index = <span class="question-mark">?</span><span class="self">self</span>.request.index,
+<a href=#419 id=419 data-nosnippet>419</a>						candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
+<a href=#420 id=420 data-nosnippet>420</a>						<span class="string">"Peer sent us invalid erasure chunk data - unknown protocol"
+<a href=#421 id=421 data-nosnippet>421</a>					</span>);
+<a href=#422 id=422 data-nosnippet>422</a>					<span class="prelude-val">Err</span>(TaskError::PeerError)
+<a href=#423 id=423 data-nosnippet>423</a>				},
+<a href=#424 id=424 data-nosnippet>424</a>			},
+<a href=#425 id=425 data-nosnippet>425</a>			<span class="prelude-val">Err</span>(RequestError::InvalidResponse(err)) =&gt; {
+<a href=#426 id=426 data-nosnippet>426</a>				<span class="macro">gum::warn!</span>(
+<a href=#427 id=427 data-nosnippet>427</a>					target: LOG_TARGET,
+<a href=#428 id=428 data-nosnippet>428</a>					origin = <span class="question-mark">?</span>validator,
+<a href=#429 id=429 data-nosnippet>429</a>					relay_parent = <span class="question-mark">?</span><span class="self">self</span>.relay_parent,
+<a href=#430 id=430 data-nosnippet>430</a>					group_index = <span class="question-mark">?</span><span class="self">self</span>.group_index,
+<a href=#431 id=431 data-nosnippet>431</a>					session_index = <span class="question-mark">?</span><span class="self">self</span>.session_index,
+<a href=#432 id=432 data-nosnippet>432</a>					chunk_index = <span class="question-mark">?</span><span class="self">self</span>.request.index,
+<a href=#433 id=433 data-nosnippet>433</a>					candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
+<a href=#434 id=434 data-nosnippet>434</a>					err = <span class="question-mark">?</span>err,
+<a href=#435 id=435 data-nosnippet>435</a>					<span class="string">"Peer sent us invalid erasure chunk data"
+<a href=#436 id=436 data-nosnippet>436</a>				</span>);
+<a href=#437 id=437 data-nosnippet>437</a>				<span class="prelude-val">Err</span>(TaskError::PeerError)
+<a href=#438 id=438 data-nosnippet>438</a>			},
+<a href=#439 id=439 data-nosnippet>439</a>			<span class="prelude-val">Err</span>(RequestError::NetworkError(err)) =&gt; {
+<a href=#440 id=440 data-nosnippet>440</a>				<span class="macro">gum::warn_if_frequent!</span>(
+<a href=#441 id=441 data-nosnippet>441</a>					freq: network_error_freq,
+<a href=#442 id=442 data-nosnippet>442</a>					max_rate: gum::Times::PerHour(<span class="number">100</span>),
+<a href=#443 id=443 data-nosnippet>443</a>					target: LOG_TARGET,
+<a href=#444 id=444 data-nosnippet>444</a>					origin = <span class="question-mark">?</span>validator,
+<a href=#445 id=445 data-nosnippet>445</a>					relay_parent = <span class="question-mark">?</span><span class="self">self</span>.relay_parent,
+<a href=#446 id=446 data-nosnippet>446</a>					group_index = <span class="question-mark">?</span><span class="self">self</span>.group_index,
+<a href=#447 id=447 data-nosnippet>447</a>					session_index = <span class="question-mark">?</span><span class="self">self</span>.session_index,
+<a href=#448 id=448 data-nosnippet>448</a>					chunk_index = <span class="question-mark">?</span><span class="self">self</span>.request.index,
+<a href=#449 id=449 data-nosnippet>449</a>					candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
+<a href=#450 id=450 data-nosnippet>450</a>					err = <span class="question-mark">?</span>err,
+<a href=#451 id=451 data-nosnippet>451</a>					<span class="string">"Some network error occurred when fetching erasure chunk"
+<a href=#452 id=452 data-nosnippet>452</a>				</span>);
+<a href=#453 id=453 data-nosnippet>453</a>				<span class="prelude-val">Err</span>(TaskError::PeerError)
+<a href=#454 id=454 data-nosnippet>454</a>			},
+<a href=#455 id=455 data-nosnippet>455</a>			<span class="prelude-val">Err</span>(RequestError::Canceled(oneshot::Canceled)) =&gt; {
+<a href=#456 id=456 data-nosnippet>456</a>				<span class="macro">gum::warn_if_frequent!</span>(
+<a href=#457 id=457 data-nosnippet>457</a>					freq: canceled_freq,
+<a href=#458 id=458 data-nosnippet>458</a>					max_rate: gum::Times::PerHour(<span class="number">100</span>),
+<a href=#459 id=459 data-nosnippet>459</a>					target: LOG_TARGET,
+<a href=#460 id=460 data-nosnippet>460</a>					origin = <span class="question-mark">?</span>validator,
+<a href=#461 id=461 data-nosnippet>461</a>					relay_parent = <span class="question-mark">?</span><span class="self">self</span>.relay_parent,
+<a href=#462 id=462 data-nosnippet>462</a>					group_index = <span class="question-mark">?</span><span class="self">self</span>.group_index,
+<a href=#463 id=463 data-nosnippet>463</a>					session_index = <span class="question-mark">?</span><span class="self">self</span>.session_index,
+<a href=#464 id=464 data-nosnippet>464</a>					chunk_index = <span class="question-mark">?</span><span class="self">self</span>.request.index,
+<a href=#465 id=465 data-nosnippet>465</a>					candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
+<a href=#466 id=466 data-nosnippet>466</a>					<span class="string">"Erasure chunk request got canceled"
+<a href=#467 id=467 data-nosnippet>467</a>				</span>);
+<a href=#468 id=468 data-nosnippet>468</a>				<span class="prelude-val">Err</span>(TaskError::PeerError)
+<a href=#469 id=469 data-nosnippet>469</a>			},
+<a href=#470 id=470 data-nosnippet>470</a>		}
+<a href=#471 id=471 data-nosnippet>471</a>	}
+<a href=#472 id=472 data-nosnippet>472</a>
+<a href=#473 id=473 data-nosnippet>473</a>	<span class="kw">fn </span>validate_chunk(
+<a href=#474 id=474 data-nosnippet>474</a>		<span class="kw-2">&amp;</span><span class="self">self</span>,
+<a href=#475 id=475 data-nosnippet>475</a>		validator: <span class="kw-2">&amp;</span>AuthorityDiscoveryId,
+<a href=#476 id=476 data-nosnippet>476</a>		chunk: <span class="kw-2">&amp;</span>ErasureChunk,
+<a href=#477 id=477 data-nosnippet>477</a>		expected_chunk_index: ChunkIndex,
+<a href=#478 id=478 data-nosnippet>478</a>	) -&gt; bool {
+<a href=#479 id=479 data-nosnippet>479</a>		<span class="kw">if </span>chunk.<span class="macro">index !</span>= expected_chunk_index {
+<a href=#480 id=480 data-nosnippet>480</a>			<span class="macro">gum::warn!</span>(
+<a href=#481 id=481 data-nosnippet>481</a>				target: LOG_TARGET,
+<a href=#482 id=482 data-nosnippet>482</a>				candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
+<a href=#483 id=483 data-nosnippet>483</a>				origin = <span class="question-mark">?</span>validator,
+<a href=#484 id=484 data-nosnippet>484</a>				chunk_index = <span class="question-mark">?</span>chunk.index,
+<a href=#485 id=485 data-nosnippet>485</a>				expected_chunk_index = <span class="question-mark">?</span>expected_chunk_index,
+<a href=#486 id=486 data-nosnippet>486</a>				<span class="string">"Validator sent the wrong chunk"</span>,
+<a href=#487 id=487 data-nosnippet>487</a>			);
+<a href=#488 id=488 data-nosnippet>488</a>			<span class="kw">return </span><span class="bool-val">false</span>;
+<a href=#489 id=489 data-nosnippet>489</a>		}
+<a href=#490 id=490 data-nosnippet>490</a>		<span class="kw">let </span>anticipated_hash =
+<a href=#491 id=491 data-nosnippet>491</a>			<span class="kw">match </span>branch_hash(<span class="kw-2">&amp;</span><span class="self">self</span>.erasure_root, chunk.proof(), chunk.index.<span class="number">0 </span><span class="kw">as </span>usize) {
+<a href=#492 id=492 data-nosnippet>492</a>				<span class="prelude-val">Ok</span>(hash) =&gt; hash,
+<a href=#493 id=493 data-nosnippet>493</a>				<span class="prelude-val">Err</span>(e) =&gt; {
+<a href=#494 id=494 data-nosnippet>494</a>					<span class="macro">gum::warn!</span>(
+<a href=#495 id=495 data-nosnippet>495</a>						target: LOG_TARGET,
+<a href=#496 id=496 data-nosnippet>496</a>						candidate_hash = <span class="question-mark">?</span><span class="self">self</span>.request.candidate_hash,
+<a href=#497 id=497 data-nosnippet>497</a>						origin = <span class="question-mark">?</span>validator,
+<a href=#498 id=498 data-nosnippet>498</a>						error = <span class="question-mark">?</span>e,
+<a href=#499 id=499 data-nosnippet>499</a>						<span class="string">"Failed to calculate chunk merkle proof"</span>,
+<a href=#500 id=500 data-nosnippet>500</a>					);
+<a href=#501 id=501 data-nosnippet>501</a>					<span class="kw">return </span><span class="bool-val">false</span>;
+<a href=#502 id=502 data-nosnippet>502</a>				},
+<a href=#503 id=503 data-nosnippet>503</a>			};
+<a href=#504 id=504 data-nosnippet>504</a>		<span class="kw">let </span>erasure_chunk_hash = BlakeTwo256::hash(<span class="kw-2">&amp;</span>chunk.chunk);
+<a href=#505 id=505 data-nosnippet>505</a>		<span class="kw">if </span><span class="macro">anticipated_hash !</span>= erasure_chunk_hash {
+<a href=#506 id=506 data-nosnippet>506</a>			<span class="macro">gum::warn!</span>(target: LOG_TARGET, origin = <span class="question-mark">?</span>validator,  <span class="string">"Received chunk does not match merkle tree"</span>);
+<a href=#507 id=507 data-nosnippet>507</a>			<span class="kw">return </span><span class="bool-val">false</span>;
+<a href=#508 id=508 data-nosnippet>508</a>		}
+<a href=#509 id=509 data-nosnippet>509</a>		<span class="bool-val">true
+<a href=#510 id=510 data-nosnippet>510</a>	</span>}
+<a href=#511 id=511 data-nosnippet>511</a>
+<a href=#512 id=512 data-nosnippet>512</a>	<span class="doccomment">/// Store given chunk and log any error.
+<a href=#513 id=513 data-nosnippet>513</a>	</span><span class="kw">async fn </span>store_chunk(<span class="kw-2">&amp;mut </span><span class="self">self</span>, chunk: ErasureChunk) {
+<a href=#514 id=514 data-nosnippet>514</a>		<span class="kw">let </span>(tx, rx) = oneshot::channel();
+<a href=#515 id=515 data-nosnippet>515</a>		<span class="kw">let </span>r = <span class="self">self
+<a href=#516 id=516 data-nosnippet>516</a>			</span>.sender
+<a href=#517 id=517 data-nosnippet>517</a>			.send(FromFetchTask::Message(
+<a href=#518 id=518 data-nosnippet>518</a>				AvailabilityStoreMessage::StoreChunk {
+<a href=#519 id=519 data-nosnippet>519</a>					candidate_hash: <span class="self">self</span>.request.candidate_hash,
+<a href=#520 id=520 data-nosnippet>520</a>					chunk,
+<a href=#521 id=521 data-nosnippet>521</a>					validator_index: <span class="self">self</span>.request.index,
+<a href=#522 id=522 data-nosnippet>522</a>					tx,
+<a href=#523 id=523 data-nosnippet>523</a>				}
+<a href=#524 id=524 data-nosnippet>524</a>				.into(),
+<a href=#525 id=525 data-nosnippet>525</a>			))
+<a href=#526 id=526 data-nosnippet>526</a>			.<span class="kw">await</span>;
+<a href=#527 id=527 data-nosnippet>527</a>		<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = r {
+<a href=#528 id=528 data-nosnippet>528</a>			<span class="macro">gum::error!</span>(target: LOG_TARGET, err= <span class="question-mark">?</span>err, <span class="string">"Storing erasure chunk failed, system shutting down?"</span>);
+<a href=#529 id=529 data-nosnippet>529</a>		}
+<a href=#530 id=530 data-nosnippet>530</a>
+<a href=#531 id=531 data-nosnippet>531</a>		<span class="kw">if let </span><span class="prelude-val">Err</span>(oneshot::Canceled) = rx.<span class="kw">await </span>{
+<a href=#532 id=532 data-nosnippet>532</a>			<span class="macro">gum::error!</span>(target: LOG_TARGET, <span class="string">"Storing erasure chunk failed"</span>);
+<a href=#533 id=533 data-nosnippet>533</a>		}
+<a href=#534 id=534 data-nosnippet>534</a>	}
+<a href=#535 id=535 data-nosnippet>535</a>
+<a href=#536 id=536 data-nosnippet>536</a>	<span class="doccomment">/// Tell subsystem we are done.
+<a href=#537 id=537 data-nosnippet>537</a>	</span><span class="kw">async fn </span>conclude(<span class="kw-2">&amp;mut </span><span class="self">self</span>, bad_validators: Vec&lt;AuthorityDiscoveryId&gt;) {
+<a href=#538 id=538 data-nosnippet>538</a>		<span class="kw">let </span>payload = <span class="kw">if </span>bad_validators.is_empty() {
+<a href=#539 id=539 data-nosnippet>539</a>			<span class="prelude-val">None
+<a href=#540 id=540 data-nosnippet>540</a>		</span>} <span class="kw">else </span>{
+<a href=#541 id=541 data-nosnippet>541</a>			<span class="prelude-val">Some</span>(BadValidators {
+<a href=#542 id=542 data-nosnippet>542</a>				session_index: <span class="self">self</span>.session_index,
+<a href=#543 id=543 data-nosnippet>543</a>				group_index: <span class="self">self</span>.group_index,
+<a href=#544 id=544 data-nosnippet>544</a>				bad_validators,
+<a href=#545 id=545 data-nosnippet>545</a>			})
+<a href=#546 id=546 data-nosnippet>546</a>		};
+<a href=#547 id=547 data-nosnippet>547</a>		<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = <span class="self">self</span>.sender.send(FromFetchTask::Concluded(payload)).<span class="kw">await </span>{
+<a href=#548 id=548 data-nosnippet>548</a>			<span class="macro">gum::warn!</span>(
+<a href=#549 id=549 data-nosnippet>549</a>				target: LOG_TARGET,
+<a href=#550 id=550 data-nosnippet>550</a>				err= <span class="question-mark">?</span>err,
+<a href=#551 id=551 data-nosnippet>551</a>				<span class="string">"Sending concluded message for task failed"
+<a href=#552 id=552 data-nosnippet>552</a>			</span>);
+<a href=#553 id=553 data-nosnippet>553</a>		}
+<a href=#554 id=554 data-nosnippet>554</a>	}
+<a href=#555 id=555 data-nosnippet>555</a>
+<a href=#556 id=556 data-nosnippet>556</a>	<span class="kw">async fn </span>conclude_fail(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+<a href=#557 id=557 data-nosnippet>557</a>		<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = <span class="self">self</span>.sender.send(FromFetchTask::Failed(<span class="self">self</span>.request.candidate_hash)).<span class="kw">await
+<a href=#558 id=558 data-nosnippet>558</a>		</span>{
+<a href=#559 id=559 data-nosnippet>559</a>			<span class="macro">gum::warn!</span>(target: LOG_TARGET, <span class="question-mark">?</span>err, <span class="string">"Sending `Failed` message for task failed"</span>);
+<a href=#560 id=560 data-nosnippet>560</a>		}
+<a href=#561 id=561 data-nosnippet>561</a>	}
+<a href=#562 id=562 data-nosnippet>562</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

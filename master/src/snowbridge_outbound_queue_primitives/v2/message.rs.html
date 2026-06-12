@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/snowbridge/primitives/outbound-queue/src/v2/message.rs`."><title>message.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/snowbridge/primitives/outbound-queue/src/v2/message.rs`."><title>message.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="snowbridge_outbound_queue_primitives" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="snowbridge_outbound_queue_primitives" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">snowbridge_outbound_queue_primitives/v2/</div>message.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// SPDX-License-Identifier: Apache-2.0
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">snowbridge_outbound_queue_primitives/v2/</div>message.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// SPDX-License-Identifier: Apache-2.0
 <a href=#2 id=2 data-nosnippet>2</a>// SPDX-FileCopyrightText: 2023 Snowfork &lt;hello@snowfork.com&gt;
 <a href=#3 id=3 data-nosnippet>3</a></span><span class="doccomment">//! # Outbound V2 primitives
 <a href=#4 id=4 data-nosnippet>4</a>
@@ -364,99 +364,103 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#214 id=214 data-nosnippet>214</a>				initParams: Bytes::from(initializer.params.clone()),
 <a href=#215 id=215 data-nosnippet>215</a>			}
 <a href=#216 id=216 data-nosnippet>216</a>			.abi_encode(),
-<a href=#217 id=217 data-nosnippet>217</a>			Command::SetOperatingMode { mode } =&gt;
-<a href=#218 id=218 data-nosnippet>218</a>				SetOperatingModeParams { mode: (<span class="kw-2">*</span>mode) <span class="kw">as </span>u8 }.abi_encode(),
-<a href=#219 id=219 data-nosnippet>219</a>			Command::UnlockNativeToken { token, recipient, amount, .. } =&gt;
-<a href=#220 id=220 data-nosnippet>220</a>				UnlockNativeTokenParams {
-<a href=#221 id=221 data-nosnippet>221</a>					token: Address::from(token.as_fixed_bytes()),
-<a href=#222 id=222 data-nosnippet>222</a>					recipient: Address::from(recipient.as_fixed_bytes()),
-<a href=#223 id=223 data-nosnippet>223</a>					amount: <span class="kw-2">*</span>amount,
-<a href=#224 id=224 data-nosnippet>224</a>				}
-<a href=#225 id=225 data-nosnippet>225</a>				.abi_encode(),
-<a href=#226 id=226 data-nosnippet>226</a>			Command::RegisterForeignToken { token_id, name, symbol, decimals } =&gt;
-<a href=#227 id=227 data-nosnippet>227</a>				RegisterForeignTokenParams {
-<a href=#228 id=228 data-nosnippet>228</a>					foreignTokenID: FixedBytes::from(token_id.as_fixed_bytes()),
-<a href=#229 id=229 data-nosnippet>229</a>					name: Bytes::from(name.to_vec()),
-<a href=#230 id=230 data-nosnippet>230</a>					symbol: Bytes::from(symbol.to_vec()),
-<a href=#231 id=231 data-nosnippet>231</a>					decimals: <span class="kw-2">*</span>decimals,
-<a href=#232 id=232 data-nosnippet>232</a>				}
-<a href=#233 id=233 data-nosnippet>233</a>				.abi_encode(),
-<a href=#234 id=234 data-nosnippet>234</a>			Command::MintForeignToken { token_id, recipient, amount } =&gt; MintForeignTokenParams {
-<a href=#235 id=235 data-nosnippet>235</a>				foreignTokenID: FixedBytes::from(token_id.as_fixed_bytes()),
-<a href=#236 id=236 data-nosnippet>236</a>				recipient: Address::from(recipient.as_fixed_bytes()),
-<a href=#237 id=237 data-nosnippet>237</a>				amount: <span class="kw-2">*</span>amount,
-<a href=#238 id=238 data-nosnippet>238</a>			}
-<a href=#239 id=239 data-nosnippet>239</a>			.abi_encode(),
-<a href=#240 id=240 data-nosnippet>240</a>			Command::CallContract { target, calldata: data, value, .. } =&gt; CallContractParams {
-<a href=#241 id=241 data-nosnippet>241</a>				target: Address::from(target.as_fixed_bytes()),
-<a href=#242 id=242 data-nosnippet>242</a>				data: Bytes::from(data.to_vec()),
-<a href=#243 id=243 data-nosnippet>243</a>				value: U256::try_from(<span class="kw-2">*</span>value).unwrap(),
-<a href=#244 id=244 data-nosnippet>244</a>			}
-<a href=#245 id=245 data-nosnippet>245</a>			.abi_encode(),
-<a href=#246 id=246 data-nosnippet>246</a>		}
-<a href=#247 id=247 data-nosnippet>247</a>	}
-<a href=#248 id=248 data-nosnippet>248</a>}
-<a href=#249 id=249 data-nosnippet>249</a>
-<a href=#250 id=250 data-nosnippet>250</a><span class="doccomment">/// Representation of a call to the initializer of an implementation contract.
-<a href=#251 id=251 data-nosnippet>251</a>/// The initializer has the following ABI signature: `initialize(bytes)`.
-<a href=#252 id=252 data-nosnippet>252</a></span><span class="attr">#[derive(Clone, Encode, Decode, DecodeWithMemTracking, PartialEq, Debug, TypeInfo)]
-<a href=#253 id=253 data-nosnippet>253</a></span><span class="kw">pub struct </span>Initializer {
-<a href=#254 id=254 data-nosnippet>254</a>	<span class="doccomment">/// ABI-encoded params of type `bytes` to pass to the initializer
-<a href=#255 id=255 data-nosnippet>255</a>	</span><span class="kw">pub </span>params: Vec&lt;u8&gt;,
-<a href=#256 id=256 data-nosnippet>256</a>	<span class="doccomment">/// The initializer is allowed to consume this much gas at most.
-<a href=#257 id=257 data-nosnippet>257</a>	</span><span class="kw">pub </span>maximum_required_gas: u64,
-<a href=#258 id=258 data-nosnippet>258</a>}
-<a href=#259 id=259 data-nosnippet>259</a>
-<a href=#260 id=260 data-nosnippet>260</a><span class="kw">pub trait </span>SendMessage {
-<a href=#261 id=261 data-nosnippet>261</a>	<span class="kw">type </span>Ticket: Clone + Encode + Decode;
+<a href=#217 id=217 data-nosnippet>217</a>			Command::SetOperatingMode { mode } =&gt; {
+<a href=#218 id=218 data-nosnippet>218</a>				SetOperatingModeParams { mode: (<span class="kw-2">*</span>mode) <span class="kw">as </span>u8 }.abi_encode()
+<a href=#219 id=219 data-nosnippet>219</a>			},
+<a href=#220 id=220 data-nosnippet>220</a>			Command::UnlockNativeToken { token, recipient, amount, .. } =&gt; {
+<a href=#221 id=221 data-nosnippet>221</a>				UnlockNativeTokenParams {
+<a href=#222 id=222 data-nosnippet>222</a>					token: Address::from(token.as_fixed_bytes()),
+<a href=#223 id=223 data-nosnippet>223</a>					recipient: Address::from(recipient.as_fixed_bytes()),
+<a href=#224 id=224 data-nosnippet>224</a>					amount: <span class="kw-2">*</span>amount,
+<a href=#225 id=225 data-nosnippet>225</a>				}
+<a href=#226 id=226 data-nosnippet>226</a>				.abi_encode()
+<a href=#227 id=227 data-nosnippet>227</a>			},
+<a href=#228 id=228 data-nosnippet>228</a>			Command::RegisterForeignToken { token_id, name, symbol, decimals } =&gt; {
+<a href=#229 id=229 data-nosnippet>229</a>				RegisterForeignTokenParams {
+<a href=#230 id=230 data-nosnippet>230</a>					foreignTokenID: FixedBytes::from(token_id.as_fixed_bytes()),
+<a href=#231 id=231 data-nosnippet>231</a>					name: Bytes::from(name.to_vec()),
+<a href=#232 id=232 data-nosnippet>232</a>					symbol: Bytes::from(symbol.to_vec()),
+<a href=#233 id=233 data-nosnippet>233</a>					decimals: <span class="kw-2">*</span>decimals,
+<a href=#234 id=234 data-nosnippet>234</a>				}
+<a href=#235 id=235 data-nosnippet>235</a>				.abi_encode()
+<a href=#236 id=236 data-nosnippet>236</a>			},
+<a href=#237 id=237 data-nosnippet>237</a>			Command::MintForeignToken { token_id, recipient, amount } =&gt; MintForeignTokenParams {
+<a href=#238 id=238 data-nosnippet>238</a>				foreignTokenID: FixedBytes::from(token_id.as_fixed_bytes()),
+<a href=#239 id=239 data-nosnippet>239</a>				recipient: Address::from(recipient.as_fixed_bytes()),
+<a href=#240 id=240 data-nosnippet>240</a>				amount: <span class="kw-2">*</span>amount,
+<a href=#241 id=241 data-nosnippet>241</a>			}
+<a href=#242 id=242 data-nosnippet>242</a>			.abi_encode(),
+<a href=#243 id=243 data-nosnippet>243</a>			Command::CallContract { target, calldata: data, value, .. } =&gt; CallContractParams {
+<a href=#244 id=244 data-nosnippet>244</a>				target: Address::from(target.as_fixed_bytes()),
+<a href=#245 id=245 data-nosnippet>245</a>				data: Bytes::from(data.to_vec()),
+<a href=#246 id=246 data-nosnippet>246</a>				value: U256::try_from(<span class="kw-2">*</span>value).unwrap(),
+<a href=#247 id=247 data-nosnippet>247</a>			}
+<a href=#248 id=248 data-nosnippet>248</a>			.abi_encode(),
+<a href=#249 id=249 data-nosnippet>249</a>		}
+<a href=#250 id=250 data-nosnippet>250</a>	}
+<a href=#251 id=251 data-nosnippet>251</a>}
+<a href=#252 id=252 data-nosnippet>252</a>
+<a href=#253 id=253 data-nosnippet>253</a><span class="doccomment">/// Representation of a call to the initializer of an implementation contract.
+<a href=#254 id=254 data-nosnippet>254</a>/// The initializer has the following ABI signature: `initialize(bytes)`.
+<a href=#255 id=255 data-nosnippet>255</a></span><span class="attr">#[derive(Clone, Encode, Decode, DecodeWithMemTracking, PartialEq, Debug, TypeInfo)]
+<a href=#256 id=256 data-nosnippet>256</a></span><span class="kw">pub struct </span>Initializer {
+<a href=#257 id=257 data-nosnippet>257</a>	<span class="doccomment">/// ABI-encoded params of type `bytes` to pass to the initializer
+<a href=#258 id=258 data-nosnippet>258</a>	</span><span class="kw">pub </span>params: Vec&lt;u8&gt;,
+<a href=#259 id=259 data-nosnippet>259</a>	<span class="doccomment">/// The initializer is allowed to consume this much gas at most.
+<a href=#260 id=260 data-nosnippet>260</a>	</span><span class="kw">pub </span>maximum_required_gas: u64,
+<a href=#261 id=261 data-nosnippet>261</a>}
 <a href=#262 id=262 data-nosnippet>262</a>
-<a href=#263 id=263 data-nosnippet>263</a>	<span class="doccomment">/// Validate an outbound message and return a tuple:
-<a href=#264 id=264 data-nosnippet>264</a>	/// 1. Ticket for submitting the message
-<a href=#265 id=265 data-nosnippet>265</a>	/// 2. Delivery fee
-<a href=#266 id=266 data-nosnippet>266</a>	</span><span class="kw">fn </span>validate(message: <span class="kw-2">&amp;</span>Message) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Ticket, SendError&gt;;
-<a href=#267 id=267 data-nosnippet>267</a>
-<a href=#268 id=268 data-nosnippet>268</a>	<span class="doccomment">/// Submit the message ticket for eventual delivery to Ethereum
-<a href=#269 id=269 data-nosnippet>269</a>	</span><span class="kw">fn </span>deliver(ticket: <span class="self">Self</span>::Ticket) -&gt; <span class="prelude-ty">Result</span>&lt;H256, SendError&gt;;
-<a href=#270 id=270 data-nosnippet>270</a>}
-<a href=#271 id=271 data-nosnippet>271</a>
-<a href=#272 id=272 data-nosnippet>272</a><span class="kw">pub trait </span>GasMeter {
-<a href=#273 id=273 data-nosnippet>273</a>	<span class="doccomment">/// Measures the maximum amount of gas a command payload will require to *dispatch*, NOT
-<a href=#274 id=274 data-nosnippet>274</a>	/// including validation &amp; verification.
-<a href=#275 id=275 data-nosnippet>275</a>	</span><span class="kw">fn </span>maximum_dispatch_gas_used_at_most(command: <span class="kw-2">&amp;</span>Command) -&gt; u64;
-<a href=#276 id=276 data-nosnippet>276</a>}
-<a href=#277 id=277 data-nosnippet>277</a>
-<a href=#278 id=278 data-nosnippet>278</a><span class="doccomment">/// A meter that assigns a constant amount of gas for the execution of a command
-<a href=#279 id=279 data-nosnippet>279</a>///
-<a href=#280 id=280 data-nosnippet>280</a>/// The gas figures are extracted from this report:
-<a href=#281 id=281 data-nosnippet>281</a>/// &gt; forge test --match-path test/Gateway.t.sol --gas-report
+<a href=#263 id=263 data-nosnippet>263</a><span class="kw">pub trait </span>SendMessage {
+<a href=#264 id=264 data-nosnippet>264</a>	<span class="kw">type </span>Ticket: Clone + Encode + Decode;
+<a href=#265 id=265 data-nosnippet>265</a>
+<a href=#266 id=266 data-nosnippet>266</a>	<span class="doccomment">/// Validate an outbound message and return a tuple:
+<a href=#267 id=267 data-nosnippet>267</a>	/// 1. Ticket for submitting the message
+<a href=#268 id=268 data-nosnippet>268</a>	/// 2. Delivery fee
+<a href=#269 id=269 data-nosnippet>269</a>	</span><span class="kw">fn </span>validate(message: <span class="kw-2">&amp;</span>Message) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Ticket, SendError&gt;;
+<a href=#270 id=270 data-nosnippet>270</a>
+<a href=#271 id=271 data-nosnippet>271</a>	<span class="doccomment">/// Submit the message ticket for eventual delivery to Ethereum
+<a href=#272 id=272 data-nosnippet>272</a>	</span><span class="kw">fn </span>deliver(ticket: <span class="self">Self</span>::Ticket) -&gt; <span class="prelude-ty">Result</span>&lt;H256, SendError&gt;;
+<a href=#273 id=273 data-nosnippet>273</a>}
+<a href=#274 id=274 data-nosnippet>274</a>
+<a href=#275 id=275 data-nosnippet>275</a><span class="kw">pub trait </span>GasMeter {
+<a href=#276 id=276 data-nosnippet>276</a>	<span class="doccomment">/// Measures the maximum amount of gas a command payload will require to *dispatch*, NOT
+<a href=#277 id=277 data-nosnippet>277</a>	/// including validation &amp; verification.
+<a href=#278 id=278 data-nosnippet>278</a>	</span><span class="kw">fn </span>maximum_dispatch_gas_used_at_most(command: <span class="kw-2">&amp;</span>Command) -&gt; u64;
+<a href=#279 id=279 data-nosnippet>279</a>}
+<a href=#280 id=280 data-nosnippet>280</a>
+<a href=#281 id=281 data-nosnippet>281</a><span class="doccomment">/// A meter that assigns a constant amount of gas for the execution of a command
 <a href=#282 id=282 data-nosnippet>282</a>///
-<a href=#283 id=283 data-nosnippet>283</a>/// A healthy buffer is added on top of these figures to account for:
-<a href=#284 id=284 data-nosnippet>284</a>/// * The EIP-150 63/64 rule
-<a href=#285 id=285 data-nosnippet>285</a>/// * Future EVM upgrades that may increase gas cost
-<a href=#286 id=286 data-nosnippet>286</a></span><span class="kw">pub struct </span>ConstantGasMeter;
-<a href=#287 id=287 data-nosnippet>287</a>
-<a href=#288 id=288 data-nosnippet>288</a><span class="kw">impl </span>GasMeter <span class="kw">for </span>ConstantGasMeter {
-<a href=#289 id=289 data-nosnippet>289</a>	<span class="kw">fn </span>maximum_dispatch_gas_used_at_most(command: <span class="kw-2">&amp;</span>Command) -&gt; u64 {
-<a href=#290 id=290 data-nosnippet>290</a>		<span class="kw">match </span>command {
-<a href=#291 id=291 data-nosnippet>291</a>			Command::SetOperatingMode { .. } =&gt; <span class="number">40_000</span>,
-<a href=#292 id=292 data-nosnippet>292</a>			Command::Upgrade { initializer, .. } =&gt; {
-<a href=#293 id=293 data-nosnippet>293</a>				<span class="comment">// total maximum gas must also include the gas used for updating the proxy before
-<a href=#294 id=294 data-nosnippet>294</a>				// the the initializer is called.
-<a href=#295 id=295 data-nosnippet>295</a>				</span><span class="number">50_000 </span>+ initializer.maximum_required_gas
-<a href=#296 id=296 data-nosnippet>296</a>			},
-<a href=#297 id=297 data-nosnippet>297</a>			Command::UnlockNativeToken { .. } =&gt; <span class="number">200_000</span>,
-<a href=#298 id=298 data-nosnippet>298</a>			Command::RegisterForeignToken { .. } =&gt; <span class="number">1_200_000</span>,
-<a href=#299 id=299 data-nosnippet>299</a>			Command::MintForeignToken { .. } =&gt; <span class="number">100_000</span>,
-<a href=#300 id=300 data-nosnippet>300</a>			Command::CallContract { gas: gas_limit, .. } =&gt; <span class="kw-2">*</span>gas_limit,
-<a href=#301 id=301 data-nosnippet>301</a>		}
-<a href=#302 id=302 data-nosnippet>302</a>	}
-<a href=#303 id=303 data-nosnippet>303</a>}
-<a href=#304 id=304 data-nosnippet>304</a>
-<a href=#305 id=305 data-nosnippet>305</a><span class="kw">impl </span>GasMeter <span class="kw">for </span>() {
-<a href=#306 id=306 data-nosnippet>306</a>	<span class="kw">fn </span>maximum_dispatch_gas_used_at_most(<span class="kw">_</span>: <span class="kw-2">&amp;</span>Command) -&gt; u64 {
-<a href=#307 id=307 data-nosnippet>307</a>		<span class="number">1
-<a href=#308 id=308 data-nosnippet>308</a>	</span>}
-<a href=#309 id=309 data-nosnippet>309</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#283 id=283 data-nosnippet>283</a>/// The gas figures are extracted from this report:
+<a href=#284 id=284 data-nosnippet>284</a>/// &gt; forge test --match-path test/Gateway.t.sol --gas-report
+<a href=#285 id=285 data-nosnippet>285</a>///
+<a href=#286 id=286 data-nosnippet>286</a>/// A healthy buffer is added on top of these figures to account for:
+<a href=#287 id=287 data-nosnippet>287</a>/// * The EIP-150 63/64 rule
+<a href=#288 id=288 data-nosnippet>288</a>/// * Future EVM upgrades that may increase gas cost
+<a href=#289 id=289 data-nosnippet>289</a></span><span class="kw">pub struct </span>ConstantGasMeter;
+<a href=#290 id=290 data-nosnippet>290</a>
+<a href=#291 id=291 data-nosnippet>291</a><span class="kw">impl </span>GasMeter <span class="kw">for </span>ConstantGasMeter {
+<a href=#292 id=292 data-nosnippet>292</a>	<span class="kw">fn </span>maximum_dispatch_gas_used_at_most(command: <span class="kw-2">&amp;</span>Command) -&gt; u64 {
+<a href=#293 id=293 data-nosnippet>293</a>		<span class="kw">match </span>command {
+<a href=#294 id=294 data-nosnippet>294</a>			Command::SetOperatingMode { .. } =&gt; <span class="number">40_000</span>,
+<a href=#295 id=295 data-nosnippet>295</a>			Command::Upgrade { initializer, .. } =&gt; {
+<a href=#296 id=296 data-nosnippet>296</a>				<span class="comment">// total maximum gas must also include the gas used for updating the proxy before
+<a href=#297 id=297 data-nosnippet>297</a>				// the the initializer is called.
+<a href=#298 id=298 data-nosnippet>298</a>				</span><span class="number">50_000 </span>+ initializer.maximum_required_gas
+<a href=#299 id=299 data-nosnippet>299</a>			},
+<a href=#300 id=300 data-nosnippet>300</a>			Command::UnlockNativeToken { .. } =&gt; <span class="number">200_000</span>,
+<a href=#301 id=301 data-nosnippet>301</a>			Command::RegisterForeignToken { .. } =&gt; <span class="number">1_200_000</span>,
+<a href=#302 id=302 data-nosnippet>302</a>			Command::MintForeignToken { .. } =&gt; <span class="number">100_000</span>,
+<a href=#303 id=303 data-nosnippet>303</a>			Command::CallContract { gas: gas_limit, .. } =&gt; <span class="kw-2">*</span>gas_limit,
+<a href=#304 id=304 data-nosnippet>304</a>		}
+<a href=#305 id=305 data-nosnippet>305</a>	}
+<a href=#306 id=306 data-nosnippet>306</a>}
+<a href=#307 id=307 data-nosnippet>307</a>
+<a href=#308 id=308 data-nosnippet>308</a><span class="kw">impl </span>GasMeter <span class="kw">for </span>() {
+<a href=#309 id=309 data-nosnippet>309</a>	<span class="kw">fn </span>maximum_dispatch_gas_used_at_most(<span class="kw">_</span>: <span class="kw-2">&amp;</span>Command) -&gt; u64 {
+<a href=#310 id=310 data-nosnippet>310</a>		<span class="number">1
+<a href=#311 id=311 data-nosnippet>311</a>	</span>}
+<a href=#312 id=312 data-nosnippet>312</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

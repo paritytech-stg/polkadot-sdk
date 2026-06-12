@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["run"],"struct":["CliCommand"]};
+window.SIDEBAR_ITEMS = {"enum":["EthPruningMode"],"fn":["run"],"struct":["CliCommand"]};

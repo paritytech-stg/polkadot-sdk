@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/bin/node/runtime/src/genesis_config_presets.rs`."><title>genesis_config_presets.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/bin/node/runtime/src/genesis_config_presets.rs`."><title>genesis_config_presets.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="kitchensink_runtime" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="kitchensink_runtime" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">kitchensink_runtime/</div>genesis_config_presets.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">kitchensink_runtime/</div>genesis_config_presets.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -177,12 +177,12 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#27 id=27 data-nosnippet>27</a>};
 <a href=#28 id=28 data-nosnippet>28</a><span class="kw">use </span>alloc::{vec, vec::Vec};
 <a href=#29 id=29 data-nosnippet>29</a><span class="kw">use </span>pallet_im_online::sr25519::AuthorityId <span class="kw">as </span>ImOnlineId;
-<a href=#30 id=30 data-nosnippet>30</a><span class="kw">use </span>pallet_revive::is_eth_derived;
+<a href=#30 id=30 data-nosnippet>30</a><span class="kw">use </span>pallet_revive::AddressMapper;
 <a href=#31 id=31 data-nosnippet>31</a><span class="kw">use </span>sp_authority_discovery::AuthorityId <span class="kw">as </span>AuthorityDiscoveryId;
 <a href=#32 id=32 data-nosnippet>32</a><span class="kw">use </span>sp_consensus_babe::AuthorityId <span class="kw">as </span>BabeId;
 <a href=#33 id=33 data-nosnippet>33</a><span class="kw">use </span>sp_consensus_beefy::ecdsa_crypto::AuthorityId <span class="kw">as </span>BeefyId;
 <a href=#34 id=34 data-nosnippet>34</a><span class="kw">use </span>sp_consensus_grandpa::AuthorityId <span class="kw">as </span>GrandpaId;
-<a href=#35 id=35 data-nosnippet>35</a><span class="kw">use </span>sp_core::{crypto::get_public_from_string_or_panic, sr25519};
+<a href=#35 id=35 data-nosnippet>35</a><span class="kw">use </span>sp_core::{crypto::get_public_from_string_or_panic, sr25519, Get};
 <a href=#36 id=36 data-nosnippet>36</a><span class="kw">use </span>sp_genesis_builder::PresetId;
 <a href=#37 id=37 data-nosnippet>37</a><span class="kw">use </span>sp_keyring::Sr25519Keyring;
 <a href=#38 id=38 data-nosnippet>38</a><span class="kw">use </span>sp_mixnet::types::AuthorityId <span class="kw">as </span>MixnetId;
@@ -246,130 +246,141 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#96 id=96 data-nosnippet>96</a>			min_join_bond: <span class="number">1 </span>* DOLLARS,
 <a href=#97 id=97 data-nosnippet>97</a>		},
 <a href=#98 id=98 data-nosnippet>98</a>		revive: ReviveConfig {
-<a href=#99 id=99 data-nosnippet>99</a>			mapped_accounts: endowed_accounts.iter().filter(|x| ! is_eth_derived(x)).cloned().collect(),
-<a href=#100 id=100 data-nosnippet>100</a>		},
-<a href=#101 id=101 data-nosnippet>101</a>	})
-<a href=#102 id=102 data-nosnippet>102</a>}
-<a href=#103 id=103 data-nosnippet>103</a>
-<a href=#104 id=104 data-nosnippet>104</a><span class="doccomment">/// Provides the JSON representation of predefined genesis config for given `id`.
-<a href=#105 id=105 data-nosnippet>105</a></span><span class="kw">pub fn </span>get_preset(id: <span class="kw-2">&amp;</span>PresetId) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt; {
-<a href=#106 id=106 data-nosnippet>106</a>	<span class="comment">// Note: Can't use `Sr25519Keyring::Alice.to_seed()` because the seed comes with `//`.
-<a href=#107 id=107 data-nosnippet>107</a>	</span><span class="kw">let </span>(alice_stash, alice, alice_session_keys) = authority_keys_from_seed(<span class="string">"Alice"</span>);
-<a href=#108 id=108 data-nosnippet>108</a>	<span class="kw">let </span>(bob_stash, _bob, bob_session_keys) = authority_keys_from_seed(<span class="string">"Bob"</span>);
-<a href=#109 id=109 data-nosnippet>109</a>
-<a href=#110 id=110 data-nosnippet>110</a>	<span class="kw">let </span>endowed = well_known_including_eth_accounts();
-<a href=#111 id=111 data-nosnippet>111</a>
-<a href=#112 id=112 data-nosnippet>112</a>	<span class="kw">let </span>patch = <span class="kw">match </span>id.as_ref() {
-<a href=#113 id=113 data-nosnippet>113</a>		sp_genesis_builder::DEV_RUNTIME_PRESET =&gt; kitchensink_genesis(
-<a href=#114 id=114 data-nosnippet>114</a>			<span class="comment">// Use stash as controller account, otherwise grandpa can't load the authority set at
-<a href=#115 id=115 data-nosnippet>115</a>			// genesis.
-<a href=#116 id=116 data-nosnippet>116</a>			</span><span class="macro">vec!</span>[(alice_stash.clone(), alice_stash.clone(), alice_session_keys)],
-<a href=#117 id=117 data-nosnippet>117</a>			alice.clone(),
-<a href=#118 id=118 data-nosnippet>118</a>			endowed,
-<a href=#119 id=119 data-nosnippet>119</a>			<span class="macro">vec!</span>[validator(alice_stash.clone())],
-<a href=#120 id=120 data-nosnippet>120</a>		),
-<a href=#121 id=121 data-nosnippet>121</a>		sp_genesis_builder::LOCAL_TESTNET_RUNTIME_PRESET =&gt; kitchensink_genesis(
-<a href=#122 id=122 data-nosnippet>122</a>			<span class="macro">vec!</span>[
-<a href=#123 id=123 data-nosnippet>123</a>				<span class="comment">// Use stash as controller account, otherwise grandpa can't load the authority set
-<a href=#124 id=124 data-nosnippet>124</a>				// at genesis.
-<a href=#125 id=125 data-nosnippet>125</a>				</span>(alice_stash.clone(), alice_stash.clone(), alice_session_keys),
-<a href=#126 id=126 data-nosnippet>126</a>				(bob_stash.clone(), bob_stash.clone(), bob_session_keys),
-<a href=#127 id=127 data-nosnippet>127</a>			],
-<a href=#128 id=128 data-nosnippet>128</a>			alice,
-<a href=#129 id=129 data-nosnippet>129</a>			endowed,
-<a href=#130 id=130 data-nosnippet>130</a>			<span class="macro">vec!</span>[validator(alice_stash), validator(bob_stash)],
-<a href=#131 id=131 data-nosnippet>131</a>		),
-<a href=#132 id=132 data-nosnippet>132</a>		<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
-<a href=#133 id=133 data-nosnippet>133</a>	};
-<a href=#134 id=134 data-nosnippet>134</a>
-<a href=#135 id=135 data-nosnippet>135</a>	<span class="prelude-val">Some</span>(
-<a href=#136 id=136 data-nosnippet>136</a>		serde_json::to_string(<span class="kw-2">&amp;</span>patch)
-<a href=#137 id=137 data-nosnippet>137</a>			.expect(<span class="string">"serialization to json is expected to work. qed."</span>)
-<a href=#138 id=138 data-nosnippet>138</a>			.into_bytes(),
-<a href=#139 id=139 data-nosnippet>139</a>	)
-<a href=#140 id=140 data-nosnippet>140</a>}
-<a href=#141 id=141 data-nosnippet>141</a>
-<a href=#142 id=142 data-nosnippet>142</a><span class="doccomment">/// List of supported presets.
-<a href=#143 id=143 data-nosnippet>143</a></span><span class="kw">pub fn </span>preset_names() -&gt; Vec&lt;PresetId&gt; {
-<a href=#144 id=144 data-nosnippet>144</a>	<span class="macro">vec!</span>[
-<a href=#145 id=145 data-nosnippet>145</a>		PresetId::from(sp_genesis_builder::DEV_RUNTIME_PRESET),
-<a href=#146 id=146 data-nosnippet>146</a>		PresetId::from(sp_genesis_builder::LOCAL_TESTNET_RUNTIME_PRESET),
-<a href=#147 id=147 data-nosnippet>147</a>	]
-<a href=#148 id=148 data-nosnippet>148</a>}
-<a href=#149 id=149 data-nosnippet>149</a>
-<a href=#150 id=150 data-nosnippet>150</a><span class="doccomment">/// Sets up the `account` to be a staker of validator variant as supplied to the
-<a href=#151 id=151 data-nosnippet>151</a>/// staking config.
-<a href=#152 id=152 data-nosnippet>152</a></span><span class="kw">pub fn </span>validator(account: AccountId) -&gt; Staker {
-<a href=#153 id=153 data-nosnippet>153</a>	<span class="comment">// validator, controller, stash, staker status
-<a href=#154 id=154 data-nosnippet>154</a>	</span>(account.clone(), account, STASH, StakerStatus::Validator)
-<a href=#155 id=155 data-nosnippet>155</a>}
-<a href=#156 id=156 data-nosnippet>156</a>
-<a href=#157 id=157 data-nosnippet>157</a><span class="doccomment">/// Extract some accounts from endowed to be put into the collective.
-<a href=#158 id=158 data-nosnippet>158</a></span><span class="kw">fn </span>collective(endowed: <span class="kw-2">&amp;</span>[AccountId]) -&gt; Vec&lt;AccountId&gt; {
-<a href=#159 id=159 data-nosnippet>159</a>	<span class="kw">const </span>MAX_COLLECTIVE_SIZE: usize = <span class="number">50</span>;
-<a href=#160 id=160 data-nosnippet>160</a>	<span class="kw">let </span>endowed_accounts_count = endowed.len();
-<a href=#161 id=161 data-nosnippet>161</a>	endowed
-<a href=#162 id=162 data-nosnippet>162</a>		.iter()
-<a href=#163 id=163 data-nosnippet>163</a>		.take((endowed_accounts_count.div_ceil(<span class="number">2</span>)).min(MAX_COLLECTIVE_SIZE))
-<a href=#164 id=164 data-nosnippet>164</a>		.cloned()
-<a href=#165 id=165 data-nosnippet>165</a>		.collect()
-<a href=#166 id=166 data-nosnippet>166</a>}
-<a href=#167 id=167 data-nosnippet>167</a>
-<a href=#168 id=168 data-nosnippet>168</a><span class="doccomment">/// The Keyring's wellknown accounts + Alith and Baltathar.
-<a href=#169 id=169 data-nosnippet>169</a>///
-<a href=#170 id=170 data-nosnippet>170</a>/// Some integration tests require these ETH accounts.
-<a href=#171 id=171 data-nosnippet>171</a></span><span class="kw">pub fn </span>well_known_including_eth_accounts() -&gt; Vec&lt;AccountId&gt; {
-<a href=#172 id=172 data-nosnippet>172</a>	Sr25519Keyring::well_known()
-<a href=#173 id=173 data-nosnippet>173</a>		.map(|k| k.to_account_id())
-<a href=#174 id=174 data-nosnippet>174</a>		.chain([
-<a href=#175 id=175 data-nosnippet>175</a>			<span class="comment">// subxt_signer::eth::dev::alith()
-<a href=#176 id=176 data-nosnippet>176</a>			</span>array_bytes::hex_n_into_unchecked(
-<a href=#177 id=177 data-nosnippet>177</a>				<span class="string">"f24ff3a9cf04c71dbc94d0b566f7a27b94566caceeeeeeeeeeeeeeeeeeeeeeee"</span>,
-<a href=#178 id=178 data-nosnippet>178</a>			),
-<a href=#179 id=179 data-nosnippet>179</a>			<span class="comment">// subxt_signer::eth::dev::baltathar()
-<a href=#180 id=180 data-nosnippet>180</a>			</span>array_bytes::hex_n_into_unchecked(
-<a href=#181 id=181 data-nosnippet>181</a>				<span class="string">"3cd0a705a2dc65e5b1e1205896baa2be8a07c6e0eeeeeeeeeeeeeeeeeeeeeeee"</span>,
-<a href=#182 id=182 data-nosnippet>182</a>			),
-<a href=#183 id=183 data-nosnippet>183</a>		])
-<a href=#184 id=184 data-nosnippet>184</a>		.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;()
-<a href=#185 id=185 data-nosnippet>185</a>}
-<a href=#186 id=186 data-nosnippet>186</a>
-<a href=#187 id=187 data-nosnippet>187</a><span class="doccomment">/// Helper function to generate stash, controller and session key from seed.
-<a href=#188 id=188 data-nosnippet>188</a>///
-<a href=#189 id=189 data-nosnippet>189</a>/// Note: `//` is prepended internally.
-<a href=#190 id=190 data-nosnippet>190</a></span><span class="kw">pub fn </span>authority_keys_from_seed(seed: <span class="kw-2">&amp;</span>str) -&gt; (AccountId, AccountId, SessionKeys) {
-<a href=#191 id=191 data-nosnippet>191</a>	(
-<a href=#192 id=192 data-nosnippet>192</a>		get_public_from_string_or_panic::&lt;sr25519::Public&gt;(<span class="kw-2">&amp;</span><span class="macro">alloc::format!</span>(<span class="string">"{seed}//stash"</span>)).into(),
-<a href=#193 id=193 data-nosnippet>193</a>		get_public_from_string_or_panic::&lt;sr25519::Public&gt;(seed).into(),
-<a href=#194 id=194 data-nosnippet>194</a>		session_keys_from_seed(seed),
-<a href=#195 id=195 data-nosnippet>195</a>	)
-<a href=#196 id=196 data-nosnippet>196</a>}
-<a href=#197 id=197 data-nosnippet>197</a>
-<a href=#198 id=198 data-nosnippet>198</a><span class="kw">pub fn </span>session_keys(
-<a href=#199 id=199 data-nosnippet>199</a>	grandpa: GrandpaId,
-<a href=#200 id=200 data-nosnippet>200</a>	babe: BabeId,
-<a href=#201 id=201 data-nosnippet>201</a>	im_online: ImOnlineId,
-<a href=#202 id=202 data-nosnippet>202</a>	authority_discovery: AuthorityDiscoveryId,
-<a href=#203 id=203 data-nosnippet>203</a>	mixnet: MixnetId,
-<a href=#204 id=204 data-nosnippet>204</a>	beefy: BeefyId,
-<a href=#205 id=205 data-nosnippet>205</a>) -&gt; SessionKeys {
-<a href=#206 id=206 data-nosnippet>206</a>	SessionKeys { grandpa, babe, im_online, authority_discovery, mixnet, beefy }
-<a href=#207 id=207 data-nosnippet>207</a>}
-<a href=#208 id=208 data-nosnippet>208</a>
-<a href=#209 id=209 data-nosnippet>209</a><span class="doccomment">/// We have this method as there is no straight forward way to convert the
-<a href=#210 id=210 data-nosnippet>210</a>/// account keyring into these ids.
-<a href=#211 id=211 data-nosnippet>211</a>///
-<a href=#212 id=212 data-nosnippet>212</a>/// Note: `//` is prepended internally.
-<a href=#213 id=213 data-nosnippet>213</a></span><span class="kw">pub fn </span>session_keys_from_seed(seed: <span class="kw-2">&amp;</span>str) -&gt; SessionKeys {
-<a href=#214 id=214 data-nosnippet>214</a>	session_keys(
-<a href=#215 id=215 data-nosnippet>215</a>		get_public_from_string_or_panic::&lt;GrandpaId&gt;(seed),
-<a href=#216 id=216 data-nosnippet>216</a>		get_public_from_string_or_panic::&lt;BabeId&gt;(seed),
-<a href=#217 id=217 data-nosnippet>217</a>		get_public_from_string_or_panic::&lt;ImOnlineId&gt;(seed),
-<a href=#218 id=218 data-nosnippet>218</a>		get_public_from_string_or_panic::&lt;AuthorityDiscoveryId&gt;(seed),
-<a href=#219 id=219 data-nosnippet>219</a>		get_public_from_string_or_panic::&lt;MixnetId&gt;(seed),
-<a href=#220 id=220 data-nosnippet>220</a>		get_public_from_string_or_panic::&lt;BeefyId&gt;(seed),
-<a href=#221 id=221 data-nosnippet>221</a>	)
-<a href=#222 id=222 data-nosnippet>222</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#99 id=99 data-nosnippet>99</a>			mapped_accounts: <span class="kw">if </span>&lt;<span class="kw">crate</span>::Runtime <span class="kw">as </span>pallet_revive::Config&gt;::AutoMap::get() {
+<a href=#100 id=100 data-nosnippet>100</a>				<span class="macro">vec!</span>[]
+<a href=#101 id=101 data-nosnippet>101</a>			} <span class="kw">else </span>{
+<a href=#102 id=102 data-nosnippet>102</a>				endowed_accounts
+<a href=#103 id=103 data-nosnippet>103</a>					.iter()
+<a href=#104 id=104 data-nosnippet>104</a>					.filter(|x| {
+<a href=#105 id=105 data-nosnippet>105</a>						!&lt;<span class="kw">crate</span>::Runtime <span class="kw">as </span>pallet_revive::Config&gt;::AddressMapper::is_eth_derived(x)
+<a href=#106 id=106 data-nosnippet>106</a>					})
+<a href=#107 id=107 data-nosnippet>107</a>					.cloned()
+<a href=#108 id=108 data-nosnippet>108</a>					.collect()
+<a href=#109 id=109 data-nosnippet>109</a>			},
+<a href=#110 id=110 data-nosnippet>110</a>		},
+<a href=#111 id=111 data-nosnippet>111</a>	})
+<a href=#112 id=112 data-nosnippet>112</a>}
+<a href=#113 id=113 data-nosnippet>113</a>
+<a href=#114 id=114 data-nosnippet>114</a><span class="doccomment">/// Provides the JSON representation of predefined genesis config for given `id`.
+<a href=#115 id=115 data-nosnippet>115</a></span><span class="kw">pub fn </span>get_preset(id: <span class="kw-2">&amp;</span>PresetId) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt; {
+<a href=#116 id=116 data-nosnippet>116</a>	<span class="comment">// Note: Can't use `Sr25519Keyring::Alice.to_seed()` because the seed comes with `//`.
+<a href=#117 id=117 data-nosnippet>117</a>	</span><span class="kw">let </span>(alice_stash, alice, alice_session_keys) = authority_keys_from_seed(<span class="string">"Alice"</span>);
+<a href=#118 id=118 data-nosnippet>118</a>	<span class="kw">let </span>(bob_stash, _bob, bob_session_keys) = authority_keys_from_seed(<span class="string">"Bob"</span>);
+<a href=#119 id=119 data-nosnippet>119</a>
+<a href=#120 id=120 data-nosnippet>120</a>	<span class="kw">let </span>endowed = well_known_including_eth_accounts();
+<a href=#121 id=121 data-nosnippet>121</a>
+<a href=#122 id=122 data-nosnippet>122</a>	<span class="kw">let </span>patch = <span class="kw">match </span>id.as_ref() {
+<a href=#123 id=123 data-nosnippet>123</a>		sp_genesis_builder::DEV_RUNTIME_PRESET =&gt; kitchensink_genesis(
+<a href=#124 id=124 data-nosnippet>124</a>			<span class="comment">// Use stash as controller account, otherwise grandpa can't load the authority set at
+<a href=#125 id=125 data-nosnippet>125</a>			// genesis.
+<a href=#126 id=126 data-nosnippet>126</a>			</span><span class="macro">vec!</span>[(alice_stash.clone(), alice_stash.clone(), alice_session_keys)],
+<a href=#127 id=127 data-nosnippet>127</a>			alice.clone(),
+<a href=#128 id=128 data-nosnippet>128</a>			endowed,
+<a href=#129 id=129 data-nosnippet>129</a>			<span class="macro">vec!</span>[validator(alice_stash.clone())],
+<a href=#130 id=130 data-nosnippet>130</a>		),
+<a href=#131 id=131 data-nosnippet>131</a>		sp_genesis_builder::LOCAL_TESTNET_RUNTIME_PRESET =&gt; kitchensink_genesis(
+<a href=#132 id=132 data-nosnippet>132</a>			<span class="macro">vec!</span>[
+<a href=#133 id=133 data-nosnippet>133</a>				<span class="comment">// Use stash as controller account, otherwise grandpa can't load the authority set
+<a href=#134 id=134 data-nosnippet>134</a>				// at genesis.
+<a href=#135 id=135 data-nosnippet>135</a>				</span>(alice_stash.clone(), alice_stash.clone(), alice_session_keys),
+<a href=#136 id=136 data-nosnippet>136</a>				(bob_stash.clone(), bob_stash.clone(), bob_session_keys),
+<a href=#137 id=137 data-nosnippet>137</a>			],
+<a href=#138 id=138 data-nosnippet>138</a>			alice,
+<a href=#139 id=139 data-nosnippet>139</a>			endowed,
+<a href=#140 id=140 data-nosnippet>140</a>			<span class="macro">vec!</span>[validator(alice_stash), validator(bob_stash)],
+<a href=#141 id=141 data-nosnippet>141</a>		),
+<a href=#142 id=142 data-nosnippet>142</a>		<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
+<a href=#143 id=143 data-nosnippet>143</a>	};
+<a href=#144 id=144 data-nosnippet>144</a>
+<a href=#145 id=145 data-nosnippet>145</a>	<span class="prelude-val">Some</span>(
+<a href=#146 id=146 data-nosnippet>146</a>		serde_json::to_string(<span class="kw-2">&amp;</span>patch)
+<a href=#147 id=147 data-nosnippet>147</a>			.expect(<span class="string">"serialization to json is expected to work. qed."</span>)
+<a href=#148 id=148 data-nosnippet>148</a>			.into_bytes(),
+<a href=#149 id=149 data-nosnippet>149</a>	)
+<a href=#150 id=150 data-nosnippet>150</a>}
+<a href=#151 id=151 data-nosnippet>151</a>
+<a href=#152 id=152 data-nosnippet>152</a><span class="doccomment">/// List of supported presets.
+<a href=#153 id=153 data-nosnippet>153</a></span><span class="kw">pub fn </span>preset_names() -&gt; Vec&lt;PresetId&gt; {
+<a href=#154 id=154 data-nosnippet>154</a>	<span class="macro">vec!</span>[
+<a href=#155 id=155 data-nosnippet>155</a>		PresetId::from(sp_genesis_builder::DEV_RUNTIME_PRESET),
+<a href=#156 id=156 data-nosnippet>156</a>		PresetId::from(sp_genesis_builder::LOCAL_TESTNET_RUNTIME_PRESET),
+<a href=#157 id=157 data-nosnippet>157</a>	]
+<a href=#158 id=158 data-nosnippet>158</a>}
+<a href=#159 id=159 data-nosnippet>159</a>
+<a href=#160 id=160 data-nosnippet>160</a><span class="doccomment">/// Sets up the `account` to be a staker of validator variant as supplied to the
+<a href=#161 id=161 data-nosnippet>161</a>/// staking config.
+<a href=#162 id=162 data-nosnippet>162</a></span><span class="kw">pub fn </span>validator(account: AccountId) -&gt; Staker {
+<a href=#163 id=163 data-nosnippet>163</a>	<span class="comment">// validator, controller, stash, staker status
+<a href=#164 id=164 data-nosnippet>164</a>	</span>(account.clone(), account, STASH, StakerStatus::Validator)
+<a href=#165 id=165 data-nosnippet>165</a>}
+<a href=#166 id=166 data-nosnippet>166</a>
+<a href=#167 id=167 data-nosnippet>167</a><span class="doccomment">/// Extract some accounts from endowed to be put into the collective.
+<a href=#168 id=168 data-nosnippet>168</a></span><span class="kw">fn </span>collective(endowed: <span class="kw-2">&amp;</span>[AccountId]) -&gt; Vec&lt;AccountId&gt; {
+<a href=#169 id=169 data-nosnippet>169</a>	<span class="kw">const </span>MAX_COLLECTIVE_SIZE: usize = <span class="number">50</span>;
+<a href=#170 id=170 data-nosnippet>170</a>	<span class="kw">let </span>endowed_accounts_count = endowed.len();
+<a href=#171 id=171 data-nosnippet>171</a>	endowed
+<a href=#172 id=172 data-nosnippet>172</a>		.iter()
+<a href=#173 id=173 data-nosnippet>173</a>		.take((endowed_accounts_count.div_ceil(<span class="number">2</span>)).min(MAX_COLLECTIVE_SIZE))
+<a href=#174 id=174 data-nosnippet>174</a>		.cloned()
+<a href=#175 id=175 data-nosnippet>175</a>		.collect()
+<a href=#176 id=176 data-nosnippet>176</a>}
+<a href=#177 id=177 data-nosnippet>177</a>
+<a href=#178 id=178 data-nosnippet>178</a><span class="doccomment">/// The Keyring's wellknown accounts + Alith and Baltathar.
+<a href=#179 id=179 data-nosnippet>179</a>///
+<a href=#180 id=180 data-nosnippet>180</a>/// Some integration tests require these ETH accounts.
+<a href=#181 id=181 data-nosnippet>181</a></span><span class="kw">pub fn </span>well_known_including_eth_accounts() -&gt; Vec&lt;AccountId&gt; {
+<a href=#182 id=182 data-nosnippet>182</a>	Sr25519Keyring::well_known()
+<a href=#183 id=183 data-nosnippet>183</a>		.map(|k| k.to_account_id())
+<a href=#184 id=184 data-nosnippet>184</a>		.chain([
+<a href=#185 id=185 data-nosnippet>185</a>			<span class="comment">// subxt_signer::eth::dev::alith()
+<a href=#186 id=186 data-nosnippet>186</a>			</span>array_bytes::hex_n_into_unchecked(
+<a href=#187 id=187 data-nosnippet>187</a>				<span class="string">"f24ff3a9cf04c71dbc94d0b566f7a27b94566caceeeeeeeeeeeeeeeeeeeeeeee"</span>,
+<a href=#188 id=188 data-nosnippet>188</a>			),
+<a href=#189 id=189 data-nosnippet>189</a>			<span class="comment">// subxt_signer::eth::dev::baltathar()
+<a href=#190 id=190 data-nosnippet>190</a>			</span>array_bytes::hex_n_into_unchecked(
+<a href=#191 id=191 data-nosnippet>191</a>				<span class="string">"3cd0a705a2dc65e5b1e1205896baa2be8a07c6e0eeeeeeeeeeeeeeeeeeeeeeee"</span>,
+<a href=#192 id=192 data-nosnippet>192</a>			),
+<a href=#193 id=193 data-nosnippet>193</a>		])
+<a href=#194 id=194 data-nosnippet>194</a>		.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;()
+<a href=#195 id=195 data-nosnippet>195</a>}
+<a href=#196 id=196 data-nosnippet>196</a>
+<a href=#197 id=197 data-nosnippet>197</a><span class="doccomment">/// Helper function to generate stash, controller and session key from seed.
+<a href=#198 id=198 data-nosnippet>198</a>///
+<a href=#199 id=199 data-nosnippet>199</a>/// Note: `//` is prepended internally.
+<a href=#200 id=200 data-nosnippet>200</a></span><span class="kw">pub fn </span>authority_keys_from_seed(seed: <span class="kw-2">&amp;</span>str) -&gt; (AccountId, AccountId, SessionKeys) {
+<a href=#201 id=201 data-nosnippet>201</a>	(
+<a href=#202 id=202 data-nosnippet>202</a>		get_public_from_string_or_panic::&lt;sr25519::Public&gt;(<span class="kw-2">&amp;</span><span class="macro">alloc::format!</span>(<span class="string">"{seed}//stash"</span>)).into(),
+<a href=#203 id=203 data-nosnippet>203</a>		get_public_from_string_or_panic::&lt;sr25519::Public&gt;(seed).into(),
+<a href=#204 id=204 data-nosnippet>204</a>		session_keys_from_seed(seed),
+<a href=#205 id=205 data-nosnippet>205</a>	)
+<a href=#206 id=206 data-nosnippet>206</a>}
+<a href=#207 id=207 data-nosnippet>207</a>
+<a href=#208 id=208 data-nosnippet>208</a><span class="kw">pub fn </span>session_keys(
+<a href=#209 id=209 data-nosnippet>209</a>	grandpa: GrandpaId,
+<a href=#210 id=210 data-nosnippet>210</a>	babe: BabeId,
+<a href=#211 id=211 data-nosnippet>211</a>	im_online: ImOnlineId,
+<a href=#212 id=212 data-nosnippet>212</a>	authority_discovery: AuthorityDiscoveryId,
+<a href=#213 id=213 data-nosnippet>213</a>	mixnet: MixnetId,
+<a href=#214 id=214 data-nosnippet>214</a>	beefy: BeefyId,
+<a href=#215 id=215 data-nosnippet>215</a>) -&gt; SessionKeys {
+<a href=#216 id=216 data-nosnippet>216</a>	SessionKeys { grandpa, babe, im_online, authority_discovery, mixnet, beefy }
+<a href=#217 id=217 data-nosnippet>217</a>}
+<a href=#218 id=218 data-nosnippet>218</a>
+<a href=#219 id=219 data-nosnippet>219</a><span class="doccomment">/// We have this method as there is no straight forward way to convert the
+<a href=#220 id=220 data-nosnippet>220</a>/// account keyring into these ids.
+<a href=#221 id=221 data-nosnippet>221</a>///
+<a href=#222 id=222 data-nosnippet>222</a>/// Note: `//` is prepended internally.
+<a href=#223 id=223 data-nosnippet>223</a></span><span class="kw">pub fn </span>session_keys_from_seed(seed: <span class="kw-2">&amp;</span>str) -&gt; SessionKeys {
+<a href=#224 id=224 data-nosnippet>224</a>	session_keys(
+<a href=#225 id=225 data-nosnippet>225</a>		get_public_from_string_or_panic::&lt;GrandpaId&gt;(seed),
+<a href=#226 id=226 data-nosnippet>226</a>		get_public_from_string_or_panic::&lt;BabeId&gt;(seed),
+<a href=#227 id=227 data-nosnippet>227</a>		get_public_from_string_or_panic::&lt;ImOnlineId&gt;(seed),
+<a href=#228 id=228 data-nosnippet>228</a>		get_public_from_string_or_panic::&lt;AuthorityDiscoveryId&gt;(seed),
+<a href=#229 id=229 data-nosnippet>229</a>		get_public_from_string_or_panic::&lt;MixnetId&gt;(seed),
+<a href=#230 id=230 data-nosnippet>230</a>		get_public_from_string_or_panic::&lt;BeefyId&gt;(seed),
+<a href=#231 id=231 data-nosnippet>231</a>	)
+<a href=#232 id=232 data-nosnippet>232</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

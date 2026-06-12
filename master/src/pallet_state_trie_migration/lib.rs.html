@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/state-trie-migration/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/state-trie-migration/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_state_trie_migration" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_state_trie_migration" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_state_trie_migration/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_state_trie_migration/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-4"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -168,7 +168,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#18 id=18 data-nosnippet>18</a></span><span class="doccomment">//! # Pallet State Trie Migration
 <a href=#19 id=19 data-nosnippet>19</a>//!
 <a href=#20 id=20 data-nosnippet>20</a>//! Reads and writes all keys and values in the entire state in a systematic way. This is useful for
-<a href=#21 id=21 data-nosnippet>21</a>//! upgrading a chain to [`sp-core::StateVersion::V1`], where all keys need to be touched.
+<a href=#21 id=21 data-nosnippet>21</a>//! upgrading a chain to `sp_core::StateVersion::V1`, where all keys need to be touched.
 <a href=#22 id=22 data-nosnippet>22</a>//!
 <a href=#23 id=23 data-nosnippet>23</a>//! ## Migration Types
 <a href=#24 id=24 data-nosnippet>24</a>//!
@@ -215,8 +215,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#65 id=65 data-nosnippet>65</a><span class="attr">#[macro_export]
 <a href=#66 id=66 data-nosnippet>66</a></span><span class="macro">macro_rules!</span> log {
 <a href=#67 id=67 data-nosnippet>67</a>	(<span class="macro-nonterminal">$level</span>:tt, <span class="macro-nonterminal">$patter</span>:expr $(, <span class="macro-nonterminal">$values</span>:expr)* $(,)<span class="question-mark">?</span>) =&gt; {
-<a href=#68 id=68 data-nosnippet>68</a>		log::<span class="macro-nonterminal">$</span><span class="macro">level!</span>(
-<a href=#69 id=69 data-nosnippet>69</a>			<span class="macro-nonterminal">target</span>: <span class="kw">crate</span>::LOG_TARGET,
+<a href=#68 id=68 data-nosnippet>68</a>		log::<span class="macro-nonterminal">$level</span>!(
+<a href=#69 id=69 data-nosnippet>69</a>			target: <span class="kw">crate</span>::LOG_TARGET,
 <a href=#70 id=70 data-nosnippet>70</a>			<span class="macro">concat!</span>(<span class="string">"[{:?}] 🤖 "</span>, <span class="macro-nonterminal">$patter</span>), frame_system::Pallet::&lt;T&gt;::block_number() $(, <span class="macro-nonterminal">$values</span>)*
 <a href=#71 id=71 data-nosnippet>71</a>		)
 <a href=#72 id=72 data-nosnippet>72</a>	};
@@ -227,7 +227,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#77 id=77 data-nosnippet>77</a>
 <a href=#78 id=78 data-nosnippet>78</a>	<span class="kw">pub use </span><span class="kw">crate</span>::weights::WeightInfo;
 <a href=#79 id=79 data-nosnippet>79</a>
-<a href=#80 id=80 data-nosnippet>80</a>	<span class="kw">use </span>alloc::{vec, vec::Vec};
+<a href=#80 id=80 data-nosnippet>80</a>	<span class="kw">use </span>alloc::vec::Vec;
 <a href=#81 id=81 data-nosnippet>81</a>	<span class="kw">use </span>core::ops::Deref;
 <a href=#82 id=82 data-nosnippet>82</a>	<span class="kw">use </span>frame_support::{
 <a href=#83 id=83 data-nosnippet>83</a>		dispatch::{DispatchErrorWithPostInfo, PostDispatchInfo},
@@ -691,7 +691,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#541 id=541 data-nosnippet>541</a>		/// - [`frame_support::storage::StorageDoubleMap`]: 96 byte
 <a href=#542 id=542 data-nosnippet>542</a>		///
 <a href=#543 id=543 data-nosnippet>543</a>		/// For more info see
-<a href=#544 id=544 data-nosnippet>544</a>		/// &lt;https://www.shawntabrizi.com/blog/substrate/querying-substrate-storage-via-rpc/&gt;
+<a href=#544 id=544 data-nosnippet>544</a>		/// &lt;https://www.shawntabrizi.com/blog/interacting-with-the-substrate-rpc-endpoint/&gt;
 <a href=#545 id=545 data-nosnippet>545</a>
 <a href=#546 id=546 data-nosnippet>546</a>		</span><span class="attr">#[pallet::constant]
 <a href=#547 id=547 data-nosnippet>547</a>		#[pallet::no_default]
@@ -957,7 +957,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#807 id=807 data-nosnippet>807</a>				}
 <a href=#808 id=808 data-nosnippet>808</a>			}
 <a href=#809 id=809 data-nosnippet>809</a>
-<a href=#810 id=810 data-nosnippet>810</a>			<span class="kw">if </span>dyn_size != total_size {
+<a href=#810 id=810 data-nosnippet>810</a>			<span class="kw">if </span><span class="macro">dyn_size !</span>= total_size {
 <a href=#811 id=811 data-nosnippet>811</a>				<span class="self">Self</span>::slash(who, deposit)<span class="question-mark">?</span>;
 <a href=#812 id=812 data-nosnippet>812</a>				<span class="prelude-val">Ok</span>(PostDispatchInfo {
 <a href=#813 id=813 data-nosnippet>813</a>					actual_weight: <span class="prelude-val">Some</span>(T::WeightInfo::migrate_custom_child_fail()),
@@ -2027,23 +2027,28 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#1877 id=1877 data-nosnippet>1877</a>		sp_tracing::try_init_simple();
 <a href=#1878 id=1878 data-nosnippet>1878</a>		<span class="kw">let </span>mode = Mode::OfflineOrElseOnline(
 <a href=#1879 id=1879 data-nosnippet>1879</a>			OfflineConfig { state_snapshot: snap.clone() },
-<a href=#1880 id=1880 data-nosnippet>1880</a>			OnlineConfig { transport: ws_api, state_snapshot: <span class="prelude-val">Some</span>(snap), ..Default::default() },
-<a href=#1881 id=1881 data-nosnippet>1881</a>		);
-<a href=#1882 id=1882 data-nosnippet>1882</a>
-<a href=#1883 id=1883 data-nosnippet>1883</a>		<span class="comment">// item being the bottleneck
-<a href=#1884 id=1884 data-nosnippet>1884</a>		</span>run_with_limits::&lt;Test, Block&gt;(
-<a href=#1885 id=1885 data-nosnippet>1885</a>			MigrationLimits { item: <span class="number">8 </span>* <span class="number">1024</span>, size: <span class="number">128 </span>* <span class="number">1024 </span>* <span class="number">1024 </span>},
-<a href=#1886 id=1886 data-nosnippet>1886</a>			mode.clone(),
-<a href=#1887 id=1887 data-nosnippet>1887</a>		)
-<a href=#1888 id=1888 data-nosnippet>1888</a>		.<span class="kw">await</span>;
-<a href=#1889 id=1889 data-nosnippet>1889</a>		<span class="comment">// size being the bottleneck
-<a href=#1890 id=1890 data-nosnippet>1890</a>		</span>run_with_limits::&lt;Test, Block&gt;(
-<a href=#1891 id=1891 data-nosnippet>1891</a>			MigrationLimits { item: Bounded::max_value(), size: <span class="number">64 </span>* <span class="number">1024 </span>},
-<a href=#1892 id=1892 data-nosnippet>1892</a>			mode,
-<a href=#1893 id=1893 data-nosnippet>1893</a>		)
-<a href=#1894 id=1894 data-nosnippet>1894</a>		.<span class="kw">await</span>;
-<a href=#1895 id=1895 data-nosnippet>1895</a>	}
-<a href=#1896 id=1896 data-nosnippet>1896</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#1880 id=1880 data-nosnippet>1880</a>			OnlineConfig {
+<a href=#1881 id=1881 data-nosnippet>1881</a>				transport_uris: <span class="macro">vec!</span>[ws_api],
+<a href=#1882 id=1882 data-nosnippet>1882</a>				state_snapshot: <span class="prelude-val">Some</span>(snap),
+<a href=#1883 id=1883 data-nosnippet>1883</a>				..Default::default()
+<a href=#1884 id=1884 data-nosnippet>1884</a>			},
+<a href=#1885 id=1885 data-nosnippet>1885</a>		);
+<a href=#1886 id=1886 data-nosnippet>1886</a>
+<a href=#1887 id=1887 data-nosnippet>1887</a>		<span class="comment">// item being the bottleneck
+<a href=#1888 id=1888 data-nosnippet>1888</a>		</span>run_with_limits::&lt;Test, Block&gt;(
+<a href=#1889 id=1889 data-nosnippet>1889</a>			MigrationLimits { item: <span class="number">8 </span>* <span class="number">1024</span>, size: <span class="number">128 </span>* <span class="number">1024 </span>* <span class="number">1024 </span>},
+<a href=#1890 id=1890 data-nosnippet>1890</a>			mode.clone(),
+<a href=#1891 id=1891 data-nosnippet>1891</a>		)
+<a href=#1892 id=1892 data-nosnippet>1892</a>		.<span class="kw">await</span>;
+<a href=#1893 id=1893 data-nosnippet>1893</a>		<span class="comment">// size being the bottleneck
+<a href=#1894 id=1894 data-nosnippet>1894</a>		</span>run_with_limits::&lt;Test, Block&gt;(
+<a href=#1895 id=1895 data-nosnippet>1895</a>			MigrationLimits { item: Bounded::max_value(), size: <span class="number">64 </span>* <span class="number">1024 </span>},
+<a href=#1896 id=1896 data-nosnippet>1896</a>			mode,
+<a href=#1897 id=1897 data-nosnippet>1897</a>		)
+<a href=#1898 id=1898 data-nosnippet>1898</a>		.<span class="kw">await</span>;
+<a href=#1899 id=1899 data-nosnippet>1899</a>	}
+<a href=#1900 id=1900 data-nosnippet>1900</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

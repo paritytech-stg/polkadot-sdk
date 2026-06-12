@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["migration","pallet"],"struct":["AllowedRelayParentsTracker","RelayParentInfo"]};
+window.SIDEBAR_ITEMS = {"mod":["migration","pallet"],"struct":["AllowedSchedulingParentsTracker","SchedulingParentInfo"]};

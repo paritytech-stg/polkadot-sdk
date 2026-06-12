@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":["converter","message","traits"]};
+window.SIDEBAR_ITEMS = {"mod":["converter","message","processor","traits"]};

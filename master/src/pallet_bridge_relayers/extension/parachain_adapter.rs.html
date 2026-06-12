@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/modules/relayers/src/extension/parachain_adapter.rs`."><title>parachain_adapter.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `bridges/modules/relayers/src/extension/parachain_adapter.rs`."><title>parachain_adapter.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="pallet_bridge_relayers" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../../static.files/storage-4e99c027.js"></script><script defer src="../../../static.files/src-script-63605ae7.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="pallet_bridge_relayers" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../../static.files/storage-e2aeef58.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../../theme.css"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_bridge_relayers/extension/</div>parachain_adapter.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_bridge_relayers/extension/</div>parachain_adapter.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Parity Bridges Common.
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a>// Parity Bridges Common is free software: you can redistribute it and/or modify
@@ -272,70 +272,73 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../../" d
 <a href=#122 id=122 data-nosnippet>122</a>		<span class="kw">let </span>relay_finality_call =
 <a href=#123 id=123 data-nosnippet>123</a>			calls.next().transpose()<span class="question-mark">?</span>.and_then(|c| c.submit_finality_proof_info());
 <a href=#124 id=124 data-nosnippet>124</a>		<span class="prelude-val">Ok</span>(<span class="kw">match </span>(total_calls, relay_finality_call, para_finality_call, msgs_call) {
-<a href=#125 id=125 data-nosnippet>125</a>			(<span class="number">3</span>, <span class="prelude-val">Some</span>(relay_finality_call), <span class="prelude-val">Some</span>(para_finality_call), <span class="prelude-val">Some</span>(msgs_call)) =&gt;
+<a href=#125 id=125 data-nosnippet>125</a>			(<span class="number">3</span>, <span class="prelude-val">Some</span>(relay_finality_call), <span class="prelude-val">Some</span>(para_finality_call), <span class="prelude-val">Some</span>(msgs_call)) =&gt; {
 <a href=#126 id=126 data-nosnippet>126</a>				<span class="prelude-val">Some</span>(ExtensionCallInfo::AllFinalityAndMsgs(
 <a href=#127 id=127 data-nosnippet>127</a>					relay_finality_call,
 <a href=#128 id=128 data-nosnippet>128</a>					para_finality_call,
 <a href=#129 id=129 data-nosnippet>129</a>					msgs_call,
-<a href=#130 id=130 data-nosnippet>130</a>				)),
-<a href=#131 id=131 data-nosnippet>131</a>			(<span class="number">2</span>, <span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(para_finality_call), <span class="prelude-val">Some</span>(msgs_call)) =&gt;
-<a href=#132 id=132 data-nosnippet>132</a>				<span class="prelude-val">Some</span>(ExtensionCallInfo::ParachainFinalityAndMsgs(para_finality_call, msgs_call)),
-<a href=#133 id=133 data-nosnippet>133</a>			(<span class="number">1</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(msgs_call)) =&gt; <span class="prelude-val">Some</span>(ExtensionCallInfo::Msgs(msgs_call)),
-<a href=#134 id=134 data-nosnippet>134</a>			<span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
-<a href=#135 id=135 data-nosnippet>135</a>		})
-<a href=#136 id=136 data-nosnippet>136</a>	}
-<a href=#137 id=137 data-nosnippet>137</a>
-<a href=#138 id=138 data-nosnippet>138</a>	<span class="kw">fn </span>check_obsolete_parsed_call(
-<a href=#139 id=139 data-nosnippet>139</a>		call: <span class="kw-2">&amp;</span>R::RuntimeCall,
-<a href=#140 id=140 data-nosnippet>140</a>	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span>R::RuntimeCall, TransactionValidityError&gt; {
-<a href=#141 id=141 data-nosnippet>141</a>		call.check_obsolete_submit_finality_proof()<span class="question-mark">?</span>;
-<a href=#142 id=142 data-nosnippet>142</a>		call.check_obsolete_submit_parachain_heads()<span class="question-mark">?</span>;
-<a href=#143 id=143 data-nosnippet>143</a>		call.check_obsolete_call()<span class="question-mark">?</span>;
-<a href=#144 id=144 data-nosnippet>144</a>		<span class="prelude-val">Ok</span>(call)
-<a href=#145 id=145 data-nosnippet>145</a>	}
-<a href=#146 id=146 data-nosnippet>146</a>
-<a href=#147 id=147 data-nosnippet>147</a>	<span class="kw">fn </span>check_call_result(
-<a href=#148 id=148 data-nosnippet>148</a>		call_info: <span class="kw-2">&amp;</span>ExtensionCallInfo&lt;<span class="self">Self</span>::RemoteGrandpaChainBlockNumber, <span class="self">Self</span>::LaneId&gt;,
-<a href=#149 id=149 data-nosnippet>149</a>		call_data: <span class="kw-2">&amp;mut </span>ExtensionCallData,
-<a href=#150 id=150 data-nosnippet>150</a>		relayer: <span class="kw-2">&amp;</span>R::AccountId,
-<a href=#151 id=151 data-nosnippet>151</a>	) -&gt; bool {
-<a href=#152 id=152 data-nosnippet>152</a>		verify_submit_finality_proof_succeeded::&lt;<span class="self">Self</span>, R::BridgesGrandpaPalletInstance&gt;(
-<a href=#153 id=153 data-nosnippet>153</a>			call_info, call_data, relayer,
-<a href=#154 id=154 data-nosnippet>154</a>		) &amp;&amp; verify_submit_parachain_head_succeeded::&lt;<span class="self">Self</span>, PI&gt;(call_info, call_data, relayer) &amp;&amp;
-<a href=#155 id=155 data-nosnippet>155</a>			verify_messages_call_succeeded::&lt;<span class="self">Self</span>&gt;(call_info, call_data, relayer)
-<a href=#156 id=156 data-nosnippet>156</a>	}
-<a href=#157 id=157 data-nosnippet>157</a>}
-<a href=#158 id=158 data-nosnippet>158</a>
-<a href=#159 id=159 data-nosnippet>159</a><span class="doccomment">/// If the batch call contains the parachain state update call, verify that it
-<a href=#160 id=160 data-nosnippet>160</a>/// has been successful.
-<a href=#161 id=161 data-nosnippet>161</a>///
-<a href=#162 id=162 data-nosnippet>162</a>/// Only returns false when parachain state update call has failed.
-<a href=#163 id=163 data-nosnippet>163</a></span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>verify_submit_parachain_head_succeeded&lt;C, PI&gt;(
-<a href=#164 id=164 data-nosnippet>164</a>	call_info: <span class="kw-2">&amp;</span>ExtensionCallInfo&lt;C::RemoteGrandpaChainBlockNumber, C::LaneId&gt;,
-<a href=#165 id=165 data-nosnippet>165</a>	_call_data: <span class="kw-2">&amp;mut </span>ExtensionCallData,
-<a href=#166 id=166 data-nosnippet>166</a>	relayer: <span class="kw-2">&amp;</span>&lt;C::Runtime <span class="kw">as </span>SystemConfig&gt;::AccountId,
-<a href=#167 id=167 data-nosnippet>167</a>) -&gt; bool
-<a href=#168 id=168 data-nosnippet>168</a><span class="kw">where
-<a href=#169 id=169 data-nosnippet>169</a>	</span>C: ExtensionConfig,
-<a href=#170 id=170 data-nosnippet>170</a>	PI: <span class="lifetime">'static</span>,
-<a href=#171 id=171 data-nosnippet>171</a>	C::Runtime: BridgeParachainsConfig&lt;PI&gt;,
-<a href=#172 id=172 data-nosnippet>172</a>{
-<a href=#173 id=173 data-nosnippet>173</a>	<span class="kw">let </span><span class="prelude-val">Some</span>(para_proof_info) = call_info.submit_parachain_heads_info() <span class="kw">else </span>{ <span class="kw">return </span><span class="bool-val">true </span>};
-<a href=#174 id=174 data-nosnippet>174</a>
-<a href=#175 id=175 data-nosnippet>175</a>	<span class="kw">if </span>!SubmitParachainHeadsHelper::&lt;C::Runtime, PI&gt;::was_successful(para_proof_info) {
-<a href=#176 id=176 data-nosnippet>176</a>		<span class="comment">// we only refund relayer if all calls have updated chain state
-<a href=#177 id=177 data-nosnippet>177</a>		</span><span class="macro">tracing::trace!</span>(
-<a href=#178 id=178 data-nosnippet>178</a>			target: LOG_TARGET,
-<a href=#179 id=179 data-nosnippet>179</a>			id_provider=%C::IdProvider::STR,
-<a href=#180 id=180 data-nosnippet>180</a>			lane_id=<span class="question-mark">?</span>call_info.messages_call_info().lane_id(),
-<a href=#181 id=181 data-nosnippet>181</a>			<span class="question-mark">?</span>relayer,
-<a href=#182 id=182 data-nosnippet>182</a>			<span class="string">"Relayer has submitted invalid parachain finality proof"
-<a href=#183 id=183 data-nosnippet>183</a>		</span>);
-<a href=#184 id=184 data-nosnippet>184</a>		<span class="kw">return </span><span class="bool-val">false
-<a href=#185 id=185 data-nosnippet>185</a>	</span>}
-<a href=#186 id=186 data-nosnippet>186</a>
-<a href=#187 id=187 data-nosnippet>187</a>	<span class="bool-val">true
-<a href=#188 id=188 data-nosnippet>188</a></span>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#130 id=130 data-nosnippet>130</a>				))
+<a href=#131 id=131 data-nosnippet>131</a>			},
+<a href=#132 id=132 data-nosnippet>132</a>			(<span class="number">2</span>, <span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(para_finality_call), <span class="prelude-val">Some</span>(msgs_call)) =&gt; {
+<a href=#133 id=133 data-nosnippet>133</a>				<span class="prelude-val">Some</span>(ExtensionCallInfo::ParachainFinalityAndMsgs(para_finality_call, msgs_call))
+<a href=#134 id=134 data-nosnippet>134</a>			},
+<a href=#135 id=135 data-nosnippet>135</a>			(<span class="number">1</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(msgs_call)) =&gt; <span class="prelude-val">Some</span>(ExtensionCallInfo::Msgs(msgs_call)),
+<a href=#136 id=136 data-nosnippet>136</a>			<span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
+<a href=#137 id=137 data-nosnippet>137</a>		})
+<a href=#138 id=138 data-nosnippet>138</a>	}
+<a href=#139 id=139 data-nosnippet>139</a>
+<a href=#140 id=140 data-nosnippet>140</a>	<span class="kw">fn </span>check_obsolete_parsed_call(
+<a href=#141 id=141 data-nosnippet>141</a>		call: <span class="kw-2">&amp;</span>R::RuntimeCall,
+<a href=#142 id=142 data-nosnippet>142</a>	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span>R::RuntimeCall, TransactionValidityError&gt; {
+<a href=#143 id=143 data-nosnippet>143</a>		call.check_obsolete_submit_finality_proof()<span class="question-mark">?</span>;
+<a href=#144 id=144 data-nosnippet>144</a>		call.check_obsolete_submit_parachain_heads()<span class="question-mark">?</span>;
+<a href=#145 id=145 data-nosnippet>145</a>		call.check_obsolete_call()<span class="question-mark">?</span>;
+<a href=#146 id=146 data-nosnippet>146</a>		<span class="prelude-val">Ok</span>(call)
+<a href=#147 id=147 data-nosnippet>147</a>	}
+<a href=#148 id=148 data-nosnippet>148</a>
+<a href=#149 id=149 data-nosnippet>149</a>	<span class="kw">fn </span>check_call_result(
+<a href=#150 id=150 data-nosnippet>150</a>		call_info: <span class="kw-2">&amp;</span>ExtensionCallInfo&lt;<span class="self">Self</span>::RemoteGrandpaChainBlockNumber, <span class="self">Self</span>::LaneId&gt;,
+<a href=#151 id=151 data-nosnippet>151</a>		call_data: <span class="kw-2">&amp;mut </span>ExtensionCallData,
+<a href=#152 id=152 data-nosnippet>152</a>		relayer: <span class="kw-2">&amp;</span>R::AccountId,
+<a href=#153 id=153 data-nosnippet>153</a>	) -&gt; bool {
+<a href=#154 id=154 data-nosnippet>154</a>		verify_submit_finality_proof_succeeded::&lt;<span class="self">Self</span>, R::BridgesGrandpaPalletInstance&gt;(
+<a href=#155 id=155 data-nosnippet>155</a>			call_info, call_data, relayer,
+<a href=#156 id=156 data-nosnippet>156</a>		) &amp;&amp; verify_submit_parachain_head_succeeded::&lt;<span class="self">Self</span>, PI&gt;(call_info, call_data, relayer) &amp;&amp;
+<a href=#157 id=157 data-nosnippet>157</a>			verify_messages_call_succeeded::&lt;<span class="self">Self</span>&gt;(call_info, call_data, relayer)
+<a href=#158 id=158 data-nosnippet>158</a>	}
+<a href=#159 id=159 data-nosnippet>159</a>}
+<a href=#160 id=160 data-nosnippet>160</a>
+<a href=#161 id=161 data-nosnippet>161</a><span class="doccomment">/// If the batch call contains the parachain state update call, verify that it
+<a href=#162 id=162 data-nosnippet>162</a>/// has been successful.
+<a href=#163 id=163 data-nosnippet>163</a>///
+<a href=#164 id=164 data-nosnippet>164</a>/// Only returns false when parachain state update call has failed.
+<a href=#165 id=165 data-nosnippet>165</a></span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>verify_submit_parachain_head_succeeded&lt;C, PI&gt;(
+<a href=#166 id=166 data-nosnippet>166</a>	call_info: <span class="kw-2">&amp;</span>ExtensionCallInfo&lt;C::RemoteGrandpaChainBlockNumber, C::LaneId&gt;,
+<a href=#167 id=167 data-nosnippet>167</a>	_call_data: <span class="kw-2">&amp;mut </span>ExtensionCallData,
+<a href=#168 id=168 data-nosnippet>168</a>	relayer: <span class="kw-2">&amp;</span>&lt;C::Runtime <span class="kw">as </span>SystemConfig&gt;::AccountId,
+<a href=#169 id=169 data-nosnippet>169</a>) -&gt; bool
+<a href=#170 id=170 data-nosnippet>170</a><span class="kw">where
+<a href=#171 id=171 data-nosnippet>171</a>	</span>C: ExtensionConfig,
+<a href=#172 id=172 data-nosnippet>172</a>	PI: <span class="lifetime">'static</span>,
+<a href=#173 id=173 data-nosnippet>173</a>	C::Runtime: BridgeParachainsConfig&lt;PI&gt;,
+<a href=#174 id=174 data-nosnippet>174</a>{
+<a href=#175 id=175 data-nosnippet>175</a>	<span class="kw">let </span><span class="prelude-val">Some</span>(para_proof_info) = call_info.submit_parachain_heads_info() <span class="kw">else </span>{ <span class="kw">return </span><span class="bool-val">true </span>};
+<a href=#176 id=176 data-nosnippet>176</a>
+<a href=#177 id=177 data-nosnippet>177</a>	<span class="kw">if </span>!SubmitParachainHeadsHelper::&lt;C::Runtime, PI&gt;::was_successful(para_proof_info) {
+<a href=#178 id=178 data-nosnippet>178</a>		<span class="comment">// we only refund relayer if all calls have updated chain state
+<a href=#179 id=179 data-nosnippet>179</a>		</span><span class="macro">tracing::trace!</span>(
+<a href=#180 id=180 data-nosnippet>180</a>			target: LOG_TARGET,
+<a href=#181 id=181 data-nosnippet>181</a>			id_provider=%C::IdProvider::STR,
+<a href=#182 id=182 data-nosnippet>182</a>			lane_id=<span class="question-mark">?</span>call_info.messages_call_info().lane_id(),
+<a href=#183 id=183 data-nosnippet>183</a>			<span class="question-mark">?</span>relayer,
+<a href=#184 id=184 data-nosnippet>184</a>			<span class="string">"Relayer has submitted invalid parachain finality proof"
+<a href=#185 id=185 data-nosnippet>185</a>		</span>);
+<a href=#186 id=186 data-nosnippet>186</a>		<span class="kw">return </span><span class="bool-val">false</span>;
+<a href=#187 id=187 data-nosnippet>187</a>	}
+<a href=#188 id=188 data-nosnippet>188</a>
+<a href=#189 id=189 data-nosnippet>189</a>	<span class="bool-val">true
+<a href=#190 id=190 data-nosnippet>190</a></span>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

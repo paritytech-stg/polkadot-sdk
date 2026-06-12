@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/lottery/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `substrate/frame/lottery/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_lottery" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="pallet_lottery" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_lottery/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">pallet_lottery/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// This file is part of Substrate.
 <a href=#2 id=2 data-nosnippet>2</a>
 <a href=#3 id=3 data-nosnippet>3</a>// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#4 id=4 data-nosnippet>4</a>// SPDX-License-Identifier: Apache-2.0
@@ -417,11 +417,11 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#267 id=267 data-nosnippet>267</a>							</span>LotteryIndex::&lt;T&gt;::mutate(|index| <span class="kw-2">*</span>index = index.saturating_add(<span class="number">1</span>));
 <a href=#268 id=268 data-nosnippet>268</a>							<span class="comment">// Set a new start with the current block.
 <a href=#269 id=269 data-nosnippet>269</a>							</span>config.start = n;
-<a href=#270 id=270 data-nosnippet>270</a>							<span class="kw">return </span>T::WeightInfo::on_initialize_repeat()
+<a href=#270 id=270 data-nosnippet>270</a>							<span class="kw">return </span>T::WeightInfo::on_initialize_repeat();
 <a href=#271 id=271 data-nosnippet>271</a>						} <span class="kw">else </span>{
 <a href=#272 id=272 data-nosnippet>272</a>							<span class="comment">// Else, kill the lottery storage.
 <a href=#273 id=273 data-nosnippet>273</a>							</span><span class="kw-2">*</span>lottery = <span class="prelude-val">None</span>;
-<a href=#274 id=274 data-nosnippet>274</a>							<span class="kw">return </span>T::WeightInfo::on_initialize_end()
+<a href=#274 id=274 data-nosnippet>274</a>							<span class="kw">return </span>T::WeightInfo::on_initialize_end();
 <a href=#275 id=275 data-nosnippet>275</a>						}
 <a href=#276 id=276 data-nosnippet>276</a>						<span class="comment">// We choose not need to kill Participants and Tickets to avoid a large
 <a href=#277 id=277 data-nosnippet>277</a>						// number of writes at one time. Instead, data persists between lotteries,
@@ -579,7 +579,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#429 id=429 data-nosnippet>429</a>	</span><span class="kw">fn </span>call_to_index(call: <span class="kw-2">&amp;</span>&lt;T <span class="kw">as </span>Config&gt;::RuntimeCall) -&gt; <span class="prelude-ty">Result</span>&lt;CallIndex, DispatchError&gt; {
 <a href=#430 id=430 data-nosnippet>430</a>		<span class="kw">let </span>encoded_call = call.encode();
 <a href=#431 id=431 data-nosnippet>431</a>		<span class="kw">if </span>encoded_call.len() &lt; <span class="number">2 </span>{
-<a href=#432 id=432 data-nosnippet>432</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::EncodingFailed.into())
+<a href=#432 id=432 data-nosnippet>432</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::&lt;T&gt;::EncodingFailed.into());
 <a href=#433 id=433 data-nosnippet>433</a>		}
 <a href=#434 id=434 data-nosnippet>434</a>		<span class="prelude-val">Ok</span>((encoded_call[<span class="number">0</span>], encoded_call[<span class="number">1</span>]))
 <a href=#435 id=435 data-nosnippet>435</a>	}
@@ -603,7 +603,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#453 id=453 data-nosnippet>453</a>			|(lottery_index, participating_calls)| -&gt; DispatchResult {
 <a href=#454 id=454 data-nosnippet>454</a>				<span class="kw">let </span>index = LotteryIndex::&lt;T&gt;::get();
 <a href=#455 id=455 data-nosnippet>455</a>				<span class="comment">// If lottery index doesn't match, then reset participating calls and index.
-<a href=#456 id=456 data-nosnippet>456</a>				</span><span class="kw">if </span><span class="kw-2">*</span>lottery_index != index {
+<a href=#456 id=456 data-nosnippet>456</a>				</span><span class="kw">if </span><span class="kw-2">*</span><span class="macro">lottery_index !</span>= index {
 <a href=#457 id=457 data-nosnippet>457</a>					<span class="kw-2">*</span>participating_calls = Default::default();
 <a href=#458 id=458 data-nosnippet>458</a>					<span class="kw-2">*</span>lottery_index = index;
 <a href=#459 id=459 data-nosnippet>459</a>				} <span class="kw">else </span>{
@@ -642,15 +642,15 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#492 id=492 data-nosnippet>492</a>	/// Returns `None` if there are no tickets.
 <a href=#493 id=493 data-nosnippet>493</a>	</span><span class="kw">fn </span>choose_ticket(total: u32) -&gt; <span class="prelude-ty">Option</span>&lt;u32&gt; {
 <a href=#494 id=494 data-nosnippet>494</a>		<span class="kw">if </span>total == <span class="number">0 </span>{
-<a href=#495 id=495 data-nosnippet>495</a>			<span class="kw">return </span><span class="prelude-val">None
-<a href=#496 id=496 data-nosnippet>496</a>		</span>}
+<a href=#495 id=495 data-nosnippet>495</a>			<span class="kw">return </span><span class="prelude-val">None</span>;
+<a href=#496 id=496 data-nosnippet>496</a>		}
 <a href=#497 id=497 data-nosnippet>497</a>		<span class="kw">let </span><span class="kw-2">mut </span>random_number = <span class="self">Self</span>::generate_random_number(<span class="number">0</span>);
 <a href=#498 id=498 data-nosnippet>498</a>
 <a href=#499 id=499 data-nosnippet>499</a>		<span class="comment">// Best effort attempt to remove bias from modulus operator.
 <a href=#500 id=500 data-nosnippet>500</a>		</span><span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..T::MaxGenerateRandom::get() {
 <a href=#501 id=501 data-nosnippet>501</a>			<span class="kw">if </span>random_number &lt; u32::MAX - u32::MAX % total {
-<a href=#502 id=502 data-nosnippet>502</a>				<span class="kw">break
-<a href=#503 id=503 data-nosnippet>503</a>			</span>}
+<a href=#502 id=502 data-nosnippet>502</a>				<span class="kw">break</span>;
+<a href=#503 id=503 data-nosnippet>503</a>			}
 <a href=#504 id=504 data-nosnippet>504</a>
 <a href=#505 id=505 data-nosnippet>505</a>			random_number = <span class="self">Self</span>::generate_random_number(i);
 <a href=#506 id=506 data-nosnippet>506</a>		}
@@ -670,7 +670,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#520 id=520 data-nosnippet>520</a>			.expect(<span class="string">"secure hashes should always be bigger than u32; qed"</span>);
 <a href=#521 id=521 data-nosnippet>521</a>		random_number
 <a href=#522 id=522 data-nosnippet>522</a>	}
-<a href=#523 id=523 data-nosnippet>523</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#523 id=523 data-nosnippet>523</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

@@ -1,1 +1,0 @@
-searchState.loadedDescShard("people_westend_integration_tests", 0, "")

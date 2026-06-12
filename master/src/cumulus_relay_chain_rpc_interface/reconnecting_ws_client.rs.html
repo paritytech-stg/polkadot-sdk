@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `cumulus/client/relay-chain-rpc-interface/src/reconnecting_ws_client.rs`."><title>reconnecting_ws_client.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><script id="default-settings" 
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `cumulus/client/relay-chain-rpc-interface/src/reconnecting_ws_client.rs`."><title>reconnecting_ws_client.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><script id="default-settings" 
 data-use_system_theme="false"
-data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cumulus_relay_chain_rpc_interface" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
+data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="cumulus_relay_chain_rpc_interface" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="stylesheet" href="../../theme.css"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"><script>
 	function createToC() {
 		let sidebar = document.querySelector(".sidebar");
 		let headers = document.querySelectorAll("#main-content h2, #main-content h3, #main-content h4");
@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">cumulus_relay_chain_rpc_interface/</div>reconnecting_ws_client.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">cumulus_relay_chain_rpc_interface/</div>reconnecting_ws_client.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// Copyright (C) Parity Technologies (UK) Ltd.
 <a href=#2 id=2 data-nosnippet>2</a>// This file is part of Cumulus.
 <a href=#3 id=3 data-nosnippet>3</a>// SPDX-License-Identifier: GPL-3.0-or-later WITH Classpath-exception-2.0
 <a href=#4 id=4 data-nosnippet>4</a>
@@ -217,8 +217,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#67 id=67 data-nosnippet>67</a>	<span class="comment">// This is already validated on CLI side, just defensive here
 <a href=#68 id=68 data-nosnippet>68</a>	</span><span class="kw">if </span>(url.scheme() != <span class="string">"ws" </span>&amp;&amp; url.scheme() != <span class="string">"wss"</span>) || url.host_str().is_none() {
 <a href=#69 id=69 data-nosnippet>69</a>		<span class="macro">tracing::warn!</span>(target: LOG_TARGET, <span class="question-mark">?</span>url, <span class="string">"Non-WebSocket URL or missing host."</span>);
-<a href=#70 id=70 data-nosnippet>70</a>		<span class="kw">return </span><span class="prelude-val">None
-<a href=#71 id=71 data-nosnippet>71</a>	</span>}
+<a href=#70 id=70 data-nosnippet>70</a>		<span class="kw">return </span><span class="prelude-val">None</span>;
+<a href=#71 id=71 data-nosnippet>71</a>	}
 <a href=#72 id=72 data-nosnippet>72</a>
 <a href=#73 id=73 data-nosnippet>73</a>	<span class="comment">// Either we have a user-supplied port or use the default for 'ws' or 'wss' here
 <a href=#74 id=74 data-nosnippet>74</a>	</span><span class="prelude-val">Some</span>(<span class="macro">format!</span>(
@@ -303,7 +303,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#153 id=153 data-nosnippet>153</a><span class="kw">impl </span>ClientManager {
 <a href=#154 id=154 data-nosnippet>154</a>	<span class="kw">pub async fn </span>new(urls: Vec&lt;String&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ()&gt; {
 <a href=#155 id=155 data-nosnippet>155</a>		<span class="kw">if </span>urls.is_empty() {
-<a href=#156 id=156 data-nosnippet>156</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(())
+<a href=#156 id=156 data-nosnippet>156</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(());
 <a href=#157 id=157 data-nosnippet>157</a>		}
 <a href=#158 id=158 data-nosnippet>158</a>		<span class="kw">let </span>active_client = connect_next_available_rpc_server(<span class="kw-2">&amp;</span>urls, <span class="number">0</span>).<span class="kw">await</span><span class="question-mark">?</span>;
 <a href=#159 id=159 data-nosnippet>159</a>		<span class="prelude-val">Ok</span>(<span class="self">Self </span>{ urls, active_client: active_client.<span class="number">1</span>, active_index: active_client.<span class="number">0 </span>})
@@ -390,7 +390,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#240 id=240 data-nosnippet>240</a>			// the websocket connection is dead and requires a restart.
 <a href=#241 id=241 data-nosnippet>241</a>			// Other errors should be forwarded to the request caller.
 <a href=#242 id=242 data-nosnippet>242</a>			</span><span class="kw">if let </span><span class="prelude-val">Err</span>(JsonRpseeError::RestartNeeded(<span class="kw">_</span>)) = resp {
-<a href=#243 id=243 data-nosnippet>243</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(RpcDispatcherMessage::Request(method, params, response_sender))
+<a href=#243 id=243 data-nosnippet>243</a>				<span class="kw">return </span><span class="prelude-val">Err</span>(RpcDispatcherMessage::Request(method, params, response_sender));
 <a href=#244 id=244 data-nosnippet>244</a>			}
 <a href=#245 id=245 data-nosnippet>245</a>
 <a href=#246 id=246 data-nosnippet>246</a>			<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = response_sender.send(resp) {
@@ -452,7 +452,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#302 id=302 data-nosnippet>302</a>		}
 <a href=#303 id=303 data-nosnippet>303</a>
 <a href=#304 id=304 data-nosnippet>304</a>		<span class="kw">if </span>client_manager.connect_to_new_rpc_server().<span class="kw">await</span>.is_err() {
-<a href=#305 id=305 data-nosnippet>305</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(<span class="string">"Unable to find valid external RPC server, shutting down."</span>.to_string())
+<a href=#305 id=305 data-nosnippet>305</a>			<span class="kw">return </span><span class="prelude-val">Err</span>(<span class="string">"Unable to find valid external RPC server, shutting down."</span>.to_string());
 <a href=#306 id=306 data-nosnippet>306</a>		};
 <a href=#307 id=307 data-nosnippet>307</a>
 <a href=#308 id=308 data-nosnippet>308</a>		<span class="kw">for </span>item <span class="kw">in </span>requests_to_retry.into_iter() {
@@ -486,12 +486,12 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#336 id=336 data-nosnippet>336</a>		<span class="kw">let </span>urls = std::mem::take(<span class="kw-2">&amp;mut </span><span class="self">self</span>.ws_urls);
 <a href=#337 id=337 data-nosnippet>337</a>		<span class="kw">let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>client_manager) = ClientManager::new(urls).<span class="kw">await else </span>{
 <a href=#338 id=338 data-nosnippet>338</a>			<span class="macro">tracing::error!</span>(target: LOG_TARGET, <span class="string">"No valid RPC url found. Stopping RPC worker."</span>);
-<a href=#339 id=339 data-nosnippet>339</a>			<span class="kw">return
-<a href=#340 id=340 data-nosnippet>340</a>		</span>};
+<a href=#339 id=339 data-nosnippet>339</a>			<span class="kw">return</span>;
+<a href=#340 id=340 data-nosnippet>340</a>		};
 <a href=#341 id=341 data-nosnippet>341</a>		<span class="kw">let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>subscriptions) = client_manager.get_subscriptions().<span class="kw">await else </span>{
 <a href=#342 id=342 data-nosnippet>342</a>			<span class="macro">tracing::error!</span>(target: LOG_TARGET, <span class="string">"Unable to fetch subscriptions on initial connection."</span>);
-<a href=#343 id=343 data-nosnippet>343</a>			<span class="kw">return
-<a href=#344 id=344 data-nosnippet>344</a>		</span>};
+<a href=#343 id=343 data-nosnippet>343</a>			<span class="kw">return</span>;
+<a href=#344 id=344 data-nosnippet>344</a>		};
 <a href=#345 id=345 data-nosnippet>345</a>
 <a href=#346 id=346 data-nosnippet>346</a>		<span class="kw">let </span><span class="kw-2">mut </span>imported_blocks_cache = LruMap::new(ByLength::new(<span class="number">40</span>));
 <a href=#347 id=347 data-nosnippet>347</a>		<span class="kw">let </span><span class="kw-2">mut </span>should_reconnect = ConnectionStatus::Connected;
@@ -516,8 +516,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#366 id=366 data-nosnippet>366</a>							message,
 <a href=#367 id=367 data-nosnippet>367</a>							<span class="string">"Unable to reconnect, stopping worker."
 <a href=#368 id=368 data-nosnippet>368</a>						</span>);
-<a href=#369 id=369 data-nosnippet>369</a>						<span class="kw">return
-<a href=#370 id=370 data-nosnippet>370</a>					</span>},
+<a href=#369 id=369 data-nosnippet>369</a>						<span class="kw">return</span>;
+<a href=#370 id=370 data-nosnippet>370</a>					},
 <a href=#371 id=371 data-nosnippet>371</a>				}
 <a href=#372 id=372 data-nosnippet>372</a>				should_reconnect = ConnectionStatus::Connected;
 <a href=#373 id=373 data-nosnippet>373</a>			}
@@ -675,7 +675,8 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 <a href=#525 id=525 data-nosnippet>525</a>
 <a href=#526 id=526 data-nosnippet>526</a>		server.<span class="kw">await</span>.unwrap();
 <a href=#527 id=527 data-nosnippet>527</a>	}
-<a href=#528 id=528 data-nosnippet>528</a>}</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+<a href=#528 id=528 data-nosnippet>528</a>}
+</code></pre></div></section></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>
