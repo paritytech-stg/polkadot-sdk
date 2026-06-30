@@ -48,13 +48,13 @@ use polkadot_primitives::{
 	vstaging::RelayParentInfo,
 	ApprovalVotingParams, AuthorityDiscoveryId, BackedCandidate, BlockNumber, CandidateCommitments,
 	CandidateEvent, CandidateHash, CandidateIndex, CandidateReceiptV2 as CandidateReceipt,
-	CommittedCandidateReceiptV2 as CommittedCandidateReceipt, CoreIndex, CoreState, DisputeState,
-	ExecutorParams, GroupIndex, GroupRotationInfo, Hash, HeadData, Header as BlockHeader,
-	Id as ParaId, InboundDownwardMessage, InboundHrmpMessage, MultiDisputeStatementSet,
-	NodeFeatures, OccupiedCoreAssumption, PersistedValidationData, PvfCheckStatement,
-	PvfExecKind as RuntimePvfExecKind, SessionIndex, SessionInfo, SignedAvailabilityBitfield,
-	SignedAvailabilityBitfields, ValidationCode, ValidationCodeHash, ValidatorId, ValidatorIndex,
-	ValidatorSignature,
+	CoalescedApprovalCandidateHashes, CommittedCandidateReceiptV2 as CommittedCandidateReceipt,
+	CoreIndex, CoreState, DisputeState, ExecutorParams, GroupIndex, GroupRotationInfo, Hash,
+	HeadData, Header as BlockHeader, Id as ParaId, InboundDownwardMessage, InboundHrmpMessage,
+	MultiDisputeStatementSet, NodeFeatures, OccupiedCoreAssumption, PersistedValidationData,
+	PvfCheckStatement, PvfExecKind as RuntimePvfExecKind, SessionIndex, SessionInfo,
+	SignedAvailabilityBitfield, SignedAvailabilityBitfields, ValidationCode, ValidationCodeHash,
+	ValidatorId, ValidatorIndex, ValidatorSignature,
 };
 use polkadot_statement_table::v2::Misbehavior;
 use std::{
@@ -204,8 +204,12 @@ pub enum CandidateValidationMessage {
 		candidate_receipt: CandidateReceipt,
 		/// The proof-of-validity
 		pov: Arc<PoV>,
-		/// Session's executor parameters
-		executor_params: ExecutorParams,
+		/// Scheduling session index for this candidate. For V1 descriptors this
+		/// equals the relay-parent session and serves as fallback for both
+		/// execution and scheduling session. For V2+, sessions are in the
+		/// descriptor and this field is ignored. Can be removed once V1 support
+		/// is dropped.
+		scheduling_session_index: SessionIndex,
 		/// Execution kind, used for timeouts and retries (backing/approvals)
 		exec_kind: PvfExecKind,
 		/// The sending side of the response channel
@@ -296,7 +300,7 @@ pub enum CollatorProtocolMessage {
 	/// We recommended a particular candidate to be seconded, but it was invalid; penalize the
 	/// collator.
 	///
-	/// The hash is the relay parent.
+	/// The hash is the scheduling parent.
 	Invalid(Hash, CandidateReceipt),
 	/// The candidate we recommended to be seconded was validated successfully.
 	///
@@ -838,9 +842,10 @@ pub enum RuntimeApiRequest {
 	/// Get the maximum relay parent session age allowed for parachain blocks.
 	/// `V16`
 	MaxRelayParentSessionAge(SessionIndex, RuntimeApiSender<u32>),
-	/// Get the relay parent info (block number and state root) for a given session and relay
-	/// parent hash. `V16`
-	AllowedRelayParentInfo(
+	/// Look up relay parent info for an **ancestor** block. A block is not in its
+	/// own `AllowedRelayParents`, so querying a block about itself returns `None`.
+	/// Use the node-side `check_relay_parent_session` utility for the general case. `V16`
+	AncestorRelayParentInfo(
 		SessionIndex,
 		Hash,
 		RuntimeApiSender<Option<RelayParentInfo<Hash, BlockNumber>>>,
@@ -904,8 +909,8 @@ impl RuntimeApiRequest {
 	/// `MaxRelayParentSessionAge`
 	pub const MAX_RELAY_PARENT_SESSION_AGE_RUNTIME_REQUIREMENT: u32 = 16;
 
-	/// `AllowedRelayParentInfo`
-	pub const ALLOWED_RELAY_PARENT_INFO_RUNTIME_REQUIREMENT: u32 = 16;
+	/// `AncestorRelayParentInfo`
+	pub const ANCESTOR_RELAY_PARENT_INFO_RUNTIME_REQUIREMENT: u32 = 16;
 }
 
 /// A message to the Runtime API subsystem.
@@ -1082,7 +1087,9 @@ pub enum ApprovalVotingParallelMessage {
 	/// Gets mapped into `ApprovalVotingMessage::GetApprovalSignaturesForCandidate`
 	GetApprovalSignaturesForCandidate(
 		CandidateHash,
-		oneshot::Sender<HashMap<ValidatorIndex, (Vec<CandidateHash>, ValidatorSignature)>>,
+		oneshot::Sender<
+			HashMap<ValidatorIndex, (CoalescedApprovalCandidateHashes, ValidatorSignature)>,
+		>,
 	),
 	/// Gets mapped into `ApprovalDistributionMessage::NewBlocks`
 	NewBlocks(Vec<BlockApprovalMeta>),
@@ -1264,7 +1271,9 @@ pub enum ApprovalVotingMessage {
 	/// requires calling into `approval-distribution`: Calls should be infrequent and bounded.
 	GetApprovalSignaturesForCandidate(
 		CandidateHash,
-		oneshot::Sender<HashMap<ValidatorIndex, (Vec<CandidateHash>, ValidatorSignature)>>,
+		oneshot::Sender<
+			HashMap<ValidatorIndex, (CoalescedApprovalCandidateHashes, ValidatorSignature)>,
+		>,
 	),
 }
 
@@ -1341,8 +1350,8 @@ pub enum HypotheticalCandidate {
 		candidate_para: ParaId,
 		/// The claimed head-data hash of the candidate.
 		parent_head_data_hash: Hash,
-		/// The claimed relay parent of the candidate.
-		candidate_relay_parent: Hash,
+		/// The claimed scheduling parent of the candidate.
+		candidate_scheduling_parent: Hash,
 	},
 }
 
@@ -1375,14 +1384,18 @@ impl HypotheticalCandidate {
 		}
 	}
 
-	/// Get candidate's relay parent.
-	pub fn relay_parent(&self) -> Hash {
+	/// Get candidate's scheduling parent.
+	///
+	/// For `Complete` candidates, this is the scheduling parent from the descriptor
+	/// (which equals relay_parent for V1/V2 descriptors).
+	/// For `Incomplete` candidates, this is the claimed scheduling parent.
+	pub fn scheduling_parent(&self) -> Hash {
 		match *self {
 			HypotheticalCandidate::Complete { ref receipt, .. } => {
-				receipt.descriptor.relay_parent()
+				receipt.descriptor.scheduling_parent()
 			},
-			HypotheticalCandidate::Incomplete { candidate_relay_parent, .. } => {
-				candidate_relay_parent
+			HypotheticalCandidate::Incomplete { candidate_scheduling_parent, .. } => {
+				candidate_scheduling_parent
 			},
 		}
 	}
@@ -1446,6 +1459,8 @@ pub struct ProspectiveValidationDataRequest {
 	pub para_id: ParaId,
 	/// The relay-parent of the candidate.
 	pub candidate_relay_parent: Hash,
+	/// The session index of the candidate's relay parent
+	pub session_index: SessionIndex,
 	/// The parent head-data.
 	pub parent_head_data: ParentHeadData,
 }

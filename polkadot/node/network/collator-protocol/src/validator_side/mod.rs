@@ -133,16 +133,20 @@ use bitvec::vec::BitVec;
 use futures::{
 	channel::oneshot, future::BoxFuture, select, stream::FuturesUnordered, FutureExt, StreamExt,
 };
+#[cfg(test)]
 use futures_timer::Delay;
 use std::{
 	collections::{hash_map::Entry, BTreeMap, HashMap, HashSet, VecDeque},
 	future::Future,
+	sync::Arc,
 	time::{Duration, Instant},
 };
 use tokio_util::sync::CancellationToken;
 
 use sp_keystore::KeystorePtr;
 
+use crate::{extract_leaf_scheduling_info, is_scheduling_parent_valid, LeafSchedulingInfo};
+use polkadot_node_clock::Clock;
 use polkadot_node_network_protocol::{
 	self as net_protocol,
 	peer_set::{CollationVersion, PeerSet, MAX_AUTHORITY_INCOMING_STREAMS},
@@ -156,34 +160,27 @@ use polkadot_node_network_protocol::{
 use polkadot_node_primitives::{SignedFullStatement, Statement};
 use polkadot_node_subsystem::{
 	messages::{
-		CanSecondRequest, CandidateBackingMessage, ChainApiMessage, CollatorProtocolMessage,
-		IfDisconnected, NetworkBridgeEvent, NetworkBridgeTxMessage, ParentHeadData,
-		ProspectiveParachainsMessage, ProspectiveValidationDataRequest,
+		CanSecondRequest, CandidateBackingMessage, CollatorProtocolMessage, IfDisconnected,
+		NetworkBridgeEvent, NetworkBridgeTxMessage, ParentHeadData, ProspectiveParachainsMessage,
+		ProspectiveValidationDataRequest,
 	},
 	overseer, CollatorProtocolSenderTrait, FromOrchestra, OverseerSignal, SubsystemError,
 };
 use polkadot_node_subsystem_util::{
 	backing_implicit_view::View as ImplicitView,
 	reputation::{ReputationAggregator, REPUTATION_CHANGE_INTERVAL},
-	request_claim_queue, request_node_features, request_session_index_for_child,
+	request_claim_queue, request_session_index_for_child,
 };
 use polkadot_primitives::{
-	node_features, CandidateDescriptorV2, CandidateDescriptorVersion, CandidateHash, CollatorId,
-	CoreIndex, Hash, HeadData, Id as ParaId, OccupiedCoreAssumption, PersistedValidationData,
-	SessionIndex, RELAY_CHAIN_SLOT_DURATION_MILLIS,
+	CandidateDescriptorV2, CandidateDescriptorVersion, CandidateHash, CollatorId, CoreIndex, Hash,
+	HeadData, Id as ParaId, OccupiedCoreAssumption, PersistedValidationData, SessionIndex,
 };
-use sp_consensus_babe::digests::CompatibleDigestItem;
-use sp_consensus_slots::SlotDuration;
 
 use super::{modify_reputation, tick_stream, LOG_TARGET};
 
-mod claim_queue_state;
 mod collation;
 pub mod error;
 
-// Only export PerLeafClaimQueueState for validator_side_experimental
-// ClaimQueueState (basic.rs) is no longer used in validator_side after the leaf-based refactoring
-pub(crate) use claim_queue_state::PerLeafClaimQueueState;
 pub use collation::BlockedCollationId;
 use collation::{
 	fetched_collation_sanity_check, CollationEvent, CollationFetchError, CollationFetchRequest,
@@ -352,6 +349,7 @@ impl PeerData {
 		implicit_view: &ImplicitView,
 		per_scheduling_parent: &PerSchedulingParent,
 		leaf_claim_queues: &HashMap<Hash, BTreeMap<CoreIndex, VecDeque<ParaId>>>,
+		clock: &dyn Clock,
 	) -> std::result::Result<(CollatorId, ParaId), InsertAdvertisementError> {
 		match self.state {
 			PeerState::Connected(_) => Err(InsertAdvertisementError::UndeclaredCollator),
@@ -388,6 +386,15 @@ impl PeerData {
 						return Err(InsertAdvertisementError::PeerLimitReached);
 					}
 
+					gum::debug!(
+						target: LOG_TARGET,
+						?on_scheduling_parent,
+						?candidate_hash,
+						current_ads = candidates.len(),
+						max_ads,
+						"Tracking new advertisement from peer",
+					);
+
 					candidates.insert(candidate_hash);
 				} else {
 					if self.version != CollationVersion::V1 {
@@ -407,7 +414,7 @@ impl PeerData {
 						.insert(on_scheduling_parent, HashSet::from_iter(candidate_hash));
 				};
 
-				state.last_active = Instant::now();
+				state.last_active = clock.now();
 				Ok((state.collator_id.clone(), state.para_id))
 			},
 		}
@@ -425,12 +432,12 @@ impl PeerData {
 	///
 	/// This will overwrite any previous call to `set_collating` and should only be called
 	/// if `is_collating` is false.
-	fn set_collating(&mut self, collator_id: CollatorId, para_id: ParaId) {
+	fn set_collating(&mut self, collator_id: CollatorId, para_id: ParaId, clock: &dyn Clock) {
 		self.state = PeerState::Collating(CollatingPeerState {
 			collator_id,
 			para_id,
 			advertisements: HashMap::new(),
-			last_active: Instant::now(),
+			last_active: clock.now(),
 		});
 	}
 
@@ -470,11 +477,14 @@ impl PeerData {
 	}
 
 	/// Whether the peer is now inactive according to the current instant and the eviction policy.
-	fn is_inactive(&self, policy: &crate::CollatorEvictionPolicy) -> bool {
+	fn is_inactive(&self, clock: &dyn Clock, policy: &crate::CollatorEvictionPolicy) -> bool {
+		let now = clock.now();
 		match self.state {
-			PeerState::Connected(connected_at) => connected_at.elapsed() >= policy.undeclared,
+			PeerState::Connected(connected_at) => {
+				now.saturating_duration_since(connected_at) >= policy.undeclared
+			},
 			PeerState::Collating(ref state) => {
-				state.last_active.elapsed() >= policy.inactive_collator
+				now.saturating_duration_since(state.last_active) >= policy.inactive_collator
 			},
 		}
 	}
@@ -555,7 +565,6 @@ impl RelayParentHoldOffState {
 /// State tracked for each scheduling parent in the implicit view.
 struct PerSchedulingParent {
 	collations: Collations,
-	v3_enabled: bool,
 	/// The core index assigned to this validator at this scheduling parent's block height.
 	/// Used to look up the relevant claim queue from the leaf.
 	current_core: CoreIndex,
@@ -581,19 +590,11 @@ struct HeldOffAdvertisement {
 	advertised_descriptor_version: Option<CandidateDescriptorVersion>,
 }
 
-/// Scheduling info tracked per active leaf, used for V3 scheduling parent validation.
-/// Stores the leaf's BABE slot and parent hash so the validator can determine whether
-/// the scheduling parent corresponds to the last finished relay chain slot.
-struct LeafSchedulingInfo {
-	/// The parent hash of the leaf block.
-	parent_hash: Hash,
-	/// The BABE slot of the leaf block.
-	slot: sp_consensus_slots::Slot,
-}
-
 /// All state relevant for the validator side of the protocol lives here.
-#[derive(Default)]
 struct State {
+	/// Clock used for all time reads. Production passes [`polkadot_node_clock::SystemClock`];
+	/// tests inject a mock.
+	clock: Arc<dyn Clock>,
 	/// Leaves that do support asynchronous backing along with
 	/// implicit ancestry. Leaves from the implicit view are present in
 	/// `active_leaves`, the opposite doesn't hold true.
@@ -684,6 +685,34 @@ struct State {
 }
 
 impl State {
+	fn new(
+		clock: Arc<dyn Clock>,
+		metrics: Metrics,
+		reputation: ReputationAggregator,
+		ah_invulnerables: HashSet<PeerId>,
+		hold_off_duration: Duration,
+	) -> Self {
+		Self {
+			clock,
+			implicit_view: Default::default(),
+			leaf_claim_queues: Default::default(),
+			leaf_scheduling_info: Default::default(),
+			per_scheduling_parent: Default::default(),
+			peer_data: Default::default(),
+			assigned_cores: Default::default(),
+			collation_requests: Default::default(),
+			collation_requests_cancel_handles: Default::default(),
+			metrics,
+			collation_fetch_timeouts: Default::default(),
+			fetched_candidates: Default::default(),
+			blocked_from_seconding: Default::default(),
+			reputation,
+			ah_invulnerables,
+			ah_held_off_rp_timers: Default::default(),
+			hold_off_duration,
+		}
+	}
+
 	// Returns the number of seconded and pending collations for a specific `ParaId`. Pending
 	// collations are:
 	// 1. Collations being fetched from a collator.
@@ -709,18 +738,13 @@ impl State {
 			.filter(|fc| fc.scheduling_parent == *scheduling_parent && fc.para_id == *para_id)
 			.count();
 
-		let v3_enabled = self
-			.per_scheduling_parent
-			.get(scheduling_parent)
-			.map_or(false, |sp| sp.v3_enabled);
-
 		let blocked_from_seconding =
 			self.blocked_from_seconding.values().fold(0, |acc, blocked_collations| {
 				acc + blocked_collations
 					.iter()
 					.filter(|pc| {
 						pc.candidate_receipt.descriptor.para_id() == *para_id &&
-							pc.candidate_receipt.descriptor.scheduling_parent(v3_enabled) ==
+							pc.candidate_receipt.descriptor.scheduling_parent() ==
 								*scheduling_parent
 					})
 					.count()
@@ -764,24 +788,23 @@ fn is_scheduling_parent_in_implicit_view<'a>(
 	})
 }
 
-async fn construct_per_relay_parent<Sender>(
+async fn construct_per_scheduling_parent<Sender>(
 	sender: &mut Sender,
 	assigned_cores: &mut HashMap<CoreIndex, usize>,
 	keystore: &KeystorePtr,
-	relay_parent: Hash,
-	v3_enabled: bool,
+	scheduling_parent: Hash,
 	session_index: SessionIndex,
 ) -> Result<Option<PerSchedulingParent>>
 where
 	Sender: CollatorProtocolSenderTrait,
 {
-	let validators = polkadot_node_subsystem_util::request_validators(relay_parent, sender)
+	let validators = polkadot_node_subsystem_util::request_validators(scheduling_parent, sender)
 		.await
 		.await
 		.map_err(Error::CancelledActiveValidators)??;
 
 	let (groups, rotation_info) =
-		polkadot_node_subsystem_util::request_validator_groups(relay_parent, sender)
+		polkadot_node_subsystem_util::request_validator_groups(scheduling_parent, sender)
 			.await
 			.await
 			.map_err(Error::CancelledValidatorGroups)??;
@@ -792,7 +815,7 @@ where
 		) {
 		rotation_info.core_for_group(group, groups.len())
 	} else {
-		gum::trace!(target: LOG_TARGET, ?relay_parent, "Not a validator");
+		gum::trace!(target: LOG_TARGET, ?scheduling_parent, "Not a validator");
 		return Ok(None);
 	};
 
@@ -802,7 +825,7 @@ where
 	if *entry == 1 {
 		gum::debug!(
 			target: LOG_TARGET,
-			?relay_parent,
+			?scheduling_parent,
 			?core_now,
 			"Assigned to core",
 		);
@@ -812,7 +835,6 @@ where
 
 	Ok(Some(PerSchedulingParent {
 		collations,
-		v3_enabled,
 		current_core: core_now,
 		session_index,
 		ah_held_off_advertisements: RelayParentHoldOffState::NotStarted,
@@ -870,8 +892,9 @@ async fn fetch_collation(
 
 	if peer_data.has_advertised(&relay_parent, candidate_hash) {
 		request_collation(sender, state, pc, id.clone(), peer_data.version).await?;
+		let clock = state.clock.clone();
 		let timeout = |collator_id, candidate_hash, relay_parent| async move {
-			Delay::new(MAX_UNSHARED_DOWNLOAD_TIME).await;
+			clock.delay(MAX_UNSHARED_DOWNLOAD_TIME).await;
 			(collator_id, candidate_hash, relay_parent)
 		};
 		state
@@ -1165,7 +1188,7 @@ async fn process_incoming_peer_message<Context>(
 					"Declared as collator for current para",
 				);
 
-				peer_data.set_collating(collator_id, para_id);
+				peer_data.set_collating(collator_id, para_id, &*state.clock);
 			} else {
 				gum::debug!(
 					target: LOG_TARGET,
@@ -1342,8 +1365,9 @@ fn hold_off_asset_hub_collation_if_needed(
 
 	match hold_off_outcome {
 		HoldOffOperationOutcome::FirstHoldOff => {
+			let clock = state.clock.clone();
 			state.ah_held_off_rp_timers.push(Box::pin(async move {
-				Delay::new(hold_off_duration).await;
+				clock.delay(hold_off_duration).await;
 				scheduling_parent
 			}));
 
@@ -1679,6 +1703,14 @@ where
 	if peer_data.version == CollationVersion::V1 &&
 		!state.leaf_claim_queues.contains_key(&scheduling_parent)
 	{
+		gum::debug!(
+			target: LOG_TARGET,
+			?peer_id,
+			?scheduling_parent,
+			?prospective_candidate,
+			"V1 advertisement must use an active leaf as relay parent",
+		);
+
 		return Err(AdvertisementError::ProtocolMisuse);
 	}
 
@@ -1699,8 +1731,20 @@ where
 			&state.implicit_view,
 			&per_scheduling_parent,
 			&state.leaf_claim_queues,
+			&*state.clock,
 		)
-		.map_err(AdvertisementError::Invalid)?;
+		.map_err(|error| {
+			gum::debug!(
+				target: LOG_TARGET,
+				?peer_id,
+				?scheduling_parent,
+				?prospective_candidate,
+				?error,
+				"Failed to insert advertisement",
+			);
+
+			AdvertisementError::Invalid(error)
+		})?;
 
 	if hold_off_asset_hub_collation_if_needed(
 		state,
@@ -1711,6 +1755,14 @@ where
 		scheduling_parent, // For V1/V2, the relay parent is the same as the scheduling parent
 		None,              // V1/V2 don't have advertised descriptor version
 	) {
+		gum::debug!(
+			target: LOG_TARGET,
+			?peer_id,
+			?scheduling_parent,
+			?prospective_candidate,
+			"Collation held off, not processing advertisement further for now",
+		);
+
 		return Ok(());
 	}
 
@@ -1760,26 +1812,11 @@ where
 	// finished relay chain slot. We compare slot numbers rather than timestamps to keep
 	// the logic simple and aligned with how BABE/Aura reason about slots.
 	if candidate_descriptor_version == CandidateDescriptorVersion::V3 {
-		let slot_duration = SlotDuration::from_millis(RELAY_CHAIN_SLOT_DURATION_MILLIS);
-		let current_slot = sp_consensus_slots::Slot::from_timestamp(
-			sp_timestamp::Timestamp::current(),
-			slot_duration,
-		);
-
-		let scheduling_parent_valid =
-			if let Some(info) = state.leaf_scheduling_info.get(&scheduling_parent) {
-				// scheduling_parent is a leaf — valid only if the leaf's slot is exactly
-				// one behind the current slot (i.e., it just finished).
-				*current_slot == *info.slot + 1
-			} else {
-				// scheduling_parent is not a leaf — valid if it's the parent of any leaf
-				// whose slot is the current slot (still in progress).
-				state.leaf_scheduling_info.iter().any(|(_leaf_hash, info)| {
-					*current_slot == *info.slot && scheduling_parent == info.parent_hash
-				})
-			};
-
-		if !scheduling_parent_valid {
+		if !is_scheduling_parent_valid(
+			&*state.clock,
+			&scheduling_parent,
+			&state.leaf_scheduling_info,
+		) {
 			return Err(AdvertisementError::SchedulingParentNotValid);
 		}
 	}
@@ -1795,6 +1832,7 @@ where
 			&state.implicit_view,
 			&per_scheduling_parent,
 			&state.leaf_claim_queues,
+			&*state.clock,
 		)
 		.map_err(AdvertisementError::Invalid)?;
 
@@ -1841,7 +1879,16 @@ where
 	// Check if there's a free slot accounting for obsolete positions and capacity.
 	// This happens AFTER hold-off logic (for AssetHub) has run, so held-off advertisements
 	// can be queued even when capacity is temporarily full.
-	is_slot_available(&scheduling_parent, para_id, state)?;
+	is_slot_available(&scheduling_parent, para_id, state).inspect_err(|error| {
+		gum::debug!(
+			target: LOG_TARGET,
+			?peer_id,
+			?scheduling_parent,
+			?para_id,
+			?error,
+			"Slot is not available",
+		);
+	})?;
 
 	if let Some((candidate_hash, parent_head_data_hash)) = prospective_candidate {
 		// Check if backing subsystem allows to second this candidate.
@@ -1852,6 +1899,16 @@ where
 				.await;
 
 		if !can_second {
+			gum::debug!(
+				target: LOG_TARGET,
+				?peer_id,
+				?scheduling_parent,
+				?para_id,
+				?candidate_hash,
+				?parent_head_data_hash,
+				"Backing subsystem does not allow seconding this candidate",
+			);
+
 			return Err(AdvertisementError::BlockedByBacking);
 		}
 	}
@@ -1988,25 +2045,17 @@ where
 			.await
 			.map_err(Error::CancelledSessionIndex)??;
 
-		let node_features = request_node_features(*leaf, session_index, sender)
-			.await
-			.await
-			.map_err(Error::CancelledNodeFeatures)??;
-
-		let v3_enabled = node_features::FeatureIndex::CandidateReceiptV3.is_set(&node_features);
-
 		// Fetch claim queue for this leaf (used for both construction and validation)
 		let leaf_claim_queue = request_claim_queue(*leaf, sender)
 			.await
 			.await
 			.map_err(Error::CancelledClaimQueue)??;
 
-		let Some(per_relay_parent) = construct_per_relay_parent(
+		let Some(per_scheduling_parent) = construct_per_scheduling_parent(
 			sender,
 			&mut state.assigned_cores,
 			keystore,
 			*leaf,
-			v3_enabled,
 			session_index,
 		)
 		.await?
@@ -2014,18 +2063,10 @@ where
 			continue;
 		};
 
-		state.per_scheduling_parent.insert(*leaf, per_relay_parent);
+		state.per_scheduling_parent.insert(*leaf, per_scheduling_parent);
 		state.leaf_claim_queues.insert(*leaf, leaf_claim_queue);
 
-		// Fetch leaf header to extract BABE slot for V3 scheduling parent validation.
-		// Without this info, V3 advertisements referencing this leaf will be rejected.
-		let (tx, rx) = oneshot::channel();
-		sender.send_message(ChainApiMessage::BlockHeader(*leaf, tx)).await;
-		let header = rx.await.ok().and_then(|r| r.ok()).flatten();
-		match header.and_then(|h| {
-			let slot = h.digest.logs().iter().find_map(|log| log.as_babe_pre_digest())?.slot();
-			Some(LeafSchedulingInfo { parent_hash: h.parent_hash, slot })
-		}) {
+		match extract_leaf_scheduling_info(sender, *leaf).await {
 			Some(info) => {
 				state.leaf_scheduling_info.insert(*leaf, info);
 			},
@@ -2051,19 +2092,18 @@ where
 			state.implicit_view.known_allowed_relay_parents_under(leaf).unwrap_or_default();
 		for block_hash in allowed_ancestry {
 			if let Entry::Vacant(entry) = state.per_scheduling_parent.entry(*block_hash) {
-				// Safe to use the same v3_enabled config for the allowed relay parents as well
-				// as the same session index since they must be in the same session.
-				if let Some(per_relay_parent) = construct_per_relay_parent(
+				// Safe to use the same session index for the allowed scheduling parents as well
+				// since they must be in the same session.
+				if let Some(per_scheduling_parent) = construct_per_scheduling_parent(
 					sender,
 					&mut state.assigned_cores,
 					keystore,
 					*block_hash,
-					v3_enabled,
 					session_index,
 				)
 				.await?
 				{
-					entry.insert(per_relay_parent);
+					entry.insert(per_scheduling_parent);
 				}
 			}
 		}
@@ -2198,9 +2238,10 @@ async fn handle_network_msg<Context>(
 				return Ok(());
 			}
 
+			let now = state.clock.now();
 			state.peer_data.entry(peer_id).or_insert_with(|| PeerData {
 				view: View::default(),
-				state: PeerState::Connected(Instant::now()),
+				state: PeerState::Connected(now),
 				version,
 			});
 			state.metrics.note_collator_peer_count(state.peer_data.len());
@@ -2296,9 +2337,7 @@ async fn process_msg<Context>(
 			};
 			let output_head_data = receipt.commitments.head_data.clone();
 			let output_head_data_hash = receipt.descriptor.para_head();
-			let v3_enabled =
-				state.per_scheduling_parent.get(&parent).map_or(false, |rp| rp.v3_enabled);
-			let fetched_collation = FetchedCollation::new(&receipt.to_plain(), v3_enabled);
+			let fetched_collation = FetchedCollation::new(&receipt.to_plain());
 			if let Some(CollationEvent { collator_id, pending_collation, .. }) =
 				state.fetched_candidates.remove(&fetched_collation)
 			{
@@ -2366,9 +2405,7 @@ async fn process_msg<Context>(
 				parent_head_data_hash: candidate_receipt.descriptor.para_head(),
 			});
 
-			let v3_enabled =
-				state.per_scheduling_parent.get(&parent).map_or(false, |rp| rp.v3_enabled);
-			let fetched_collation = FetchedCollation::new(&candidate_receipt, v3_enabled);
+			let fetched_collation = FetchedCollation::new(&candidate_receipt);
 			let candidate_hash = fetched_collation.candidate_hash;
 			let id = match state.fetched_candidates.entry(fetched_collation) {
 				Entry::Occupied(entry)
@@ -2406,6 +2443,7 @@ pub(crate) async fn run<Context>(
 	metrics: Metrics,
 	ah_invulnerables: HashSet<PeerId>,
 	hold_off_duration: Option<Duration>,
+	clock: Arc<dyn Clock>,
 ) -> std::result::Result<(), SubsystemError> {
 	gum::info!(target: LOG_TARGET, "Running legacy collator protocol");
 	run_inner(
@@ -2417,6 +2455,7 @@ pub(crate) async fn run<Context>(
 		REPUTATION_CHANGE_INTERVAL,
 		ah_invulnerables,
 		hold_off_duration.unwrap_or(HOLD_OFF_DURATION_DEFAULT_VALUE),
+		clock,
 	)
 	.await
 }
@@ -2431,14 +2470,15 @@ async fn run_inner<Context>(
 	reputation_interval: Duration,
 	ah_invulnerables: HashSet<PeerId>,
 	hold_off_duration: Duration,
+	clock: Arc<dyn Clock>,
 ) -> std::result::Result<(), SubsystemError> {
-	let new_reputation_delay = || futures_timer::Delay::new(reputation_interval).fuse();
+	let new_reputation_delay = || clock.delay(reputation_interval).fuse();
 	let mut reputation_delay = new_reputation_delay();
 
 	let mut state =
-		State { metrics, reputation, ah_invulnerables, hold_off_duration, ..Default::default() };
+		State::new(clock.clone(), metrics, reputation, ah_invulnerables, hold_off_duration);
 
-	let next_inactivity_stream = tick_stream(ACTIVITY_POLL);
+	let next_inactivity_stream = tick_stream(clock.clone(), ACTIVITY_POLL);
 	futures::pin_mut!(next_inactivity_stream);
 
 	let mut network_error_freq = gum::Freq::new();
@@ -2466,7 +2506,7 @@ async fn run_inner<Context>(
 				}
 			},
 			_ = next_inactivity_stream.next() => {
-				disconnect_inactive_peers(ctx.sender(), &eviction_policy, &state.peer_data).await;
+				disconnect_inactive_peers(ctx.sender(), &*clock, &eviction_policy, &state.peer_data).await;
 			},
 			resp = state.collation_requests.select_next_some() => {
 				let relay_parent = resp.0.pending_collation.scheduling_parent;
@@ -2675,6 +2715,7 @@ where
 pub async fn request_prospective_validation_data<Sender>(
 	sender: &mut Sender,
 	candidate_relay_parent: Hash,
+	session_index: SessionIndex,
 	parent_head_data_hash: Hash,
 	para_id: ParaId,
 	maybe_parent_head_data: Option<HeadData>,
@@ -2690,8 +2731,12 @@ where
 		ParentHeadData::OnlyHash(parent_head_data_hash)
 	};
 
-	let request =
-		ProspectiveValidationDataRequest { para_id, candidate_relay_parent, parent_head_data };
+	let request = ProspectiveValidationDataRequest {
+		para_id,
+		candidate_relay_parent,
+		session_index,
+		parent_head_data,
+	};
 
 	sender
 		.send_message(ProspectiveParachainsMessage::GetProspectiveValidationData(request, tx))
@@ -2711,19 +2756,18 @@ async fn kick_off_seconding<Context>(
 	let scheduling_parent = collation_event.pending_collation.scheduling_parent;
 	let para_id = collation_event.pending_collation.para_id;
 
-	let (v3_enabled, per_scheduling_parent) =
-		match state.per_scheduling_parent.get_mut(&scheduling_parent) {
-			Some(state) => (state.v3_enabled, state),
-			None => {
-				// Relay parent went out of view, not an error.
-				gum::trace!(
-					target: LOG_TARGET,
-					relay_parent = ?scheduling_parent,
-					"Fetched collation for a parent out of view",
-				);
-				return Ok(false);
-			},
-		};
+	let per_scheduling_parent = match state.per_scheduling_parent.get_mut(&scheduling_parent) {
+		Some(state) => state,
+		None => {
+			// Scheduling parent went out of view, not an error.
+			gum::trace!(
+				target: LOG_TARGET,
+				?scheduling_parent,
+				"Fetched collation for a scheduling parent out of view",
+			);
+			return Ok(false);
+		},
+	};
 
 	// Sanity check of the candidate receipt version.
 	descriptor_version_sanity_check(
@@ -2734,7 +2778,7 @@ async fn kick_off_seconding<Context>(
 
 	let collations = &mut per_scheduling_parent.collations;
 
-	let fetched_collation = FetchedCollation::new(&candidate_receipt, v3_enabled);
+	let fetched_collation = FetchedCollation::new(&candidate_receipt);
 	if let Entry::Vacant(entry) = state.fetched_candidates.entry(fetched_collation) {
 		collation_event.pending_collation.commitments_hash =
 			Some(candidate_receipt.commitments_hash);
@@ -2745,9 +2789,19 @@ async fn kick_off_seconding<Context>(
 		) {
 			(CollationVersion::V2, Some(ProspectiveCandidate { parent_head_data_hash, .. })) |
 			(CollationVersion::V3, Some(ProspectiveCandidate { parent_head_data_hash, .. })) => {
+				// PVD contains relay_parent_number and relay_parent_storage_root, so
+				// we must pass the actual relay_parent (execution context), not the
+				// scheduling_parent. For V1/V2 these are identical; for V3 the
+				// relay_parent may be older.
+				let session_index = candidate_receipt
+					.descriptor()
+					.session_index()
+					.unwrap_or(per_scheduling_parent.session_index);
+
 				let pvd = request_prospective_validation_data(
 					ctx.sender(),
-					scheduling_parent,
+					candidate_receipt.descriptor().relay_parent(),
+					session_index,
 					parent_head_data_hash,
 					para_id,
 					maybe_parent_head_data.clone(),
@@ -2757,6 +2811,8 @@ async fn kick_off_seconding<Context>(
 				(pvd, maybe_parent_head_data, Some(parent_head_data_hash))
 			},
 			(CollationVersion::V1, _) => {
+				// V1 protocol only carries V1 descriptors (enforced by
+				// descriptor_version_sanity_check), so the legacy PVD API is correct.
 				let pvd = request_persisted_validation_data(
 					ctx.sender(),
 					candidate_receipt.descriptor().relay_parent(),
@@ -2817,7 +2873,6 @@ async fn kick_off_seconding<Context>(
 			&candidate_receipt,
 			&pvd,
 			maybe_parent_head.and_then(|head| maybe_parent_head_hash.map(|hash| (head, hash))),
-			v3_enabled,
 		)?;
 
 		ctx.send_message(CandidateBackingMessage::Second {
@@ -2843,11 +2898,12 @@ async fn kick_off_seconding<Context>(
 // receipt of the `PeerDisconnected` event.
 async fn disconnect_inactive_peers(
 	sender: &mut impl overseer::CollatorProtocolSenderTrait,
+	clock: &dyn Clock,
 	eviction_policy: &crate::CollatorEvictionPolicy,
 	peers: &HashMap<PeerId, PeerData>,
 ) {
 	for (peer, peer_data) in peers {
-		if peer_data.is_inactive(&eviction_policy) {
+		if peer_data.is_inactive(clock, &eviction_policy) {
 			gum::trace!(target: LOG_TARGET, ?peer, "Disconnecting inactive peer");
 			disconnect_peer(sender, *peer).await;
 		}
@@ -3138,31 +3194,34 @@ fn get_next_collation_to_fetch(
 // Sanity check the candidate descriptor version using individual parameters.
 pub fn descriptor_version_sanity_check_with_params(
 	descriptor: &CandidateDescriptorV2,
-	v3_enabled: bool,
 	expected_core: CoreIndex,
 	expected_session: SessionIndex,
 	collator_protocol_version: CollationVersion,
 ) -> std::result::Result<(), SecondingError> {
-	match descriptor.version(v3_enabled) {
+	match descriptor.version() {
 		CandidateDescriptorVersion::V1 => Ok(()),
 		CandidateDescriptorVersion::V2 | CandidateDescriptorVersion::V3 => {
 			// V3 descriptors must only arrive via V3 protocol.
-			if descriptor.version(v3_enabled) == CandidateDescriptorVersion::V3 &&
+			if descriptor.version() == CandidateDescriptorVersion::V3 &&
 				collator_protocol_version != CollationVersion::V3
 			{
 				return Err(SecondingError::InvalidReceiptVersion(CandidateDescriptorVersion::V3));
 			}
 
-			if let Some(core_index) = descriptor.core_index(v3_enabled) {
+			if let Some(core_index) = descriptor.core_index() {
 				if core_index != expected_core {
 					return Err(SecondingError::InvalidCoreIndex(core_index.0, expected_core.0));
 				}
 			}
 
-			if let Some(session_index) = descriptor.session_index(v3_enabled) {
-				if session_index != expected_session {
+			// For V2: session_index() == scheduling_session() (relay_parent == scheduling_parent).
+			// For V3: session_index() is the relay_parent's session which may differ from the
+			// scheduling session when the relay_parent is from a previous session. Check the
+			// scheduling_session instead, which must always match the current session.
+			if let Some(scheduling_session) = descriptor.scheduling_session() {
+				if scheduling_session != expected_session {
 					return Err(SecondingError::InvalidSessionIndex(
-						session_index,
+						scheduling_session,
 						expected_session,
 					));
 				}
@@ -3182,7 +3241,6 @@ fn descriptor_version_sanity_check(
 ) -> std::result::Result<(), SecondingError> {
 	descriptor_version_sanity_check_with_params(
 		descriptor,
-		per_scheduling_parent.v3_enabled,
 		per_scheduling_parent.current_core,
 		per_scheduling_parent.session_index,
 		collator_protocol_version,
