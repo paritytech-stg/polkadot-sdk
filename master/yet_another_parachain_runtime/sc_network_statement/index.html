@@ -148,7 +148,7 @@ data-theme="ayu"></script><meta name="rustdoc-vars" data-root-path="../../" data
 	}
 </style>
 
-<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate sc_network_statement</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../yet_another_parachain_runtime/index.html">yet_<wbr>another_<wbr>parachain_<wbr>runtime</a><span class="version">0.6.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#propagation" title="Propagation">Propagation</a></li><li><a href="#topic-affinity-and-light-nodes" title="Topic affinity and light nodes">Topic affinity and light nodes</a></li><li><a href="#usage" title="Usage">Usage</a></li></ul><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#types" title="Type Aliases">Type Aliases</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">yet_another_parachain_runtime</a></div><h1>Crate <span>sc_<wbr>network_<wbr>statement</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Statement handling to plug on top of the network service.</p>
+<script async defer src=https://apisa.parity.io/latest.js></script><noscript><img src=https://apisa.parity.io/latest.js alt= referrerpolicy=no-referrer-when-downgrade /></noscript></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate sc_network_statement</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../yet_another_parachain_runtime/index.html">yet_<wbr>another_<wbr>parachain_<wbr>runtime</a><span class="version">0.6.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#propagation" title="Propagation">Propagation</a></li><li><a href="#tracking-received-statements" title="Tracking received statements">Tracking received statements</a></li><li><a href="#initial-sync" title="Initial sync">Initial sync</a></li><li><a href="#send-scheduling" title="Send scheduling">Send scheduling</a></li><li><a href="#topic-affinity-and-light-nodes" title="Topic affinity and light nodes">Topic affinity and light nodes</a></li><li><a href="#usage" title="Usage">Usage</a></li></ul><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#functions" title="Functions">Functions</a></li><li><a href="#types" title="Type Aliases">Type Aliases</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">yet_another_parachain_runtime</a></div><h1>Crate <span>sc_<wbr>network_<wbr>statement</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Statement handling to plug on top of the network service.</p>
 <p>This crate implements gossip-based propagation of statements between nodes, layered on the
 substrate notifications protocol. Two protocol versions are negotiated per peer: <code>statement/2</code>
 (preferred) with <code>statement/1</code> as a fallback.</p>
@@ -157,24 +157,65 @@ substrate notifications protocol. Two protocol versions are negotiated per peer:
 <li>During major chain synchronization, statement gossip is paused so peers prioritize downloading
 blocks; it resumes automatically once the node is fully synced (peers are reconnected to
 recover statements missed while syncing).</li>
-<li>Each peer keeps an LRU cache of statement hashes sent to or received from it, so duplicates
-are not re-sent.</li>
 <li>A propagation loop runs every second (<code>config::PROPAGATE_TIMEOUT</code>): it takes all statements
-added since the previous round, batches them up to the maximum notification size
-(<code>config::MAX_STATEMENT_NOTIFICATION_SIZE</code>, ~1 MiB), and sends the batches to connected peers.</li>
+added since the previous round and queues their hashes to a per-peer outbox. Each peer has at
+most one propagation chunk in flight at a time. When its send slot is free, statements are
+fetched from the store, filtered and encoded up to the maximum notification size
+(<code>config::MAX_STATEMENT_NOTIFICATION_SIZE</code>, ~1 MiB).</li>
 <li>Incoming statements are pushed onto a bounded validation queue
 (<code>config::MAX_PENDING_STATEMENTS</code>); if the queue is full, incoming statements are dropped.</li>
 <li>Peer reputation is adjusted based on statement quality (good, duplicate, invalid, flooding).</li>
 </ul>
+<h3 id="tracking-received-statements"><a class="doc-anchor" href="#tracking-received-statements">§</a>Tracking received statements</h3>
+<p>There is no per-peer record of delivered statements. A statement is propagated once, on the
+tick after its import: the propagation pass drains the store’s recent set, so no later pass
+can pick it up again. The only duplicates worth preventing are statements sent back to the
+peers they came from.</p>
+<p>While a statement waits for validation, the peers it came from are recorded in
+<code>pending_statements_peers</code>. On import they move to <code>recently_received_statements</code>, and a
+peer that resends the statement before its tick is added there too. Propagation and
+initial-sync chunks both skip the recorded peers, and the propagation pass clears
+<code>recently_received_statements</code> when done.</p>
+<h3 id="initial-sync"><a class="doc-anchor" href="#initial-sync">§</a>Initial sync</h3>
+<p>A peer joining (or changing its topic affinity) receives the store’s existing statements
+through a cursor over the store’s admission journal: scheduling captures the journal’s
+watermark, and bursts walk the admissions below it chunk by chunk, advancing the cursor as
+each send is confirmed — a failed chunk is resent from the same position. The watermark also
+splits delivery ownership between the two paths: admissions below the peer’s highest
+watermark are the sync cursor’s job, and propagation skips them, so within one sync a
+statement reaches the peer through at most one path. Duplicates stay possible at the edges —
+an affinity-change re-sync restarts the cursor from zero and redelivers earlier admissions,
+and a chunk whose send timed out may have arrived regardless, so its resend repeats it.</p>
+<h3 id="send-scheduling"><a class="doc-anchor" href="#send-scheduling">§</a>Send scheduling</h3>
+<p>Every peer has one send slot, shared by propagation and initial sync, so at most one chunk per
+connection is in flight. Each chunk carries a fresh id, so the result of a send left over from
+a previous connection cannot free the current one’s slot. A completed chunk frees the slot at
+once and the next propagation chunk follows, a failed send included: a failed propagation
+chunk is not retried, but the rest of the backlog keeps draining, while a failed initial-sync
+chunk is resent from the sync’s cursor.</p>
+<p>Propagation queues hashes in a per-peer outbox and fetches, filters and encodes them only when
+the slot is free, so a slow peer holds one encoded chunk rather than its whole backlog. An
+outbox past <code>config::MAX_PROPAGATION_OUTBOX_LEN</code> drops its oldest hashes, since the freshest
+statements are the ones still worth delivering. Dropped hashes are counted in
+<code>undelivered_statements</code>.</p>
+<p>In-flight bytes of both kinds are held against the shared
+<code>config::MAX_SEND_IN_FLIGHT_BYTES</code> budget. A peer that finds the budget full, or whose store
+fetch fails, is parked once and refilled in parking order as completed sends free bytes and on
+propagation ticks. While initial syncs are pending, propagation parks
+<code>config::INITIAL_SYNC_RESERVED_BYTES</code> early: refills reclaim freed bytes synchronously,
+while the timer-driven sync bursts would otherwise always find the budget full.</p>
 <h3 id="topic-affinity-and-light-nodes"><a class="doc-anchor" href="#topic-affinity-and-light-nodes">§</a>Topic affinity and light nodes</h3>
 <p>The <code>statement/2</code> protocol lets a peer advertise which topics it cares about as a bloom filter
 (“topic affinity”). Once a peer has an active affinity filter, only matching statements are
 forwarded to it; when its affinity changes, newly relevant statements are re-sent. Affinity
-advertisements are rate-limited. See the <code>affinity</code> module.</p>
+advertisements are rate-limited per peer, see <code>config::AFFINITY_UPDATES_PER_SECOND</code>.</p>
 <p>Light-client peers on <code>statement/2</code> must advertise an affinity before receiving any statements:
 a light V2 peer pulls only the topics it cares about instead of the full feed, and is synced
 those statements in an initial burst on connect. Full nodes receive all statements unless they
 opt into an affinity.</p>
+<p>With the v2 DHT path enabled, every <code>statement/2</code> peer sends its affinity filter as the first
+message on connect, and the initial sync waits for the peer’s filter, replaying the statements
+it matches and those the peer is a DHT routing target for.</p>
 <h3 id="usage"><a class="doc-anchor" href="#usage">§</a>Usage</h3>
 <ul>
 <li>Use <a href="struct.StatementHandlerPrototype.html#method.new" title="associated function yet_another_parachain_runtime::sc_network_statement::StatementHandlerPrototype::new"><code>StatementHandlerPrototype::new</code></a> to create a prototype.</li>
@@ -183,7 +224,7 @@ configuration as an extra peers set.</li>
 <li>Use <a href="struct.StatementHandlerPrototype.html#method.build" title="method yet_another_parachain_runtime::sc_network_statement::StatementHandlerPrototype::build"><code>StatementHandlerPrototype::build</code></a> then <a href="struct.StatementHandler.html#method.run" title="method yet_another_parachain_runtime::sc_network_statement::StatementHandler::run"><code>StatementHandler::run</code></a> to obtain a <code>Future</code>
 that processes statements.</li>
 </ul>
-</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="config/index.html" title="mod yet_another_parachain_runtime::sc_network_statement::config">config</a></dt><dd>Configuration of the statement protocol</dd></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.Peer.html" title="struct yet_another_parachain_runtime::sc_network_statement::Peer">Peer</a></dt><dd>Peer information</dd><dt><a class="struct" href="struct.StatementHandler.html" title="struct yet_another_parachain_runtime::sc_network_statement::StatementHandler">Statement<wbr>Handler</a></dt><dd>Handler for statements. Call <a href="struct.StatementHandler.html#method.run" title="method yet_another_parachain_runtime::sc_network_statement::StatementHandler::run"><code>StatementHandler::run</code></a> to start the processing.</dd><dt><a class="struct" href="struct.StatementHandlerPrototype.html" title="struct yet_another_parachain_runtime::sc_network_statement::StatementHandlerPrototype">Statement<wbr>Handler<wbr>Prototype</a></dt><dd>Prototype for a <a href="struct.StatementHandler.html" title="struct yet_another_parachain_runtime::sc_network_statement::StatementHandler"><code>StatementHandler</code></a>.</dd></dl><h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2><dl class="item-table"><dt><a class="type" href="type.StatementImportFuture.html" title="type yet_another_parachain_runtime::sc_network_statement::StatementImportFuture">Statement<wbr>Import<wbr>Future</a></dt><dd>Future resolving to statement import result.</dd><dt><a class="type" href="type.Statements.html" title="type yet_another_parachain_runtime::sc_network_statement::Statements">Statements</a></dt><dd>A set of statements.</dd></dl></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="config/index.html" title="mod yet_another_parachain_runtime::sc_network_statement::config">config</a></dt><dd>Configuration of the statement protocol</dd></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.Peer.html" title="struct yet_another_parachain_runtime::sc_network_statement::Peer">Peer</a></dt><dd>Peer information</dd><dt><a class="struct" href="struct.RetentionReasonMask.html" title="struct yet_another_parachain_runtime::sc_network_statement::RetentionReasonMask">Retention<wbr>Reason<wbr>Mask</a></dt><dd>The reasons a received statement is retained, as a bitmask of independent flags.</dd><dt><a class="struct" href="struct.StatementHandler.html" title="struct yet_another_parachain_runtime::sc_network_statement::StatementHandler">Statement<wbr>Handler</a></dt><dd>Handler for statements. Call <a href="struct.StatementHandler.html#method.run" title="method yet_another_parachain_runtime::sc_network_statement::StatementHandler::run"><code>StatementHandler::run</code></a> to start the processing.</dd><dt><a class="struct" href="struct.StatementHandlerPrototype.html" title="struct yet_another_parachain_runtime::sc_network_statement::StatementHandlerPrototype">Statement<wbr>Handler<wbr>Prototype</a></dt><dd>Prototype for a <a href="struct.StatementHandler.html" title="struct yet_another_parachain_runtime::sc_network_statement::StatementHandler"><code>StatementHandler</code></a>.</dd><dt><a class="struct" href="struct.V2DhtConfig.html" title="struct yet_another_parachain_runtime::sc_network_statement::V2DhtConfig">V2Dht<wbr>Config</a></dt><dd>Parameters of the v2 DHT statement path.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.v2dht_enabled.html" title="fn yet_another_parachain_runtime::sc_network_statement::v2dht_enabled">v2dht_<wbr>enabled</a></dt><dd>Feature-flag to switch between the legacy flood path and the new DHT-targeted path.</dd></dl><h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2><dl class="item-table"><dt><a class="type" href="type.StatementImportFuture.html" title="type yet_another_parachain_runtime::sc_network_statement::StatementImportFuture">Statement<wbr>Import<wbr>Future</a></dt><dd>Future resolving to statement import result.</dd><dt><a class="type" href="type.Statements.html" title="type yet_another_parachain_runtime::sc_network_statement::Statements">Statements</a></dt><dd>A set of statements.</dd></dl></section></div></main><script> mermaid.init({ startOnLoad: true, theme: "dark" }, "pre.language-mermaid > code");</script>
 
 
 </body></html>

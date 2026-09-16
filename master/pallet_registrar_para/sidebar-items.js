@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["RegistrationState"],"mod":["pallet","weights"],"struct":["ParaInfo"],"trait":["SendToRelay"],"type":["ParaInfoOf","ProvidedBlockNumberOf"]};

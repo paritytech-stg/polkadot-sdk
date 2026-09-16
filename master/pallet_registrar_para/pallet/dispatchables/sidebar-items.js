@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["add_lock","cancel_registration","receive","register","remove_lock","reserve"]};
